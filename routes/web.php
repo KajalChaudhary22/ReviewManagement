@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BusinessAuthPageController;
+use App\Http\Controllers\{
+    BusinessAuthPageController,
+    CustomerAuthPageController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +20,5 @@ use App\Http\Controllers\BusinessAuthPageController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/business-auth', [BusinessAuthPageController::class, 'show'])->name('business.auth.show');
+Route::get('/business/login', [BusinessAuthPageController::class, 'show'])->name('business.auth.show');
+Route::get('/customer/login', [CustomerAuthPageController::class, 'show'])->name('customer.auth.show');
