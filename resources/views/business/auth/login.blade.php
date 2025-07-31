@@ -164,7 +164,7 @@
                         contact_number: phone.value,
                         industry_id: industry.value,
                         password: password.value,
-                        password_confirmation: confirmPassword.value
+                        confirmed: confirmPassword.value
                     };
 
                     fetch('/api/business/register', {

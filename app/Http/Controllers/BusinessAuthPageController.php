@@ -15,7 +15,12 @@ class BusinessAuthPageController extends Controller
     public function show()
     {
         $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Industries')->first();
-        $industries = $mastertypId->getActiveMasterData;
+        if($mastertypId)
+        {
+            $industries = $mastertypId?->getActiveMasterData;
+        }else{
+            $industries = collect();
+        }
         return view('business.auth.login', compact('industries'));
     }
 }

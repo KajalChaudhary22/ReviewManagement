@@ -1,0 +1,1 @@
+© 2025 LabZora. All rights reserved.<?php /**PATH D:\Projects\ReviewManagement\resources\views/layouts/reserved.blade.php ENDPATH**/ ?>
