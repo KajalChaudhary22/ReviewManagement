@@ -227,7 +227,7 @@
 
                     </button>
                 </a>
-                <a href="#">
+                <a href="<?php echo e(route('customer.auth.show')); ?>">
                     <button class="hidden md:block bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full hover:bg-blue-700 transition-all text-sm md:text-base">
                         Login
                     </button>
@@ -1102,4 +1102,4 @@
 		
     </script>
 </body>
-</html><?php /**PATH C:\KajalProjects\reviewManagement\resources\views/welcome.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\KajalProjects\ReviewManagement\resources\views/welcome.blade.php ENDPATH**/ ?>

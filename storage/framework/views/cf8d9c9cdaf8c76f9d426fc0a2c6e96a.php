@@ -1,1 +1,0 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><?php /**PATH C:\KajalProjects\reviewManagement\resources\views/layouts/commonjs.blade.php ENDPATH**/ ?>
