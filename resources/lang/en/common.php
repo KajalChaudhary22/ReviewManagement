@@ -1,3 +1,4 @@
+<?php
 return [
     'Dashboard' => 'Dashboard',
     'Categories' => 'Categories',
