@@ -23,7 +23,7 @@
         .border-purple-primary { border-color: #1544da; }
         .focus\:ring-purple-primary:focus { --tw-ring-color: rgba(106, 13, 173, var(--tw-ring-opacity)); }
     </style>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+   @include('layouts.token')
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Top Navigation Bar -->
@@ -164,7 +164,7 @@
                         contact_number: phone.value,
                         industry_id: industry.value,
                         password: password.value,
-                        confirmed: confirmPassword.value
+                        password_confirmation: confirmPassword.value
                     };
 
                     fetch('/api/business/register', {

@@ -3669,3 +3669,213 @@ Did you mean one of these?
 #61 C:\\KajalProjects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\KajalProject...')
 #62 {main}
 "} 
+[2025-07-31 17:22:00] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:22:00] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:22:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:22:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:22:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:22:21] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(186): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(170): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#7 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#8 D:\\Projects\\ReviewManagement\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#9 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('D:\\\\Projects\\\\Rev...')
+#10 {main}
+"} 
+[2025-07-31 17:23:05] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:24:03] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:24:06] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:24:06] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:24:16] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:25:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:25:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:26:05] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:27:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:27:04] local.ERROR: Class "LaravelLang\Config\ServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"LaravelLang\\Config\\ServiceProvider\" not found at D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:880)
+[stacktrace]
+#0 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(814): Illuminate\\Foundation\\Application->resolveProvider('LaravelLang\\\\Con...')
+#1 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('LaravelLang\\\\Con...')
+#2 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(794): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 D:\\Projects\\ReviewManagement\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2025-07-31 17:40:05] local.ERROR: Trait "App\Models\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasApiTokens\" not found at D:\\Projects\\ReviewManagement\\app\\Models\\Customer.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2025-07-31 17:40:07] local.ERROR: Trait "App\Models\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasApiTokens\" not found at D:\\Projects\\ReviewManagement\\app\\Models\\Customer.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2025-07-31 17:40:22] local.ERROR: Trait "App\Models\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasApiTokens\" not found at D:\\Projects\\ReviewManagement\\app\\Models\\Customer.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2025-07-31 17:40:33] local.ERROR: Trait "App\Models\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasApiTokens\" not found at D:\\Projects\\ReviewManagement\\app\\Models\\Customer.php:8)
+[stacktrace]
+#0 {main}
+"} 

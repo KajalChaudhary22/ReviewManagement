@@ -44,4 +44,4 @@
                         <img src="https://tpc.googlesyndication.com/simgad/13265185988757716340" alt="Advertisement"
                             style="max-width: 100%; height: auto; margin: 0 auto;">
                     </div>
-                </form>
+                </form><?php /**PATH D:\Projects\ReviewManagement\resources\views/customer/auth/registration.blade.php ENDPATH**/ ?>
