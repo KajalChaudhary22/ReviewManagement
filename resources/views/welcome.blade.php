@@ -216,7 +216,7 @@
             
             
             <div class="flex items-center space-x-3 md:space-x-4">
-                <a href="#">
+                <a href="{{route('admin.dashboard.show')}}">
                     <button class="hidden md:block bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full hover:bg-blue-700 transition-all text-sm md:text-base">
                        Admin Dashboard
                     </button>
