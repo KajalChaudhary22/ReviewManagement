@@ -12,6 +12,7 @@ class BusinessAuthController extends Controller
 {
     public function register(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name'                  => 'required|string|max:255',
             'email'                 => 'required|email|unique:businesses,email',

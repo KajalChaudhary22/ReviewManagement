@@ -18,4 +18,9 @@ class CustomerAuthPageController extends Controller
         // $industries = $mastertypId->getActiveMasterData;
         return view('customer.auth.login');
     }
+
+    public function dashboard()
+    {
+        return view('customer.dashboard.dashboard');
+    }
 }

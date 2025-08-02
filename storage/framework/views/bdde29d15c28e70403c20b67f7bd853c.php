@@ -8,14 +8,14 @@
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SCIZORA | Secure Access Portal</title>
 
-    @include('customer.auth.style')
-    @include('layouts.token')
+    <?php echo $__env->make('customer.auth.style', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('layouts.token', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </head>
 
 <body>
     <div class="container">
         <!-- Left Panel -->
-        @include('customer.auth.leftpanel')
+        <?php echo $__env->make('customer.auth.leftpanel', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <!-- Right Panel -->
         <section class="right-panel">
@@ -79,13 +79,11 @@
                 </form>
 
                 <!-- Signup Form -->
-                @include('customer.auth.registration')
+                <?php echo $__env->make('customer.auth.registration', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
         </section>
     </div>
-
-    @include('customer.auth.js')
-    @include('layouts.commonjs')
+    <?php echo $__env->make('layouts.commonjs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Tab switching functionality
@@ -300,4 +298,4 @@
     </script>
 </body>
 
-</html>
+</html><?php /**PATH D:\Projects\ReviewManagement\resources\views/customer/auth/login.blade.php ENDPATH**/ ?>

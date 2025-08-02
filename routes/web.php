@@ -29,7 +29,4 @@ Route::prefix('admin')->group(function () {
 });
 Route::get('/business/login', [BusinessAuthPageController::class, 'show'])->name('business.auth.show');
 Route::get('/customer/login', [CustomerAuthPageController::class, 'show'])->name('customer.auth.show');
-// Route::get('/admin/dashboard', [AdminDashboard::class, 'dashboard'])->name('admin.dashboard.show');
-// Route::prefix('customer')->group(function () {
-
-// });
+Route::get('/customer/dashboard', [CustomerAuthPageController::class, 'dashboard'])->name('customer.dashboard.dashboard');
