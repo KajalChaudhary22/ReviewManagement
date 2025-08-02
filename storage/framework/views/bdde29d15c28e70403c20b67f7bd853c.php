@@ -45,12 +45,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="login-phone">Phone</label>
-                        <input type="number" id="login-phone" class="input-field" placeholder="Enter your phone number"
-                            required>
-                    </div>
-
-                    <div class="form-group">
                         <label for="login-password">Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="login-password" class="input-field"

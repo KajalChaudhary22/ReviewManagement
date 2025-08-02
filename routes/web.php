@@ -22,3 +22,4 @@ Route::get('/', function () {
 });
 Route::get('/business/login', [BusinessAuthPageController::class, 'show'])->name('business.auth.show');
 Route::get('/customer/login', [CustomerAuthPageController::class, 'show'])->name('customer.auth.show');
+Route::get('/customer/dashboard', [CustomerAuthPageController::class, 'dashboard'])->name('customer.dashboard.dashboard');
