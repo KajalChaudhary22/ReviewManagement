@@ -257,9 +257,9 @@
                                 text: data.message || 'Welcome!',
                                 timer: 2000,
                                 showConfirmButton: false
-                            // }).then(() => {
-                            //     localStorage.setItem('token', data.token);
-                            //     window.location.href = '/customer/dashboard'; // adjust URL as needed
+                            }).then(() => {
+                                localStorage.setItem('token', data.token);
+                                window.location.href = data.route; // adjust URL as needed
                             });
                         } else {
                             Swal.fire({

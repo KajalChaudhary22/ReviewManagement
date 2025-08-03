@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'admin',
-        'passwords' => 'admins',
+        'guard' => 'web',
+        'passwords' => 'users',
     ],
 
     /*
@@ -36,22 +36,22 @@ return [
     */
 
     'guards' => [
-        // 'web' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        // 'admin' => [
         //     'driver' => 'session',
         //     'provider' => 'users',
         // ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-        'business' => [
-            'driver' => 'session',
-            'provider' => 'businesses',
-        ],
-        'customer' => [
-            'driver' => 'session',
-            'provider' => 'customers',
-        ],
+        // 'business' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
+        // 'customer' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
     ],
 
     /*
@@ -72,27 +72,27 @@ return [
     */
 
     'providers' => [
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\User::class,
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
-        'businesses' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Business::class,
-        ],
-        'customers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Customer::class,
-        ],
+        // 'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Admin::class,
+        // ],
+        // 'businesses' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Business::class,
+        // ],
+        // 'customers' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Customer::class,
+        // ],
     ],
 
     /*

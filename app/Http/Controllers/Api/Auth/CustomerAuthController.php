@@ -4,14 +4,24 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Customer;
+use App\Models\{
+    Customer,
+    User
+};
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\AuthenticationService;
 
 
 
 class CustomerAuthController extends Controller
 {
+    protected $authService;
+
+    public function __construct(AuthenticationService $authService)
+    {
+        $this->authService = $authService;
+    }
 
     public function register(Request $request)
     {
@@ -28,15 +38,8 @@ class CustomerAuthController extends Controller
                 'message' => $validator->errors()->first(),
             ], 422);
         }
-
-        $customer = Customer::create([
-            'name'           => $request->name,
-            'email'          => $request->email,
-            'password'       => Hash::make($request->password),
-        ]);
-
-        $token = $customer->createToken('customer-token')->plainTextToken;
-
+        $response = $this->authService->customerRegistration($request->all());
+        return response()->json($response, $response['status'] ? 200 : 422);
         return response()->json([
             'status' => true,
             'message' => 'Customer registered successfully.',
@@ -59,24 +62,13 @@ class CustomerAuthController extends Controller
             ], 422);
         }
 
-        // Find customer by email
-        $customer = Customer::where('email', $request->email)->first();
-
-        // Check password
-        if (!$customer || !Hash::check($request->password, $customer->password)) {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Invalid email or password.',
-            ], 401);
-        }
-
-        // Create token
-        $token = $customer->createToken('customer-token')->plainTextToken;
-
+        $data = $this->authService->customerLogin($request->all());
         return response()->json([
             'status' => true,
             'message' => 'Login successful.',
-            'token' => $token,
+            'token' => $data['token'],
+            'user' => $data['user'],
+            'route' => route('customer.dashboard.show',['ty'=>custom_encrypt('CustomerDashboard')]),
         ]);
     }
 }

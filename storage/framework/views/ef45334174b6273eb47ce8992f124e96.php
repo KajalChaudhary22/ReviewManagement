@@ -23,7 +23,7 @@
         .border-purple-primary { border-color: #1544da; }
         .focus\:ring-purple-primary:focus { --tw-ring-color: rgba(106, 13, 173, var(--tw-ring-opacity)); }
     </style>
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+   <?php echo $__env->make('layouts.token', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Top Navigation Bar -->
@@ -257,9 +257,9 @@
                                 text: data.message || 'Welcome!',
                                 timer: 2000,
                                 showConfirmButton: false
-                            // }).then(() => {
-                            //     localStorage.setItem('token', data.token);
-                            //     window.location.href = '/customer/dashboard'; // adjust URL as needed
+                            }).then(() => {
+                                localStorage.setItem('token', data.token);
+                                window.location.href = data.route; // adjust URL as needed
                             });
                         } else {
                             Swal.fire({
