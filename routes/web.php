@@ -10,7 +10,6 @@ use App\Http\Controllers\{
     AuthController
 };
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
