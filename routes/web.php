@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     BusinessAuthPageController,
     CustomerAuthPageController,
-    Admin\AdminDashboard,
+     Admin\AdminDashboard,
     Admin\UserManagementController,
 };
-
 
 /*
 |--------------------------------------------------------------------------
