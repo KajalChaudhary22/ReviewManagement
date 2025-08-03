@@ -32,7 +32,7 @@ Route::prefix('business')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::post('register', [AdminAuthController::class, 'register']);
+    // Route::post('register', [AdminAuthController::class, 'register']);
     Route::post('login', [AdminAuthController::class, 'login']);
     Route::post('addUser', [AdminAuthController::class, 'addUser']);
 });

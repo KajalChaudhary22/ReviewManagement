@@ -164,11 +164,6 @@
                     email,
                     password,
                 });
-                // showSuccessMessage();
-                // console.log('Login submitted:', {
-                //     email,
-                //     password
-                // });
             });
             function submitLogin(data) {
                 fetch('/api/customer/login', {
@@ -195,7 +190,7 @@
 
                             // Optional: redirect after success
                             setTimeout(() => {
-                                window.location.href = '/customer/dashboard'; // change to your actual dashboard route
+                                window.location.href = res.route; // change to your actual dashboard route
                             }, 3000);
                         }
                     })

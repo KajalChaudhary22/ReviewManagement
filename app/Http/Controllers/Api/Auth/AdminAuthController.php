@@ -4,50 +4,69 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Admin;
-use App\Models\User;
-
+use App\Services\AuthenticationService;
+use Illuminate\Support\Facades\{
+    Validator,
+    Log,
+    DB
+};
 
 class AdminAuthController extends Controller
 {
-    //
-    public function addUser(Request $request)
+    /**
+     * Handle the admin login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */ 
+    protected $authService;
+    public function __construct(AuthenticationService $authService)
+    {
+        $this->authService = $authService;
+        
+    }
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:admins,email',
-            'password' => 'required|min:6',
-            'phone' => 'nullable|string|max:20',
-            // 'status' => 'required|in:customer,business,admin', // Assuming status can be customer, business, or admin
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'message' => $validator->errors()->first(),
+                'message' => $validator->errors()->first()
             ], 422);
         }
 
-        $admin = Admin::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'status' => 'Active', // Assuming 'active' is the default status
-        ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'email_verified_at' => now(), // Assuming email verification is required
-            'password' => Hash::make($request->password),
-            'remember_token' => $request->remember_token ?? null, // Optional remember token
-        ]);
+        try {
+            DB::beginTransaction();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Add user successfully.',
-        ]);
+            $data = $this->authService->adminLogin($request->only('email', 'password'));
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Login successful.',
+                'token' => $data['token'],
+                'user' => $data['user'],
+                'route' => route('admin.dashboard.show',['ty'=>custom_encrypt('AdminDashboard')]),
+            ]);
+
+        } catch (\Exception $e) {
+            // dd($e);
+            DB::rollBack();
+            Log::error('Admin Login Error: ' . $e->getMessage(), [
+                'email' => $request->input('email'),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage() === 'Invalid credentials' 
+                    ? 'Invalid email or password.' 
+                    : 'Something went wrong during login.'
+            ], 401);
+        }
     }
 }
