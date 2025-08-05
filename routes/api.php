@@ -2,9 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\CustomerAuthController;
-use App\Http\Controllers\Api\Auth\BusinessAuthController;
-use App\Http\Controllers\Api\Auth\AdminAuthController;
+use App\Http\Controllers\Api\Auth\{
+    CustomerAuthController,
+    ForgotPasswordController,
+    BusinessAuthController,
+    AdminAuthController,
+    ResetPasswordController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +40,6 @@ Route::prefix('admin')->group(function () {
     Route::post('login', [AdminAuthController::class, 'login']);
     Route::post('addUser', [AdminAuthController::class, 'addUser']);
 });
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');

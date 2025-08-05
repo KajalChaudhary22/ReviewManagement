@@ -64,7 +64,7 @@
                             <input type="checkbox" id="rememberMe" name="rememberMe" class="h-4 w-4 text-purple-primary focus:ring-purple-primary border-gray-300 rounded">
                             <label for="rememberMe" class="ml-2 block text-sm text-gray-600">Remember me</label>
                         </div>
-                        <a href="#" class="text-sm text-purple-primary hover:underline">Forgot Password?</a>
+                        <a href="{{ route('password.request',['ty' => custom_encrypt('ResetPasswordEmail')]) }}" class="text-sm text-purple-primary hover:underline">Forgot Password?</a>
                     </div>
                     
                     <button type="submit" 
