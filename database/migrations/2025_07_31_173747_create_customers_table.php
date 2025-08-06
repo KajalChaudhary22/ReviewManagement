@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('contact_number')->nullable(); // Optional field for phone number
-            $table->string('password');
             $table->timestamps();
         });
     }
