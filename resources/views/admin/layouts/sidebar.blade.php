@@ -4,22 +4,18 @@
         <div class="brand-subtitle">Management Portal</div>
     </div>
     <div class="menu">
-        <a href="{{ route('admin.dashboard.show',['ty'=>custom_encrypt('AdminDashboard')]) }}" class="menu-item active">
+        <a href="{{ route('admin.dashboard.show',['ty'=>custom_encrypt('AdminDashboard')]) }}" class="menu-item {{ Route::is('admin.dashboard.show') ? 'active' : '' }}">
             <i class="icon">📊</i>
             <span class="menu-text">Dashboard Overview</span>
         </a>
-        <a href="{{ route('user.management.index',['ty'=>custom_encrypt('UserManagement')]) }}" class="menu-item">
+        <a href="{{ route('user.management.index',['ty'=>custom_encrypt('UserManagement')]) }}" class="menu-item {{ Route::is('user.management.index') ? 'active' : '' }}">
             <i class="icon">👥</i>
             <span class="menu-text">User Management</span>
         </a>
-        {{-- <a href="user-management.html" class="menu-item">
-            <i class="icon">👥</i>
-            <span class="menu-text">User Management</span>
-        </a> --}}
-        {{-- <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
+        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item {{ Route::is('business.management.index') ? 'active' : '' }}">
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>
-        </a> --}}
+        </a>
         {{-- <a href="business-management.html" class="menu-item">
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>

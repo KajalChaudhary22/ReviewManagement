@@ -4,8 +4,8 @@
     use App\Http\Controllers\{
         Business\BusinessDashboardController,
         Customer\CustomerDashboardController,
-        Admin\AdminDashboard,
-        Admin\UserManagementController,
+        // Admin\AdminDashboard,
+        // Admin\UserManagementController,
         Admin\AdminAuthPageController,
         AuthController,
         Auth\ForgotPasswordController
@@ -31,15 +31,15 @@
     Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
     Route::middleware(['web'])->prefix('admin')->group(function () {
-        Route::get('/dashboard', [AdminDashboard::class, 'dashboard'])->name('admin.dashboard.show');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
-        Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
-        Route::get('/review-moderation', [UserManagementController::class, 'index'])->name('review.moderation.index');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/dashboard', [AdminDashboard::class, 'dashboard'])->name('admin.dashboard.show');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
+        // Route::get('/review-moderation', [UserManagementController::class, 'index'])->name('review.moderation.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
     });
     Route::middleware(['web'])->prefix('business')->group(function () {
         Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');

@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Customer extends Authenticatable
+class Customer extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
      protected $table = 'customers';
 
-    // Corrected spelling
+    
     protected $guarded = [];
+
+    public function userDetails()
+    {
+        return $this->hasOne(User::class,'customer_id');
+    }
 }

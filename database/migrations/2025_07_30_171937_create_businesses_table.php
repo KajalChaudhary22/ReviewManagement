@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('master_id')->nullable();
             $table->foreign('master_id')->references('id')->on('masters')->onDelete('cascade');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('masters')->onDelete('cascade');
             $table->enum('status', ['Active', 'Inactive','Suspend','Approved','Pending'])->default('Pending');
             $table->timestamps();
         });
