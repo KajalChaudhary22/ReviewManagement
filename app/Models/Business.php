@@ -13,6 +13,19 @@ class Business extends Authenticatable
 
     protected $table = 'businesses';
 
-    // Corrected spelling
     protected $guarded = [];
+
+    public function userDetails()
+    {
+        return $this->hasOne(User::class,'business_id');
+    }
+    public function masterType()
+    {
+        return $this->belongsTo(MasterType::class, 'master_id');
+    }
+    public function locationDetails()
+    {
+        return $this->belongsTo(MasterType::class, 'location_id');
+    }
+
 }

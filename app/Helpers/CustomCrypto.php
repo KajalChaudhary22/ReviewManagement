@@ -18,7 +18,6 @@ if (!function_exists('custom_encrypt')) {
 
         return strtr($combined, ['+' => '-', '/' => '_', '=' => '~']);
     }
-
 }
 
 if (!function_exists('custom_decrypt')) {

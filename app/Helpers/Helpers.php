@@ -25,5 +25,27 @@ class Helpers
                 return '<span class="status-badge status-pending">Unknown</span>';
         }
     }
+    public static function statusActionButton($id, string $status = 'Pending'): string
+    {
+        $idEncrypted = custom_encrypt($id);
+        $status = ucfirst(strtolower($status));
+
+        switch ($status) {
+            case 'Active':
+                return '<button class="action-btn status" data-id="'.$idEncrypted.'" data-status="Suspended">
+                            <i class="fa fa-trash"></i> Suspend
+                        </button>';
+            case 'Suspended':
+                return '<button class="action-btn status" data-id="'.$idEncrypted.'" data-status="Active">
+                            <i class="fa fa-check"></i> Activate
+                        </button>';
+            case 'Pending':
+                return '<button class="action-btn status" data-id="'.$idEncrypted.'" data-status="Rejected">
+                            <i class="fa fa-times"></i> Reject
+                        </button>';
+            default:
+                return '';
+        }
+    }
     
 }

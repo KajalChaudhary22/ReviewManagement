@@ -17,11 +17,11 @@
             }
         });
 
-        let table = $('#usersTable').DataTable({
+        let table = $('#businessesTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: '/api/admin/users-list',
+                url: '/api/admin/business-list',
                 data: function(d) {
                     d.status = $('#userStatusFilter').val();
                     d.date_range = $('#userDateFilter').val();
@@ -58,11 +58,11 @@
             ]
         });
 
-        $('#applyUserFilters').on('click', function() {
+        $('#applyBusinessFilters').on('click', function() {
             table.ajax.reload();
         });
         // VIEW USER DETAILS
-        $('#usersTable').on('click', '.action-btn.view', function() {
+        $('#businessesTable').on('click', '.action-btn.view', function() {
             let id = $(this).data('id');
 
             $.get(`/api/admin/user-view/${id}`, function(user) {
@@ -146,7 +146,7 @@
 
 
         // EDIT
-        $('#usersTable').on('click', '.action-btn.edit', function() {
+        $('#businessesTable').on('click', '.action-btn.edit', function() {
             let id = $(this).data('id');
             $.get(`/api/admin/user-view/${id}`, function(user) {
                 let form = $('#editUserForm');
@@ -165,7 +165,7 @@
             let id = $('#editUserForm [name=id]').val();
             let formData = $('#editUserForm').serialize();
             $.ajax({
-                url: `/api/admin/user-update/${id}`,
+                url: `/api/admin/business-update/${id}`,
                 type: 'PUT',
                 data: formData,
                 success: function() {
@@ -180,7 +180,7 @@
         });
 
         // DELETE
-        $('#usersTable').on('click', '.action-btn.delete', function() {
+        $('#businessesTable').on('click', '.action-btn.delete', function() {
             let id = $(this).data('id');
             Swal.fire({
                 title: "Are you sure?",
@@ -193,10 +193,10 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/api/admin/user-delete/${id}`,
+                        url: `/api/admin/business-delete/${id}`,
                         type: 'DELETE',
                         success: function() {
-                            showAlert('success', 'User deleted successfully!');
+                            showAlert('success', 'Business deleted successfully!');
                             table.ajax.reload();
                         },
                         error: function() {
@@ -206,8 +206,53 @@
                 }
             });
         });
+        // STATUS CHANGE
+        $('#businessesTable').on('click', '.action-btn.status', function() {
+            let id = $(this).data('id');
+            let newStatus = $(this).data('status');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: `This will change the user's status to ${newStatus}!`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: `Yes, change to ${newStatus}`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/api/admin/user-status/${id}`,
+                        type: 'POST',
+                        data: {
+                            status: newStatus
+                        },
+                        success: function(res) {
+                            if (res.success) {
+                                showAlert('success', res.message);
+                                table.ajax.reload();
+                            } else {
+                                showAlert('error', res.message ||
+                                    'Status change failed.');
+                            }
+                        },
+                        error: function(xhr) {
+                            let errors = xhr.responseJSON?.errors;
+                            if (errors) {
+                                Object.values(errors).forEach(msgArray => {
+                                    msgArray.forEach(msg => showAlert(
+                                        'error', msg));
+                                });
+                            } else {
+                                showAlert('error', 'Failed to change status.');
+                            }
+                        }
+                    });
+                }
+            });
+        });
         // Open "Add User" modal
-        $('#addUserBtn').on('click', function() {
+        $('#addBusinessBtn').on('click', function() {
             $('#userForm')[0].reset();
             $('#addUserModal').show();
         });

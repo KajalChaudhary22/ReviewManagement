@@ -65,7 +65,69 @@
         });
         document.getElementById('saveUser')?.addEventListener('click', function() {
             const userName = document.getElementById('userName').value;
-            alert(`User "${userName}" has been added successfully!`);
+            const userEmail = document.getElementById('userEmail').value;
+            const userPhone = document.getElementById('userPhone').value;
+            // const userType = document.getElementById('userType').value;
+            const userPassword = document.getElementById('userPassword').value;
+
+            // if (!userName || !userEmail || !userType || !userPassword) {
+            if (!userName || !userEmail || !userPassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill out all required fields.'
+                });
+                return;
+            }
+
+            const endpoint = `/api/admin/addUser`; // Adjust endpoint based on user type
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: userName,
+                    email: userEmail,
+                    phone: userPhone,
+                    password: userPassword,
+                    // user_type: userType // Assuming userType is a string like 'customer', 'business', or 'admin'
+                })
+            })
+                .then(async (response) => {
+                    const res = await response.json();
+                    if (!response.ok) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Registration Failed',
+                            text: res.message || 'Something went wrong.'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: res.message || 'User add successfully!',
+                            timer: 2500,
+                            showConfirmButton: false
+                        });
+
+                        // Reset form and close modal
+                        document.getElementById('userForm').reset();
+                        closeModal('addUserModal');
+                    }
+                })
+                .catch((error) => {
+                    console.error('API Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to connect to server.'
+                    });
+                });
+
+
             closeModal('addUserModal');
             document.getElementById('userForm').reset();
         });
@@ -75,7 +137,65 @@
         });
         document.getElementById('saveBusiness')?.addEventListener('click', function() {
             const businessName = document.getElementById('businessName').value;
-            alert(`Business "${businessName}" has been added successfully!`);
+            const businessCategory = document.getElementById('businessCategory').value;
+            const businessLocation = document.getElementById('businessLocation').value;
+            const businessEmail = document.getElementById('businessEmail').value;
+            const businessPhone = document.getElementById('businessPhone').value;
+
+            if (!businessName || !businessEmail || !businessPhone || !businessCategory || !businessLocation) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill out all required fields.'
+                });
+                return;
+            }
+
+            const endpoint = `/api/admin/addBusiness`;
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: businessName,
+                    email: businessEmail,
+                    phone: businessPhone,
+                })
+            })
+                .then(async (response) => {
+                    const res = await response.json();
+                    if (!response.ok) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Registration Failed',
+                            text: res.message || 'Something went wrong.'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: res.message || 'User add successfully!',
+                            timer: 2500,
+                            showConfirmButton: false
+                        });
+
+                        // Reset form and close modal
+                        document.getElementById('userForm').reset();
+                        closeModal('addUserModal');
+                    }
+                })
+                .catch((error) => {
+                    console.error('API Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to connect to server.'
+                    });
+                });
+
             closeModal('addBusinessModal');
             document.getElementById('businessForm').reset();
         });

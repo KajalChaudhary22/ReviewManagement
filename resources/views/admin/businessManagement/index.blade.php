@@ -1489,9 +1489,9 @@
                             <label class="form-label">Business Status</label>
                             <select class="form-control" id="businessStatusFilter">
                                 <option value="all">All Businesses</option>
-                                <option value="active">Active</option>
-                                <option value="pending">Pending Approval</option>
-                                <option value="suspended">Suspended</option>
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Suspended">Suspended</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1499,8 +1499,7 @@
                             <select class="form-control" id="businessCategoryFilter">
                                 <option value="all">All Categories</option>
                                 @foreach ($industries as $industry)
-                                    <option value="{{ $industry->id }}">{{ $industry->name }}</option>
-                                    
+                                    <option value="{{ $industry->id }}">{{ $industry->name }}</option>                                    
                                 @endforeach
                     
                             </select>
@@ -1538,7 +1537,6 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Location</th>
-                                <th>Owner</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -1619,14 +1617,49 @@
     <div class="modal" id="detailsModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="detailsModalTitle">Details</h2>
-                <button class="modal-close">×</button>
+                <h2 class="modal-title" id="detailsModalTitle">User Details</h2>
+                <button class="modal-close" data-close="detailsModal">×</button>
             </div>
             <div class="modal-body" id="detailsModalContent">
-                <!-- Content will be loaded dynamically -->
+
+                <!-- USER INFO HEADER -->
+                <div id="userInfoHeader" style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
+                    <div id="userAvatar"
+                        style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; flex-shrink: 0;">
+                        U
+                    </div>
+                    <div>
+                        <h3 id="userName" style="margin-bottom: 5px; color: var(--black);">User Name</h3>
+                        <p id="userEmail" style="color: var(--text-light); margin-bottom: 5px;">user@email.com</p>
+                        <span id="userStatusBadge" class="status-badge status-active">Active</span>
+                    </div>
+                </div>
+
+                <!-- USER DETAILS GRID -->
+                <div id="userInfoGrid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                    <div>
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Phone</p>
+                        <p id="userPhone" style="font-weight: 500;">N/A</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">User Type</p>
+                        <p id="userType" style="font-weight: 500;">N/A</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Registration Date
+                        </p>
+                        <p id="userRegistrationDate" style="font-weight: 500;">N/A</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Last Active</p>
+                        <p id="userLastActive" style="font-weight: 500;">N/A</p>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" id="closeDetails">Close</button>
+                <button class="btn btn-secondary" data-close="detailsModal">Close</button>
             </div>
         </div>
     </div>
