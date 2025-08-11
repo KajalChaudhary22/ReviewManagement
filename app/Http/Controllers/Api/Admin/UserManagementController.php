@@ -241,6 +241,43 @@ class UserManagementController extends Controller
             ], 500);
         }
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $id = custom_decrypt($id);
+
+        $request->validate([
+            'status' => 'required|string|in:Active,Suspended,Rejected'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $customer = Customer::findOrFail($id);
+            // dd($customer);
+            // Update customer related user
+            $customer->userDetails()->update([
+                'status' => $request->status
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => "User status changed to {$request->status}."
+            ]);
+        } catch (\Throwable $e) {
+            dd($e);
+            DB::rollBack();
+            Log::error('User status change failed: '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to change user status.'
+            ], 500);
+        }
+    }
     
     
 
