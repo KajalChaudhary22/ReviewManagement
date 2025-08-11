@@ -145,5 +145,6 @@ return [
     "Delete Account" => "Delete Account",
     "Change Password" => "Change Password",
     "Update" => "Update",
+    'Review Moderation' => 'Review Moderation',
 
 ];

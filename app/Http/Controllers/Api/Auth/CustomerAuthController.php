@@ -38,7 +38,7 @@ class CustomerAuthController extends Controller
                 'message' => $validator->errors()->first(),
             ], 422);
         }
-        $response = $this->authService->customerRegistration($request->all());
+        $response = $this->authService->a($request->all());
         return response()->json($response, $response['status'] ? 200 : 422);
         return response()->json([
             'status' => true,

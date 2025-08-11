@@ -138,9 +138,12 @@ class AuthenticationService
 
         try {
             // Create customer
+            $code = \App\Helpers\CodeGenerator::generate('CUST', 'customers', 'code', 6);
             $customer = Customer::create([
                 'name'  => $data['name'],
                 'email' => $data['email'],
+                'code'  => $code,
+                'status' => 'Active',
             ]);
 
             // Create user
@@ -150,6 +153,7 @@ class AuthenticationService
                 'password'    => Hash::make($data['password']),
                 'customer_id' => $customer->id,
                 'type'        => 'Customer',
+                'status' => 'Active',
             ]);
 
             // Create token

@@ -2,9 +2,19 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\CustomerAuthController;
-use App\Http\Controllers\Api\Auth\BusinessAuthController;
-use App\Http\Controllers\Api\Auth\AdminAuthController;
+use App\Http\Controllers\Api\Auth\{
+    CustomerAuthController,
+    ForgotPasswordController,
+    BusinessAuthController,
+    AdminAuthController,
+    ResetPasswordController
+};
+use App\Http\Controllers\Api\Admin\{
+    UserManagementController,
+    BusinessManagementController,
+    AdminDashboardController,
+};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +42,32 @@ Route::prefix('business')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    // Route::post('register', [AdminAuthController::class, 'register']);
     Route::post('login', [AdminAuthController::class, 'login']);
-    Route::post('addUser', [AdminAuthController::class, 'addUser']);
+
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard.show');
+        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        Route::get('/users-list', [UserManagementController::class, 'usersList'])->name('users.list');
+        Route::get('/user-view/{id}', [UserManagementController::class, 'userView'])->name('user.view');
+        Route::put('/user-update/{id}', [UserManagementController::class, 'userUpdate'])->name('user.update');
+        Route::delete('/user-delete/{id}', [UserManagementController::class, 'userDelete'])->name('user.delete');
+        Route::post('/user-add', [UserManagementController::class, 'userAdd']);
+        // Route::post('users', [UserController::class, 'store']);      // Create
+        // Route::get('users/{id}', [UserController::class, 'show']);   // View single
+        // Route::put('users/{id}', [UserController::class, 'update']); // Update
+        // Route::delete('users/{id}', [UserController::class, 'destroy']); // Delete
+        Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
+        // Route::get('/review-moderation', [UserManagementController::class, 'index'])->name('review.moderation.index');
+        // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+        // Route::get('/', [UserController::class, 'index']);
+        // Route::post('/', [UserController::class, 'store']);
+        // Route::get('{user}', [UserController::class, 'show']);
+        // Route::put('{user}', [UserController::class, 'update']);
+        // Route::delete('{user}', [UserController::class, 'destroy']);
+    });
+    // Route::post('addUser', [AdminAuthController::class, 'addUser']);
+    
 });
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
