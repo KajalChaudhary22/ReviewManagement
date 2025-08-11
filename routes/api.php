@@ -53,18 +53,14 @@ Route::prefix('admin')->group(function () {
         Route::delete('/user-delete/{id}', [UserManagementController::class, 'userDelete'])->name('user.delete');
         Route::post('/user-status/{id}', [UserManagementController::class, 'changeStatus'])->name('user.status');
         Route::post('/user-add', [UserManagementController::class, 'userAdd']);
-        // Route::post('users', [UserController::class, 'store']);      // Create
-        // Route::get('users/{id}', [UserController::class, 'show']);   // View single
-        // Route::put('users/{id}', [UserController::class, 'update']); // Update
-        // Route::delete('users/{id}', [UserController::class, 'destroy']); // Delete
+
+        // Business Management Routes
         Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
-        // Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard.show');
-        // Route::get('/user-management', [BusinessManagementController::class, 'index'])->name('user.management.index');
         Route::get('/business-list', [BusinessManagementController::class, 'BusinessList']);
-        Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
-        Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
-        Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
-        Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
+        // Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
+        // Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
+        // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
+        // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
         // Route::get('/review-moderation', [BusinessManagementController::class, 'index'])->name('review.moderation.index');
         // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         // Route::get('/', [UserController::class, 'index']);
@@ -75,6 +71,7 @@ Route::prefix('admin')->group(function () {
     });
     // Route::post('addUser', [AdminAuthController::class, 'addUser']);
     
+    Route::post('addUser', [AdminDashboardController::class, 'addUser']);
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);

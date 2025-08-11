@@ -32,7 +32,7 @@
                             <option value="in">India</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label class="form-label">Owner</label>
                         <select class="form-control" id="businessOwner" required>
                             <option value="">Select Owner</option>
@@ -40,10 +40,18 @@
                             <option value="1004">David Kim</option>
                             <option value="1005">Robert Taylor</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="businessEmail" required>
+                    </div>
+                    {{-- <div class="form-group">
                         <label class="form-label">Description</label>
                         <textarea class="form-control" id="businessDescription" rows="3"></textarea>
+                    </div> --}}
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="businessPhone">
                     </div>
                 </form>
             </div>
