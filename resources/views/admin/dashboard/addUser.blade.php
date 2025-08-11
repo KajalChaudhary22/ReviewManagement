@@ -18,7 +18,7 @@
                         <label class="form-label">Phone</label>
                         <input type="tel" class="form-control" id="userPhone">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label class="form-label">User Type</label>
                         <select class="form-control" id="userType" required>
                             <option value="">Select User Type</option>
@@ -26,7 +26,7 @@
                             <option value="business">Business Owner</option>
                             <option value="admin">Admin</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" id="userPassword" required>

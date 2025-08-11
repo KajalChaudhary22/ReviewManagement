@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\CustomerAuthController;
 use App\Http\Controllers\Api\Auth\BusinessAuthController;
 use App\Http\Controllers\Api\Auth\AdminAuthController;
+use App\Http\Controllers\Api\Admin\AdminDashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +36,5 @@ Route::prefix('business')->group(function () {
 Route::prefix('admin')->group(function () {
     // Route::post('register', [AdminAuthController::class, 'register']);
     Route::post('login', [AdminAuthController::class, 'login']);
-    Route::post('addUser', [AdminAuthController::class, 'addUser']);
+    Route::post('addUser', [AdminDashboardController::class, 'addUser']);
 });
