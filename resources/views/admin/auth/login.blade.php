@@ -137,55 +137,11 @@
         </div>
     </footer>
 
-    <!-- Social Login Modals -->
-    <div class="modal" id="googleModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-icon">
-                <i class="fab fa-google google-icon"></i>
-            </div>
-            <div class="modal-header">
-                <h3>Login with Google</h3>
-                <p>Sign in to your SCIZORA account using Google</p>
-            </div>
-            <input type="email" class="input-field" placeholder="Your Google email" style="margin-bottom: 15px;">
-            <input type="password" class="input-field" placeholder="Your Google password">
-            <button class="modal-btn" id="googleSignIn">Continue with Google</button>
-        </div>
-    </div>
+    
 
-    <div class="modal" id="microsoftModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-icon">
-                <i class="fab fa-microsoft microsoft-icon"></i>
-            </div>
-            <div class="modal-header">
-                <h3>Login with Microsoft</h3>
-                <p>Sign in to your SCIZORA account using Microsoft</p>
-            </div>
-            <input type="email" class="input-field" placeholder="Your Microsoft email"
-                style="margin-bottom: 15px;">
-            <input type="password" class="input-field" placeholder="Your Microsoft password">
-            <button class="modal-btn" id="microsoftSignIn">Continue with Microsoft</button>
-        </div>
-    </div>
+    
 
-    <div class="modal" id="appleModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-icon">
-                <i class="fab fa-apple apple-icon"></i>
-            </div>
-            <div class="modal-header">
-                <h3>Login with Apple</h3>
-                <p>Sign in to your SCIZORA account using Apple</p>
-            </div>
-            <input type="email" class="input-field" placeholder="Your Apple ID" style="margin-bottom: 15px;">
-            <input type="password" class="input-field" placeholder="Your Apple password">
-            <button class="modal-btn" id="appleSignIn">Continue with Apple</button>
-        </div>
-    </div>
+    
     @include('layouts.commonjs')
     <script>
         // Toggle password visibility
@@ -246,71 +202,7 @@
                 });
         });
 
-        // Modal functionality
-        const googleModal = document.getElementById('googleModal');
-        const microsoftModal = document.getElementById('microsoftModal');
-        const appleModal = document.getElementById('appleModal');
-
-        const googleBtn = document.getElementById('googleLogin');
-        const microsoftBtn = document.getElementById('microsoftLogin');
-        const appleBtn = document.getElementById('appleLogin');
-
-        const closeButtons = document.querySelectorAll('.close-modal');
-
-        // Open modals
-        googleBtn.addEventListener('click', () => {
-            googleModal.style.display = 'flex';
-        });
-
-        microsoftBtn.addEventListener('click', () => {
-            microsoftModal.style.display = 'flex';
-        });
-
-        appleBtn.addEventListener('click', () => {
-            appleModal.style.display = 'flex';
-        });
-
-        // Close modals
-        closeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                this.closest('.modal').style.display = 'none';
-            });
-        });
-
-        // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        });
-
-        // Social sign in functionality
-        document.getElementById('googleSignIn').addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-            setTimeout(() => {
-                alert('Successfully signed in with Google!');
-                googleModal.style.display = 'none';
-                this.innerHTML = 'Continue with Google';
-            }, 1500);
-        });
-
-        document.getElementById('microsoftSignIn').addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-            setTimeout(() => {
-                alert('Successfully signed in with Microsoft!');
-                microsoftModal.style.display = 'none';
-                this.innerHTML = 'Continue with Microsoft';
-            }, 1500);
-        });
-
-        document.getElementById('appleSignIn').addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-            setTimeout(() => {
-                alert('Successfully signed in with Apple!');
-                appleModal.style.display = 'none';
-                this.innerHTML = 'Continue with Apple';
-            }, 1500);
-        });
+        
     </script>
 </body>
 

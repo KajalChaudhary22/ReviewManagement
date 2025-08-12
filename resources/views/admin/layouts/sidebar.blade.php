@@ -16,15 +16,21 @@
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>
         </a>
+        <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
+            <i class="icon">📢</i>
+            <span class="menu-text">Campaigns</span>
+        </a> 
+        {{-- <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
+            <i class="icon">⭐</i>
+            <span class="menu-text">Review Moderation</span>
+        </a> --}}
+        
         {{-- <a href="business-management.html" class="menu-item">
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>
         </a> --}}
-        {{-- <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
-            <i class="icon">⭐</i>
-            <span class="menu-text">Review Moderation</span>
-        </a>
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
+      
+         {{-- <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
             <i class="icon">📈</i>
             <span class="menu-text">Analytics & Reports</span>
         </a>
@@ -67,11 +73,8 @@
         <a href="queries.html" class="menu-item">
             <i class="icon">📩</i>
             <span class="menu-text">Queries</span>
-        </a>
-        <a href="campaigns.html" class="menu-item">
-            <i class="icon">📢</i>
-            <span class="menu-text">Campaigns</span>
-        </a> --}}
+        </a>--}}
+        
     </div>
     <div class="user-profile">
         <div class="user-avatar">

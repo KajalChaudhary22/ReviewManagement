@@ -13,6 +13,9 @@ use App\Http\Controllers\Api\Admin\{
     UserManagementController,
     BusinessManagementController,
     AdminDashboardController,
+    ReviewModerationController,
+    CampaignsController,
+    
 };
 
 
@@ -60,14 +63,11 @@ Route::prefix('admin')->group(function () {
         // Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
         // Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
         // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
+        Route::post('/user-status/{id}', [UserManagementController::class, 'changeStatus'])->name('user.status');
         // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
-        // Route::get('/review-moderation', [BusinessManagementController::class, 'index'])->name('review.moderation.index');
-        // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-        // Route::get('/', [UserController::class, 'index']);
-        // Route::post('/', [UserController::class, 'store']);
-        // Route::get('{user}', [UserController::class, 'show']);
-        // Route::put('{user}', [UserController::class, 'update']);
-        // Route::delete('{user}', [UserController::class, 'destroy']);
+        Route::get('/review-moderation', [ReviewModerationController::class, 'index'])->name('review.moderation.index');
+        Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
+       
     });
     // Route::post('addUser', [AdminAuthController::class, 'addUser']);
     
