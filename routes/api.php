@@ -56,11 +56,12 @@ Route::prefix('admin')->group(function () {
 
         // Business Management Routes
         Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
-        Route::get('/business-list', [BusinessManagementController::class, 'BusinessList']);
-        // Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
-        // Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
-        // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
-        // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
+        Route::get('/business-list', [BusinessManagementController::class, 'businessList']);
+        Route::get('/business-view/{id}', [BusinessManagementController::class, 'businessView'])->name('business.view');
+        Route::put('/business-update/{id}', [BusinessManagementController::class, 'businessUpdate'])->name('business.update');
+        Route::delete('/business-delete/{id}', [BusinessManagementController::class, 'businessDelete'])->name('business.delete');
+        Route::post('/business-add', [BusinessManagementController::class, 'businessAdd']);
+        Route::post('/business-status/{id}', [BusinessManagementController::class, 'changeStatus'])->name('business.status');
         // Route::get('/review-moderation', [BusinessManagementController::class, 'index'])->name('review.moderation.index');
         // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         // Route::get('/', [UserController::class, 'index']);

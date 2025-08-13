@@ -6,5 +6,5 @@
     <button class="action-btn edit" data-id="{{ custom_encrypt($data?->id) }}">
         <i class="fa fa-edit"></i> Edit
     </button>
-    {!! \App\Helpers\Helpers::statusActionButton($data?->id, $data?->userDetails?->status) !!}
+    {{-- {!! \App\Helpers\Helpers::statusActionButton($data?->id, $data?->userDetails?->status) !!} --}}
 </div>
