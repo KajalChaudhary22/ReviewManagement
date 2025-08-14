@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Business Management - SCIZORA-Admin</title>
     @include('admin.layouts.styles')
 </head>
+
 <body>
     <!-- Sidebar -->
     @include('admin.layouts.sidebar')
@@ -25,13 +28,14 @@
                         <i class="icon">➕</i> Add Business
                     </button>
                 </div>
-                
+
                 <!-- Business Filters -->
                 <div class="table-container mb-20">
                     <div style="padding: 15px; display: grid; grid-template-columns: 1fr; gap: 15px;">
                         <div class="form-group">
                             <label class="form-label">Search Businesses</label>
-                            <input type="text" class="form-control" id="businessSearch" placeholder="Name, category, location...">
+                            <input type="text" class="form-control" id="businessSearch"
+                                placeholder="Name, category, location...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Business Status</label>
@@ -47,9 +51,9 @@
                             <select class="form-control" id="businessCategoryFilter">
                                 <option value="all">All Categories</option>
                                 @foreach ($industries as $industry)
-                                    <option value="{{ $industry->id }}">{{ $industry->name }}</option>                                    
+                                    <option value="{{ $industry->id }}">{{ $industry->name }}</option>
                                 @endforeach
-                    
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -58,7 +62,7 @@
                                 <option value="all">All Locations</option>
                                 @foreach ($locations as $location)
                                     <option value="{{ $location->id }}">{{ $location->name }}</option>
-                                    
+
                                 @endforeach
                             </select>
                         </div>
@@ -67,7 +71,7 @@
                         <button class="btn btn-primary" id="applyBusinessFilters">Apply Filters</button>
                     </div>
                 </div>
-                
+
                 <!-- Businesses Table -->
                 <div class="table-container">
                     <div class="table-header">
@@ -90,10 +94,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
         </div>
@@ -115,43 +119,95 @@
                 <form id="businessForm">
                     <div class="form-group">
                         <label class="form-label">Business Name</label>
-                        <input type="text" class="form-control" id="businessName" required>
+                        <input type="text" class="form-control" id="businessName" name="name" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Category</label>
-                        <select class="form-control" id="businessCategory" required>
+                        <select class="form-control" id="businessCategory" required name="category">
                             <option value="">Select Category</option>
-                            <option value="pharmacy">Pharmacy</option>
-                            <option value="hospital">Hospital</option>
-                            <option value="clinic">Clinic</option>
-                            <option value="laboratory">Laboratory</option>
-                            <option value="distributor">Distributor</option>
+                            @foreach ($industries as $industry)
+                                <option value="{{ $industry->id }}">{{ $industry->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Location</label>
-                        <select class="form-control" id="businessLocation" required>
+                        <select class="form-control" id="businessLocation" name="location" required>
                             <option value="">Select Location</option>
-                            <option value="us">United States</option>
-                            <option value="uk">United Kingdom</option>
-                            <option value="ca">Canada</option>
-                            <option value="au">Australia</option>
-                            <option value="in">India</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Owner</label>
-                        <select class="form-control" id="businessOwner" required>
-                            <option value="">Select Owner</option>
-                            <option value="1002">Michael Chen</option>
-                            <option value="1004">David Kim</option>
-                            <option value="1005">Robert Taylor</option>
-                        </select>
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="businessEmail" name="email" required>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="businessPhone" name="contact_number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="businessPassword" name="password" required>
+                    </div>
+                    {{-- <div class="form-group">
                         <label class="form-label">Description</label>
                         <textarea class="form-control" id="businessDescription" rows="3"></textarea>
+                    </div> --}}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBusiness">Cancel</button>
+                <button class="btn btn-primary" id="saveBusiness">Save Business</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Business Modal -->
+     <div class="modal" id="editBusinessModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Business</h2>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="businessEditForm">
+                    <div class="form-group">
+                        <label class="form-label">Business Name</label>
+                        <input type="text" class="form-control" id="businessEditName" name="name" required>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="businessEditCategory" required name="category">
+                            <option value="">Select Category</option>
+                            @foreach ($industries as $industry)
+                                <option value="{{ $industry->id }}">{{ $industry->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <select class="form-control" id="businessEditLocation" name="location" required>
+                            <option value="">Select Location</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="businessEditEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="businessEditPhone" name="contact_number">
+                    </div>
+                    
+                    {{-- <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="businessEditDescription" rows="3"></textarea>
+                    </div> --}}
                 </form>
             </div>
             <div class="modal-footer">
@@ -170,16 +226,17 @@
             </div>
             <div class="modal-body" id="detailsModalContent">
 
-                <!-- USER INFO HEADER -->
-                <div id="userInfoHeader" style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
-                    <div id="userAvatar"
+                <!-- BUSINESS INFO HEADER -->
+                <div id="businessInfoHeader"
+                    style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
+                    <div id="businessAvatar"
                         style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; flex-shrink: 0;">
                         U
                     </div>
                     <div>
-                        <h3 id="userName" style="margin-bottom: 5px; color: var(--black);">User Name</h3>
-                        <p id="userEmail" style="color: var(--text-light); margin-bottom: 5px;">user@email.com</p>
-                        <span id="userStatusBadge" class="status-badge status-active">Active</span>
+                        <h3 id="businessName" style="margin-bottom: 5px; color: var(--black);">User Name</h3>
+                        <p id="businessEmail" style="color: var(--text-light); margin-bottom: 5px;">user@email.com</p>
+                        <span id="businessStatusBadge" class="status-badge status-active">Active</span>
                     </div>
                 </div>
 
@@ -188,20 +245,20 @@
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Phone</p>
-                        <p id="userPhone" style="font-weight: 500;">N/A</p>
+                        <p id="businessPhone" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
-                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">User Type</p>
-                        <p id="userType" style="font-weight: 500;">N/A</p>
+                        <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Business Type</p>
+                        <p id="businessType" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Registration Date
                         </p>
-                        <p id="userRegistrationDate" style="font-weight: 500;">N/A</p>
+                        <p id="businessRegistrationDate" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Last Active</p>
-                        <p id="userLastActive" style="font-weight: 500;">N/A</p>
+                        <p id="businessLastActive" style="font-weight: 500;">N/A</p>
                     </div>
                 </div>
 
@@ -211,7 +268,10 @@
             </div>
         </div>
     </div>
+    @include('layouts.commonjs')
+    @include('admin.businessManagement.js')
 
-   
+
 </body>
+
 </html>

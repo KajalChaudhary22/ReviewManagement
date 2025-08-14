@@ -254,7 +254,7 @@
 
         // Open "Add User" modal
         $('#addUserBtn').on('click', function() {
-            $('#userForm')[0].reset();
+            // $('#userForm')[0].reset();
             $('#addUserModal').show();
         });
     });
