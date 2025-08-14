@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\{
     Log,
     DB
 };
+use App\Helpers\CodeGenerator;
 
 class AuthenticationService
 {
@@ -91,14 +92,17 @@ class AuthenticationService
     {
         DB::beginTransaction();
         try {
+            $code = CodeGenerator::generate('businesses', 'code');
             $business = Business::create([
                 'name'           => $request->name,
                 'email'          => $request->email,
                 'contact_number' => $request->contact_number,
                 'master_id'      => $request->industry_id,
                 'status'         => 'Pending',
+                'location_id'         => $request->location_id,
+                'code'          => $code,
             ]);
-
+            $userCode = CodeGenerator::generate('users', 'code');
             $user = User::create([
                 'name'         => $request->name,
                 'email'        => $request->email,
@@ -106,6 +110,7 @@ class AuthenticationService
                 'type'         => 'Business',
                 'business_id'  => $business->id,
                 'status'       => 'Active',
+                'code'         => $userCode,
             ]);
             DB::commit();
 
@@ -138,7 +143,7 @@ class AuthenticationService
 
         try {
             // Create customer
-            $code = \App\Helpers\CodeGenerator::generate('CUST', 'customers', 'code', 6);
+            $code = \App\Helpers\CodeGenerator::generate('customers', 'code');
             $customer = Customer::create([
                 'name'  => $data['name'],
                 'email' => $data['email'],

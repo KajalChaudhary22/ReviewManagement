@@ -29,6 +29,7 @@ class BusinessAuthController extends Controller
             'email'                 => 'required|email|unique:businesses,email',
             'contact_number'        => 'required|string',
             'industry_id'           => 'required|exists:masters,id', // Adjust table name if needed
+            'location_id'           => 'required|exists:masters,id', // Adjust table name if needed
             'password'              => 'required|min:8|confirmed',
         ]);
 
@@ -40,7 +41,6 @@ class BusinessAuthController extends Controller
         }        
 
         $response = $this->authService->businessRegistration($request);
-
         return response()->json($response, $response['status'] ? 200 : 500);
     }
     public function login(Request $request)

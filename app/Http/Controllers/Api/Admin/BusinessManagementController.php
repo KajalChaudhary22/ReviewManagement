@@ -165,7 +165,7 @@ class BusinessManagementController extends Controller
                 ], 400);
             }
 
-            $code = \App\Helpers\CodeGenerator::generate('CUST', 'customers', 'code', 8);
+            $code = \App\Helpers\CodeGenerator::generate( 'customers', 'code');
             $customer = Customer::create([
                 'code' => $code,
                 'name' => $validated['name'],
@@ -173,7 +173,7 @@ class BusinessManagementController extends Controller
                 'contact_number' => $validated['contact_number'] ?? null,
             ]);
 
-            $code = \App\Helpers\CodeGenerator::generate('USR', 'users', 'code', 10);
+            $code = \App\Helpers\CodeGenerator::generate('users', 'code');
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],

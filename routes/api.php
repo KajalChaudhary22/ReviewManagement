@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Admin\{
     AdminDashboardController,
     ReviewModerationController,
     CampaignsController,
+    MasterSetupController,
     
 };
 
@@ -65,8 +66,19 @@ Route::prefix('admin')->group(function () {
         // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
         Route::post('/user-status/{id}', [UserManagementController::class, 'changeStatus'])->name('user.status');
         // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
+
+
         Route::get('/review-moderation', [ReviewModerationController::class, 'index'])->name('review.moderation.index');
+        Route::get('/reviews/list', [ReviewModerationController::class, 'list'])->name('reviews.list');
+        Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
+        Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
+        // Route::post('/reviews/reviews-show/{id}', [ReviewModerationController::class, 'show'])->name('reviews.approve');
+        // Route::post('/reviews/reject/{id}', [ReviewModerationController::class, 'reject'])->name('reviews.reject');
+
+
+
         Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
+        Route::get('/master-setup', [MasterSetupController::class, 'index'])->name('master.setup.index');
        
     });
     // Route::post('addUser', [AdminAuthController::class, 'addUser']);

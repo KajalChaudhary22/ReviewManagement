@@ -38,30 +38,22 @@
                 @foreach ($industries as $industry)
                     <option value="{{ $industry?->id }}">{{ $industry?->name }}</option>
                 @endforeach
-                <!-- <option value="Antibodies">Antibodies</option>
-                <option value="Assay Kits & Reagents">Assay Kits & Reagents</option>
-                <option value="Cell & Tissue Culture">Cell & Tissue Culture</option>
-                <option value="Genomics & Proteomics">Genomics & Proteomics</option>
-                <option value="Molecular Biology">Molecular Biology</option>
-                <option value="Drug Discovery">Drug Discovery</option>
-                <option value="Clinical Diagnostics">Clinical Diagnostics</option>
-                <option value="Lab Equipment & Instruments">Lab Equipment & Instruments</option>
-                <option value="Lab Automation & Informatics">Lab Automation & Informatics</option>
-                <option value="Chemicals & Reagents">Chemicals & Reagents</option>
-                <option value="Microscopy & Imaging">Microscopy & Imaging</option>
-                <option value="Life Sciences">Life Sciences</option>
-                <option value="Environmental">Environmental</option>
-                <option value="Materials">Materials</option>
-                <option value="Food & Beverage">Food & Beverage</option>
-                <option value="General Lab">General Lab</option>
-                <option value="Lab Automation">Lab Automation</option>
-                <option value="Lab Informatics">Lab Informatics</option>
-                <option value="Separations">Separations</option>
-                <option value="Spectroscopy">Spectroscopy</option>
-                <option value="Forensics">Forensics</option>
-                <option value="Cannabis Testing">Cannabis Testing</option> -->
+                
             </select>
             <p class="text-red-500 text-xs mt-1 hidden" id="industryError">Please select an industry category</p>
+        </div>
+        <div>
+            <label for="industry" class="block text-sm font-medium mb-1 text-gray-700">Location</label>
+            <select id="location" name="location" 
+                class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent transition appearance-none text-gray-700"
+                required>
+                <option value="" disabled selected>{{__('common.Select location')}}</option>
+                @foreach ($locations as $location)
+                    <option value="{{ $location?->id }}">{{ $location?->name }}</option>
+                @endforeach
+                
+            </select>
+            <p class="text-red-500 text-xs mt-1 hidden" id="locationError">Please select a location</p>
         </div>
         
         <div>

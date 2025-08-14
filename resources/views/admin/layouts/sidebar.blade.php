@@ -16,9 +16,17 @@
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>
         </a>
+        <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
+            <i class="icon">⭐</i>
+            <span class="menu-text">Review Moderation</span>
+        </a>
         <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
+        </a> 
+        <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
+            <i class="icon">📢</i>
+            <span class="menu-text">Master Setup</span>
         </a> 
         {{-- <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
             <i class="icon">⭐</i>
