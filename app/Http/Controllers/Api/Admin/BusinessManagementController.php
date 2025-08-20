@@ -183,8 +183,8 @@ class BusinessManagementController extends Controller
                 ], 400);
             }
 
-            $code = \App\Helpers\CodeGenerator::generate('BUS', 'businesses', 'code', 8);
-            $business = Business::create([
+            $code = \App\Helpers\CodeGenerator::generate( 'customers', 'code');
+            $customer = Customer::create([
                 'code' => $code,
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -193,7 +193,7 @@ class BusinessManagementController extends Controller
                 'master_id' => $validated['category'] ?? null,
             ]);
 
-            $code = \App\Helpers\CodeGenerator::generate('USR', 'users', 'code', 10);
+            $code = \App\Helpers\CodeGenerator::generate('users', 'code');
             $user = User::create([
                 'name' => $validated['name'],
                 'status' => 'Active',

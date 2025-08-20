@@ -135,6 +135,15 @@
                 } else {
                     industryError.classList.add('hidden');
                 }
+                // Validate Location
+                const location = document.getElementById('location');
+                const locationError = document.getElementById('locationError');
+                if (!location.value) {
+                    locationError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    locationError.classList.add('hidden');
+                }
 
                 // Validate Password
                 const password = document.getElementById('password');
@@ -163,6 +172,7 @@
                         email: email.value,
                         contact_number: phone.value,
                         industry_id: industry.value,
+                        location_id: location.value,
                         password: password.value,
                         password_confirmation: confirmPassword.value
                     };
@@ -193,7 +203,6 @@
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops!',

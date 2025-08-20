@@ -19,13 +19,21 @@ class AuthController extends Controller
     public function showBusinessLogin()
     {
         $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Industries')->first();
+        $locationMasterId = MasterType::with('getActiveMasterData')->where('name', 'Location')->first();
         if($mastertypId)
         {
             $industries = $mastertypId?->getActiveMasterData;
         }else{
             $industries = collect();
         }
-        return view('business.auth.login', compact('industries'));
+        if($locationMasterId)
+        {
+            $locations = $locationMasterId?->getActiveMasterData;
+        }
+        else{
+            $locations = collect();
+        }
+        return view('business.auth.login', compact('industries','locations'));
     }
     public function showCustomerLogin()
     {

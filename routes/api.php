@@ -13,6 +13,11 @@ use App\Http\Controllers\Api\Admin\{
     UserManagementController,
     BusinessManagementController,
     AdminDashboardController,
+    ReviewModerationController,
+    CampaignsController,
+    MasterSetupController,
+    SettingController
+    
 };
 
 
@@ -46,6 +51,8 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard.show');
+
+        //user Management Routes
         Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         Route::get('/users-list', [UserManagementController::class, 'usersList'])->name('users.list');
         Route::get('/user-view/{id}', [UserManagementController::class, 'userView'])->name('user.view');
@@ -62,6 +69,35 @@ Route::prefix('admin')->group(function () {
         Route::delete('/business-delete/{id}', [BusinessManagementController::class, 'businessDelete'])->name('business.delete');
         Route::post('/business-add', [BusinessManagementController::class, 'businessAdd']);
         Route::post('/business-status/{id}', [BusinessManagementController::class, 'changeStatus'])->name('business.status');
+
+        // Review Moderation Routes
+        Route::get('/review-moderation', [ReviewModerationController::class, 'index'])->name('review.moderation.index');
+        Route::get('/reviews/list', [ReviewModerationController::class, 'list'])->name('reviews.list');
+        Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
+        Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
+
+
+        // Route::get('/business-list', [BusinessManagementController::class, 'BusinessList']);
+        // Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
+        // Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
+        // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
+        // Route::post('/user-status/{id}', [UserManagementController::class, 'changeStatus'])->name('user.status');
+        // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
+
+
+        
+        // Route::post('/reviews/reviews-show/{id}', [ReviewModerationController::class, 'show'])->name('reviews.approve');
+        // Route::post('/reviews/reject/{id}', [ReviewModerationController::class, 'reject'])->name('reviews.reject');
+
+
+
+        Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
+        Route::get('/master-setup', [MasterSetupController::class, 'index'])->name('master.setup.index');
+
+        Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
+        Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
+       
+        
         // Route::get('/review-moderation', [BusinessManagementController::class, 'index'])->name('review.moderation.index');
         // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         // Route::get('/', [UserController::class, 'index']);

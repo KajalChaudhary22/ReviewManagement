@@ -146,5 +146,7 @@ return [
     "Change Password" => "Change Password",
     "Update" => "Update",
     'Review Moderation' => 'Review Moderation',
+    'Select category' => 'Select category',
+    'Select location' => 'Select location',
 
 ];
