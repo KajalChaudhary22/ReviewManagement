@@ -28,6 +28,10 @@
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
         </a> 
+        <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}" class="menu-item">
+            <i class="icon">⚙️</i>
+            <span class="menu-text">Settings</span>
+        </a>
         {{-- <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
             <i class="icon">⭐</i>
             <span class="menu-text">Review Moderation</span>
@@ -46,10 +50,7 @@
             <i class="icon">🏆</i>
             <span class="menu-text">Points System</span>
         </a>
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">⚙️</i>
-            <span class="menu-text">Settings</span>
-        </a>
+        
         <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
             <i class="icon">📩</i>
             <span class="menu-text">Queries</span>
