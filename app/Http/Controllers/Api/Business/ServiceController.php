@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Api\Business;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductController extends Controller
+class ServiceController extends Controller
 {
     //
-    protected function addProduct(Request $request)
+    protected function addService(Request $request)
     {
         try {
             DB::beginTransaction();
@@ -20,11 +20,7 @@ class ProductController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'required|string|max:255',
-                'sku' => 'required|string|min:8|unique:products,sku',
-                'productCategory_id' => 'required|exists:product_categories,id',
                 'price' => 'required|numeric|min:0',
-                'quantity' => 'required|integer|min:1',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
             // Handle image upload
@@ -33,17 +29,17 @@ class ProductController extends Controller
                 $validated['image'] = $imagePath;
             }
 
-            // Create product
-            $product = Product::create($validated);
+            // Create service
+            $service = Service::create($validated);
 
             DB::commit();
 
-            return response()->json(['product' => $product], 201);
+            return response()->json(['service' => $service], 201);
         } catch (\Exception $e) {
             DB::rollBack();
 
             // Log error with full trace
-            Log::error('Product creation failed: ' . $e->getMessage(), [
+            Log::error('Service creation failed: ' . $e->getMessage(), [
                 'stack' => $e->getTraceAsString(),
                 'input' => $request->all()
             ]);
