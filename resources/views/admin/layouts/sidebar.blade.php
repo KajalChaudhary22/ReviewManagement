@@ -20,6 +20,10 @@
             <i class="icon">⭐</i>
             <span class="menu-text">Review Moderation</span>
         </a>
+        <a href="{{ route('analytics.reports.index',['ty'=>custom_encrypt('AnalyticsReports')]) }}" class="menu-item {{ Route::is('analytics.reports.index') ? 'active' : '' }}">
+            <i class="icon">📈</i>
+            <span class="menu-text">Analytics & Reports</span>
+        </a>
         <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
