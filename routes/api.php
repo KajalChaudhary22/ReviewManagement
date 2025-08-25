@@ -16,7 +16,8 @@ use App\Http\Controllers\Api\Admin\{
     ReviewModerationController,
     CampaignsController,
     MasterSetupController,
-    SettingController
+    SettingController,
+    AnalyticsReportsController
 };
 
 use App\Http\Controllers\Api\Business\{
@@ -78,6 +79,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/reviews/list', [ReviewModerationController::class, 'list'])->name('reviews.list');
         Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
         Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
+
+        // Analytics Reports Routes
+        Route::get('/analytics-reports', [AnalyticsReportsController::class, 'index'])->name('analytics.reports.index');
+        // Route::get('/reviews/list', [ReviewModerationController::class, 'list'])->name('reviews.list');
+        // Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
+        // Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
+
 
 
         // Route::get('/business-list', [BusinessManagementController::class, 'BusinessList']);

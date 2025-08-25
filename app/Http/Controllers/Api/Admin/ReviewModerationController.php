@@ -110,7 +110,7 @@ class ReviewModerationController extends Controller
             ]);
         } catch (Exception $e) {
             Log::error('Error approving review', [
-                'review_id' => $id,
+                'review_id' => $request->id,
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
