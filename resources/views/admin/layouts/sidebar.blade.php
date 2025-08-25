@@ -20,10 +20,10 @@
             <i class="icon">⭐</i>
             <span class="menu-text">Review Moderation</span>
         </a>
-        <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
+        {{-- <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
-        </a> 
+        </a>  --}}
         <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
@@ -32,15 +32,6 @@
             <i class="icon">⚙️</i>
             <span class="menu-text">Settings</span>
         </a>
-        {{-- <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
-            <i class="icon">⭐</i>
-            <span class="menu-text">Review Moderation</span>
-        </a> --}}
-        
-        {{-- <a href="business-management.html" class="menu-item">
-            <i class="icon">🏢</i>
-            <span class="menu-text">Business Management</span>
-        </a> --}}
       
          {{-- <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
             <i class="icon">📈</i>
@@ -55,10 +46,7 @@
             <i class="icon">📩</i>
             <span class="menu-text">Queries</span>
         </a>
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">📢</i>
-            <span class="menu-text">Campaigns</span>
-        </a>
+        
         <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
             <i class="icon">📢</i>
             <span class="menu-text">Master</span>
@@ -75,10 +63,7 @@
             <i class="icon">🏆</i>
             <span class="menu-text">Points System</span>
         </a>
-        <a href="settings.html" class="menu-item">
-            <i class="icon">⚙️</i>
-            <span class="menu-text">Settings</span>
-        </a>
+       
         <a href="queries.html" class="menu-item">
             <i class="icon">📩</i>
             <span class="menu-text">Queries</span>

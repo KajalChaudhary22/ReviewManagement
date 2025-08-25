@@ -7,7 +7,8 @@ use App\Http\Controllers\Api\Auth\{
     ForgotPasswordController,
     BusinessAuthController,
     AdminAuthController,
-    ResetPasswordController
+    ResetPasswordController,
+    AuthController
 };
 use App\Http\Controllers\Api\Admin\{
     UserManagementController,
@@ -18,6 +19,10 @@ use App\Http\Controllers\Api\Admin\{
     MasterSetupController,
     SettingController
     
+};
+use App\Http\Controllers\Api\Business\{
+    BusinessDashboardController,
+    BusinessProfileController,
 };
 
 
@@ -51,6 +56,8 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard.show');
+        Route::post('/business-approval/{id}', [AdminDashboardController::class, 'updateApproval']);
+        Route::get('/business/{id}', [AdminDashboardController::class, 'viewBusiness']);
 
         //user Management Routes
         Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
@@ -77,19 +84,6 @@ Route::prefix('admin')->group(function () {
         Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
 
 
-        // Route::get('/business-list', [BusinessManagementController::class, 'BusinessList']);
-        // Route::get('/user-view/{id}', [BusinessManagementController::class, 'userView'])->name('user.view');
-        // Route::put('/user-update/{id}', [BusinessManagementController::class, 'userUpdate'])->name('user.update');
-        // Route::delete('/user-delete/{id}', [BusinessManagementController::class, 'userDelete'])->name('user.delete');
-        // Route::post('/user-status/{id}', [UserManagementController::class, 'changeStatus'])->name('user.status');
-        // Route::post('/user-add', [BusinessManagementController::class, 'userAdd']);
-
-
-        
-        // Route::post('/reviews/reviews-show/{id}', [ReviewModerationController::class, 'show'])->name('reviews.approve');
-        // Route::post('/reviews/reject/{id}', [ReviewModerationController::class, 'reject'])->name('reviews.reject');
-
-
 
         Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
         Route::get('/master-setup', [MasterSetupController::class, 'index'])->name('master.setup.index');
@@ -97,19 +91,20 @@ Route::prefix('admin')->group(function () {
         Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
        
-        
-        // Route::get('/review-moderation', [BusinessManagementController::class, 'index'])->name('review.moderation.index');
-        // Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-        // Route::get('/', [UserController::class, 'index']);
-        // Route::post('/', [UserController::class, 'store']);
-        // Route::get('{user}', [UserController::class, 'show']);
-        // Route::put('{user}', [UserController::class, 'update']);
-        // Route::delete('{user}', [UserController::class, 'destroy']);
     });
-    // Route::post('addUser', [AdminAuthController::class, 'addUser']);
     
     Route::post('addUser', [AdminDashboardController::class, 'addUser']);
+});
+Route::prefix('business')->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
+        Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
+        Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
+        // Route::get('/profile', [BusinessDashboardController::class, 'profile']);
+    });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

@@ -5,113 +5,131 @@
     <meta charset="UTF-8">
     <!-- Added proper viewport meta tag for mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard</title>
+    <title>Profile</title>
     @include('business.layouts.styles')
 </head>
 
 <body>
     <!-- Sidebar -->
     @include('business.layouts.sidebar')
-    <!-- Sidebar End -->
 
     <!-- Main Content -->
     <div class="main-content">
         <!-- Navbar -->
-       @include('business.layouts.navbar')
-        <!-- Navbar End -->
+        @include('business.layouts.navbar')
 
         <!-- Content Area -->
         <div class="content">
-            <!-- Dashboard Content (Default) -->
-            <div id="dashboard-content" class="content-section">
+
+
+            <!-- Profile Management Content -->
+            <div id="profile-content" class="content-section">
                 <div class="content-header">
-                    <h1 class="welcome-text">Welcome back, {{Auth::user()?->name}}</h1>
+                    <h1 class="welcome-text">Profile Management</h1>
                     <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
                 </div>
 
-                <!-- Stats Cards -->
-               @include('business.dashboard.statsCard')
+                <div class="table-container">
+                    <h2 class="section-title mb-20">Company Information</h2>
 
-                <!-- Recent Inquiries Table -->
-                @include('business.dashboard.recentInquiry')
-                
-
-                <!-- Top Performing Products -->
-                @include('business.dashboard.topProducts')
-
-                <!-- Profile Completion and Recent Reviews -->
-                <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <!-- Profile Completion Widget -->
-                    <div class="profile-widget" style="flex: 1; min-width: 300px;">
-                        <h2 class="section-title">Profile Completion</h2>
-                        <div class="progress-container">
-                            <div class="progress-circle">
-                                <svg width="120" height="120" viewBox="0 0 120 120">
-                                    <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
-                                    <circle class="circle-progress" cx="60" cy="60" r="50"></circle>
-                                </svg>
-                                <div class="progress-text">85%<span>Complete</span></div>
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" value="PharmaCorp Inc">
                             </div>
-                            <div class="progress-cta">
-                                <h3>Complete your profile</h3>
-                                <p>Add more details to your profile to increase visibility and trust among potential
-                                    clients.</p>
-                                <a href="{{route('business.profile.edit',['ty'=> custom_encrypt('UpdateBusinessProfile')])}}"><button class="btn btn-primary">Complete Profile</button></a>
+                            <div class="form-group">
+                                <label class="form-label">Business Type</label>
+                                <input type="text" class="form-control" value="Pharmaceutical Manufacturer">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Year Established</label>
+                                <input type="text" class="form-control" value="2005">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Company Logo</label>
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div
+                                        style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
+                                        <img src="https://via.placeholder.com/80x80?text=PC" alt="Company Logo"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <button class="btn btn-primary">Upload New</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-20">Contact Information</h2>
+
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Primary Contact</label>
+                                <input type="text" class="form-control" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="john.doe@pharmacorp.com">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="url" class="form-control" value="https://www.pharmacorp.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-20">Business Address</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Street Address</label>
+                        <input type="text" class="form-control" value="123 Pharma Street">
+                    </div>
+
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" value="Boston">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">State/Province</label>
+                                <input type="text" class="form-control" value="Massachusetts">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">ZIP/Postal Code</label>
+                                <input type="text" class="form-control" value="02108">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <input type="text" class="form-control" value="United States">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recent Reviews -->
-                    <div class="reviews-container" style="flex: 1; min-width: 300px;">
-                        <div class="table-header">
-                            <h2 class="section-title">Recent Reviews</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">SM</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Sarah Miller</div>
-                                <div class="stars">★★★★★</div>
-                                <div class="review-text">Excellent product quality and fast delivery. Will definitely
-                                    order again!</div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">JD</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">John Davis</div>
-                                <div class="stars">★★★★☆</div>
-                                <div class="review-text">Good service but packaging could be improved.</div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">AP</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Amanda Patel</div>
-                                <div class="stars">★★★★★</div>
-                                <div class="review-text">The best pharmaceutical supplier we've worked with!</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <h2 class="section-title mb-20">Business Description</h2>
 
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <div class="action-btn" id="quick-add-product">
-                        <i class="icon">➕</i>
-                        <span>Add Product</span>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5">PharmaCorp Inc is a leading manufacturer of high-quality pharmaceutical products with over 15 years of experience in the industry. We specialize in antibiotics, pain relievers, and vitamin supplements, serving clients across North America and Europe.</textarea>
                     </div>
-                    <div class="action-btn" id="quick-view-inquiries">
-                        <i class="icon">📩</i>
-                        <span>View Enquiries</span>
-                    </div>
-                    <div class="action-btn" id="quick-edit-profile">
-                        <i class="icon">👤</i>
-                        <span>Edit Profile</span>
-                    </div>
-                    <div class="action-btn" id="quick-view-analytics">
-                        <i class="icon">📊</i>
-                        <span>View Analytics</span>
+
+                    <div class="flex justify-between" style="margin-top: 30px;">
+                        <button class="btn" style="background-color: #f0f0f0;">Cancel</button>
+                        <button class="btn btn-primary">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -280,10 +298,30 @@
             </div>
         </div>
     </div>
-@include('business.dashboard.js')
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
+
+            // Settings Tabs
+            const settingsTabs = document.querySelectorAll('.settings-tabs .tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            settingsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    settingsTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Show the selected tab content
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
 
             // Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');
