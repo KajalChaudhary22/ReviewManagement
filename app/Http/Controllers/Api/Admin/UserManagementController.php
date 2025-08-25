@@ -253,11 +253,11 @@ class UserManagementController extends Controller
         DB::beginTransaction();
         try {
             $customer = Customer::findOrFail($id);
-            // dd($customer);
             // Update customer related user
             $customer->userDetails()->update([
                 'status' => $request->status
             ]);
+            // dd($customer->userDetails);
 
             DB::commit();
 
