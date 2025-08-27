@@ -40,6 +40,7 @@ class CodeGenerator
         'users.code' => ['prefix' => 'USR', 'length' => 10, 'separator' => '-'],
         'businesses.code' => ['prefix' => 'BSNS', 'length' => 8, 'separator' => '-'],
         'customers.code' => ['prefix' => 'CUST', 'length' => 8, 'separator' => '-'],
+        'products.code' => ['prefix' => 'PRDCT', 'length' => 8, 'separator' => '-'],
     ];
 
     $key = "$table.$column";

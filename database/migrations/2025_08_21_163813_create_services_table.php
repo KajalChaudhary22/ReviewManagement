@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique(); 
             $table->string('name');
             $table->text('description')->nullable();
             $table->double('price', 10, 2);
+            $table->unsignedBigInteger('business_id');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->foreign('business_id')->references('id')->on('businesses')->onDelete('cascade');
             $table->timestamps();
         });
     }

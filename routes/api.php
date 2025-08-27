@@ -105,15 +105,27 @@ Route::prefix('admin')->group(function () {
     Route::post('addUser', [AdminDashboardController::class, 'addUser']);
 });
 Route::prefix('business')->group(function () {
+    Route::post('register', [BusinessAuthController::class, 'register']);
+    Route::post('login', [BusinessAuthController::class, 'login']);
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
         Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
         Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
-        // Route::get('/profile', [BusinessDashboardController::class, 'profile']);
+
+
+        // Product Routes
+        Route::get('/product-list', [ProductController::class, 'index'])->name('business.product.list');
+        Route::get('/get-product-data', [ProductController::class, 'getProductsData'])->name('business.product.data');
+        Route::post('/products/store', [ProductController::class, 'saveProduct'])->name('business.products.store');
+        Route::get('/products/{id}', [ProductController::class, 'show'])->name('business.products.show');
+        Route::put('/business/products/{id}', [ProductController::class, 'update'])->name('business.products.update');
+        Route::delete('/business/products/{id}', [ProductController::class, 'destroy'])->name('business.products.delete');
+
+        // Service Routes
+        Route::get('/get-service-data', [ServiceController::class, 'getServiceData'])->name('business.service.data');
     });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);

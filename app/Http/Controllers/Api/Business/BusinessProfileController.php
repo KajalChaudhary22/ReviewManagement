@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Business;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Business;
 
 class BusinessProfileController extends Controller
 {
@@ -14,8 +16,9 @@ class BusinessProfileController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         } else {
-            // Logic to edit the business profile goes here
-            return view('business.profile.edit');
+            $businessId = Auth::user()->business_id;
+            $profileData = Business::find($businessId);
+            return view('business.profile.edit',compact('profileData'));
         }
     }
 }

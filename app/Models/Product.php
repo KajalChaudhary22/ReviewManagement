@@ -10,4 +10,8 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $guarded  = [];
+    public function categoryDetails()
+    {
+        return $this->belongsTo(MasterType::class, 'productCategory_id');
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Yajra\DataTables\Facades\DataTables;
 
 class ServiceController extends Controller
 {
@@ -48,5 +49,23 @@ class ServiceController extends Controller
                 'error' => 'Failed to create product. Please try again later.'
             ], 500);
         }
+    }
+    protected function getServiceData(Request $request)
+    {
+        if ($request->ajax()) {
+            // $services = Service::all();
+            $data = Service::select('id','name','description','price')->latest();
+
+            return DataTables::of($data)
+                ->addColumn('actions', function ($row) {
+                    return '
+                        <button class="btn btn-sm btn-primary editService" data-id="'.$row->id.'">✏️</button>
+                        <button class="btn btn-sm btn-danger deleteService" data-id="'.$row->id.'">🗑️</button>
+                    ';
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
+        }
+        return response()->json(['services' => $services], 200);
     }
 }
