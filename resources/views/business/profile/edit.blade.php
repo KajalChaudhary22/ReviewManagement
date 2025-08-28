@@ -28,110 +28,143 @@
                     <h1 class="welcome-text">Profile Management</h1>
                     <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
                 </div>
+                <form id="businessProfileForm" enctype="multipart/form-data">
+                    <div class="table-container">
+                        <h2 class="section-title mb-20">Company Information</h2>
 
-                <div class="table-container">
-                    <h2 class="section-title mb-20">Company Information</h2>
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" name="name" class="form-control"
+                                        value="{{ $profileData->name ?? '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Business Type</label>
+                                    <select class="form-control" id="businessCategory" name="category">
+                                        <option value="">Select Category</option>
+                                        @foreach ($industries as $industry)
+                                            <option value="{{ $industry->id }}" {{ $profileData->master_id == $industry->id ? 'selected' : '' }}>
+                                                {{ $industry->name }}
+                                            </option>
 
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Company Name</label>
-                                <input type="text" class="form-control" value="PharmaCorp Inc">
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Year Established</label>
+                                    <input type="text" name="year" class="form-control"
+                                        value="{{ $profileData->year ?? '' }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Business Type</label>
-                                <input type="text" class="form-control" value="Pharmaceutical Manufacturer">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Year Established</label>
-                                <input type="text" class="form-control" value="2005">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Company Logo</label>
-                                <div style="display: flex; align-items: center; gap: 20px;">
-                                    <div
-                                        style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
-                                        <img src="https://via.placeholder.com/80x80?text=PC" alt="Company Logo"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">Company Logo</label>
+                                    <div style="display: flex; align-items: center; gap: 20px;">
+                                        <!-- Preview Box -->
+                                        <div id="logoPreviewBox"
+                                            style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
+                                            <img id="logoPreview"
+                                                src="{{ url($profileData->logo) ?? 'https://via.placeholder.com/80x80?text=PC' }}"
+                                                alt="Company Logo"
+                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+
+                                        <!-- Hidden file input -->
+                                        <input type="file" id="logoUpload" name="logo" accept="image/*"
+                                            style="display
+                                            : none;">
+
+                                        <!-- Trigger button -->
+                                        <button type="button" class="btn btn-primary" id="uploadLogoBtn">Upload
+                                            New</button>
                                     </div>
-                                    <button class="btn btn-primary">Upload New</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <h2 class="section-title mb-20">Contact Information</h2>
+                        <h2 class="section-title mb-20">Contact Information</h2>
 
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Primary Contact</label>
-                                <input type="text" class="form-control" value="John Doe">
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">Primary Contact</label>
+                                    <input type="text" name="primary_contact" class="form-control"
+                                        value="{{ $profileData->primary_contact ?? '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" name="email" class="form-control"
+                                        value="{{ $profileData->email ?? '' }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" value="john.doe@pharmacorp.com">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Website</label>
-                                <input type="url" class="form-control" value="https://www.pharmacorp.com">
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 class="section-title mb-20">Business Address</h2>
-
-                    <div class="form-group">
-                        <label class="form-label">Street Address</label>
-                        <input type="text" class="form-control" value="123 Pharma Street">
-                    </div>
-
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">City</label>
-                                <input type="text" class="form-control" value="Boston">
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" name="contact_number" class="form-control"
+                                        value="{{ $profileData->contact_number ?? '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="url" name="website" class="form-control"
+                                        value="{{ $profileData->website ?? '' }}">
+                                </div>
                             </div>
                         </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">State/Province</label>
-                                <input type="text" class="form-control" value="Massachusetts">
+
+                        <h2 class="section-title mb-20">Business Address</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Street Address</label>
+                            <input type="text" name="address" class="form-control"
+                                value="{{ $profileData->address ?? '' }}">
+                        </div>
+
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">City</label>
+                                    <input type="text" name="city" class="form-control"
+                                        value="{{ $profileData->city ?? '' }}">
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">State/Province</label>
+                                    <input type="text" name="state" class="form-control"
+                                        value="{{ $profileData->state ?? '' }}">
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">ZIP/Postal Code</label>
+                                    <input type="text" name="zip_code" class="form-control"
+                                        value="{{ $profileData->zip_code ?? '' }}">
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <input type="text" name="country" class="form-control"
+                                        value="{{ $profileData->country ?? '' }}">
+                                </div>
                             </div>
                         </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">ZIP/Postal Code</label>
-                                <input type="text" class="form-control" value="02108">
-                            </div>
+
+                        <h2 class="section-title mb-20">Business Description</h2>
+
+                        <div class="form-group">
+                            <textarea class="form-control" name="description"
+                                rows="5">{{ $profileData->description ?? '' }}</textarea>
                         </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Country</label>
-                                <input type="text" class="form-control" value="United States">
-                            </div>
+
+                        <div class="flex justify-between" style="margin-top: 30px;">
+                            <button type="reset" class="btn" id="cancelBusinessProfile"
+                                style="background-color: #f0f0f0;">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="saveBusinessProfile">Save Changes</button>
                         </div>
                     </div>
-
-                    <h2 class="section-title mb-20">Business Description</h2>
-
-                    <div class="form-group">
-                        <textarea class="form-control" rows="5">PharmaCorp Inc is a leading manufacturer of high-quality pharmaceutical products with over 15 years of experience in the industry. We specialize in antibiotics, pain relievers, and vitamin supplements, serving clients across North America and Europe.</textarea>
-                    </div>
-
-                    <div class="flex justify-between" style="margin-top: 30px;">
-                        <button class="btn" style="background-color: #f0f0f0;">Cancel</button>
-                        <button class="btn btn-primary">Save Changes</button>
-                    </div>
-                </div>
+                </form>
             </div>
 
 
@@ -143,10 +176,25 @@
         <i class="icon">≡</i>
     </div>
 
-    
+    @include('layouts.commonjs')
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function () {
+            // Open file selector when clicking "Upload New"
+            $("#uploadLogoBtn").click(function () {
+                $("#logoUpload").click();
+            });
+
+            // Preview selected image
+            $("#logoUpload").change(function (event) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#logoPreview").attr("src", e.target.result); // update preview
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
 
 
             // Settings Tabs
@@ -154,7 +202,7 @@
             const tabContents = document.querySelectorAll('.tab-content');
 
             settingsTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
+                tab.addEventListener('click', function () {
                     // Remove active class from all tabs
                     settingsTabs.forEach(t => t.classList.remove('active'));
                     // Add active class to clicked tab
@@ -173,7 +221,7 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.sidebar');
 
-            menuToggle.addEventListener('click', function() {
+            menuToggle.addEventListener('click', function () {
                 sidebar.classList.toggle('active');
             });
 
@@ -194,7 +242,7 @@
             window.addEventListener('resize', checkScreenSize);
 
             // Simulate chart animations when they come into view
-            const animateOnScroll = function() {
+            const animateOnScroll = function () {
                 const charts = document.querySelectorAll('.chart-line');
 
                 charts.forEach(chart => {
@@ -228,7 +276,7 @@
 
             // Close modal when clicking on X or cancel button
             closeModalButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const modal = this.closest('.modal');
                     closeModal(modal.id);
                 });
@@ -236,7 +284,7 @@
 
             // Close modal when clicking outside the modal content
             modals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
+                modal.addEventListener('click', function (e) {
                     if (e.target === this) {
                         closeModal(this.id);
                     }
@@ -246,6 +294,8 @@
 
         });
     </script>
+
+    @include('business.profile.js')
 </body>
 
 </html>
