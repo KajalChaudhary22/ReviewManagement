@@ -15,7 +15,7 @@
             <i class="icon">💊</i>
             <span class="menu-text">Products & Services</span>
         </div></a>
-        <a href="Inquiries.html"><div class="menu-item {{ Route::is('business.profile.edit') ? 'active' : '' }}" data-content="inquiries">
+        <a href="{{ route('business.inquiries.list',['ty'=> custom_encrypt('InquiriesProductList')]) }}"><div class="menu-item {{ Route::is('business.inquiries.list') ? 'active' : '' }}" data-content="inquiries">
             <i class="icon">📩</i>
             <span class="menu-text">Inquiries</span>
         </div></a>

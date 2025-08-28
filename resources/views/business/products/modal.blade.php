@@ -51,3 +51,32 @@
         </form>
     </div>
 </div>
+
+
+<!-- Service Modal -->
+<div class="modal" id="service-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Add New Service</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <form id="service-form">
+            <div class="form-group">
+                <label class="form-label">Service Name</label>
+                <input type="text" class="form-control" id="service-name" required name="service_name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" id="service-description" rows="3" required name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Price</label>
+                <input type="text" class="form-control" id="service-price" required name="price">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Save Service</button>
+            </div>
+        </form>
+    </div>
+</div>

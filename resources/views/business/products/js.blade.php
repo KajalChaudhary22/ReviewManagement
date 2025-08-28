@@ -191,8 +191,7 @@
             processing: true,
             serverSide: true,
             ajax: "/api/business/get-service-data",
-            columns: [
-                {
+            columns: [{
                     data: 'name',
                     name: 'name'
                 },
@@ -212,5 +211,47 @@
                 }
             ]
         });
+        $('#service-form').on('submit', function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    $.ajax({
+        url: "/api/business/services/store", // always same URL
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(res) {
+            if (res.status) {
+                Swal.fire({
+                    icon: 'success',
+                    title: res.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                $('#service-form')[0].reset();
+                $('#serviceModal').hide();
+                $('#servicesTable').DataTable().ajax.reload();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: res.message
+                });
+            }
+        },
+        error: function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Something went wrong!'
+            });
+        }
+    });
+});
+
+
     });
 </script>

@@ -24,7 +24,8 @@ use App\Http\Controllers\Api\Business\{
     BusinessDashboardController,
     BusinessProfileController,
     ProductController,
-    ServiceController
+    ServiceController,
+    InquiryController
 };
 
 
@@ -123,6 +124,10 @@ Route::prefix('business')->group(function () {
 
         // Service Routes
         Route::get('/get-service-data', [ServiceController::class, 'getServiceData'])->name('business.service.data');
+        Route::post('/services/store', [ServiceController::class, 'saveService'])->name('business.service.store');
+
+        // Inquiry Routes
+        Route::get('/inquiries-list', [InquiryController::class, 'index'])->name('business.inquiries.list');
     });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);

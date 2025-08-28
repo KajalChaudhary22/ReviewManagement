@@ -137,33 +137,7 @@
 
    @include('business.products.modal') 
 
-    <!-- Service Modal -->
-    <div class="modal" id="service-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Add New Service</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="service-form">
-                <div class="form-group">
-                    <label class="form-label">Service Name</label>
-                    <input type="text" class="form-control" id="service-name" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" id="service-description" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Price</label>
-                    <input type="text" class="form-control" id="service-price" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Service</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    
 
     
 
@@ -296,7 +270,7 @@
             const editServiceBtns = document.querySelectorAll('.edit-service-btn');
             const deleteServiceBtns = document.querySelectorAll('.delete-service-btn');
             // const productForm = document.getElementById('product-form');
-            const serviceForm = document.getElementById('service-form');
+            
             // const prevProductsBtn = document.getElementById('prev-products');
             // const nextProductsBtn = document.getElementById('next-products');
 
@@ -395,19 +369,7 @@
                 });
             });
 
-            // Save Service
-            serviceForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const serviceName = document.getElementById('service-name').value;
-                const serviceDescription = document.getElementById('service-description').value;
-                const servicePrice = document.getElementById('service-price').value;
-
-                // In a real app, you would save this to your database
-                alert(`Service ${serviceName} saved successfully!`);
-                closeModal('service-modal');
-            });
-
+           
             // Pagination for Products
             let currentProductPage = 1;
 
