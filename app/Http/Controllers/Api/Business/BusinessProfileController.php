@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Business;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 use App\Models\{
     Business,
     MasterType
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\{
     Log
 };
 use App\Helpers\Helpers;
+
 
 class BusinessProfileController extends Controller
 {
@@ -26,6 +28,7 @@ class BusinessProfileController extends Controller
         } else {
             $businessId = Auth::user()->business_id;
             $profileData = Business::find($businessId);
+
             // return view('business.profile.edit',compact('profileData'));
 
             $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Industries')->first();
@@ -127,6 +130,7 @@ class BusinessProfileController extends Controller
                 'success' => false,
                 'message' => 'An unexpected error occurred. Please try again later.'
             ], 500);
+
         }
     }
 }

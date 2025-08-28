@@ -16,7 +16,7 @@
             <i class="icon">🏢</i>
             <span class="menu-text">Business Management</span>
         </a>
-        <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item">
+        <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="menu-item {{ Route::is('review.moderation.index') ? 'active' : '' }}">
             <i class="icon">⭐</i>
             <span class="menu-text">Review Moderation</span>
         </a>
@@ -32,46 +32,10 @@
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
         </a> 
-        <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}" class="menu-item">
+        <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}" class="menu-item {{ Route::is('admin.setting') ? 'active' : '' }}">
             <i class="icon">⚙️</i>
             <span class="menu-text">Settings</span>
         </a>
-      
-         {{-- <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">📈</i>
-            <span class="menu-text">Analytics & Reports</span>
-        </a>
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">🏆</i>
-            <span class="menu-text">Points System</span>
-        </a>
-        
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">📩</i>
-            <span class="menu-text">Queries</span>
-        </a>
-        
-        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="menu-item">
-            <i class="icon">📢</i>
-            <span class="menu-text">Master</span>
-        </a> --}}
-        {{-- <a href="review-moderation.html" class="menu-item">
-            <i class="icon">⭐</i>
-            <span class="menu-text">Review Moderation</span>
-        </a>
-        <a href="analytics-&-reports.html" class="menu-item">
-            <i class="icon">📈</i>
-            <span class="menu-text">Analytics & Reports</span>
-        </a>
-        <a href="points-system.html" class="menu-item">
-            <i class="icon">🏆</i>
-            <span class="menu-text">Points System</span>
-        </a>
-       
-        <a href="queries.html" class="menu-item">
-            <i class="icon">📩</i>
-            <span class="menu-text">Queries</span>
-        </a>--}}
         
     </div>
     <div class="user-profile">

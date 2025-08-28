@@ -64,7 +64,7 @@
                             <input type="checkbox" id="rememberMe" name="rememberMe" class="h-4 w-4 text-purple-primary focus:ring-purple-primary border-gray-300 rounded">
                             <label for="rememberMe" class="ml-2 block text-sm text-gray-600">Remember me</label>
                         </div>
-                        <a href="#" class="text-sm text-purple-primary hover:underline">Forgot Password?</a>
+                        <a href="<?php echo e(route('password.request',['ty' => custom_encrypt('ResetPasswordEmail')])); ?>" class="text-sm text-purple-primary hover:underline">Forgot Password?</a>
                     </div>
                     
                     <button type="submit" 
@@ -135,6 +135,15 @@
                 } else {
                     industryError.classList.add('hidden');
                 }
+                // Validate Location
+                const location = document.getElementById('location');
+                const locationError = document.getElementById('locationError');
+                if (!location.value) {
+                    locationError.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    locationError.classList.add('hidden');
+                }
 
                 // Validate Password
                 const password = document.getElementById('password');
@@ -163,6 +172,7 @@
                         email: email.value,
                         contact_number: phone.value,
                         industry_id: industry.value,
+                        location_id: location.value,
                         password: password.value,
                         password_confirmation: confirmPassword.value
                     };
@@ -193,7 +203,6 @@
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops!',
