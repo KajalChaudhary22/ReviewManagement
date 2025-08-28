@@ -100,17 +100,18 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
-       
     });
-    
+
     Route::post('addUser', [AdminDashboardController::class, 'addUser']);
 });
+
 Route::prefix('business')->group(function () {
     Route::post('register', [BusinessAuthController::class, 'register']);
     Route::post('login', [BusinessAuthController::class, 'login']);
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
         Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
+
         Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
 
 
@@ -128,6 +129,7 @@ Route::prefix('business')->group(function () {
 
         // Inquiry Routes
         Route::get('/inquiries-list', [InquiryController::class, 'index'])->name('business.inquiries.list');
+
     });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
