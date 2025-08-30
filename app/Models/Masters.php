@@ -13,11 +13,11 @@ class Masters extends Model
 
     public function children()
 {
-    return $this->hasMany(Master::class, 'parent_id');
+    return $this->hasMany(Masters::class, 'parent_id');
 }
 
 public function parent()
 {
-    return $this->belongsTo(Master::class, 'parent_id');
+    return $this->belongsTo(Masters::class, 'parent_id');
 }
 }

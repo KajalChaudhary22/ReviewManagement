@@ -111,8 +111,8 @@ Route::prefix('business')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
         Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
-
         Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
+        
 
 
         // Product Routes
@@ -128,7 +128,13 @@ Route::prefix('business')->group(function () {
         Route::post('/services/store', [ServiceController::class, 'saveService'])->name('business.service.store');
 
         // Inquiry Routes
+        Route::get('/inquiries/stats', [InquiryController::class, 'getInquiryStats'])->name('business.inquiries.stats');
         Route::get('/inquiries-list', [InquiryController::class, 'index'])->name('business.inquiries.list');
+        Route::get('/inquiries-data', [InquiryController::class, 'getData'])->name('business.inquiries.data');
+        Route::get('/inquiries/{id}', [InquiryController::class, 'show'])->name('business.inquiries.show');
+        Route::post('/inquiries/{id}', [InquiryController::class, 'update'])->name('business.inquiries.update');
+        Route::get('/inquiries-export', [InquiryController::class, 'export'])->name('business.inquiries.export');
+
 
     });
 });

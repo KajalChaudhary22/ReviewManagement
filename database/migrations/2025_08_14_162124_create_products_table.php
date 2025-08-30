@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum ('status', ['Active', 'Inactive'])->default('Active');
             $table->string('product_image')->nullable();
             $table->unsignedBigInteger('business_id')->index();
-            $table->foreign('business_id')->references('id')->on('businesses')->onDelete('cascade');
+            $table->foreign(columns: 'business_id')->references('id')->on('businesses')->onDelete('cascade');
             $table->unsignedBigInteger('created_by')->index();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
