@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reviewType_id')->index();
-            $table->foreign('reviewType_id')->references('id')->on('masters')->onDelete('cascade');
-            $table->unsignedBigInteger('business_id')->index();
-            $table->foreign('business_id')->references('id')->on('businesses')->onDelete('cascade');
-            $table->unsignedBigInteger('product_id')->index();
+            $table->unsignedBigInteger('business_id');
+            $table->foreign(columns: 'business_id')->references('id')->on('businesses')->onDelete('cascade');
+            $table->unsignedBigInteger('product_id');
             $table->foreign(columns: 'product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->unsignedBigInteger('customer_id')->index();
+            $table->double('quantity', 10, 2);
+            $table->enum('status',  ['In Progress', 'Completed', 'Pending'])->default('Pending');
+            $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->integer('rating')->default(0);
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('inquiries');
     }
 };
