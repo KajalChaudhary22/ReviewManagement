@@ -17,7 +17,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Navbar -->
-       @include('business.layouts.navbar')
+        @include('business.layouts.navbar')
         <!-- Navbar End -->
 
         <!-- Content Area -->
@@ -25,16 +25,16 @@
             <!-- Dashboard Content (Default) -->
             <div id="dashboard-content" class="content-section">
                 <div class="content-header">
-                    <h1 class="welcome-text">Welcome back, {{Auth::user()?->name}}</h1>
+                    <h1 class="welcome-text">Welcome back, {{ Auth::user()?->name }}</h1>
                     <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
                 </div>
 
                 <!-- Stats Cards -->
-               @include('business.dashboard.statsCard')
+                @include('business.dashboard.statsCard')
 
                 <!-- Recent Inquiries Table -->
                 @include('business.dashboard.recentInquiry')
-                
+
 
                 <!-- Top Performing Products -->
                 @include('business.dashboard.topProducts')
@@ -56,63 +56,41 @@
                                 <h3>Complete your profile</h3>
                                 <p>Add more details to your profile to increase visibility and trust among potential
                                     clients.</p>
-                                <a href="{{route('business.profile.edit',['ty'=> custom_encrypt('UpdateBusinessProfile')])}}"><button class="btn btn-primary">Complete Profile</button></a>
+                                <a
+                                    href="{{ route('business.profile.edit', ['ty' => custom_encrypt('UpdateBusinessProfile')]) }}"><button
+                                        class="btn btn-primary">Complete Profile</button></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Recent Reviews -->
-                    <div class="reviews-container" style="flex: 1; min-width: 300px;">
-                        <div class="table-header">
-                            <h2 class="section-title">Recent Reviews</h2>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">SM</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Sarah Miller</div>
-                                <div class="stars">★★★★★</div>
-                                <div class="review-text">Excellent product quality and fast delivery. Will definitely
-                                    order again!</div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">JD</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">John Davis</div>
-                                <div class="stars">★★★★☆</div>
-                                <div class="review-text">Good service but packaging could be improved.</div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="reviewer-avatar">AP</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Amanda Patel</div>
-                                <div class="stars">★★★★★</div>
-                                <div class="review-text">The best pharmaceutical supplier we've worked with!</div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('business.dashboard.recentReviews')
                 </div>
 
                 <!-- Quick Actions -->
                 <div class="quick-actions">
-                    <div class="action-btn" id="quick-add-product">
-                        <i class="icon">➕</i>
+                    <div class="action-btn" id="add-product-btn">
+                        <i class="icon" >➕</i>
                         <span>Add Product</span>
                     </div>
-                    <div class="action-btn" id="quick-view-inquiries">
-                        <i class="icon">📩</i>
-                        <span>View Enquiries</span>
-                    </div>
-                    <div class="action-btn" id="quick-edit-profile">
-                        <i class="icon">👤</i>
-                        <span>Edit Profile</span>
-                    </div>
-                    <div class="action-btn" id="quick-view-analytics">
-                        <i class="icon">📊</i>
-                        <span>View Analytics</span>
-                    </div>
+                    <a href="{{ route('business.inquiries.list', ['ty' => custom_encrypt('InquiriesProductList')]) }}">
+                        <div class="action-btn" id="quick-view-inquiries">
+                            <i class="icon">📩</i>
+                            <span>View Enquiries</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('business.profile.edit', ['ty' => custom_encrypt('UpdateBusinessProfile')]) }}">
+                        <div class="action-btn" id="quick-edit-profile">
+                            <i class="icon">👤</i>
+                            <span>Edit Profile</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('business.analytics', ['ty' => custom_encrypt('AnalyticsList')]) }}">
+                        <div class="action-btn" id="quick-view-analytics">
+                            <i class="icon">📊</i>
+                            <span>View Analytics</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -125,60 +103,7 @@
         <i class="icon">≡</i>
     </div>
 
-    <!-- Product Modal -->
-    <div class="modal" id="product-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Add New Product</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="product-form">
-                <div class="form-group">
-                    <label class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="product-name" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" id="product-description" rows="3" required></textarea>
-                </div>
-                <div class="flex" style="gap: 20px; flex-wrap: wrap;">
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label class="form-label">SKU</label>
-                        <input type="text" class="form-control" id="product-sku" required>
-                    </div>
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label class="form-label">Category</label>
-                        <select class="form-control" id="product-category" required>
-                            <option value="">Select Category</option>
-                            <option>Antibiotics</option>
-                            <option>Pain Relievers</option>
-                            <option>Vitamins</option>
-                            <option>Supplements</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="flex" style="gap: 20px; flex-wrap: wrap;">
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label class="form-label">Price ($)</label>
-                        <input type="number" class="form-control" id="product-price" step="0.01" required>
-                    </div>
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label class="form-label">Quantity in Stock</label>
-                        <input type="number" class="form-control" id="product-quantity" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Product Image</label>
-                    <input type="file" class="form-control" id="product-image">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Product</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    
     <!-- Service Modal -->
     <div class="modal" id="service-modal">
         <div class="modal-content">
@@ -250,6 +175,59 @@
         </div>
     </div>
 
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Product</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="product-form">
+                <input type="hidden" id="product_id" name="product_id">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="product-name" required name="product_name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="product-description" rows="3" required name="description"></textarea>
+                </div>
+                <div class="flex" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label class="form-label">SKU</label>
+                        <input type="text" class="form-control" id="product-sku" required name="sku">
+                    </div>
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="product-category" required name="category_id">
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>                                
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="flex" style="gap: 20px; flex-wrap: wrap;">
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label class="form-label">Price ($)</label>
+                        <input type="number" class="form-control" id="product-price" step="0.01" required name="price">
+                    </div>
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label class="form-label">Quantity in Stock</label>
+                        <input type="number" class="form-control" id="product-quantity" required name="quantity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Product Image</label>
+                    <input type="file" class="form-control" id="product-image" name="image" accept="image/*">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Reply Review Modal -->
     <div class="modal" id="reply-review-modal">
         <div class="modal-content">
@@ -280,7 +258,7 @@
             </div>
         </div>
     </div>
-@include('business.dashboard.js')
+    @include('business.dashboard.js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -328,36 +306,28 @@
             // Initial animation trigger
             animateOnScroll();
 
-            // Modal functionality
-            const modals = document.querySelectorAll('.modal');
-            const closeModalButtons = document.querySelectorAll('.close-modal');
+            // // Modal functionality
+            // const modals = document.querySelectorAll('.modal');
+            // const closeModalButtons = document.querySelectorAll('.close-modal');
 
-            function openModal(modalId) {
-                document.getElementById(modalId).style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
+            
 
-            function closeModal(modalId) {
-                document.getElementById(modalId).style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
+            // // Close modal when clicking on X or cancel button
+            // closeModalButtons.forEach(button => {
+            //     button.addEventListener('click', function() {
+            //         const modal = this.closest('.modal');
+            //         closeModal(modal.id);
+            //     });
+            // });
 
-            // Close modal when clicking on X or cancel button
-            closeModalButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const modal = this.closest('.modal');
-                    closeModal(modal.id);
-                });
-            });
-
-            // Close modal when clicking outside the modal content
-            modals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeModal(this.id);
-                    }
-                });
-            });
+            // // Close modal when clicking outside the modal content
+            // modals.forEach(modal => {
+            //     modal.addEventListener('click', function(e) {
+            //         if (e.target === this) {
+            //             closeModal(this.id);
+            //         }
+            //     });
+            // });
 
 
         });

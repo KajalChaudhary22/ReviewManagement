@@ -77,8 +77,12 @@ class BusinessProfileController extends Controller
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('logos', $filename, 'public'); // storage/app/public/logos
-                $validated['logo'] = "/storage/" . $path;
+                $path = 'logos/' . $filename;
+            
+                // move file directly to public/logos folder
+                $file->move(public_path('logos'), $filename);
+            
+                $validated['logo'] = $path; // save path as logos/filename.png
             }
 
             // Update Business

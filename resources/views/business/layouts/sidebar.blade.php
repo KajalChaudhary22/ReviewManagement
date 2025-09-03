@@ -19,15 +19,15 @@
             <i class="icon">📩</i>
             <span class="menu-text">Inquiries</span>
         </div></a>
-        <a href="Reviews.html"><div class="menu-item {{ Route::is('business.profile.edit') ? 'active' : '' }}" data-content="reviews">
+        <a href="{{ route('business.reviews.list',['ty'=> custom_encrypt('ReviewsList')]) }}"><div class="menu-item {{ Route::is('business.reviews.list') ? 'active' : '' }}" data-content="reviews">
             <i class="icon">⭐</i>
             <span class="menu-text">Reviews</span>
         </div></a>
-        <a href="Analytics.html"><div class="menu-item {{ Route::is('business.profile.edit') ? 'active' : '' }}" data-content="analytics">
+        <a href="{{ route('business.analytics',['ty'=> custom_encrypt('AnalyticsList')]) }}"><div class="menu-item {{ Route::is('business.analytics') ? 'active' : '' }}" data-content="analytics">
             <i class="icon">📈</i>
             <span class="menu-text">Analytics</span>
         </div></a>
-        <a href="Settings.html"><div class="menu-item {{ Route::is('business.profile.edit') ? 'active' : '' }}" data-content="settings">
+        <a href="{{ route('business.settings',['ty'=> custom_encrypt('BusinessSetting')]) }}"><div class="menu-item {{ Route::is('business.settings') ? 'active' : '' }}" data-content="settings">
             <i class="icon">⚙️</i>
             <span class="menu-text">Settings</span>
         </div></a>

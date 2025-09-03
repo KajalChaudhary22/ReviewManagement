@@ -1,33 +1,77 @@
 @include('layouts.commonjs')
 <script>
-    $('#logoutBtn').on('click', function () {
-    $.ajax({
-        url: '/api/logout',
-        type: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token'), // your saved token
-            'Accept': 'application/json'
-        },
-        success: function (response) {
-            if (response.status) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Logged out!',
-                    text: response.message,
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-                // remove token and redirect
-                localStorage.removeItem('token');
-                window.location.href = '/';
-            } else {
-                Swal.fire('Error', response.message, 'error');
-            }
-        },
-        error: function () {
-            Swal.fire('Error', 'Unable to logout, please try again.', 'error');
-        }
-    });
-});
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    const modals = document.querySelectorAll('.modal');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    // Close modal when clicking on X or cancel button
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal.id);
+        });
+    });
+
+    // Close modal when clicking outside the modal content
+    modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal(this.id);
+            }
+        });
+    });
+    $(document).ready(function() {
+        // Add product button
+        $('#add-product-btn').click(function() {
+            $('#product_id').val('');
+            $('#product-form')[0].reset();
+            openModal('productModal');
+        });
+        $('#product-form').on('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "/api/business/products/store",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        $('#product-form')[0].reset();
+                        $('#productModal').hide(); // hide custom modal
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: res.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Server Error',
+                        text: 'Something went wrong!'
+                    });
+                }
+            });
+        });
+    });
 </script>

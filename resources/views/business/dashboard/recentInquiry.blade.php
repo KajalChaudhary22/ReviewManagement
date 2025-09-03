@@ -1,7 +1,7 @@
 <div class="table-container">
     <div class="table-header">
         <h2 class="section-title">Recent Inquiries</h2>
-        <a href="#" class="view-all">View All</a>
+        <a href="{{ route('business.inquiries.list',['ty'=> custom_encrypt('InquiriesProductList')]) }}" class="view-all">View All</a>
     </div>
     <table>
         <thead>
@@ -13,36 +13,15 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($recentInquiries as $inquiry)
             <tr>
-                <td>20 Feb 2024</td>
-                <td>MediLife Inc.</td>
-                <td>Antibiotic X</td>
-                <td><span class="status in-progress">In Progress</span></td>
+                <td>{{ $inquiry->created_at->format('d M Y') }}</td>
+                <td>{{ $inquiry->businessDetails?->name }}</td>
+                <td>{{ $inquiry->productDetails?->name }}</td>
+                <td>{!! App\Helpers\Helpers::showStatus($inquiry?->status) !!}</td>
             </tr>
-            <tr>
-                <td>18 Feb 2024</td>
-                <td>HealthPlus</td>
-                <td>Pain Reliever Y</td>
-                <td><span class="status completed">Completed</span></td>
-            </tr>
-            <tr>
-                <td>15 Feb 2024</td>
-                <td>PharmaGlobal</td>
-                <td>Vitamin Complex</td>
-                <td><span class="status in-progress">In Progress</span></td>
-            </tr>
-            <tr>
-                <td>12 Feb 2024</td>
-                <td>CareSolutions</td>
-                <td>Antibiotic X</td>
-                <td><span class="status completed">Completed</span></td>
-            </tr>
-            <tr>
-                <td>10 Feb 2024</td>
-                <td>MediCare</td>
-                <td>Immune Booster</td>
-                <td><span class="status in-progress">In Progress</span></td>
-            </tr>
+            @endforeach
+            
         </tbody>
     </table>
 </div>
