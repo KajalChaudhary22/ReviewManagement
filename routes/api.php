@@ -25,7 +25,10 @@ use App\Http\Controllers\Api\Business\{
     BusinessProfileController,
     ProductController,
     ServiceController,
-    InquiryController
+    InquiryController,
+    ReviewController,
+    AnalyticsController,
+    BusinessSettingController
 };
 
 
@@ -136,6 +139,18 @@ Route::prefix('business')->group(function () {
         Route::get('/inquiries-export', [InquiryController::class, 'export'])->name('business.inquiries.export');
 
 
+        // Review Routes
+        Route::get('/reviews-list', [ReviewController::class, 'index'])->name('business.reviews.list');
+        Route::get('/reviews/data', [ReviewController::class, 'getReviews'])->name('business.reviews.data');
+        // Route::post('/reviews/update-status/{id}', [ReviewController::class, 'updateStatus'])->name('business.reviews.status');
+        // Route::get('/reviews/reviews-show/{id}', [ReviewController::class, 'show'])->name('business.reviews.show'); // for view details
+
+        // Analytics Routes
+        Route::get('/analytics', [AnalyticsController::class, 'index'])->name('business.analytics');
+
+
+        Route::get('/settings', [BusinessSettingController::class, 'index'])->name('business.settings');
+        Route::post('/save-settings', [BusinessSettingController::class, 'save'])->name('business.save.settings');
     });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);

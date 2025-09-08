@@ -61,7 +61,7 @@
                         
                     </div>
 
-                    <div
+                    {{-- <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
                         <div style="color: var(--text-light);">
                             Showing 1-4 of 124 products
@@ -71,7 +71,7 @@
                                 id="prev-products">Previous</button>
                             <button class="btn btn-primary" id="next-products">Next</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="table-container" style="margin-top: 30px;">
@@ -141,36 +141,7 @@
 
     
 
-    <!-- Reply Review Modal -->
-    <div class="modal" id="reply-review-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Reply to Review</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Reviewer</label>
-                <input type="text" class="form-control" id="reviewer-name" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Rating</label>
-                <div id="review-rating" style="color: #FFC107; font-size: 1.2rem;"></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Review</label>
-                <textarea class="form-control" id="review-text" rows="3" readonly></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Your Response</label>
-                <textarea class="form-control" id="review-response" rows="4" required></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                <button type="button" class="btn btn-primary" style="flex: 1;" id="submit-review-response">Submit
-                    Response</button>
-            </div>
-        </div>
-    </div>
+   
 @include('business.products.js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {

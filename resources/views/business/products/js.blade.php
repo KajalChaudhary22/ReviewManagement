@@ -1,5 +1,6 @@
 @include('layouts.commonjs')
 <script>
+    
     function openModal(modalId) {
         document.getElementById(modalId).style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -23,6 +24,7 @@
                 },
                 success: function(res) {
                     let html = '';
+                    const assetBaseUrl = "{{ asset('/') }}"; 
                     if (res.data.length === 0) {
                         html = '<p>No products found</p>';
                     } else {
@@ -30,7 +32,7 @@
                             html += `
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="${p.image_url ?? 'https://via.placeholder.com/400x300?text='+p.name}" alt="${p.name}">
+                                <img src="${p.product_image ? assetBaseUrl + p.product_image : 'https://via.placeholder.com/400x300?text=' + p.name}" alt="${p.name}">
                             </div>
                             <h3 class="product-name">${p.name}</h3>
                             <div class="product-meta">
