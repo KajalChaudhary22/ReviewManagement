@@ -22,9 +22,9 @@
 
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
-        
 
-        
+
+
         // ===================================================================
         // NEWLY ADDED: Analytics Chart Buttons Functionality
         // ===================================================================
@@ -55,5 +55,18 @@
         });
         document.getElementById('saveSettings')?.addEventListener('click', () => alert('Settings saved!'));
 
+        document.querySelectorAll('[data-chart]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                let type = this.dataset.chart;
+
+                document.querySelectorAll('.chart-bars').forEach(c => c.classList.add('hidden'));
+                document.querySelector('#chart-' + type).classList.remove('hidden');
+
+                document.querySelectorAll('.chart-actions button').forEach(b => b.classList.remove('btn-primary'));
+                this.classList.add('btn-primary');
+            });
+        });
+
+        
     });
 </script>

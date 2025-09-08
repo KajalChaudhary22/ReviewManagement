@@ -13,42 +13,36 @@ use App\Helpers\Helpers;
 class InquiryController extends Controller
 {
     protected function index(Request $request)
-{
-    $total = Inquiries::count();
-    $active = Inquiries::where('status', 'In Progress')->count();
-    $completed = Inquiries::where('status', 'Completed')->count();
+    {
+        $total = Inquiries::count();
+        $active = Inquiries::where('status', 'In Progress')->count();
+        $completed = Inquiries::where('status', 'Completed')->count();
 
-    // Avg response time (same as before)
-    // $avgResponse = Inquiries::whereNotNull('responded_at')
-    //     ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, created_at, responded_at)) as avg_seconds')
-    //     ->value('avg_seconds');
-    // $avgResponseHours = $avgResponse ? round($avgResponse / 3600, 1) : 0;
+        // Date ranges
+        $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
+        $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
 
-    // Date ranges
-    $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
-    $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
+        // --- Growth percentages ---
+        $lastMonthTotal = Inquiries::whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
+        $lastMonthActive = Inquiries::where('status', 'active')
+            ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
+        $lastMonthCompleted = Inquiries::where('status', 'completed')
+            ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
 
-    // --- Growth percentages ---
-    $lastMonthTotal = Inquiries::whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
-    $lastMonthActive = Inquiries::where('status', 'active')
-                        ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
-    $lastMonthCompleted = Inquiries::where('status', 'completed')
-                        ->whereBetween('created_at', [$lastMonthStart, $lastMonthEnd])->count();
+        $growthTotal = $lastMonthTotal > 0 ? round((($total - $lastMonthTotal) / $lastMonthTotal) * 100, 1) : 0;
+        $growthActive = $lastMonthActive > 0 ? round((($active - $lastMonthActive) / $lastMonthActive) * 100, 1) : 0;
+        $growthCompleted = $lastMonthCompleted > 0 ? round((($completed - $lastMonthCompleted) / $lastMonthCompleted) * 100, 1) : 0;
 
-    $growthTotal = $lastMonthTotal > 0 ? round((($total - $lastMonthTotal) / $lastMonthTotal) * 100, 1) : 0;
-    $growthActive = $lastMonthActive > 0 ? round((($active - $lastMonthActive) / $lastMonthActive) * 100, 1) : 0;
-    $growthCompleted = $lastMonthCompleted > 0 ? round((($completed - $lastMonthCompleted) / $lastMonthCompleted) * 100, 1) : 0;
-
-    return view('business.inquiry.index', compact(
-        'total',
-        'active',
-        'completed',
-        // 'avgResponseHours',
-        'growthTotal',
-        'growthActive',
-        'growthCompleted'
-    ));
-}
+        return view('business.inquiry.index', compact(
+            'total',
+            'active',
+            'completed',
+            // 'avgResponseHours',
+            'growthTotal',
+            'growthActive',
+            'growthCompleted'
+        ));
+    }
 
     // protected function index(Request $request)
     // {
