@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Analytics & Reports - SCIZORA-Admin</title>
-   
-   @include('admin.layouts.styles')
+
+    @include('admin.layouts.styles')
 </head>
+
 <body>
     <!-- Sidebar -->
-   @include('admin.layouts.sidebar')
+    @include('admin.layouts.sidebar')
 
     <!-- Main Content -->
     <div class="main-content">
@@ -26,10 +29,10 @@
                         <button class="btn btn-primary" id="generateReportBtn2">
                             <i class="icon">📄</i> Generate Report
                         </button>
-                        
+
                     </div>
                 </div>
-                
+
                 <!-- Date Range Selector -->
                 <div class="table-container mb-20">
                     <div style="padding: 15px; display: grid; grid-template-columns: 1fr; gap: 15px;">
@@ -56,33 +59,39 @@
                         <button class="btn btn-primary" id="applyAnalyticsFilters">Apply Filters</button>
                     </div>
                 </div>
-                
+
                 <!-- Key Metrics -->
                 <div class="stats-cards mb-20">
                     <div class="stat-card">
                         <div class="stat-icon">👥</div>
                         <div class="stat-title">New Users</div>
-                        <div class="stat-value" id="newUsersCount">247</div>
-                        <div class="stat-change positive">
-                            <i class="icon">↑</i> <span id="userChange">18</span>% from last period
+                        <div class="stat-value">{{ $totalCustomers }}</div>
+                        <div class="stat-change {{ $customerChange >= 0 ? 'positive' : 'negative' }}">
+                            <i class="icon">{{ $customerChange >= 0 ? '↑' : '↓' }}</i>
+                            {{ abs($customerChange) }}% from last period
                         </div>
                     </div>
+
                     <div class="stat-card">
                         <div class="stat-icon">🏢</div>
                         <div class="stat-title">New Businesses</div>
-                        <div class="stat-value" id="newBusinessesCount">132</div>
-                        <div class="stat-change positive">
-                            <i class="icon">↑</i> <span id="businessChange">7</span>% from last period
+                        <div class="stat-value">{{ $totalBusinesses }}</div>
+                        <div class="stat-change {{ $businessChange >= 0 ? 'positive' : 'negative' }}">
+                            <i class="icon">{{ $businessChange >= 0 ? '↑' : '↓' }}</i>
+                            {{ abs($businessChange) }}% from last period
                         </div>
                     </div>
+
                     <div class="stat-card">
                         <div class="stat-icon">⭐</div>
                         <div class="stat-title">New Reviews</div>
-                        <div class="stat-value" id="newReviewsCount">1,245</div>
-                        <div class="stat-change positive">
-                            <i class="icon">↑</i> <span id="reviewChange">22</span>% from last period
+                        <div class="stat-value">{{ $totalReviews }}</div>
+                        <div class="stat-change {{ $reviewChange >= 0 ? 'positive' : 'negative' }}">
+                            <i class="icon">{{ $reviewChange >= 0 ? '↑' : '↓' }}</i>
+                            {{ abs($reviewChange) }}% from last period
                         </div>
                     </div>
+
                     <div class="stat-card">
                         <div class="icon">💰</div>
                         <div class="stat-title">Revenue</div>
@@ -92,9 +101,9 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- User Growth Chart -->
-                <div class="chart-container">
+                {{-- <div class="chart-container">
                     <div class="chart-header">
                         <h2 class="chart-title">User Growth</h2>
                         <div class="chart-actions">
@@ -148,47 +157,122 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+
+                <!-- User Growth Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">User Growth</h2>
+                        <div class="chart-actions">
+                            <button class="btn btn-secondary btn-sm" data-chart="daily">Daily</button>
+                            <button class="btn btn-secondary btn-sm" data-chart="weekly">Weekly</button>
+                            <button class="btn btn-primary btn-sm" data-chart="monthly">Monthly</button>
+                        </div>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="chart" id="userChart">
+
+                            {{-- Monthly (default) --}}
+                            <div class="chart-bars" id="chart-monthly">
+                                @php $max = collect($customerMonthly)->max('count') ?: 1; @endphp
+                                @foreach ($customerMonthly as $row)
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" style="height: {{ ($row['count'] / $max) * 100 }}%;">
+                                            <span class="chart-bar-value">{{ $row['count'] }}</span>
+                                        </div>
+                                        <div class="chart-bar-label">
+                                            {{ \Carbon\Carbon::parse($row['month'] . '-01')->format('M') }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            {{-- Daily --}}
+                            <div class="chart-bars hidden" id="chart-daily">
+                                @php $max = $customerDaily->max('count') ?: 1; @endphp
+                                @foreach ($customerDaily as $row)
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" style="height: {{ ($row->count / $max) * 100 }}%;">
+                                            <span class="chart-bar-value">{{ $row->count }}</span>
+                                        </div>
+                                        <div class="chart-bar-label">{{ \Carbon\Carbon::parse($row->date)->format('d M') }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            {{-- Weekly --}}
+                            <div class="chart-bars hidden" id="chart-weekly">
+                                @php $max = $customerWeekly->max('count') ?: 1; @endphp
+                                @foreach ($customerWeekly as $row)
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" style="height: {{ ($row->count / $max) * 100 }}%;">
+                                            <span class="chart-bar-value">{{ $row->count }}</span>
+                                        </div>
+                                        <div class="chart-bar-label">W{{ $row->week }}</div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <!-- Review Activity Chart -->
                 <div class="chart-container">
                     <div class="chart-header">
                         <h2 class="chart-title">Review Activity</h2>
                         <div class="chart-actions">
-                            <button class="btn btn-secondary btn-sm" data-chart="review-rating">By Rating</button>
-                            <button class="btn btn-secondary btn-sm" data-chart="review-category">By Category</button>
-                            <button class="btn btn-primary btn-sm" data-chart="review-time">Over Time</button>
+                            <button class="btn btn-secondary btn-sm">By Rating</button>
+                            <button class="btn btn-secondary btn-sm">By Category</button>
+                            <button class="btn btn-primary btn-sm">Over Time</button>
                         </div>
                     </div>
-                    <div class="chart-placeholder">
-                        <div class="pie-chart">
-                            <div class="pie-chart-center">1,245</div>
+
+                    <div class="chart-placeholder flex items-center gap-6">
+
+                        @php
+                            // Define colors by rating
+                            $ratingColors = [
+                                5 => '#4A89DC', // Blue
+                                4 => '#5D9CEC', // Light Blue
+                                3 => '#48CFAD', // Teal
+                                2 => '#A0D468', // Green
+                                1 => '#FFCE54', // Yellow/Orange
+                            ];
+
+                            // Build gradient dynamically
+                            $gradientParts = [];
+                            $currentPercent = 0;
+
+                            foreach ($reviewData as $review) {
+                                $color = $ratingColors[$review['rating']] ?? '#ccc';
+                                $nextPercent = $currentPercent + $review['percentage'];
+                                $gradientParts[] = "{$color} {$currentPercent}% {$nextPercent}%";
+                                $currentPercent = $nextPercent;
+                            }
+
+                            $gradientString = implode(',', $gradientParts);
+                        @endphp
+
+                        <!-- CSS Pie -->
+                        <div class="pie-chart" style="background: conic-gradient({{ $gradientString }});">
+                            <div class="pie-chart-center">{{ $totalReviews }}</div>
                         </div>
+
+                        <!-- Legend -->
                         <div class="chart-legend">
-                            <div class="chart-legend-item">
-                                <div class="chart-legend-color" style="background-color: #4A89DC;"></div>
-                                <span>5 Stars (45%)</span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <div class="chart-legend-color" style="background-color: #5D9CEC;"></div>
-                                <span>4 Stars (20%)</span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <div class="chart-legend-color" style="background-color: #48CFAD;"></div>
-                                <span>3 Stars (15%)</span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <div class="chart-legend-color" style="background-color: #A0D468;"></div>
-                                <span>2 Stars (12%)</span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <div class="chart-legend-color" style="background-color: #FFCE54;"></div>
-                                <span>1 Star (8%)</span>
-                            </div>
+                            @foreach ($reviewData as $review)
+                                <div class="chart-legend-item">
+                                    <div class="chart-legend-color"
+                                        style="background-color: {{ $ratingColors[$review['rating']] ?? '#ccc' }};">
+                                    </div>
+                                    <span>{{ $review['rating'] }} Stars ({{ $review['percentage'] }}%)</span>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Business Metrics -->
                 <div class="chart-container">
                     <div class="chart-header">
@@ -245,6 +329,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -254,9 +339,10 @@
         <i class="icon">≡</i>
     </div>
 
-    
+
 
     @include('layouts.commonjs')
     @include('admin.analyticsReports.js')
 </body>
+
 </html>
