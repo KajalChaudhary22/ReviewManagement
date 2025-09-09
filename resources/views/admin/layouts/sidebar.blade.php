@@ -27,7 +27,7 @@
         <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
-        </a>  --}}
+        </a>
         <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
