@@ -50,9 +50,9 @@
     // Route::middleware(['web'])->prefix('business')->group(function () {
     //     Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
     // });
-    Route::middleware(['web'])->prefix('customer')->group(function () {
-        Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
-    });
+    // Route::middleware(['web'])->prefix('customer')->group(function () {
+    //     Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
+    // });
 
 
 
