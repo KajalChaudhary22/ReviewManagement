@@ -367,52 +367,86 @@
         /* ------------------------- */
         /* ---  6. FOOTER --- */
         /* ------------------------- */
-        .site-footer {
-            background-color: #222;
-            color: #ccc;
-            padding: 60px 0 20px 0;
+        For rest of the pages just replace footer css code with this:
+/* Main Footer Container */
+        .scizora-main-footer {
+            background-color: #ffffff;
+            color: #111827;
+            padding: 2rem 0;
+            width: 100%;
         }
-        
-        .footer-grid {
+
+        .scizora-footer-inner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .scizora-footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-        
-        .footer-col h4 {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
+
+        .scizora-footer-column > * {
+            margin-bottom: 0.5rem;
+        }
+        .scizora-footer-column > *:last-child {
+            margin-bottom: 0;
+        }
+
+        .scizora-footer-heading, .scizora-footer-logo-heading {
             font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
-        
-        .footer-col ul {
+
+        .scizora-footer-description {
+            color: #111827;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .scizora-footer-list {
             list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
         }
-        
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-col a, .footer-col p {
-            color: #ccc;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-col a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .social-icons a {
-            font-size: 1.2rem;
-            margin-right: 15px;
-        }
-        
-        .footer-bottom {
+
+        .scizora-footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
+            color: #0000FF;
+            font-size: 0.8rem;
+        }
+
+        .scizora-social-links { display: flex; gap: 1rem; }
+        .scizora-social-icon { color: #0000FF; transition: color 0.2s ease; }
+        .scizora-social-icon:hover { color: #111827; }
+        .scizora-footer-link { color: #0000FF; text-decoration: none; font-size: 0.875rem; }
+        .scizora-footer-link:hover { color: #111827; }
+        .scizora-newsletter-form { display: flex; }
+        .scizora-newsletter-input { background-color: #1F2937; color: #ffffff; padding: 6px 12px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%; font-size: 0.875rem; }
+        .scizora-newsletter-button { background-color: #2563EB; color: #ffffff; padding: 6px 12px; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .scizora-newsletter-button:hover { background-color: #1D4ED8; }
+
+
+        @media (min-width: 768px) {
+            .scizora-footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .scizora-footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         /* ------------------------- */
@@ -486,7 +520,7 @@
                 <a href="{{ route('categories') }}" class="active">Categories</a>
                 <a href="{{ route('blogs') }}">Blog</a>
                 <a href="{{ route('about.us') }}">About Us</a>
-                <a href="{{ route('contact') }}">Contact</a>
+                <a href="{{ route('contact.us') }}">Contact</a>
             </nav>
             <div class="header-actions">
                 <div class="profile-dropdown" id="profileDropdown">

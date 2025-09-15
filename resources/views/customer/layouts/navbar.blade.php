@@ -35,6 +35,7 @@
         <!-- END: Profile and Logout Button Group -->
     </div>
 </header>
+
 @include('layouts.commonjs')
 <script>
     $('#logoutBtn').on('click', function() {

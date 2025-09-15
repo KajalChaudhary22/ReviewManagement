@@ -23,4 +23,8 @@ class WelcomeController extends Controller
     {
         return view('home.about_us');
     }
+    protected function contactUs()
+    {
+        return view('home.contact_us');
+    }
 }

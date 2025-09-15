@@ -542,7 +542,7 @@
                     <li><a href="{{ route('categories') }}">Categories</a></li>
                     <li><a href="{{ route('blogs') }}">Blog</a></li>
                     <li><a href="{{ route('about.us') }}">About Us</a></li>
-                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                    <li><a href="{{ route('contact.us') }}">Contact</a></li>
                 </ul>
             </nav>
             <div class="profile-dropdown">

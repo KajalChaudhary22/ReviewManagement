@@ -161,7 +161,7 @@ Route::prefix('customer')->group(function () {
     Route::post('register', [CustomerAuthController::class, 'register']);
     Route::post('login', [CustomerAuthController::class, 'login']);
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
+        // Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
 
 
 

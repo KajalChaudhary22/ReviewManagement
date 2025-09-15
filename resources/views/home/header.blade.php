@@ -13,7 +13,7 @@
                 class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Blog</a>
             <a href="{{ route('about.us') }}"
                 class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">About Us</a>
-            <a href="{{ route('contact') }}"
+            <a href="{{ route('contact.us') }}"
                 class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Contact</a>
         </div>
 
