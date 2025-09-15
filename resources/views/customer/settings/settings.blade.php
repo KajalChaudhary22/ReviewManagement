@@ -213,425 +213,99 @@
 <body class="bg-gray-100 font-sans">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar Navigation -->
-        @include('customer.layouts.sidebar')
+       @include('customer.layouts.sidebar')
 
         <!-- Main Content Area -->
         <div class="flex-1 overflow-auto">
             <!-- Top Navigation Bar -->
-          @include('customer.layouts.navbar')
+            @include('customer.layouts.navbar')
 
             <!-- Main Content Sections -->
             <main class="p-6">
-                <!-- Dashboard Section -->
-                <section id="dashboard" class="content-section active">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Overview</h2>
 
-                    <!-- User Card -->
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                            <div class="flex items-center mb-4 md:mb-0">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User"
-                                    class="w-16 h-16 rounded-full mr-4">
+
+                <!-- Settings Section -->
+                <section id="settings" class="content-section active">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Settings</h2>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <!-- Account Settings -->
+                        <div class="p-6 border-b border-gray-200">
+                            <h3 class="text-lg font-bold mb-4">Account Settings</h3>
+                            <div class="space-y-4">
                                 <div>
-                                    <h3 class="text-xl font-bold">Dr. John Smith</h3>
-                                    <p class="text-gray-600">john.smith@example.com</p>
+                                    <label class="block text-gray-700 mb-1">Email Address</label>
+                                    <div class="flex">
+                                        <input type="email" value="john.smith@example.com"
+                                            class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-1">Change Password</label>
+                                    <div class="space-y-2">
+                                        <input type="password" placeholder="Current Password"
+                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <input type="password" placeholder="New Password"
+                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <input type="password" placeholder="Confirm New Password"
+                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                            Change Password
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Notification Preferences -->
+                        <div class="p-6 border-b border-gray-200">
+                            <h3 class="text-lg font-bold mb-4">Notification Preferences</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">Email Notifications</h4>
+                                        <p class="text-sm text-gray-600">Receive updates via email</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="email-notifications"
+                                            class="notification-toggle sr-only peer" checked>
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-medium">Message Notifications</h4>
+                                        <p class="text-sm text-gray-600">Get alerts for new messages</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="message-notifications"
+                                            class="notification-toggle sr-only peer" checked>
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Account -->
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold mb-4 text-[#1544da]">Delete Account</h3>
+                            <p class="text-gray-600 mb-4">Once you delete your account, there is no going back. Please
+                                be certain.</p>
                             <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200"
-                                onclick="document.querySelector('nav a[data-section=\"profile\"]').click()">
-                                Edit Profile
+                                class="bg-[#1544da] hover:bg-blue-800 text-white px-4 py-2 rounded-lg transition duration-200"
+                                id="deleteAccountBtn">
+                                Delete Account
                             </button>
                         </div>
                     </div>
-
-                    <!-- Key Metrics -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-white rounded-lg shadow-md p-4">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500 text-sm">Saved Businesses</p>
-                                    <p class="text-2xl font-bold">24</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-md p-4">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
-                                    <i class="fas fa-question-circle"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500 text-sm">Active Inquiries</p>
-                                    <p class="text-2xl font-bold">12</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-md p-4">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500 text-sm">Total Reviews</p>
-                                    <p class="text-2xl font-bold">38</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-md p-4">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
-                                    <i class="fas fa-reply"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500 text-sm">Response Rate</p>
-                                    <p class="text-2xl font-bold">92%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Saved Businesses -->
-                    <div class="mb-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Saved Businesses</h3>
-                            <button id="viewAllBusinesses" class="text-blue-600 hover:text-blue-800">View All</button>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <!-- Business Card 1 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">MediPharm Solutions</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Manufacturer</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="MediPharm Solutions" data-type="Manufacturer"
-                                        data-description="A leading pharmaceutical manufacturer specializing in oncology drugs and innovative treatments. With over 20 years of experience in the industry, we provide high-quality medications and research partnerships."
-                                        data-contact="contact@medipharm.com | +1 (800) 123-4567">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Card 2 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">Global Pharma Supply</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Supplier</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="Global Pharma Supply" data-type="Supplier"
-                                        data-description="International pharmaceutical supplier with a network of over 50 countries. We specialize in bulk orders, rare medications, and time-sensitive deliveries with a 98% on-time delivery rate."
-                                        data-contact="sales@globalpharmasupply.com | +1 (800) 987-6543">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Card 3 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">BioTech Labs</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Research Partner</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="BioTech Labs" data-type="Research Partner"
-                                        data-description="Cutting-edge biotechnology research facility specializing in oncology, immunology, and rare diseases. We offer clinical trial partnerships, research collaborations, and innovative treatment solutions."
-                                        data-contact="research@biotechlabs.com | +1 (800) 555-7890">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Additional Business Cards (hidden by default) -->
-                        <div id="additionalBusinesses"
-                            class="additional-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                            <!-- Business Card 4 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">PharmaPlus Distributors</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Distributor</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="PharmaPlus Distributors" data-type="Distributor"
-                                        data-description="Regional pharmaceutical distributor serving the Northeast US with same-day delivery options. We carry over 5,000 SKUs including generics, brand names, and specialty medications."
-                                        data-contact="orders@pharmaplus.com | +1 (800) 222-3333">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Card 5 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">Clinical Research Partners</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Research Organization</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="Clinical Research Partners" data-type="Research Organization"
-                                        data-description="Full-service clinical research organization (CRO) providing Phase I-IV clinical trial management, regulatory consulting, and data management services to pharmaceutical and biotechnology companies."
-                                        data-contact="info@clinicalresearchpartners.com | +1 (800) 444-5555">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Card 6 -->
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg">VitalCare Pharmaceuticals</h4>
-                                        <span class="status-badge status-verified">Verified</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">Manufacturer</p>
-                                    <button
-                                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg transition duration-200 quick-view-btn"
-                                        data-title="VitalCare Pharmaceuticals" data-type="Manufacturer"
-                                        data-description="Specialty pharmaceutical manufacturer focused on cardiovascular, diabetes, and CNS medications. Our state-of-the-art facilities are FDA-approved and cGMP compliant."
-                                        data-contact="sales@vitalcarepharma.com | +1 (800) 777-8888">
-                                        Quick View
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Inquiries -->
-                    <div class="mb-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Recent Inquiries</h3>
-                            <button id="viewAllInquiries" class="text-blue-600 hover:text-blue-800">View All</button>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Business Name</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Inquiry Date</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Status</th>
-                                            <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">MediPharm Solutions</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-06-15</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="status-badge status-pending">Pending</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-800 view-details-btn"
-                                                    data-title="Oncology Drug Inquiry" data-date="2023-06-15"
-                                                    data-status="Pending"
-                                                    data-content="Inquiry about availability and pricing for new oncology drug XZ-450 for clinical trials. Need information on bulk pricing, stability data, and regulatory documentation. Also interested in potential research collaboration opportunities.">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">Global Pharma Supply</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-06-10</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="status-badge status-replied">Replied</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-800 view-details-btn"
-                                                    data-title="Order Status Inquiry" data-date="2023-06-10"
-                                                    data-status="Replied"
-                                                    data-content="Following up on order #GPS-2023-1234 for 500 units of Medication Y. Originally placed on 2023-06-05 with estimated delivery date of 2023-06-15. Requesting tracking information and confirmation of shipment.">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">BioTech Labs</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-05-28</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="status-badge status-closed">Closed</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-800 view-details-btn"
-                                                    data-title="Research Collaboration Proposal"
-                                                    data-date="2023-05-28" data-status="Closed"
-                                                    data-content="Proposal for joint research study on new immunotherapy approach for pancreatic cancer. Our institution would provide clinical expertise and patient access, seeking partner for drug supply and additional funding. Timeline would be 18-24 months with estimated 200 participants across 5 sites.">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Additional Inquiries (hidden by default) -->
-                        <div id="additionalInquiries"
-                            class="additional-content bg-white rounded-lg shadow-md overflow-hidden mt-4">
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">PharmaPlus Distributors</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-05-20</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="status-badge status-closed">Closed</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-800 view-details-btn"
-                                                    data-title="Urgent Medication Request" data-date="2023-05-20"
-                                                    data-status="Closed"
-                                                    data-content="Urgent request for 100 units of Medication Z for emergency use at our facility. Need confirmation of availability and expedited shipping options. This is time-sensitive as our current stock will be depleted within 48 hours.">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">Clinical Research Partners</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-05-15</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="status-badge status-replied">Replied</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-800 view-details-btn"
-                                                    data-title="Regulatory Documentation Request"
-                                                    data-date="2023-05-15" data-status="Replied"
-                                                    data-content="Request for complete regulatory documentation package for Medication A to submit to FDA for new indication approval. Need Certificate of Analysis, Stability Data, and Manufacturing Process details by 2023-06-01 to meet submission deadline.">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Posted Reviews -->
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">Posted Reviews</h3>
-                            <button id="viewAllReviews" class="text-blue-600 hover:text-blue-800">View All</button>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Review Card 1 -->
-                            <div class="bg-white rounded-lg shadow-md p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-bold">MediPharm Solutions</h4>
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mb-4">"Excellent quality products and reliable delivery. Highly
-                                    recommended for pharmaceutical needs."</p>
-                                <div class="flex space-x-2">
-                                    <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button class="text-[#1544da] hover:text-blue-800">Delete</button>
-                                </div>
-                            </div>
-
-                            <!-- Review Card 2 -->
-                            <div class="bg-white rounded-lg shadow-md p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-bold">Global Pharma Supply</h4>
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mb-4">"Great customer service and competitive pricing. Will
-                                    definitely order again."</p>
-                                <div class="flex space-x-2">
-                                    <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button class="text-[#1544da] hover:text-blue-800">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Additional Reviews (hidden by default) -->
-                        <div id="additionalReviews"
-                            class="additional-content grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                            <!-- Review Card 3 -->
-                            <div class="bg-white rounded-lg shadow-md p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-bold">BioTech Labs</h4>
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mb-4">"Outstanding research partnership. Their team is
-                                    knowledgeable, responsive, and truly collaborative."</p>
-                                <div class="flex space-x-2">
-                                    <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button class="text-[#1544da] hover:text-blue-800">Delete</button>
-                                </div>
-                            </div>
-
-                            <!-- Review Card 4 -->
-                            <div class="bg-white rounded-lg shadow-md p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-bold">PharmaPlus Distributors</h4>
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mb-4">"Good selection and fast delivery, but had one incorrect
-                                    item in our last order which took time to resolve."</p>
-                                <div class="flex space-x-2">
-                                    <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                    <button class="text-[#1544da] hover:text-blue-800">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Ad Banner -->
-                    <div class="container mx-auto px-4 py-6">
-                        <img src="https://tpc.googlesyndication.com/simgad/13265185988757716340" alt="Advertisement"
-                            class="w-full h-auto mx-auto">
-                    </div>
                 </section>
-
-
             </main>
         </div>
     </div>
@@ -771,6 +445,7 @@
                     }
                 });
             });
+
 
 
             // Business Quick View Modal

@@ -31,6 +31,15 @@ use App\Http\Controllers\Api\Business\{
     BusinessSettingController
 };
 
+use App\Http\Controllers\Api\Customer\{
+    CustomerDashboardController,
+    CustomerProfileController,
+    CustomerInquiriesController,
+    CustomerNotificationController,
+    CustomerReviewsController,
+    CustomerSettingController
+};
+
 
 use App\Models\Business;
 use App\Models\Product;
@@ -49,11 +58,6 @@ use App\Models\Product;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-Route::prefix('customer')->group(function () {
-    Route::post('register', [CustomerAuthController::class, 'register']);
-    Route::post('login', [CustomerAuthController::class, 'login']);
-});
 
 
 
@@ -151,6 +155,29 @@ Route::prefix('business')->group(function () {
 
         Route::get('/settings', [BusinessSettingController::class, 'index'])->name('business.settings');
         Route::post('/save-settings', [BusinessSettingController::class, 'save'])->name('business.save.settings');
+    });
+});
+Route::prefix('customer')->group(function () {
+    Route::post('register', [CustomerAuthController::class, 'register']);
+    Route::post('login', [CustomerAuthController::class, 'login']);
+    Route::middleware(['auth:sanctum'])->group(function () {
+        // Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
+
+
+
+        Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
+        Route::post('/profile', [CustomerDashboardController::class, 'profileUpdate'])->name('customer.profile.update');
+
+
+        Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
+
+
+
+        Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
+
+
+
+        Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
     });
 });
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);

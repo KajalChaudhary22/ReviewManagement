@@ -28,11 +28,11 @@
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
         </a>
-        <a href="{{ route('campaigns.index',['ty'=>custom_encrypt('Campaigns')]) }}" class="menu-item {{ Route::is('campaigns.index') ? 'active' : '' }}">
+        <a href="{{ route('admin.master.setup',['ty'=>custom_encrypt('MasterSetup')]) }}" class="menu-item {{ Route::is('admin.master.setup') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
         </a> 
-        <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}" class="menu-item {{ Route::is('admin.setting') ? 'active' : '' }}">
+        <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}" class="menu-item {{ Route::is('admin.settings') ? 'active' : '' }}">
             <i class="icon">⚙️</i>
             <span class="menu-text">Settings</span>
         </a>

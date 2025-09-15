@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class Helpers
 {
     public static function showStatus($status): string
@@ -49,6 +49,29 @@ class Helpers
                         </button>';
             default:
                 return '';
+        }
+    }
+    public static function showTimeAgo($datetime)
+    {
+        if (!$datetime) {
+            return '';
+        }
+
+        return Carbon::parse($datetime)->diffForHumans();
+    }
+    public static function showNotificationType($type)
+    {
+        switch ($type) {
+            case 'msg':
+                return '<i class="fas fa-envelope"></i>';
+            case 'star':
+                return '<i class="fas fa-star"></i>';
+            case 'success':
+                return '<i class="fas fa-check-circle"></i>';
+            case 'pending':
+                return '<i class="fas fa-exclamation-circle"></i>';
+            default:
+                return '<i class="fas fa-exclamation-circle"></i>';
         }
     }
     

@@ -58,7 +58,7 @@
                             <input type="checkbox" id="remember-me">
                             <label for="remember-me">Remember me</label>
                         </div>
-                        <a href="#" class="forgot-password">Forgot password?</a>
+                        <a href="<?php echo e(route('password.request',['ty' => custom_encrypt('ResetPasswordEmail')])); ?>" class="forgot-password">Forgot password?</a>
                     </div>
 
                     <button type="submit" class="submit-btn">Log In</button>
