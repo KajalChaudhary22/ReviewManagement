@@ -40,7 +40,7 @@
     .grayscale {
         filter: grayscale(100%);
     }
-
+ 
     .grayscale:hover {
         filter: grayscale(0%);
     }
@@ -192,4 +192,84 @@
         color: #f59e0b;
         /* Tailwind yellow-500 */
     }
+    /* Main Footer Container */
+    .scizora-main-footer {
+            background-color: #ffffff;
+            color: #111827;
+            padding: 2rem 0;
+            width: 100%;
+        }
+
+        .scizora-footer-inner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .scizora-footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scizora-footer-column > * {
+            margin-bottom: 0.5rem;
+        }
+        .scizora-footer-column > *:last-child {
+            margin-bottom: 0;
+        }
+
+        .scizora-footer-heading, .scizora-footer-logo-heading {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .scizora-footer-description {
+            color: #111827;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .scizora-footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .scizora-footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #0000FF;
+            font-size: 0.8rem;
+        }
+
+        .scizora-social-links { display: flex; gap: 1rem; }
+        .scizora-social-icon { color: #0000FF; transition: color 0.2s ease; }
+        .scizora-social-icon:hover { color: #111827; }
+        .scizora-footer-link { color: #0000FF; text-decoration: none; font-size: 0.875rem; }
+        .scizora-footer-link:hover { color: #111827; }
+        .scizora-newsletter-form { display: flex; }
+        .scizora-newsletter-input { background-color: #1F2937; color: #ffffff; padding: 6px 12px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%; font-size: 0.875rem; }
+        .scizora-newsletter-button { background-color: #2563EB; color: #ffffff; padding: 6px 12px; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .scizora-newsletter-button:hover { background-color: #1D4ED8; }
+
+
+        @media (min-width: 768px) {
+            .scizora-footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .scizora-footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
 </style>

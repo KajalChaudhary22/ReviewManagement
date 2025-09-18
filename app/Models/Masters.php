@@ -12,12 +12,16 @@ class Masters extends Model
     protected $guarded  = [];
 
     public function children()
-{
-    return $this->hasMany(Masters::class, 'parent_id');
-}
+    {
+        return $this->hasMany(Masters::class, 'parent_id');
+    }
 
-public function parent()
-{
-    return $this->belongsTo(Masters::class, 'parent_id');
-}
+    public function parent()
+    {
+        return $this->belongsTo(Masters::class, 'parent_id');
+    }
+    public function images()
+    {
+        return $this->morphOne(Images::class, 'imageable');
+    }
 }

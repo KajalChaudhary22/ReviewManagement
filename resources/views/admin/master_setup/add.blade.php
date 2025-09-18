@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -80,14 +81,14 @@
         }
 
         .menu-item {
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-    margin: 0;
-    border-bottom: 1px solid #eeeeee;
-}
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 0;
+            border-bottom: 1px solid #eeeeee;
+        }
 
         .menu-item:hover {
             background-color: rgba(0, 0, 0, 0.05);
@@ -95,7 +96,8 @@
 
         .menu-item.active {
             background-color: var(--primary-color);
-            color: var(--white); /* Changed text color to white for active item */
+            color: var(--white);
+            /* Changed text color to white for active item */
         }
 
         .menu-item i {
@@ -281,7 +283,8 @@
         .stat-change i {
             margin-right: 5px;
         }
-		.form-card {
+
+        .form-card {
             background: white;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15);
@@ -617,8 +620,13 @@
         }
 
         @keyframes chartAnimation {
-            from { height: 0; }
-            to { height: 70%; }
+            from {
+                height: 0;
+            }
+
+            to {
+                height: 70%;
+            }
         }
 
         /* Profile Completion Widget */
@@ -665,8 +673,13 @@
         }
 
         @keyframes circleAnimation {
-            from { stroke-dashoffset: 314; }
-            to { stroke-dashoffset: 47.1; }
+            from {
+                stroke-dashoffset: 314;
+            }
+
+            to {
+                stroke-dashoffset: 47.1;
+            }
         }
 
         .progress-text {
@@ -851,9 +864,10 @@
             margin-bottom: 30px;
 
         }
-		.chart.chart-bottom-aligned {
-    justify-content: flex-end;
-}
+
+        .chart.chart-bottom-aligned {
+            justify-content: flex-end;
+        }
 
         .chart-placeholder {
             width: 100%;
@@ -990,15 +1004,15 @@
             transition: .4s;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: var(--primary-color);
         }
 
-        input:focus + .slider {
+        input:focus+.slider {
             box-shadow: 0 0 1px var(--primary-color);
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(26px);
         }
 
@@ -1012,7 +1026,8 @@
 
         /* Mobile Menu Toggle */
         .menu-toggle {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
             position: fixed;
             top: 15px;
             left: 15px;
@@ -1033,16 +1048,21 @@
             .sidebar {
                 width: var(--sidebar-collapsed-width);
             }
-            .sidebar-header, .menu-text {
+
+            .sidebar-header,
+            .menu-text {
                 display: none;
             }
+
             .menu-item {
                 justify-content: center;
                 padding: 12px 0;
             }
+
             .menu-item i {
                 margin-right: 0;
             }
+
             .main-content {
                 margin-left: var(--sidebar-collapsed-width);
             }
@@ -1115,7 +1135,7 @@
                 flex-direction: column;
             }
 
-            .flex > div {
+            .flex>div {
                 width: 100%;
             }
 
@@ -1148,20 +1168,22 @@
             }
 
             .menu-toggle {
-                display: flex; /* Show the hamburger menu */
+                display: flex;
+                /* Show the hamburger menu */
             }
 
             .menu-text {
                 display: block;
             }
-			sidebar.active .menu-item {
-    justify-content: flex-start;
-    padding: 12px 20px;
-}
 
-.sidebar.active .menu-item i {
-    margin-right: 15px;
-}
+            sidebar.active .menu-item {
+                justify-content: flex-start;
+                padding: 12px 20px;
+            }
+
+            .sidebar.active .menu-item i {
+                margin-right: 15px;
+            }
 
             .stats-cards {
                 grid-template-columns: 1fr;
@@ -1196,12 +1218,12 @@
                 flex-direction: column;
             }
 
-            .flex > div {
+            .flex>div {
                 width: 100%;
                 margin-bottom: 15px;
             }
 
-            .flex > div:last-child {
+            .flex>div:last-child {
                 margin-bottom: 0;
             }
 
@@ -1216,7 +1238,8 @@
                 flex: 1;
             }
 
-            td, th {
+            td,
+            th {
                 padding: 8px 5px;
                 font-size: 0.9rem;
             }
@@ -1257,7 +1280,9 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -1265,7 +1290,10 @@
         }
 
         @media screen and (max-width: 768px) {
-            input, select, textarea {
+
+            input,
+            select,
+            textarea {
                 font-size: 16px;
             }
         }
@@ -1328,7 +1356,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0,168,255,0.05) 0%, rgba(0,168,255,0) 70%);
+            background: radial-gradient(circle, rgba(0, 168, 255, 0.05) 0%, rgba(0, 168, 255, 0) 70%);
             pointer-events: none;
         }
 
@@ -1381,7 +1409,7 @@
             font-size: 1rem;
             transition: var(--transition);
             outline: none;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .form-control:focus {
@@ -1488,7 +1516,7 @@
             padding: 1.5rem;
             min-height: 200px;
             border: 1px solid var(--medium-gray);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .template-grid {
@@ -1505,7 +1533,7 @@
             border: 1px solid var(--medium-gray);
             transition: var(--transition);
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .template-card:hover {
@@ -1656,13 +1684,11 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: conic-gradient(
-                #4e73df 0% 30%,
-                #1cc88a 30% 55%,
-                #36b9cc 55% 75%,
-                #f6c23e 75% 90%,
-                #e74a3b 90% 100%
-            );
+            background: conic-gradient(#4e73df 0% 30%,
+                    #1cc88a 30% 55%,
+                    #36b9cc 55% 75%,
+                    #f6c23e 75% 90%,
+                    #e74a3b 90% 100%);
             margin: 0 auto;
             position: relative;
 
@@ -1759,6 +1785,7 @@
         .reply-form .form-group {
             margin-bottom: 0;
         }
+
         /* Custom style for the All Queries table header */
         #table-view-container .table-container th {
             background-color: #007BFF;
@@ -1766,12 +1793,15 @@
             font-weight: 600;
         }
     </style>
+    {{-- @include('admin.layouts.styles') --}}
 </head>
+
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
+    {{-- <div class="sidebar">
         <div class="sidebar-header">
-            <a href="#" class="text-xl md:text-2xl font-bold"><img src="logo.jpg" alt="logo" width="200" height="60"></a>
+            <a href="#" class="text-xl md:text-2xl font-bold"><img src="logo.jpg" alt="logo" width="200"
+                    height="60"></a>
         </div>
         <div class="menu">
             <div class="menu-item active" data-content="dashboard">
@@ -1803,12 +1833,13 @@
                 <span class="menu-text">Settings</span>
             </div>
         </div>
-    </div>
+    </div> --}}
+    @include('admin.layouts.sidebar')
 
     <!-- Main Content -->
     <div class="main-content">
         <!-- Navbar -->
-        <div class="navbar">
+        {{-- <div class="navbar">
 
             <div class="navbar-right">
                 <div class="search-bar">
@@ -1817,21 +1848,27 @@
                 </div>
 
                 <div class="user-profile">
-                    <a href=""><div class="user-avatar">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
-                    </div></a>
+                    <a href="">
+                        <div class="user-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                        </div>
+                    </a>
                     <span>John Doe</span>
                     <!-- The Logout Button -->
                     <a href="#" class="logout-btn" title="Logout">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" align="right" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                            <path d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2.5a.5.5 0 0 0 1 0v-2.5a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 0 4.5v9A1.5 1.5 0 0 0 1.5 15h8a1.5 1.5 0 0 0 1.5-1.5v-2.5a.5.5 0 0 0-1 0v2.5z"/>
-                            <path d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" align="right"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                            <path
+                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2.5a.5.5 0 0 0 1 0v-2.5a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 0 4.5v9A1.5 1.5 0 0 0 1.5 15h8a1.5 1.5 0 0 0 1.5-1.5v-2.5a.5.5 0 0 0-1 0v2.5z" />
+                            <path
+                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
                         </svg>
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
+        @include('admin.layouts.navbar')
 
         <!-- Content Area -->
         <div class="content">
@@ -1840,12 +1877,15 @@
                 <!-- Form View -->
                 <div id="form-view-container">
                     <div class="container">
-                        <div class="header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                           <div>
+                        <div class="header"
+                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div>
                                 <h1>Master Setup Form</h1>
-                                <p>Configure master settings for your SCIZORA platform. All fields marked with * are required.</p>
-                           </div>
-                            <button id="view-records-btn" class="btn btn-primary" style="padding: 12px 24px;">View All Records</button>
+                                <p>Configure master settings for your SCIZORA platform. All fields marked with * are
+                                    required.</p>
+                            </div>
+                            <button id="view-records-btn" class="btn btn-primary" style="padding: 12px 24px;">View
+                                All Records</button>
                         </div>
 
                         <div class="form-card">
@@ -1853,7 +1893,8 @@
                                 <div class="form-row">
                                     <div class="form-group half-width">
                                         <label for="name" class="required">Name</label>
-                                        <input type="text" id="name" class="input-control" placeholder="Enter master name">
+                                        <input type="text" id="name" class="input-control"
+                                            placeholder="Enter master name">
                                         <div class="error-message" id="name-error">Please enter a valid name</div>
                                     </div>
 
@@ -1908,7 +1949,8 @@
                                 </div>
 
                                 <div class="form-footer">
-                                    <p>By submitting this form, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                                    <p>By submitting this form, you agree to our <a href="#">Terms of Service</a>
+                                        and <a href="#">Privacy Policy</a></p>
                                 </div>
                             </form>
                         </div>
@@ -1918,8 +1960,9 @@
                 <!-- Table View (Initially Hidden) -->
                 <div id="table-view-container" class="hidden">
                     <div class="table-header">
-                         <h1 class="section-title">All Queries</h1>
-                         <button id="back-to-form-btn" class="btn btn-secondary" style="padding: 12px 24px;">Back to Form</button>
+                        <h1 class="section-title">All Queries</h1>
+                        <button id="back-to-form-btn" class="btn btn-secondary" style="padding: 12px 24px;">Back to
+                            Form</button>
                     </div>
                     <div class="table-container">
                         <table>
@@ -1968,7 +2011,7 @@
                                     <td>Parent Z</td>
                                     <td>Inactive</td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td>Sixth Sample</td>
                                     <td>Type D</td>
                                     <td>Sample data for the sixth row to demonstrate scrolling.</td>
@@ -1982,275 +2025,300 @@
             </div>
 
             <!-- Profile Management Content -->
-<div id="profile-content" class="content-section hidden">
-    <div class="content-header">
-        <h1 class="welcome-text">Profile Management</h1>
-        <p class="date-text">Tuesday, 20 February 2024</p>
-    </div>
+            <div id="profile-content" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="welcome-text">Profile Management</h1>
+                    <p class="date-text">Tuesday, 20 February 2024</p>
+                </div>
 
-    <div class="table-container">
-        <h2 class="section-title mb-20">Company Information</h2>
+                <div class="table-container">
+                    <h2 class="section-title mb-20">Company Information</h2>
 
-        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">Company Name</label>
-                    <input type="text" class="form-control" value="PharmaCorp Inc">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Business Type</label>
-                    <input type="text" class="form-control" value="Pharmaceutical Manufacturer">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Year Established</label>
-                    <input type="text" class="form-control" value="2005">
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">Company Logo</label>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
-                            <img src="https://via.placeholder.com/80x80?text=PC" alt="Company Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" value="PharmaCorp Inc">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Business Type</label>
+                                <input type="text" class="form-control" value="Pharmaceutical Manufacturer">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Year Established</label>
+                                <input type="text" class="form-control" value="2005">
+                            </div>
                         </div>
-                        <button class="btn btn-primary">Upload New</button>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Company Logo</label>
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div
+                                        style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
+                                        <img src="https://via.placeholder.com/80x80?text=PC" alt="Company Logo"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <button class="btn btn-primary">Upload New</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-20">Contact Information</h2>
+
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Primary Contact</label>
+                                <input type="text" class="form-control" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" value="john.doe@pharmacorp.com">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="url" class="form-control" value="https://www.pharmacorp.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-20">Business Address</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Street Address</label>
+                        <input type="text" class="form-control" value="123 Pharma Street">
+                    </div>
+
+                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" value="Boston">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">State/Province</label>
+                                <input type="text" class="form-control" value="Massachusetts">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">ZIP/Postal Code</label>
+                                <input type="text" class="form-control" value="02108">
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <input type="text" class="form-control" value="United States">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-20">Business Description</h2>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5">PharmaCorp Inc is a leading manufacturer of high-quality pharmaceutical products with over 15 years of experience in the industry. We specialize in antibiotics, pain relievers, and vitamin supplements, serving clients across North America and Europe.</textarea>
+                    </div>
+
+                    <div class="flex justify-between" style="margin-top: 30px;">
+                        <button id="cancel-profile-changes" class="btn"
+                            style="background-color: #f0f0f0;">Cancel</button>
+                        <button class="btn btn-primary">Save Changes</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <h2 class="section-title mb-20">Contact Information</h2>
-
-        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">Primary Contact</label>
-                    <input type="text" class="form-control" value="John Doe">
+            <!-- Products & Services Content -->
+            <div id="products-content" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="welcome-text">Products & Services</h1>
+                    <p class="date-text">Tuesday, 20 February 2024</p>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control" value="john.doe@pharmacorp.com">
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Website</label>
-                    <input type="url" class="form-control" value="https://www.pharmacorp.com">
-                </div>
-            </div>
-        </div>
 
-        <h2 class="section-title mb-20">Business Address</h2>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2 class="section-title">Your Products (124)</h2>
+                        <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
+                    </div>
 
-        <div class="form-group">
-            <label class="form-label">Street Address</label>
-            <input type="text" class="form-control" value="123 Pharma Street">
-        </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <input type="text" class="form-control" placeholder="Search products..."
+                                id="product-search">
+                        </div>
+                        <select class="form-control" style="width: 200px; min-width: 150px;"
+                            id="product-category-filter">
+                            <option>All Categories</option>
+                            <option>Antibiotics</option>
+                            <option>Pain Relievers</option>
+                            <option>Vitamins</option>
+                            <option>Supplements</option>
+                        </select>
+                        <select class="form-control" style="width: 150px; min-width: 120px;" id="product-sort">
+                            <option>Sort by: Newest</option>
+                            <option>Sort by: Oldest</option>
+                            <option>Sort by: Name</option>
+                            <option>Sort by: Popularity</option>
+                        </select>
+                    </div>
 
-        <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">City</label>
-                    <input type="text" class="form-control" value="Boston">
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">State/Province</label>
-                    <input type="text" class="form-control" value="Massachusetts">
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">ZIP/Postal Code</label>
-                    <input type="text" class="form-control" value="02108">
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group">
-                    <label class="form-label">Country</label>
-                    <input type="text" class="form-control" value="United States">
-                </div>
-            </div>
-        </div>
+                    <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
+                        id="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/400x300?text=Antibiotic+X" alt="Antibiotic X">
+                            </div>
+                            <h3 class="product-name">Antibiotic</h3>
+                            <div class="product-meta">
+                                <span>SKU: PC-ABX-500</span>
+                                <span>In Stock: 1,240</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <span style="color: var(--primary-color); font-weight: 600;">$24.99</span>
+                                <div>
+                                    <button class="edit-product-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-product-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/400x300?text=Pain+Reliever+Y"
+                                    alt="Pain Reliever Y">
+                            </div>
+                            <h3 class="product-name">Pain Reliever</h3>
+                            <div class="product-meta">
+                                <span>SKU: PC-PRY-200</span>
+                                <span>In Stock: 980</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <span style="color: var(--primary-color); font-weight: 600;">$19.99</span>
+                                <div>
+                                    <button class="edit-product-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-product-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/400x300?text=Vitamin+Complex"
+                                    alt="Vitamin Complex">
+                            </div>
+                            <h3 class="product-name">Vitamin Complex</h3>
+                            <div class="product-meta">
+                                <span>SKU: PC-VTC-100</span>
+                                <span>In Stock: 750</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <span style="color: var(--primary-color); font-weight: 600;">$29.99</span>
+                                <div>
+                                    <button class="edit-product-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-product-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/400x300?text=Immune+Booster"
+                                    alt="Immune Booster">
+                            </div>
+                            <h3 class="product-name">Immune Booster</h3>
+                            <div class="product-meta">
+                                <span>SKU: PC-IMB-300</span>
+                                <span>In Stock: 420</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <span style="color: var(--primary-color); font-weight: 600;">$34.99</span>
+                                <div>
+                                    <button class="edit-product-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-product-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <h2 class="section-title mb-20">Business Description</h2>
-
-        <div class="form-group">
-            <textarea class="form-control" rows="5">PharmaCorp Inc is a leading manufacturer of high-quality pharmaceutical products with over 15 years of experience in the industry. We specialize in antibiotics, pain relievers, and vitamin supplements, serving clients across North America and Europe.</textarea>
-        </div>
-
-        <div class="flex justify-between" style="margin-top: 30px;">
-            <button id="cancel-profile-changes" class="btn" style="background-color: #f0f0f0;">Cancel</button>
-            <button class="btn btn-primary">Save Changes</button>
-        </div>
-    </div>
-</div>
-<!-- Products & Services Content -->
-<div id="products-content" class="content-section hidden">
-    <div class="content-header">
-        <h1 class="welcome-text">Products & Services</h1>
-        <p class="date-text">Tuesday, 20 February 2024</p>
-    </div>
-
-    <div class="table-container">
-        <div class="table-header">
-            <h2 class="section-title">Your Products (124)</h2>
-            <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
-        </div>
-
-        <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 200px;">
-                <input type="text" class="form-control" placeholder="Search products..." id="product-search">
-            </div>
-            <select class="form-control" style="width: 200px; min-width: 150px;" id="product-category-filter">
-                <option>All Categories</option>
-                <option>Antibiotics</option>
-                <option>Pain Relievers</option>
-                <option>Vitamins</option>
-                <option>Supplements</option>
-            </select>
-            <select class="form-control" style="width: 150px; min-width: 120px;" id="product-sort">
-                <option>Sort by: Newest</option>
-                <option>Sort by: Oldest</option>
-                <option>Sort by: Name</option>
-                <option>Sort by: Popularity</option>
-            </select>
-        </div>
-
-        <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));" id="products-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://via.placeholder.com/400x300?text=Antibiotic+X" alt="Antibiotic X">
-                </div>
-                <h3 class="product-name">Antibiotic</h3>
-                <div class="product-meta">
-                    <span>SKU: PC-ABX-500</span>
-                    <span>In Stock: 1,240</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <span style="color: var(--primary-color); font-weight: 600;">$24.99</span>
-                    <div>
-                        <button class="edit-product-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-product-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                        <div style="color: var(--text-light);">
+                            Showing 1-4 of 124 products
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" style="background-color: #f0f0f0;"
+                                id="prev-products">Previous</button>
+                            <button class="btn btn-primary" id="next-products">Next</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://via.placeholder.com/400x300?text=Pain+Reliever+Y" alt="Pain Reliever Y">
-                </div>
-                <h3 class="product-name">Pain Reliever</h3>
-                <div class="product-meta">
-                    <span>SKU: PC-PRY-200</span>
-                    <span>In Stock: 980</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <span style="color: var(--primary-color); font-weight: 600;">$19.99</span>
-                    <div>
-                        <button class="edit-product-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-product-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://via.placeholder.com/400x300?text=Vitamin+Complex" alt="Vitamin Complex">
-                </div>
-                <h3 class="product-name">Vitamin Complex</h3>
-                <div class="product-meta">
-                    <span>SKU: PC-VTC-100</span>
-                    <span>In Stock: 750</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <span style="color: var(--primary-color); font-weight: 600;">$29.99</span>
-                    <div>
-                        <button class="edit-product-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-product-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://via.placeholder.com/400x300?text=Immune+Booster" alt="Immune Booster">
-                </div>
-                <h3 class="product-name">Immune Booster</h3>
-                <div class="product-meta">
-                    <span>SKU: PC-IMB-300</span>
-                    <span>In Stock: 420</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                    <span style="color: var(--primary-color); font-weight: 600;">$34.99</span>
-                    <div>
-                        <button class="edit-product-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-product-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-            <div style="color: var(--text-light);">
-                Showing 1-4 of 124 products
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" style="background-color: #f0f0f0;" id="prev-products">Previous</button>
-                <button class="btn btn-primary" id="next-products">Next</button>
-            </div>
-        </div>
-    </div>
+                <div class="table-container" style="margin-top: 30px;">
+                    <div class="table-header">
+                        <h2 class="section-title">Services (3)</h2>
+                        <button class="btn btn-primary" id="add-service-btn">Add New Service</button>
+                    </div>
 
-    <div class="table-container" style="margin-top: 30px;">
-        <div class="table-header">
-            <h2 class="section-title">Services (3)</h2>
-            <button class="btn btn-primary" id="add-service-btn">Add New Service</button>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Service Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Custom Formulation</td>
-                    <td>Tailored pharmaceutical solutions for specific needs</td>
-                    <td>$1,500+</td>
-                    <td>
-                        <button class="edit-service-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-service-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Private Labeling</td>
-                    <td>Brand our products with your own label and packaging</td>
-                    <td>$500+</td>
-                    <td>
-                        <button class="edit-service-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-service-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bulk Discounts</td>
-                    <td>Special pricing for large quantity orders</td>
-                    <td>20-50% off</td>
-                    <td>
-                        <button class="edit-service-btn" style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                        <button class="delete-service-btn" style="background: none; border: none; cursor: pointer;">🗑️</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Custom Formulation</td>
+                                <td>Tailored pharmaceutical solutions for specific needs</td>
+                                <td>$1,500+</td>
+                                <td>
+                                    <button class="edit-service-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-service-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Private Labeling</td>
+                                <td>Brand our products with your own label and packaging</td>
+                                <td>$500+</td>
+                                <td>
+                                    <button class="edit-service-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-service-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bulk Discounts</td>
+                                <td>Special pricing for large quantity orders</td>
+                                <td>20-50% off</td>
+                                <td>
+                                    <button class="edit-service-btn"
+                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
+                                    <button class="delete-service-btn"
+                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <!-- Inquiries Content -->
             <div id="inquiries-content" class="content-section hidden">
@@ -2294,7 +2362,8 @@
                     <div class="table-header">
                         <h2 class="section-title">Recent Inquiries</h2>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <select class="form-control" style="width: 150px; min-width: 120px;" id="inquiry-status-filter">
+                            <select class="form-control" style="width: 150px; min-width: 120px;"
+                                id="inquiry-status-filter">
                                 <option>All Statuses</option>
                                 <option>Pending</option>
                                 <option>In Progress</option>
@@ -2325,8 +2394,11 @@
                                 <td>500 units</td>
                                 <td><span class="status in-progress">In Progress</span></td>
                                 <td>
-                                    <button class="reply-inquiry-btn" data-company="MediLife Inc." data-email="sarah.miller@medilife.com" style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn" style="background: none; border: none; cursor: pointer;">👁️</button>
+                                    <button class="reply-inquiry-btn" data-company="MediLife Inc."
+                                        data-email="sarah.miller@medilife.com"
+                                        style="background: none; border: none; cursor: pointer;">✉️</button>
+                                    <button class="view-inquiry-btn"
+                                        style="background: none; border: none; cursor: pointer;">👁️</button>
                                 </td>
                             </tr>
                             <tr>
@@ -2337,8 +2409,11 @@
                                 <td>1,000 units</td>
                                 <td><span class="status pending">Pending</span></td>
                                 <td>
-                                    <button class="reply-inquiry-btn" data-company="HealthPlus" data-email="john.davis@healthplus.com" style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn" style="background: none; border: none; cursor: pointer;">👁️</button>
+                                    <button class="reply-inquiry-btn" data-company="HealthPlus"
+                                        data-email="john.davis@healthplus.com"
+                                        style="background: none; border: none; cursor: pointer;">✉️</button>
+                                    <button class="view-inquiry-btn"
+                                        style="background: none; border: none; cursor: pointer;">👁️</button>
                                 </td>
                             </tr>
                             <tr>
@@ -2349,19 +2424,24 @@
                                 <td>2,000 units</td>
                                 <td><span class="status completed">Completed</span></td>
                                 <td>
-                                    <button class="reply-inquiry-btn" data-company="PharmaGlobal" data-email="amanda.patel@pharmaglobal.com" style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn" style="background: none; border: none; cursor: pointer;">👁️</button>
+                                    <button class="reply-inquiry-btn" data-company="PharmaGlobal"
+                                        data-email="amanda.patel@pharmaglobal.com"
+                                        style="background: none; border: none; cursor: pointer;">✉️</button>
+                                    <button class="view-inquiry-btn"
+                                        style="background: none; border: none; cursor: pointer;">👁️</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
                         <div style="color: var(--text-light);">
                             Showing 1-3 of 35 active inquiries
                         </div>
                         <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0;" id="prev-inquiries">Previous</button>
+                            <button class="btn" style="background-color: #f0f0f0;"
+                                id="prev-inquiries">Previous</button>
                             <button class="btn btn-primary" id="next-inquiries">Next</button>
                         </div>
                     </div>
@@ -2369,174 +2449,224 @@
             </div>
 
             <!-- Reviews Content -->
-<div id="reviews-content" class="content-section hidden">
-    <div class="content-header">
-        <h1 class="welcome-text">Customer Reviews</h1>
-        <p class="date-text">Tuesday, 20 February 2024</p>
-    </div>
-
-    <div class="stats-cards">
-        <div class="stat-card">
-            <div class="stat-title">Total Reviews</div>
-            <div class="stat-value">156</div>
-            <div class="stat-change">
-                <i class="icon">↑</i> 18% from last month
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Average Rating</div>
-            <div class="stat-value">4.7</div>
-            <div class="stat-change">
-                <i class="icon">↑</i> 0.2 from last month
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">5-Star Reviews</div>
-            <div class="stat-value">112</div>
-            <div class="stat-change">
-                <i class="icon">↑</i> 24 from last month
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-title">Response Rate</div>
-            <div class="stat-value">92%</div>
-            <div class="stat-change">
-                <i class="icon">↑</i> 5% from last month
-            </div>
-        </div>
-    </div>
-
-    <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-        <div class="table-container" style="flex: 2; min-width: 300px;">
-            <div class="table-header">
-                <h2 class="section-title">Recent Reviews</h2>
-                <div style="display: flex; gap: 10px;">
-                    <select class="form-control" style="width: 150px; min-width: 120px;" id="review-rating-filter">
-                        <option>All Ratings</option>
-                        <option>5 Stars</option>
-                        <option>4 Stars</option>
-                        <option>3 Stars</option>
-                        <option>2 Stars</option>
-                        <option>1 Star</option>
-                    </select>
+            <div id="reviews-content" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="welcome-text">Customer Reviews</h1>
+                    <p class="date-text">Tuesday, 20 February 2024</p>
                 </div>
-            </div>
 
-            <div class="review-item">
-                <div class="reviewer-avatar">SM</div>
-                <div class="review-content">
-                    <div class="reviewer-name">Sarah Miller <span style="color: var(--text-light); font-weight: normal;">- MediLife Inc.</span></div>
-                    <div class="stars">★★★★★ <span style="color: var(--text-light); font-size: 0.9rem;">20 Feb 2024</span></div>
-                    <div class="review-text">We've been working with PharmaCorp for over 3 years now and their products have consistently exceeded our expectations. The Antibiotic X is particularly effective with minimal side effects reported by our patients.</div>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: var(--text-light);">Product: Antibiotic X</span>
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Reviews</div>
+                        <div class="stat-value">156</div>
+                        <div class="stat-change">
+                            <i class="icon">↑</i> 18% from last month
+                        </div>
                     </div>
-                    <button class="btn reply-review-btn" style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
-                </div>
-            </div>
-
-            <div class="review-item">
-                <div class="reviewer-avatar">JD</div>
-                <div class="review-content">
-                    <div class="reviewer-name">John Davis <span style="color: var(--text-light); font-weight: normal;">- HealthPlus</span></div>
-                    <div class="stars">★★★★☆ <span style="color: var(--text-light); font-size: 0.9rem;">18 Feb 2024</span></div>
-                    <div class="review-text">The Pain Reliever Y works well for most of our patients, though we've had a few reports of mild stomach discomfort. Packaging could be more eco-friendly.</div>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: var(--text-light);">Product: Pain Reliever Y</span>
+                    <div class="stat-card">
+                        <div class="stat-title">Average Rating</div>
+                        <div class="stat-value">4.7</div>
+                        <div class="stat-change">
+                            <i class="icon">↑</i> 0.2 from last month
+                        </div>
                     </div>
-                    <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                        <div style="font-weight: 500; margin-bottom: 5px;">Your Response:</div>
-                        <div>Thank you for your feedback, John. We're currently developing a new formulation to reduce stomach discomfort and will be introducing eco-friendly packaging options next quarter.</div>
+                    <div class="stat-card">
+                        <div class="stat-title">5-Star Reviews</div>
+                        <div class="stat-value">112</div>
+                        <div class="stat-change">
+                            <i class="icon">↑</i> 24 from last month
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Response Rate</div>
+                        <div class="stat-value">92%</div>
+                        <div class="stat-change">
+                            <i class="icon">↑</i> 5% from last month
+                        </div>
                     </div>
                 </div>
+
+                <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <div class="table-container" style="flex: 2; min-width: 300px;">
+                        <div class="table-header">
+                            <h2 class="section-title">Recent Reviews</h2>
+                            <div style="display: flex; gap: 10px;">
+                                <select class="form-control" style="width: 150px; min-width: 120px;"
+                                    id="review-rating-filter">
+                                    <option>All Ratings</option>
+                                    <option>5 Stars</option>
+                                    <option>4 Stars</option>
+                                    <option>3 Stars</option>
+                                    <option>2 Stars</option>
+                                    <option>1 Star</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="reviewer-avatar">SM</div>
+                            <div class="review-content">
+                                <div class="reviewer-name">Sarah Miller <span
+                                        style="color: var(--text-light); font-weight: normal;">- MediLife Inc.</span>
+                                </div>
+                                <div class="stars">★★★★★ <span
+                                        style="color: var(--text-light); font-size: 0.9rem;">20 Feb 2024</span></div>
+                                <div class="review-text">We've been working with PharmaCorp for over 3 years now and
+                                    their products have consistently exceeded our expectations. The Antibiotic X is
+                                    particularly effective with minimal side effects reported by our patients.</div>
+                                <div style="margin-top: 10px;">
+                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Antibiotic
+                                        X</span>
+                                </div>
+                                <button class="btn reply-review-btn"
+                                    style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="reviewer-avatar">JD</div>
+                            <div class="review-content">
+                                <div class="reviewer-name">John Davis <span
+                                        style="color: var(--text-light); font-weight: normal;">- HealthPlus</span>
+                                </div>
+                                <div class="stars">★★★★☆ <span
+                                        style="color: var(--text-light); font-size: 0.9rem;">18 Feb 2024</span></div>
+                                <div class="review-text">The Pain Reliever Y works well for most of our patients,
+                                    though we've had a few reports of mild stomach discomfort. Packaging could be more
+                                    eco-friendly.</div>
+                                <div style="margin-top: 10px;">
+                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Pain Reliever
+                                        Y</span>
+                                </div>
+                                <div
+                                    style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                    <div style="font-weight: 500; margin-bottom: 5px;">Your Response:</div>
+                                    <div>Thank you for your feedback, John. We're currently developing a new formulation
+                                        to reduce stomach discomfort and will be introducing eco-friendly packaging
+                                        options next quarter.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="reviewer-avatar">AP</div>
+                            <div class="review-content">
+                                <div class="reviewer-name">Amanda Patel <span
+                                        style="color: var(--text-light); font-weight: normal;">- PharmaGlobal</span>
+                                </div>
+                                <div class="stars">★★★★★ <span
+                                        style="color: var(--text-light); font-size: 0.9rem;">15 Feb 2024</span></div>
+                                <div class="review-text">The Vitamin Complex is our best-selling supplement! Customers
+                                    report increased energy levels and overall wellbeing. Delivery is always prompt.
+                                </div>
+                                <div style="margin-top: 10px;">
+                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Vitamin
+                                        Complex</span>
+                                </div>
+                                <button class="btn reply-review-btn"
+                                    style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                            <div style="color: var(--text-light);">
+                                Showing 1-3 of 28 new reviews
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn" style="background-color: #f0f0f0;"
+                                    id="prev-reviews">Previous</button>
+                                <button class="btn btn-primary" id="next-reviews">Next</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container" style="flex: 1; min-width: 300px;">
+                        <h2 class="section-title">Rating Distribution</h2>
+
+                        <div style="margin-top: 20px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="width: 80px;">5 Stars</div>
+                                <div
+                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="width: 72%; height: 100%; background-color: var(--primary-color);">
+                                    </div>
+                                </div>
+                                <div>112</div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="width: 80px;">4 Stars</div>
+                                <div
+                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="width: 18%; height: 100%; background-color: var(--primary-color);">
+                                    </div>
+                                </div>
+                                <div>28</div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="width: 80px;">3 Stars</div>
+                                <div
+                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="width: 6%; height: 100%; background-color: var(--primary-color);">
+                                    </div>
+                                </div>
+                                <div>9</div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="width: 80px;">2 Stars</div>
+                                <div
+                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="width: 3%; height: 100%; background-color: var(--primary-color);">
+                                    </div>
+                                </div>
+                                <div>4</div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <div style="width: 80px;">1 Star</div>
+                                <div
+                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="width: 1%; height: 100%; background-color: var(--primary-color);">
+                                    </div>
+                                </div>
+                                <div>3</div>
+                            </div>
+                        </div>
+
+                        <h2 style="margin-top: 30px; font-size: 1.2rem;">Review Highlights</h2>
+
+                        <div style="margin-top: 15px;">
+                            <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Positive</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px;">
+                                <span
+                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Quality
+                                    (87)</span>
+                                <span
+                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Delivery
+                                    (65)</span>
+                                <span
+                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Effectiveness
+                                    (58)</span>
+                                <span
+                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Customer
+                                    Service (42)</span>
+                            </div>
+
+                            <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Negative</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                <span
+                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Packaging
+                                    (12)</span>
+                                <span
+                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Side
+                                    Effects (8)</span>
+                                <span
+                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Price
+                                    (5)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="review-item">
-                <div class="reviewer-avatar">AP</div>
-                <div class="review-content">
-                    <div class="reviewer-name">Amanda Patel <span style="color: var(--text-light); font-weight: normal;">- PharmaGlobal</span></div>
-                    <div class="stars">★★★★★ <span style="color: var(--text-light); font-size: 0.9rem;">15 Feb 2024</span></div>
-                    <div class="review-text">The Vitamin Complex is our best-selling supplement! Customers report increased energy levels and overall wellbeing. Delivery is always prompt.</div>
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 0.9rem; color: var(--text-light);">Product: Vitamin Complex</span>
-                    </div>
-                    <button class="btn reply-review-btn" style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                <div style="color: var(--text-light);">
-                    Showing 1-3 of 28 new reviews
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn" style="background-color: #f0f0f0;" id="prev-reviews">Previous</button>
-                    <button class="btn btn-primary" id="next-reviews">Next</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="table-container" style="flex: 1; min-width: 300px;">
-            <h2 class="section-title">Rating Distribution</h2>
-
-            <div style="margin-top: 20px;">
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="width: 80px;">5 Stars</div>
-                    <div style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                        <div style="width: 72%; height: 100%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <div>112</div>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="width: 80px;">4 Stars</div>
-                    <div style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                        <div style="width: 18%; height: 100%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <div>28</div>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="width: 80px;">3 Stars</div>
-                    <div style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                        <div style="width: 6%; height: 100%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <div>9</div>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="width: 80px;">2 Stars</div>
-                    <div style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                        <div style="width: 3%; height: 100%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <div>4</div>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <div style="width: 80px;">1 Star</div>
-                    <div style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                        <div style="width: 1%; height: 100%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <div>3</div>
-                </div>
-            </div>
-
-            <h2 style="margin-top: 30px; font-size: 1.2rem;">Review Highlights</h2>
-
-            <div style="margin-top: 15px;">
-                <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Positive</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px;">
-                    <span style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Quality (87)</span>
-                    <span style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Delivery (65)</span>
-                    <span style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Effectiveness (58)</span>
-                    <span style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Customer Service (42)</span>
-                </div>
-
-                <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Negative</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
-                    <span style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Packaging (12)</span>
-                    <span style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Side Effects (8)</span>
-                    <span style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Price (5)</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
             <!-- Analytics Content -->
             <div id="analytics-content" class="content-section hidden">
@@ -2653,7 +2783,7 @@
                     <div class="chart-container" style="flex: 1; min-width: 300px;">
                         <h2 class="section-title">Top Products</h2>
 
-						<div class="chart chart-bottom-aligned">
+                        <div class="chart chart-bottom-aligned">
                             <div class="bar-chart">
                                 <div class="bar" style="height: 95%;">
                                     <div class="bar-value">$57K</div>
@@ -2750,12 +2880,14 @@
                         </tbody>
                     </table>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
                         <div style="color: var(--text-light);">
                             Showing 1-3 of 287 orders
                         </div>
                         <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0;" id="prev-orders">Previous</button>
+                            <button class="btn" style="background-color: #f0f0f0;"
+                                id="prev-orders">Previous</button>
                             <button class="btn btn-primary" id="next-orders">Next</button>
                         </div>
                     </div>
@@ -2763,264 +2895,278 @@
             </div>
 
             <!-- Settings Content -->
-<div id="settings-content" class="content-section hidden">
-    <div class="content-header">
-        <h1 class="welcome-text">Account Settings</h1>
-        <p class="date-text">Tuesday, 20 February 2024</p>
-    </div>
-
-    <div class="settings-tabs">
-        <div class="tab active" data-tab="account">Account</div>
-        <div class="tab" data-tab="security">Security</div>
-        <div class="tab" data-tab="notifications">Notifications</div>
-        <div class="tab" data-tab="billing">Billing</div>
-    </div>
-
-    <div id="account-tab" class="tab-content active">
-        <div class="table-container">
-            <h2 class="section-title mb-20">Profile Information</h2>
-
-            <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">First Name</label>
-                        <input type="text" class="form-control" value="John">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" class="form-control" value="john.doe@pharmacorp.com">
-                    </div>
+            <div id="settings-content" class="content-section hidden">
+                <div class="content-header">
+                    <h1 class="welcome-text">Account Settings</h1>
+                    <p class="date-text">Tuesday, 20 February 2024</p>
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">Last Name</label>
-                        <input type="text" class="form-control" value="Doe">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                    </div>
+
+                <div class="settings-tabs">
+                    <div class="tab active" data-tab="account">Account</div>
+                    <div class="tab" data-tab="security">Security</div>
+                    <div class="tab" data-tab="notifications">Notifications</div>
+                    <div class="tab" data-tab="billing">Billing</div>
                 </div>
-            </div>
 
-            <h2 class="section-title mb-20">Profile Picture</h2>
+                <div id="account-tab" class="tab-content active">
+                    <div class="table-container">
+                        <h2 class="section-title mb-20">Profile Information</h2>
 
-            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                <div class="user-avatar" style="width: 80px; height: 80px;">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn btn-primary">Upload New</button>
-                    <button class="btn" style="background-color: #f0f0f0;">Remove</button>
-                </div>
-            </div>
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" value="John">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" value="john.doe@pharmacorp.com">
+                                </div>
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" value="Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-            </div>
-        </div>
-    </div>
+                        <h2 class="section-title mb-20">Profile Picture</h2>
 
-    <div id="security-tab" class="tab-content">
-        <div class="table-container">
-            <h2 class="section-title mb-20">Password</h2>
+                        <div
+                            style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div class="user-avatar" style="width: 80px; height: 80px;">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-primary">Upload New</button>
+                                <button class="btn" style="background-color: #f0f0f0;">Remove</button>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label class="form-label">Current Password</label>
-                <input type="password" class="form-control" placeholder="Enter current password">
-            </div>
-
-            <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">New Password</label>
-                        <input type="password" class="form-control" placeholder="Enter new password">
+                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                        </div>
                     </div>
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">Confirm New Password</label>
-                        <input type="password" class="form-control" placeholder="Confirm new password">
+
+                <div id="security-tab" class="tab-content">
+                    <div class="table-container">
+                        <h2 class="section-title mb-20">Password</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-control" placeholder="Enter current password">
+                        </div>
+
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter new password">
+                                </div>
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" placeholder="Confirm new password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="section-title mb-20">Two-Factor Authentication</h2>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">SMS Authentication</div>
+                                <div style="color: var(--text-light);">Add your phone number to receive security codes
+                                    via SMS</div>
+                            </div>
+                            <button class="btn" style="background-color: #f0f0f0;">Enable</button>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Authenticator App</div>
+                                <div style="color: var(--text-light);">Use an authenticator app to generate security
+                                    codes</div>
+                            </div>
+                            <button class="btn" style="background-color: #f0f0f0;">Enable</button>
+                        </div>
+
+                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
+                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notifications-tab" class="tab-content">
+                    <div class="table-container">
+                        <h2 class="section-title mb-20">Notification Preferences</h2>
+
+                        <h3 style="margin-bottom: 15px; font-weight: 500;">Email Notifications</h3>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">New Orders</div>
+                                <div style="color: var(--text-light);">Receive notifications when new orders are placed
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Inquiries</div>
+                                <div style="color: var(--text-light);">Receive notifications for new inquiries</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Reviews</div>
+                                <div style="color: var(--text-light);">Receive notifications for new reviews</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Promotions</div>
+                                <div style="color: var(--text-light);">Receive promotional emails and offers</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <h3 style="margin-bottom: 15px; font-weight: 500;">Push Notifications</h3>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Order Updates</div>
+                                <div style="color: var(--text-light);">Receive push notifications for order status
+                                    changes</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <div style="font-weight: 500; margin-bottom: 5px;">Important Alerts</div>
+                                <div style="color: var(--text-light);">Receive important system alerts and
+                                    notifications</div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
+                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="billing-tab" class="tab-content">
+                    <div class="table-container">
+                        <h2 class="section-title mb-20">Billing Information</h2>
+
+                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" value="•••• •••• •••• 4242">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Name on Card</label>
+                                    <input type="text" class="form-control" value="John Doe">
+                                </div>
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="form-group">
+                                    <label class="form-label">Expiration Date</label>
+                                    <input type="text" class="form-control" value="12/25">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Security Code</label>
+                                    <input type="text" class="form-control" placeholder="•••">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="section-title mb-20">Billing History</h2>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15 Feb 2024</td>
+                                    <td>Premium Subscription</td>
+                                    <td>$99.00</td>
+                                    <td><span class="status completed">Paid</span></td>
+                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td>15 Jan 2024</td>
+                                    <td>Premium Subscription</td>
+                                    <td>$99.00</td>
+                                    <td><span class="status completed">Paid</span></td>
+                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td>15 Dec 2023</td>
+                                    <td>Premium Subscription</td>
+                                    <td>$99.00</td>
+                                    <td><span class="status completed">Paid</span></td>
+                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
+                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
+                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <h2 class="section-title mb-20">Two-Factor Authentication</h2>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">SMS Authentication</div>
-                    <div style="color: var(--text-light);">Add your phone number to receive security codes via SMS</div>
-                </div>
-                <button class="btn" style="background-color: #f0f0f0;">Enable</button>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Authenticator App</div>
-                    <div style="color: var(--text-light);">Use an authenticator app to generate security codes</div>
-                </div>
-                <button class="btn" style="background-color: #f0f0f0;">Enable</button>
-            </div>
-
-            <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="notifications-tab" class="tab-content">
-        <div class="table-container">
-            <h2 class="section-title mb-20">Notification Preferences</h2>
-
-            <h3 style="margin-bottom: 15px; font-weight: 500;">Email Notifications</h3>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">New Orders</div>
-                    <div style="color: var(--text-light);">Receive notifications when new orders are placed</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Inquiries</div>
-                    <div style="color: var(--text-light);">Receive notifications for new inquiries</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Reviews</div>
-                    <div style="color: var(--text-light);">Receive notifications for new reviews</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Promotions</div>
-                    <div style="color: var(--text-light);">Receive promotional emails and offers</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <h3 style="margin-bottom: 15px; font-weight: 500;">Push Notifications</h3>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Order Updates</div>
-                    <div style="color: var(--text-light);">Receive push notifications for order status changes</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <div style="font-weight: 500; margin-bottom: 5px;">Important Alerts</div>
-                    <div style="color: var(--text-light);">Receive important system alerts and notifications</div>
-                </div>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="billing-tab" class="tab-content">
-        <div class="table-container">
-            <h2 class="section-title mb-20">Billing Information</h2>
-
-            <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">Card Number</label>
-                        <input type="text" class="form-control" value="•••• •••• •••• 4242">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Name on Card</label>
-                        <input type="text" class="form-control" value="John Doe">
-                    </div>
-                </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <div class="form-group">
-                        <label class="form-label">Expiration Date</label>
-                        <input type="text" class="form-control" value="12/25">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Security Code</label>
-                        <input type="text" class="form-control" placeholder="•••">
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="section-title mb-20">Billing History</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Invoice</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>15 Feb 2024</td>
-                        <td>Premium Subscription</td>
-                        <td>$99.00</td>
-                        <td><span class="status completed">Paid</span></td>
-                        <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                    </tr>
-                    <tr>
-                        <td>15 Jan 2024</td>
-                        <td>Premium Subscription</td>
-                        <td>$99.00</td>
-                        <td><span class="status completed">Paid</span></td>
-                        <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                    </tr>
-                    <tr>
-                        <td>15 Dec 2023</td>
-                        <td>Premium Subscription</td>
-                        <td>$99.00</td>
-                        <td><span class="status completed">Paid</span></td>
-                        <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>
         </div>
     </div>
 
@@ -3041,10 +3187,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="edit-details-btn">
-                     Edit
+                    Edit
                 </button>
                 <button type="button" class="btn btn-primary" id="confirm-submit-btn">
-                     Confirm & Submit
+                    Confirm & Submit
                 </button>
             </div>
         </div>
@@ -3074,7 +3220,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;" id="cancel-edit-template">Cancel</button>
+                <button type="button" class="btn" style="background-color: #f0f0f0;"
+                    id="cancel-edit-template">Cancel</button>
                 <button type="button" class="btn btn-primary" id="save-edited-template">Save Changes</button>
             </div>
         </div>
@@ -3106,7 +3253,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;" id="cancel-reply">Cancel</button>
+                <button type="button" class="btn" style="background-color: #f0f0f0;"
+                    id="cancel-reply">Cancel</button>
                 <button type="button" class="btn btn-primary" id="send-reply">Send Reply</button>
             </div>
         </div>
@@ -3148,7 +3296,8 @@
                 </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;" id="cancel-view-inquiry">Cancel</button>
+                <button type="button" class="btn" style="background-color: #f0f0f0;"
+                    id="cancel-view-inquiry">Cancel</button>
                 <button type="button" class="btn btn-primary" id="save-inquiry-btn">Save Changes</button>
             </div>
         </div>
@@ -3170,7 +3319,7 @@
                     <label class="form-label">SKU</label>
                     <input type="text" id="product-sku" class="form-control" required>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label class="form-label">Price</label>
                     <input type="number" id="product-price" class="form-control" step="0.01" required>
                 </div>
@@ -3188,7 +3337,8 @@
                     </select>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0;" onclick="closeModal('product-modal')">Cancel</button>
+                    <button type="button" class="btn" style="background-color: #f0f0f0;"
+                        onclick="closeModal('product-modal')">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save Product</button>
                 </div>
             </form>
@@ -3197,7 +3347,7 @@
 
     <!-- Service Modal -->
     <div class="modal" id="service-modal">
-         <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Add New Service</h2>
                 <button class="close-modal">&times;</button>
@@ -3209,14 +3359,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                   <textarea id="service-description" class="form-control" rows="4"></textarea>
+                    <textarea id="service-description" class="form-control" rows="4"></textarea>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label class="form-label">Price</label>
-                    <input type="text" id="service-price" class="form-control" placeholder="e.g., $1,500+ or 20% off" required>
+                    <input type="text" id="service-price" class="form-control"
+                        placeholder="e.g., $1,500+ or 20% off" required>
                 </div>
                 <div class="modal-footer">
-                     <button type="button" class="btn" style="background-color: #f0f0f0;" onclick="closeModal('service-modal')">Cancel</button>
+                    <button type="button" class="btn" style="background-color: #f0f0f0;"
+                        onclick="closeModal('service-modal')">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save Service</button>
                 </div>
             </form>
@@ -3224,36 +3376,39 @@
     </div>
 
     <!-- Reply Review Modal -->
-<div class="modal" id="reply-review-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 class="modal-title">Reply to Review</h2>
-            <button class="close-modal" onclick="closeModal('reply-review-modal')">&times;</button>
+    <div class="modal" id="reply-review-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Reply to Review</h2>
+                <button class="close-modal" onclick="closeModal('reply-review-modal')">&times;</button>
+            </div>
+            <form id="review-reply-form">
+                <div class="form-group">
+                    <label class="form-label">Reviewer</label>
+                    <input type="text" id="reviewer-name" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rating</label>
+                    <div id="review-rating" class="stars" style="text-align: left;"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Original Review</label>
+                    <textarea id="review-text" class="form-control" rows="4" readonly></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Your Response</label>
+                    <textarea id="review-response" class="form-control" rows="5"
+                        placeholder="Write your public response here..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" style="background-color: #f0f0f0;"
+                        onclick="closeModal('reply-review-modal')">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submit-review-response">Submit
+                        Response</button>
+                </div>
+            </form>
         </div>
-        <form id="review-reply-form">
-            <div class="form-group">
-                <label class="form-label">Reviewer</label>
-                <input type="text" id="reviewer-name" class="form-control" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Rating</label>
-                <div id="review-rating" class="stars" style="text-align: left;"></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Original Review</label>
-                <textarea id="review-text" class="form-control" rows="4" readonly></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Your Response</label>
-                <textarea id="review-response" class="form-control" rows="5" placeholder="Write your public response here..." required></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;" onclick="closeModal('reply-review-modal')">Cancel</button>
-                <button type="button" class="btn btn-primary" id="submit-review-response">Submit Response</button>
-            </div>
-        </form>
     </div>
-</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -3279,7 +3434,7 @@
             const menuToggle = document.querySelector('.menu-toggle');
 
             // Mobile menu toggle functionality
-            if(menuToggle && sidebar) {
+            if (menuToggle && sidebar) {
                 menuToggle.addEventListener('click', function() {
                     sidebar.classList.toggle('active');
                 });
@@ -3313,8 +3468,10 @@
 
             if (form) {
                 form.addEventListener('reset', function() {
-                    document.querySelectorAll('.input-control').forEach(input => input.classList.remove('input-error'));
-                    document.querySelectorAll('.error-message').forEach(error => error.style.display = 'none');
+                    document.querySelectorAll('.input-control').forEach(input => input.classList.remove(
+                        'input-error'));
+                    document.querySelectorAll('.error-message').forEach(error => error.style.display =
+                        'none');
                 });
 
                 form.addEventListener('submit', function(e) {
@@ -3358,7 +3515,8 @@
                         const masterType = typeInput.value;
                         const description = document.getElementById('description').value || 'N/A';
                         const parentNameSelect = document.getElementById('parentName');
-                        const parentName = parentNameSelect.value ? parentNameSelect.options[parentNameSelect.selectedIndex].text : 'N/A';
+                        const parentName = parentNameSelect.value ? parentNameSelect.options[
+                            parentNameSelect.selectedIndex].text : 'N/A';
                         const status = statusInput.value;
 
                         previewContentArea.innerHTML = `
@@ -3422,8 +3580,8 @@
             document.querySelectorAll('.close-modal').forEach(btn => {
                 btn.addEventListener('click', function() {
                     // Check if the specific preview modal button was clicked, as its listener is separate
-                    if(this.id !== 'close-preview-modal') {
-                       this.closest('.modal').style.display = 'none';
+                    if (this.id !== 'close-preview-modal') {
+                        this.closest('.modal').style.display = 'none';
                     }
                 });
             });
@@ -3464,23 +3622,30 @@
                     openModal('reply-inquiry-modal');
                 });
             });
-            document.querySelectorAll('.view-inquiry-btn').forEach(btn => btn.addEventListener('click', () => openModal('view-inquiry-modal')));
-			
-			// Added listeners for the inquiry modal cancel buttons
-            document.getElementById('cancel-reply')?.addEventListener('click', () => closeModal('reply-inquiry-modal'));
-            document.getElementById('cancel-view-inquiry')?.addEventListener('click', () => closeModal('view-inquiry-modal'));
+            document.querySelectorAll('.view-inquiry-btn').forEach(btn => btn.addEventListener('click', () =>
+                openModal('view-inquiry-modal')));
+
+            // Added listeners for the inquiry modal cancel buttons
+            document.getElementById('cancel-reply')?.addEventListener('click', () => closeModal(
+                'reply-inquiry-modal'));
+            document.getElementById('cancel-view-inquiry')?.addEventListener('click', () => closeModal(
+                'view-inquiry-modal'));
 
             // Reply Review Modals
             document.querySelectorAll('.reply-review-btn').forEach(btn => {
-                 btn.addEventListener('click', function() {
+                btn.addEventListener('click', function() {
                     const reviewItem = this.closest('.review-item');
-                    document.getElementById('reviewer-name').value = reviewItem.querySelector('.reviewer-name').textContent.split('-')[0].trim();
-                    document.getElementById('review-rating').textContent = reviewItem.querySelector('.stars').textContent.split(' ')[0];
-                    document.getElementById('review-text').value = reviewItem.querySelector('.review-text').textContent;
+                    document.getElementById('reviewer-name').value = reviewItem.querySelector(
+                        '.reviewer-name').textContent.split('-')[0].trim();
+                    document.getElementById('review-rating').textContent = reviewItem.querySelector(
+                        '.stars').textContent.split(' ')[0];
+                    document.getElementById('review-text').value = reviewItem.querySelector(
+                        '.review-text').textContent;
                     openModal('reply-review-modal');
                 });
             });
         });
     </script>
 </body>
+
 </html>
