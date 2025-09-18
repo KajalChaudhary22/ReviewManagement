@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Categories - SCIZORA</title>
-    
+
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -38,6 +39,7 @@
             background-color: var(--secondary-color);
             color: var(--text-dark-color);
             line-height: 1.6;
+            overflow-x: hidden; /* Prevents horizontal scrollbar */
         }
 
         .container {
@@ -53,6 +55,7 @@
 
         img {
             max-width: 100%;
+            height: auto; /* Ensures images scale proportionally */
         }
         
         /* ------------------------- */
@@ -74,10 +77,9 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
+        .logo img {
+            max-height: 35px; /* Control logo height */
+            width: auto;
         }
 
         .main-nav {
@@ -115,6 +117,7 @@
         .header-actions {
             display: flex;
             align-items: center;
+            gap: 15px; /* Add gap for spacing */
         }
         
         .profile-dropdown {
@@ -163,6 +166,7 @@
             cursor: pointer;
             border: none;
             background: none;
+            color: var(--text-dark-color);
         }
 
         /* ------------------------- */
@@ -171,11 +175,11 @@
         .hero-section {
             background-color: var(--accent-bg-color);
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px; /* Reduced padding for mobile */
         }
 
         .hero-section h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--primary-color);
             margin-bottom: 10px;
         }
@@ -220,7 +224,7 @@
         /* ---  4. CATEGORIES SECTION --- */
         /* ------------------------- */
         .categories-section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
         
         .filter-sort-controls {
@@ -266,11 +270,13 @@
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             background-color: var(--secondary-color);
+            width: 200px; /* Give a default width */
         }
         
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            /* Switched to a more robust responsive grid layout */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
@@ -288,7 +294,7 @@
         }
 
         .category-card:hover {
-            transform: translateY(-8px) scale(1.03);
+            transform: translateY(-8px);
             box-shadow: 0 8px 30px var(--shadow-hover-color);
         }
 
@@ -344,10 +350,11 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-        
+       
         .cta-banner h2 {
             font-size: 1.8rem;
             font-weight: 600;
+            flex-grow: 1; /* Allow text to take available space */
         }
         
         .cta-button {
@@ -357,6 +364,7 @@
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
+            flex-shrink: 0; /* Prevent button from shrinking */
         }
 
         .cta-button:hover {
@@ -364,48 +372,37 @@
             transform: scale(1.05);
         }
         
-        /* ------------------------- */
-        /* ---  6. FOOTER --- */
-        /* ------------------------- */
-        For rest of the pages just replace footer css code with this:
-/* Main Footer Container */
+        /* ======================= FOOTER STYLES ======================= */
         .scizora-main-footer {
-            background-color: #ffffff;
-            color: #111827;
-            padding: 2rem 0;
-            width: 100%;
-        }
-
-        .scizora-footer-inner-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            background-color: #111827;
+            color: #ffffff;
+            padding: 4rem 1rem;
         }
 
         .scizora-footer-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 2.5rem;
         }
 
-        .scizora-footer-column > * {
-            margin-bottom: 0.5rem;
-        }
-        .scizora-footer-column > *:last-child {
-            margin-bottom: 0;
+        .scizora-footer-column > *:not(:last-child) {
+            margin-bottom: 1rem;
         }
 
         .scizora-footer-heading, .scizora-footer-logo-heading {
             font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .scizora-footer-logo-heading img {
+           max-width: 150px; /* Control logo size in footer */
         }
 
         .scizora-footer-description {
-            color: #111827;
+            color: #9CA3AF;
             font-size: 0.875rem;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .scizora-footer-list {
@@ -414,33 +411,54 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 0.2rem;
+            gap: 0.5rem;
         }
 
         .scizora-footer-bottom {
             border-top: 1px solid #374151;
-            padding-top: 1rem;
-            margin-top: 1.5rem;
+            padding-top: 2rem;
+            margin-top: 2rem;
             text-align: center;
-            color: #0000FF;
+            color: #9CA3AF;
             font-size: 0.8rem;
         }
 
         .scizora-social-links { display: flex; gap: 1rem; }
-        .scizora-social-icon { color: #0000FF; transition: color 0.2s ease; }
-        .scizora-social-icon:hover { color: #111827; }
-        .scizora-footer-link { color: #0000FF; text-decoration: none; font-size: 0.875rem; }
-        .scizora-footer-link:hover { color: #111827; }
-        .scizora-newsletter-form { display: flex; }
-        .scizora-newsletter-input { background-color: #1F2937; color: #ffffff; padding: 6px 12px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%; font-size: 0.875rem; }
-        .scizora-newsletter-button { background-color: #2563EB; color: #ffffff; padding: 6px 12px; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .scizora-social-icon { color: #9CA3AF; font-size: 1.2rem; transition: color 0.2s ease; }
+        .scizora-social-icon:hover { color: #ffffff; }
+        .scizora-footer-link { color: #9CA3AF; text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; }
+        .scizora-footer-link:hover { color: #ffffff; }
+        
+        .scizora-newsletter-form { display: flex; max-width: 100%; }
+        .scizora-newsletter-input { 
+            background-color: #1F2937; 
+            color: #ffffff; 
+            padding: 8px 12px; 
+            border: 1px solid #374151; 
+            border-radius: 4px 0 0 4px; 
+            outline: none; 
+            width: 100%; 
+            font-size: 0.875rem; 
+        }
+        .scizora-newsletter-button { 
+            background-color: #2563EB; 
+            color: #ffffff; 
+            padding: 8px 12px; 
+            border: none; 
+            border-radius: 0 4px 4px 0; 
+            cursor: pointer; 
+            transition: background-color 0.2s ease;
+        }
         .scizora-newsletter-button:hover { background-color: #1D4ED8; }
 
-
+        /* ------------------------- */
+        /* ---  7. RESPONSIVENESS --- */
+        /* ------------------------- */
+        
+        /* Tablets and Laptops (up to 1024px) */
         @media (min-width: 768px) {
             .scizora-footer-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
             }
         }
         @media (min-width: 1024px) {
@@ -448,23 +466,28 @@
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-
-        /* ------------------------- */
-        /* ---  7. RESPONSIVENESS --- */
-        /* ------------------------- */
         
-        /* Tablets and below */
+        /* Tablets and below (up to 992px) */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 70px; /* Header height */
+                top: 100%; /* Position below header */
                 left: 0;
                 width: 100%;
                 background: var(--secondary-color);
-                padding: 20px;
+                padding: 10px 20px;
                 box-shadow: 0 10px 10px var(--shadow-color);
+                border-top: 1px solid #e0e0e0;
+                gap: 0;
+            }
+            .main-nav a {
+                padding: 12px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .main-nav a:last-child {
+                border-bottom: none;
             }
             .main-nav.active {
                 display: flex;
@@ -472,16 +495,14 @@
             .mobile-toggle {
                 display: block;
             }
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
             .hero-section h1 {
                 font-size: 2.5rem;
             }
+            /* .category-grid is handled by auto-fit */
         }
         
-        /* Mobile phones */
-        @media (max-width: 768px) {
+        /* Mobile phones (up to 767px) */
+        @media (max-width: 767px) {
             .filter-sort-controls {
                 flex-direction: column;
                 align-items: stretch;
@@ -492,29 +513,34 @@
             .sort-options select {
                 width: 100%;
             }
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
             .cta-banner .container {
                 flex-direction: column;
                 text-align: center;
             }
-            .footer-grid {
-                grid-template-columns: 1fr;
+             .scizora-footer-grid, .cta-banner .container {
                 text-align: center;
             }
-            .social-icons {
-                text-align: center;
+             .scizora-social-links {
+                justify-content: center;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
             }
         }
+
     </style>
 </head>
+
 <body>
 
     <!-- ======================= HEADER ======================= -->
     <header class="site-header">
         <div class="container">
-            <a href="index.html" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="150" height="50"></a>
+            <a href="index.html" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}"
+                    alt="logo" width="150" height="50"></a>
             <nav class="main-nav" id="mainNav">
                 <a href="{{ url('/') }}">Home</a>
                 <a href="{{ route('categories') }}" class="active">Categories</a>
@@ -592,118 +618,117 @@
 
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // ===================================
-        // --- 1. DATA FOR CATEGORIES ---
-        // ===================================
-        const categoryData = [
-            { 
-                id: 1, 
-                icon: 'fa-solid fa-pills', 
-                title: 'Pharmaceuticals', 
-                description: 'Active ingredients, excipients, and finished dosage forms for drug manufacturing.',
-                tags: ['pharma'],
-                popularity: 95,
-                dateAdded: '2023-10-15'
-            },
-            { 
-                id: 2, 
-                icon: 'fa-solid fa-microscope', 
-                title: 'Diagnostics & Testing', 
-                description: 'Reagents, kits, and instruments for clinical diagnostics and research testing.',
-                tags: ['diagnostics', 'lab'],
-                popularity: 92,
-                dateAdded: '2023-11-01'
-            },
-            { 
-                id: 3, 
-                icon: 'fa-solid fa-apple-whole', 
-                title: 'Food & Nutrition', 
-                description: 'Nutraceuticals, food additives, and specialty ingredients for the health industry.',
-                tags: ['nutrition'],
-                popularity: 80,
-                dateAdded: '2023-09-20'
-            },
-            { 
-                id: 4, 
-                icon: 'fa-solid fa-flask-vial', 
-                title: 'Lab Chemicals', 
-                description: 'High-purity solvents, reagents, and standards for analytical and research labs.',
-                tags: ['lab', 'pharma'],
-                popularity: 88,
-                dateAdded: '2024-01-10'
-            },
-            { 
-                id: 5, 
-                icon: 'fa-solid fa-dna', 
-                title: 'Biotechnology', 
-                description: 'Cell culture media, enzymes, and molecular biology tools for biotech innovation.',
-                tags: ['diagnostics', 'pharma'],
-                popularity: 90,
-                dateAdded: '2023-12-05'
-            },
-            { 
-                id: 6, 
-                icon: 'fa-solid fa-vials', 
-                title: 'Lab Consumables', 
-                description: 'Pipettes, vials, gloves, and other essential supplies for daily lab operations.',
-                tags: ['lab'],
-                popularity: 85,
-                dateAdded: '2023-08-11'
-            },
-            { 
-                id: 7, 
-                icon: 'fa-solid fa-truck-medical', 
-                title: 'Medical Devices', 
-                description: 'Surgical instruments, monitoring equipment, and therapeutic devices.',
-                tags: ['diagnostics'],
-                popularity: 75,
-                dateAdded: '2024-02-01'
-            },
-            { 
-                id: 8, 
-                icon: 'fa-solid fa-seedling', 
-                title: 'Agrochemicals', 
-                description: 'Specialty chemicals for crop protection, fertilizers, and agricultural research.',
-                tags: ['nutrition'],
-                popularity: 70,
-                dateAdded: '2023-11-25'
-            }
-        ];
+            // ===================================
+            // --- 1. DATA FOR CATEGORIES ---
+            // ===================================
+            const categoryData = [{
+                    id: 1,
+                    icon: 'fa-solid fa-pills',
+                    title: 'Pharmaceuticals',
+                    description: 'Active ingredients, excipients, and finished dosage forms for drug manufacturing.',
+                    tags: ['pharma'],
+                    popularity: 95,
+                    dateAdded: '2023-10-15'
+                },
+                {
+                    id: 2,
+                    icon: 'fa-solid fa-microscope',
+                    title: 'Diagnostics & Testing',
+                    description: 'Reagents, kits, and instruments for clinical diagnostics and research testing.',
+                    tags: ['diagnostics', 'lab'],
+                    popularity: 92,
+                    dateAdded: '2023-11-01'
+                },
+                {
+                    id: 3,
+                    icon: 'fa-solid fa-apple-whole',
+                    title: 'Food & Nutrition',
+                    description: 'Nutraceuticals, food additives, and specialty ingredients for the health industry.',
+                    tags: ['nutrition'],
+                    popularity: 80,
+                    dateAdded: '2023-09-20'
+                },
+                {
+                    id: 4,
+                    icon: 'fa-solid fa-flask-vial',
+                    title: 'Lab Chemicals',
+                    description: 'High-purity solvents, reagents, and standards for analytical and research labs.',
+                    tags: ['lab', 'pharma'],
+                    popularity: 88,
+                    dateAdded: '2024-01-10'
+                },
+                {
+                    id: 5,
+                    icon: 'fa-solid fa-dna',
+                    title: 'Biotechnology',
+                    description: 'Cell culture media, enzymes, and molecular biology tools for biotech innovation.',
+                    tags: ['diagnostics', 'pharma'],
+                    popularity: 90,
+                    dateAdded: '2023-12-05'
+                },
+                {
+                    id: 6,
+                    icon: 'fa-solid fa-vials',
+                    title: 'Lab Consumables',
+                    description: 'Pipettes, vials, gloves, and other essential supplies for daily lab operations.',
+                    tags: ['lab'],
+                    popularity: 85,
+                    dateAdded: '2023-08-11'
+                },
+                {
+                    id: 7,
+                    icon: 'fa-solid fa-truck-medical',
+                    title: 'Medical Devices',
+                    description: 'Surgical instruments, monitoring equipment, and therapeutic devices.',
+                    tags: ['diagnostics'],
+                    popularity: 75,
+                    dateAdded: '2024-02-01'
+                },
+                {
+                    id: 8,
+                    icon: 'fa-solid fa-seedling',
+                    title: 'Agrochemicals',
+                    description: 'Specialty chemicals for crop protection, fertilizers, and agricultural research.',
+                    tags: ['nutrition'],
+                    popularity: 70,
+                    dateAdded: '2023-11-25'
+                }
+            ];
 
-        let currentCategories = [...categoryData];
+            let currentCategories = [...categoryData];
 
-        // ===================================
-        // --- 2. DOM ELEMENT REFERENCES ---
-        // ===================================
-        const categoryGrid = document.getElementById('categoryGrid');
-        const searchInput = document.getElementById('categorySearch');
-        const sortSelect = document.getElementById('sortCategories');
-        const filterTagsContainer = document.getElementById('filterTags');
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mainNav = document.getElementById('mainNav');
-        const profileDropdown = document.getElementById('profileDropdown');
+            // ===================================
+            // --- 2. DOM ELEMENT REFERENCES ---
+            // ===================================
+            const categoryGrid = document.getElementById('categoryGrid');
+            const searchInput = document.getElementById('categorySearch');
+            const sortSelect = document.getElementById('sortCategories');
+            const filterTagsContainer = document.getElementById('filterTags');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mainNav = document.getElementById('mainNav');
+            const profileDropdown = document.getElementById('profileDropdown');
 
-        // ===================================
-        // --- 3. CORE FUNCTIONS ---
-        // ===================================
+            // ===================================
+            // --- 3. CORE FUNCTIONS ---
+            // ===================================
 
-        /**
-         * Renders the category cards into the grid
-         * @param {Array} categories - An array of category objects to display
-         */
-        const displayCategories = (categories) => {
-            categoryGrid.innerHTML = ''; // Clear existing grid
-            if (categories.length === 0) {
-                categoryGrid.innerHTML = '<p>No categories found matching your criteria.</p>';
-                return;
-            }
+            /**
+             * Renders the category cards into the grid
+             * @param {Array} categories - An array of category objects to display
+             */
+            const displayCategories = (categories) => {
+                categoryGrid.innerHTML = ''; // Clear existing grid
+                if (categories.length === 0) {
+                    categoryGrid.innerHTML = '<p>No categories found matching your criteria.</p>';
+                    return;
+                }
 
-            categories.forEach(category => {
-                const card = document.createElement('div');
-                card.className = 'category-card';
-                card.innerHTML = `
+                categories.forEach(category => {
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.innerHTML = `
                     <i class="card-icon ${category.icon}"></i>
                     <div>
                         <h3 class="card-title">${category.title}</h3>
@@ -711,94 +736,96 @@
                     </div>
                     <a href="#" class="card-button">View More</a>
                 `;
-                categoryGrid.appendChild(card);
+                    categoryGrid.appendChild(card);
+                });
+            };
+
+            /**
+             * Handles the filtering and sorting logic
+             */
+            const applyFiltersAndSort = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const sortBy = sortSelect.value;
+                const activeFilterTag = filterTagsContainer.querySelector('button.active').dataset.filter;
+
+                // 1. Filter by tag
+                let filtered = categoryData.filter(cat => {
+                    if (activeFilterTag === 'all') return true;
+                    return cat.tags.includes(activeFilterTag);
+                });
+
+                // 2. Filter by search term
+                filtered = filtered.filter(cat =>
+                    cat.title.toLowerCase().includes(searchTerm) ||
+                    cat.description.toLowerCase().includes(searchTerm)
+                );
+
+                // 3. Sort
+                switch (sortBy) {
+                    case 'alphabetical':
+                        filtered.sort((a, b) => a.title.localeCompare(b.title));
+                        break;
+                    case 'recent':
+                        filtered.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+                        break;
+                    case 'popular':
+                    default:
+                        filtered.sort((a, b) => b.popularity - a.popularity);
+                        break;
+                }
+
+                currentCategories = filtered;
+                displayCategories(currentCategories);
+            };
+
+            // ===================================
+            // --- 4. EVENT LISTENERS ---
+            // ===================================
+
+            // Search input listener
+            searchInput.addEventListener('input', applyFiltersAndSort);
+
+            // Sort select listener
+            sortSelect.addEventListener('change', applyFiltersAndSort);
+
+            // Filter tags listener (using event delegation)
+            filterTagsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    // Remove active class from all buttons
+                    filterTagsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove(
+                        'active'));
+                    // Add active class to the clicked button
+                    e.target.classList.add('active');
+                    applyFiltersAndSort();
+                }
             });
-        };
-        
-        /**
-         * Handles the filtering and sorting logic
-         */
-        const applyFiltersAndSort = () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            const sortBy = sortSelect.value;
-            const activeFilterTag = filterTagsContainer.querySelector('button.active').dataset.filter;
 
-            // 1. Filter by tag
-            let filtered = categoryData.filter(cat => {
-                if (activeFilterTag === 'all') return true;
-                return cat.tags.includes(activeFilterTag);
+            // Mobile navigation toggle
+            mobileToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
             });
-            
-            // 2. Filter by search term
-            filtered = filtered.filter(cat => 
-                cat.title.toLowerCase().includes(searchTerm) || 
-                cat.description.toLowerCase().includes(searchTerm)
-            );
 
-            // 3. Sort
-            switch (sortBy) {
-                case 'alphabetical':
-                    filtered.sort((a, b) => a.title.localeCompare(b.title));
-                    break;
-                case 'recent':
-                    filtered.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-                    break;
-                case 'popular':
-                default:
-                    filtered.sort((a, b) => b.popularity - a.popularity);
-                    break;
-            }
-            
-            currentCategories = filtered;
-            displayCategories(currentCategories);
-        };
+            // Profile dropdown toggle
+            profileDropdown.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevents the window click listener from firing immediately
+                profileDropdown.classList.toggle('active');
+            });
 
-        // ===================================
-        // --- 4. EVENT LISTENERS ---
-        // ===================================
+            // Close dropdown when clicking outside
+            window.addEventListener('click', () => {
+                if (profileDropdown.classList.contains('active')) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
 
-        // Search input listener
-        searchInput.addEventListener('input', applyFiltersAndSort);
+            // ===================================
+            // --- 5. INITIAL RENDER ---
+            // ===================================
+            applyFiltersAndSort();
 
-        // Sort select listener
-        sortSelect.addEventListener('change', applyFiltersAndSort);
-
-        // Filter tags listener (using event delegation)
-        filterTagsContainer.addEventListener('click', (e) => {
-            if (e.target.tagName === 'BUTTON') {
-                // Remove active class from all buttons
-                filterTagsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                // Add active class to the clicked button
-                e.target.classList.add('active');
-                applyFiltersAndSort();
-            }
         });
-
-        // Mobile navigation toggle
-        mobileToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-
-        // Profile dropdown toggle
-        profileDropdown.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevents the window click listener from firing immediately
-            profileDropdown.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking outside
-        window.addEventListener('click', () => {
-            if (profileDropdown.classList.contains('active')) {
-                profileDropdown.classList.remove('active');
-            }
-        });
-
-        // ===================================
-        // --- 5. INITIAL RENDER ---
-        // ===================================
-        applyFiltersAndSort();
-
-    });
     </script>
 
 </body>
+
 </html>

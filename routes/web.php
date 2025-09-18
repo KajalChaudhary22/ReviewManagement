@@ -33,6 +33,9 @@
     Route::get('/blogs', [WelcomeController::class, 'blogs'])->name('blogs');
     Route::get('/about-us', [WelcomeController::class, 'aboutUs'])->name('about.us');
     Route::get('/contact-us', [WelcomeController::class, 'contactUs'])->name('contact.us');
+    Route::get('/category-products', [WelcomeController::class, 'categoryProducts'])->name('category.products');
+    Route::get('/product', [WelcomeController::class, 'showProduct'])->name('show.product');
+
     Route::get('/admin/login', [AuthController::class, 'showAdminLogin'])->name('business.auth.show');
     Route::get('/business/login', [AuthController::class, 'showBusinessLogin'])->name('business.auth.show');
     Route::get('/customer/login', [AuthController::class, 'showCustomerLogin'])->name('customer.auth.show');

@@ -84,8 +84,23 @@
             <div class="categories-container" id="categoriesContainer" style="height: auto;">
                 <div
                     class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6 mb-8 md:mb-10 category-grid">
+                    @forelse ($productCategoies as $productCat)
+                    <a href="{{ route('category.products',['ty'=>custom_encrypt('CategoryProducts'),'id'=>custom_encrypt($productCat?->id)]) }}">
+                        <div
+                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
+                            <div
+                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
+                                {{-- <i class="fas fa-dna text-blue-600 text-xl sm:text-2xl"></i> --}}
+                                <img src="{{ asset($productCat?->images?->path) }}">
+                            </div>
+                            <h3 class="font-semibold text-sm sm:text-base">{{$productCat?->name}}</h3>
+                        </div>
+                    </a>
+                    @empty
+                        <p>No Categories Found</p>
+                    @endforelse
                     <!-- Life Sciences -->
-                    <a href="category.html">
+                     <a href="category.html">
                         <div
                             class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
                             <div
@@ -97,7 +112,7 @@
                     </a>
 
                     <!-- Drug Discovery & Development -->
-                    <a href="category.html">
+                    {{--<a href="category.html">
                         <div
                             class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
                             <div
@@ -232,16 +247,16 @@
                             </div>
                             <h3 class="font-semibold text-sm sm:text-base">Cannabis Testing</h3>
                         </div>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
-            <div class="text-center">
+            {{-- <div class="text-center">
                 <button id="toggleCategories"
                     class="border border-blue-600 text-blue-600 px-5 py-1.5 sm:px-6 sm:py-2 rounded-full hover:bg-blue-600 hover:text-white transition-all text-sm sm:text-base">
                     Browse All Categories
                 </button>
-            </div>
+            </div> --}}
         </div>
     </section>
 
