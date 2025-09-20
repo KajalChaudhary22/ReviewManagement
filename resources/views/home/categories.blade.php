@@ -537,14 +537,14 @@
 <body>
 
     <!-- ======================= HEADER ======================= -->
-    <header class="site-header">
+    {{-- <header class="site-header">
         <div class="container">
-            <a href="index.html" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}"
+            <a href="{{ url('/') }}" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}"
                     alt="logo" width="150" height="50"></a>
             <nav class="main-nav" id="mainNav">
                 <a href="{{ url('/') }}">Home</a>
                 <a href="{{ route('categories') }}" class="active">Categories</a>
-                <a href="{{ route('blogs') }}">Blog</a>
+                
                 <a href="{{ route('about.us') }}">About Us</a>
                 <a href="{{ route('contact.us') }}">Contact</a>
             </nav>
@@ -562,8 +562,8 @@
                 </button>
             </div>
         </div>
-    </header>
-    {{-- @include('home.header') --}}
+    </header> --}}
+    @include('home.header')
 
     <main>
         <!-- ======================= HERO SECTION ======================= -->

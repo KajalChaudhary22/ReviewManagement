@@ -9,8 +9,8 @@
             <a href="{{ url('/') }}" class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Home</a>
             <a href="{{ route('categories') }}"
                 class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Categories</a>
-            <a href="{{ route('blogs') }}"
-                class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Blog</a>
+            {{-- <a href="{{ route('blogs') }}"
+                class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">Blog</a> --}}
             <a href="{{ route('about.us') }}"
                 class="text-gray-700 hover:text-blue-600 transition-all text-sm lg:text-base">About Us</a>
             <a href="{{ route('contact.us') }}"

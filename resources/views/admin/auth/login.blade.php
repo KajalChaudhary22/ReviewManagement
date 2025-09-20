@@ -20,10 +20,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-users"></i> About Us</a></li>
-                    <li><a href="#"><i class="fas fa-cog"></i> Categories</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> Contact</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{{ route('about.us') }}"><i class="fas fa-users"></i> About Us</a></li>
+                    <li><a href="{{ route('categories') }}"><i class="fas fa-cog"></i> Categories</a></li>
+                    <li><a href="{{ route('contact.us') }}"><i class="fas fa-question-circle"></i> Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -105,11 +105,11 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Categories</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="{{ route('about.us') }}"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    {{-- <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li> --}}
+                    <li><a href="{{ route('categories') }}"><i class="fas fa-chevron-right"></i> Categories</a></li>
+                    <li><a href="{{ route('contact.us') }}"><i class="fas fa-chevron-right"></i> Contact</a></li>
                 </ul>
             </div>
 

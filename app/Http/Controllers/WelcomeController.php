@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\{
     MasterType,
     Masters,
-    Product
+    Product,
+    Review
 };
 
 class WelcomeController extends Controller
@@ -16,8 +17,9 @@ class WelcomeController extends Controller
     {
         $masterTypeId = MasterType::where('name','Product Category')->first()?->id;
         $productCategoies = Masters::where('master_type_id',$masterTypeId)->where('status','Active')->with('images')->get();
+        $latestReviews = Review::where('status','Active')->with(['productDetails','customerDetails'])->latest()->take(3)->get();
         // dd($productCategoies);
-        return view('home.welcome',compact('productCategoies'));
+        return view('home.welcome',compact('productCategoies','latestReviews'));
     }
     protected function categories()
     {
@@ -83,6 +85,14 @@ class WelcomeController extends Controller
             }
             return view('home.product_details',compact('productDetails'));
         }
+    }
+    protected function terms()
+    {
+        return view('home.terms');
+    }
+    protected function privacy()
+    {
+        return view('home.privacy');
     }
 
 }

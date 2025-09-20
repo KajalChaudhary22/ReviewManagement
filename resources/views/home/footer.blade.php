@@ -85,7 +85,7 @@
         <div class="scizora-footer-grid">
             <!-- Column 1: About -->
             <div class="scizora-footer-column">
-                <h3 class="scizora-footer-logo-heading"><a href="#"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="100"></a></h3>
+                <h3 class="scizora-footer-logo-heading"><a href="{{ url('/') }}"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="100"></a></h3>
                 <p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through verified reviews and ratings from real customers.</p>
                 <div class="scizora-social-links">
                     <a href="#" class="scizora-social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -99,11 +99,11 @@
             <div class="scizora-footer-column">
                 <h3 class="scizora-footer-heading">Quick Links</h3>
                 <ul class="scizora-footer-list">
-                    <li><a href="#" class="scizora-footer-link">Home</a></li>
-                    <li><a href="categories.html" class="scizora-footer-link">Categories</a></li>
-                    <li><a href="blog.html" class="scizora-footer-link">Blogs</a></li>
-                    <li><a href="aboutus.html" class="scizora-footer-link">About Us</a></li>
-                    <li><a href="contactus.html" class="scizora-footer-link">Contact Us</a></li>
+                    <li><a href="{{ url('/') }}" class="scizora-footer-link">Home</a></li>
+                    <li><a href="{{ route('categories') }}" class="scizora-footer-link">Categories</a></li>
+                    {{-- <li><a href="{{ route('about.us') }}" class="scizora-footer-link">Blogs</a></li> --}}
+                    <li><a href="{{ route('about.us') }}" class="scizora-footer-link">About Us</a></li>
+                    <li><a href="{{ route('contact.us') }}" class="scizora-footer-link">Contact Us</a></li>
                 </ul>
             </div>
             
@@ -111,8 +111,8 @@
             <div class="scizora-footer-column">
                 <h3 class="scizora-footer-heading">Legal</h3>
                 <ul class="scizora-footer-list">
-                    <li><a href="terms.html" class="scizora-footer-link">Terms of Service</a></li>
-                    <li><a href="privacy.html" class="scizora-footer-link">Privacy Policy</a></li>
+                    <li><a href="{{ route('show.termsCondition') }}" class="scizora-footer-link">Terms of Service</a></li>
+                    <li><a href="{{ route('show.privacyPolicy') }}" class="scizora-footer-link">Privacy Policy</a></li>
                 </ul>
             </div>
             
