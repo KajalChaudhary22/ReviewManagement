@@ -70,7 +70,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/business/{id}', [AdminDashboardController::class, 'viewBusiness']);
 
         //user Management Routes
-        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         Route::get('/users-list', [UserManagementController::class, 'usersList'])->name('users.list');
         Route::get('/user-view/{id}', [UserManagementController::class, 'userView'])->name('user.view');
         Route::put('/user-update/{id}', [UserManagementController::class, 'userUpdate'])->name('user.update');
@@ -79,7 +79,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/user-add', [UserManagementController::class, 'userAdd']);
 
         // Business Management Routes
-        Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
+        //Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
         Route::get('/business-list', [BusinessManagementController::class, 'businessList']);
         Route::get('/business-view/{id}', [BusinessManagementController::class, 'businessView'])->name('business.view');
         Route::put('/business-update/{id}', [BusinessManagementController::class, 'businessUpdate'])->name('business.update');
@@ -102,10 +102,10 @@ Route::prefix('admin')->group(function () {
 
 
 
-        Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
-        Route::get('/master-setup', [MasterSetupController::class, 'index'])->name('master.setup.index');
+        // Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
+        Route::post('/save-master', [MasterSetupController::class, 'save'])->name('master.setup.save');
 
-        Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
+        // Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
     });
 

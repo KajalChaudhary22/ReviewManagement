@@ -18,17 +18,7 @@ use App\Helpers\Helpers;
 
 class UserManagementController extends Controller
 {
-    public function index(Request $request)
-    {
-        // dd($request->all());
-        $routeUrl = custom_decrypt($request->ty);
-        if (!$routeUrl || $routeUrl !== 'UserManagement') {
-            // If the URL is not valid, redirect to a 404 page or handle the error as needed
-            abort(404);
-        }
-        
-        return view('admin.userManagement.index');
-    }
+    
     public function usersList(Request $request)
     {
         $query = Customer::with('userDetails:id,customer_id,status')->latest();

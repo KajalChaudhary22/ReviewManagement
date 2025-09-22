@@ -1,7 +1,7 @@
 <div class="table-container">
     <div class="table-header">
         <h2 class="section-title">Recent User Signups</h2>
-        <a href="users.html" class="action-link">View All</a>
+        <a href="{{ route('user.management.index',['ty'=>custom_encrypt('UserManagement')]) }}" class="action-link">View All</a>
     </div>
     <table id="usersTable" class="table">
         <thead>

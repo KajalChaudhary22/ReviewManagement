@@ -11,7 +11,7 @@
         Auth\ForgotPasswordController,
         WelcomeController,
         LoadPageController,
-        CustomerLoadPageController
+        CustomerLoadPageController,
     };
 
     /*
@@ -54,6 +54,9 @@
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        Route::get('/user-management', [LoadPageController::class, 'indexUserManagement'])->name('user.management.index');
+        Route::get('/business-management', [LoadPageController::class, 'indexBusinessManagement'])->name('business.management.index');
+        Route::get('/setting', [LoadPageController::class, 'indexSetting'])->name('admin.settings');
     });
     Route::middleware(['web', 'auth'])->prefix('customer')->group(function () {
         Route::get('/dashboard', [CustomerLoadPageController::class, 'dashboard'])->name('customer.dashboard.show');

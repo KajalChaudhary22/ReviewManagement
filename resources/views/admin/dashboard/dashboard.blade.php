@@ -40,7 +40,7 @@
                         <div class="table-container">
                             <div class="table-header">
                                 <h2 class="section-title">Latest Reviews</h2>
-                                <a href="reviews.html" class="action-link">View All</a>
+                                <a href="{{ route('review.moderation.index',['ty'=>custom_encrypt('ReviewModeration')]) }}" class="action-link">View All</a>
                             </div>
                             <div class="review-cards">
                                 <div class="review-card positive">

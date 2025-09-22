@@ -1,7 +1,7 @@
 <div class="table-container">
     <div class="table-header">
         <h2 class="section-title">Pending Business Approvals</h2>
-        <a href="business.html" class="action-link">View All</a>
+        <a href="{{ route('business.management.index',['ty'=>custom_encrypt('BusinessManagement')]) }}" class="action-link">View All</a>
     </div>
     <div class="approval-cards" id="pendingBusinessApprovals">
         @foreach ($pendingBusiness as $business)
