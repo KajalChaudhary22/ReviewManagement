@@ -22,6 +22,7 @@
     </div>
 </div>
 <script>
+    @include('admin.dashboard.modalJS')
     $(document).ready(function() {
         // APPROVAL ACTIONS
         // Approve / Reject
@@ -40,7 +41,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/api/admin/business-approval/${id}`,
+                        url: `/api/admin/a/${id}`,
                         type: 'POST',
                         data: {
                             status: status

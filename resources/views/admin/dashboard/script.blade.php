@@ -23,41 +23,7 @@
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
 
-        // --- Modal Functionality ---
-        const modals = document.querySelectorAll('.modal');
-        const modalCloseButtons = document.querySelectorAll(
-            '.modal-close, .btn-secondary[id^="cancel"], .btn-secondary[id^="close"]');
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        modalCloseButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modal = this.closest('.modal');
-                if (modal) closeModal(modal.id);
-            });
-        });
-
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal(this.id);
-                }
-            });
-        });
+        
 
         // --- Add New User/Business Modals ---
         document.querySelectorAll('#addNewUserBtn, #addUserBtn').forEach(button => {

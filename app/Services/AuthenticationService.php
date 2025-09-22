@@ -1,24 +1,25 @@
 <?php
 
 namespace App\Services;
-use Illuminate\Support\Facades\Auth;
+
+use App\Helpers\CodeGenerator;
 use App\Models\{
     Business,
-    User,
-    Customer
-};
+    Industry,
+    Location
+    };
 use Illuminate\Support\Facades\{
+    Auth,
+    DB,
     Hash,
-    Log,
-    DB
-};
-use App\Helpers\CodeGenerator;
+    Log
+    };
 
 class AuthenticationService
 {
     public function adminLogin(array $credentials)
     {
-        if (!Auth::guard('web')->attempt($credentials)) {
+        if (! Auth::guard('web')->attempt($credentials)) {
             throw new \Exception('Invalid credentials');
         }
 
@@ -30,19 +31,20 @@ class AuthenticationService
             throw new \Exception('Unauthorized user type');
         }
         // ✅ Check if status is 'active' (or 1, depending on your DB value)
-    if ($user->status !== 'Active') {
-        Auth::logout();
-        throw new \Exception('Your account is inactive. Please contact the administrator.');
-    }
+        if ($user->status !== 'Active') {
+            Auth::logout();
+            throw new \Exception('Your account is inactive. Please contact the administrator.');
+        }
 
         return [
             'token' => $user->createToken('admin_token')->plainTextToken,
-            'user' => $user
+            'user' => $user,
         ];
     }
+
     public function customerLogin(array $credentials)
     {
-        if (!Auth::guard('web')->attempt($credentials)) {
+        if (! Auth::guard('web')->attempt($credentials)) {
             throw new \Exception('Invalid credentials');
         }
 
@@ -53,20 +55,23 @@ class AuthenticationService
             Auth::logout();
             throw new \Exception('Unauthorized user type');
         }
-         // ✅ Check if status is 'active' (or 1, depending on your DB value)
+        // ✅ Check if status is 'active' (or 1, depending on your DB value)
         if ($user->status !== 'Active') {
             Auth::logout();
             throw new \Exception('Your account is inactive. Please contact the administrator.');
         }
+        $user->last_active = now();
+        $user->save();
 
         return [
             'token' => $user->createToken('customer_token')->plainTextToken,
-            'user' => $user
+            'user' => $user,
         ];
     }
+
     public function businessLogin(array $credentials)
     {
-        if (!Auth::guard('web')->attempt($credentials)) {
+        if (! Auth::guard('web')->attempt($credentials)) {
             throw new \Exception('Invalid credentials');
         }
 
@@ -77,40 +82,43 @@ class AuthenticationService
             Auth::logout();
             throw new \Exception('Unauthorized user type');
         }
-         // ✅ Check if status is 'active' (or 1, depending on your DB value)
+        // ✅ Check if status is 'active' (or 1, depending on your DB value)
         if ($user->status !== 'Active') {
             Auth::logout();
             throw new \Exception('Your account is inactive. Please contact the administrator.');
         }
+        $user->last_active = now();
+        $user->save();
 
         return [
             'token' => $user->createToken('business_token')->plainTextToken,
-            'user' => $user
+            'user' => $user,
         ];
     }
+
     public function businessRegistration($request)
     {
         DB::beginTransaction();
         try {
             $code = CodeGenerator::generate('businesses', 'code');
             $business = Business::create([
-                'name'           => $request->name,
-                'email'          => $request->email,
+                'name' => $request->name,
+                'email' => $request->email,
                 'contact_number' => $request->contact_number,
-                'master_id'      => $request->industry_id,
-                'status'         => 'Pending',
-                'location_id'         => $request->location_id,
-                'code'          => $code,
+                'master_id' => $request->industry_id,
+                'status' => 'Pending',
+                'location_id' => $request->location_id,
+                'code' => $code,
             ]);
             $userCode = CodeGenerator::generate('users', 'code');
             $user = User::create([
-                'name'         => $request->name,
-                'email'        => $request->email,
-                'password'     => Hash::make($request->password),
-                'type'         => 'Business',
-                'business_id'  => $business->id,
-                'status'       => 'Active',
-                'code'         => $userCode,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'type' => 'Business',
+                'business_id' => $business->id,
+                'status' => 'Active',
+                'code' => $userCode,
             ]);
             DB::commit();
 
@@ -145,19 +153,19 @@ class AuthenticationService
             // Create customer
             $code = \App\Helpers\CodeGenerator::generate('customers', 'code');
             $customer = Customer::create([
-                'name'  => $data['name'],
+                'name' => $data['name'],
                 'email' => $data['email'],
-                'code'  => $code,
+                'code' => $code,
                 'status' => 'Active',
             ]);
 
             // Create user
             $user = User::create([
-                'name'        => $data['name'],
-                'email'       => $data['email'],
-                'password'    => Hash::make($data['password']),
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
                 'customer_id' => $customer->id,
-                'type'        => 'Customer',
+                'type' => 'Customer',
                 'status' => 'Active',
             ]);
 
@@ -167,21 +175,21 @@ class AuthenticationService
             DB::commit();
 
             return [
-                'status'  => true,
+                'status' => true,
                 'message' => 'Customer registered successfully.',
-                'token'   => $token,
+                'token' => $token,
             ];
         } catch (Exception $e) {
             DB::rollBack();
 
-            Log::error('Customer registration failed: ' . $e->getMessage(), [
+            Log::error('Customer registration failed: '.$e->getMessage(), [
                 'data' => $data,
                 'line' => $e->getLine(),
                 'file' => $e->getFile(),
             ]);
 
             return [
-                'status'  => false,
+                'status' => false,
                 'message' => 'Registration failed. Please try again later.',
             ];
         }

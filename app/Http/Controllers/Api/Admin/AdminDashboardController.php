@@ -70,7 +70,7 @@ class AdminDashboardController extends Controller
             // ? round((($monthly_revenue - $revenue_last_month) / $revenue_last_month) * 100, 2)
             // : 0;
             // dd($total_users, $users_last_month,$users_change);
-            
+
             $compactData = compact('industries', 'customers', 'pendingBusiness', 'latestReviews', 'total_users', 'users_change',
                 'active_businesses', 'business_change', 'pending_reviews', 'reviews_change');
 
@@ -141,7 +141,14 @@ class AdminDashboardController extends Controller
 
             $business = Business::findOrFail(custom_decrypt($id));
             $business->status = $status;
-            // $business->approved_by = auth()->id();
+            if ($status == 'Reject') {
+                $user = $business->userDetails; // fetch the related user
+                if ($user) {
+                    $user->status = 'Rejected';
+                    $user->save();
+                }
+            }
+
             // $business->approved_at = now();
             $business->save();
 
@@ -153,6 +160,7 @@ class AdminDashboardController extends Controller
             ]);
 
         } catch (\Throwable $e) {
+            dd($e);
             DB::rollBack();
             Log::error('Business approval failed', [
                 'business_id' => $id,

@@ -50,6 +50,7 @@
     </table>
 </div>
 <script>
+    @include('admin.dashboard.modalJS')
     $(document).ready(function() {
         // STATUS CHANGE
         $('#usersTable').on('click', '.action-btn.status', function() {
@@ -145,28 +146,29 @@
             let id = $(this).data('id');
 
             $.get(`/api/admin/user-view/${id}`, function(user) {
+                console.log('Fetched User:', user);
                 // Fill Avatar
                 $('#userAvatar').text(user.name ? user.name.charAt(0) : 'U');
 
                 // Fill Basic Info
-                $('#userName').text(user.name || 'N/A');
-                $('#userEmail').text(user.email || 'N/A');
+                $('#customerName').text(user.name || 'N/A');
+                $('#customerEmail').text(user.email || 'N/A');
 
                 // Status badge
                 let statusClass = 'status-suspended';
-                if (user.status && user.status.toLowerCase() === 'active') statusClass =
+                if (user.status && user.status.toLowerCase() === 'Active') statusClass =
                     'status-active';
-                else if (user.status && user.status.toLowerCase() === 'pending') statusClass =
+                else if (user.status == 'Pending') statusClass =
                     'status-pending';
-                $('#userStatusBadge')
+                $('#customerStatusBadge')
                     .removeClass('status-active status-pending status-suspended')
                     .addClass(statusClass)
-                    .text(user.status || 'Unknown');
+                    .text(user.user_details.status || 'Unknown');
 
                 // Fill Other Details
-                $('#userPhone').text(user.contact_number || 'N/A');
-                $('#userType').text('Customer' || 'N/A');
-                $('#userRegistrationDate').text(
+                $('#customerPhone').text(user.contact_number || 'N/A');
+                $('#customerType').text('Customer' || 'N/A');
+                $('#customerRegistrationDate').text(
                     user.created_at ? new Date(user.created_at).toLocaleDateString(
                         'en-US', {
                             month: 'short',
@@ -174,8 +176,8 @@
                             year: 'numeric'
                         }) : 'N/A'
                 );
-                $('#userLastActive').text(
-                    user.last_active ? new Date(user.created_at).toLocaleDateString(
+                $('#customerLastActive').text(
+                    user.last_active ? new Date(user.user_details.last_active).toLocaleDateString(
                         'en-US', {
                             month: 'short',
                             day: 'numeric',
@@ -184,7 +186,8 @@
                 );
 
                 // Show modal
-                $('#detailsModal').fadeIn();
+                openModal('detailsModal');
+                // $('#detailsModal').fadeIn();
             }).fail(function() {
                 showAlert('error', 'Failed to fetch user details.');
             });
