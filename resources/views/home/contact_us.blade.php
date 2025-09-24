@@ -481,13 +481,14 @@
     }
 }
     </style>
+    @include('home.styles')
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
 
     <!-- Header -->
-    <header>
+    {{-- <header>
         <a href="index.html" class="logo"><img src="logo.jpg" alt="logo" width="150" height="50"></a>
         <nav class="nav-menu">
             <a href="index.html">Home</a>
@@ -511,7 +512,8 @@
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-    </header>
+    </header> --}}
+    @include('home.header')
 
     <!-- Hero Section -->
     <section class="hero">
@@ -654,7 +656,7 @@
     </section>
 
     <!-- Footer -->
-<footer class="scizora-main-footer">
+{{-- <footer class="scizora-main-footer">
     <div class="container scizora-footer-container">
         <!-- Footer Content Grid -->
         <div class="scizora-footer-grid">
@@ -709,7 +711,8 @@
             <p>&copy; 2025 SCIZORA. All rights reserved.</p>
         </div>
     </div>
-</footer>
+</footer> --}}
+@include('home.footer')
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

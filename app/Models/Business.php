@@ -21,11 +21,11 @@ class Business extends Authenticatable
     }
     public function masterType()
     {
-        return $this->belongsTo(MasterType::class, 'master_id');
+        return $this->belongsTo(Masters::class, 'master_id');
     }
     public function locationDetails()
     {
-        return $this->belongsTo(MasterType::class, 'location_id');
+        return $this->belongsTo(Masters::class, 'location_id');
     }
 
 }

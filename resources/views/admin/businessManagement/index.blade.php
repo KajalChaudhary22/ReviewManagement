@@ -87,6 +87,7 @@
                             <tr>
                                 <th>Business ID</th>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Category</th>
                                 <th>Location</th>
                                 <th>Status</th>
@@ -145,7 +146,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" id="businessPhone" name="contact_number">
+                        <input type="number" class="form-control" id="businessPhone" name="contact_number">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>

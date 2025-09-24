@@ -1,16 +1,7 @@
 <script>
-    function openModal(id) {
-        $(`#${id}`).fadeIn();
-    }
-
-    function closeModal(id) {
-        $(`#${id}`).fadeOut();
-    }
-
-    $(document).on('click', '[data-close]', function () {
-        closeModal($(this).data('close'));
-    });
+    @include('admin.dashboard.modalJS')
     $(document).ready(function () {
+        let defaultPageLength = {{ $adminPreferences->results_per_page ?? 10 }};
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,6 +19,7 @@
                     d.search_input = $('#businessSearch').val();
                 }
             },
+            pageLength: defaultPageLength,
             columns: [{
                 data: 'code',
                 name: 'code'
@@ -39,6 +31,10 @@
             {
                 data: 'email',
                 name: 'email'
+            },
+            {
+                data: 'industry',
+                name: 'industry'
             },
             {
                 data: 'contact_number',
@@ -257,7 +253,9 @@
         // Open "Add Business" modal
         $('#addBusinessBtn').on('click', function () {
             $('#businessForm')[0].reset();
-            $('#addBusinessModal').show();
+            // Show modal
+            openModal('addBusinessModal');
+            // $('#addBusinessModal').show();
         });
     });
 </script>

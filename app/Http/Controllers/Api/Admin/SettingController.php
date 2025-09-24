@@ -9,30 +9,7 @@ use App\Models\AdminPreference;
 
 class SettingController extends Controller
 {
-    protected function index(Request $request)
-    {
-        try {
-            $routeUrl = custom_decrypt($request->ty);
-
-            if (!$routeUrl || $routeUrl !== 'Settings') {
-                Log::warning('Invalid route access in Settings@index', [
-                    'encrypted' => $request->ty,
-                    'decrypted' => $routeUrl
-                ]);
-                abort(404);
-            }
-            $adminPreferences = AdminPreference::find(1);
-
-            return view('admin.setting.index',compact('adminPreferences'));
-
-        } catch (Exception $e) {
-            Log::error('Error loading review moderation page', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-            return response()->view('errors.500', [], 500);
-        }
-    }
+    
     public function save(Request $request)
     {
         // dd($request->all());

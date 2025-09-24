@@ -11,7 +11,7 @@
         Auth\ForgotPasswordController,
         WelcomeController,
         LoadPageController,
-        CustomerLoadPageController
+        CustomerLoadPageController,
     };
 
     /*
@@ -35,6 +35,8 @@
     Route::get('/contact-us', [WelcomeController::class, 'contactUs'])->name('contact.us');
     Route::get('/category-products', [WelcomeController::class, 'categoryProducts'])->name('category.products');
     Route::get('/product', [WelcomeController::class, 'showProduct'])->name('show.product');
+    Route::get('/terms', [WelcomeController::class, 'terms'])->name('show.termsCondition');
+    Route::get('/privacy', [WelcomeController::class, 'privacy'])->name('show.privacyPolicy');
 
     Route::get('/admin/login', [AuthController::class, 'showAdminLogin'])->name('business.auth.show');
     Route::get('/business/login', [AuthController::class, 'showBusinessLogin'])->name('business.auth.show');
@@ -52,6 +54,9 @@
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+        Route::get('/user-management', [LoadPageController::class, 'indexUserManagement'])->name('user.management.index');
+        Route::get('/business-management', [LoadPageController::class, 'indexBusinessManagement'])->name('business.management.index');
+        Route::get('/setting', [LoadPageController::class, 'indexSetting'])->name('admin.settings');
     });
     Route::middleware(['web', 'auth'])->prefix('customer')->group(function () {
         Route::get('/dashboard', [CustomerLoadPageController::class, 'dashboard'])->name('customer.dashboard.show');

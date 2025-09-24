@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\{
     MasterType,
     Business,
-    User
+    User,
+    Customer
 };
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\{
@@ -16,30 +17,17 @@ use Illuminate\Support\Facades\{
     Log
 };
 use App\Helpers\Helpers;
+use App\Services\AdminCommonService;
 
 class BusinessManagementController extends Controller
 {
-    public function index(Request $request)
+    protected $adminCommonService;
+
+    public function __construct(AdminCommonService $adminCommonService)
     {
-        $routeUrl = custom_decrypt($request->ty);
-        if (!$routeUrl || $routeUrl !== 'BusinessManagement') {
-            // If the URL is not valid, redirect to a 404 page or handle the error as needed
-            abort(404);
-        }
-        $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Industries')->first();
-        $locationMastertypId = MasterType::with('getActiveMasterData')->where('name', 'Location')->first();
-        if ($mastertypId) {
-            $industries = $mastertypId?->getActiveMasterData;
-        } else {
-            $industries = collect();
-        }
-        if ($locationMastertypId) {
-            $locations = $locationMastertypId?->getActiveMasterData;
-        } else {
-            $locations = collect();
-        }
-        return view('admin.businessManagement.index', compact('industries', 'locations'));
+        $this->adminCommonService = $adminCommonService;
     }
+    
     public function businessList(Request $request)
     {
         $query = Business::with(['userDetails:id,business_id,status', 'locationDetails:id,name', 'masterType:id,name'])->latest();
@@ -68,7 +56,7 @@ class BusinessManagementController extends Controller
         // dd($query->get());
         return DataTables::of($query)
             ->addColumn('status_badge', function ($row) {
-                return Helpers::showStatus($row->userDetails?->status);
+                return $this->adminCommonService->showStatus($row->userDetails?->status);
             })
             ->addColumn('industry', function ($row) {
                 return $row->masterType?->name;
@@ -183,8 +171,8 @@ class BusinessManagementController extends Controller
                 ], 400);
             }
 
-            $code = \App\Helpers\CodeGenerator::generate( 'customers', 'code');
-            $customer = Customer::create([
+            $code = \App\Helpers\CodeGenerator::generate('businesses', 'code');
+            $business = Business::create([
                 'code' => $code,
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -221,6 +209,7 @@ class BusinessManagementController extends Controller
                 'errors' => $e->errors()
             ], 422);
         } catch (\Throwable $e) {
+            dd($e->getMessage());
             DB::rollBack();
 
             // Store error in laravel.log with stack trace

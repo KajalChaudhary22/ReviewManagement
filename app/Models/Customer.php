@@ -10,13 +10,18 @@ use Laravel\Sanctum\HasApiTokens;
 class Customer extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-     protected $table = 'customers';
 
-    
+    protected $table = 'customers';
+
     protected $guarded = [];
 
     public function userDetails()
     {
-        return $this->hasOne(User::class,'customer_id');
+        return $this->hasOne(User::class, 'customer_id');
+    }
+
+    public function customerType()
+    {
+        return $this->belongsTo(Masters::class, 'industrialType_id');
     }
 }

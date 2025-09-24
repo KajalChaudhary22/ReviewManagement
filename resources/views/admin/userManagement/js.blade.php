@@ -11,6 +11,7 @@
         closeModal($(this).data('close'));
     });
     $(document).ready(function() {
+        let defaultPageLength = {{ $adminPreferences->results_per_page ?? 10 }};
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,6 +29,7 @@
                     d.search_input = $('#userSearch').val();
                 }
             },
+            pageLength: defaultPageLength,
             columns: [{
                     data: 'code',
                     name: 'code'

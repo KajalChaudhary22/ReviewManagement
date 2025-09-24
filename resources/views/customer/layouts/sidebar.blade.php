@@ -20,13 +20,13 @@
                     <span>My Profile</span>
                 </a>
             </li>
-            <li class="mb-2">
+            {{-- <li class="mb-2">
                 <a href="Messages.html"
                     class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-gray-100">
                     <i class="fas fa-envelope mr-3"></i>
                     <span>Messages</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="mb-2">
                 <a href="{{ route('customer.show.notifications',['ty'=>custom_encrypt('CustomerNotificationsShow')]) }}"
                     class="flex items-center p-3 rounded-lg {{ Route::is('customer.show.notifications') ? 'text-blue-600 font-medium bg-blue-50' : 'text-gray-700 hover:bg-gray-100' }}">
@@ -44,8 +44,8 @@
         </ul>
     </nav>
     <!-- Ad Banner -->
-    <div class="container mx-auto px-4 py-6">
+    {{-- <div class="container mx-auto px-4 py-6">
         <img src="https://tpc.googlesyndication.com/simgad/13265185988757716340" alt="Advertisement"
             class="w-full h-auto mx-auto">
-    </div>
+    </div> --}}
 </div>

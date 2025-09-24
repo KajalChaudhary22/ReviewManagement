@@ -528,11 +528,12 @@
             }
         }
     </style>
+    @include('home.styles')
 </head>
 
 <body>
 
-    <header>
+    {{-- <header>
         <div class="container">
             <a href="#" class="text-xl md:text-2xl font-bold"><img src="logo.jpg" alt="logo" width="150"
                     height="50"></a>
@@ -557,7 +558,8 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> --}}
+    @include('home.header')
 
     <section class="hero">
         <div class="container">
@@ -691,7 +693,7 @@
     </section>
 
     
-    <footer class="scizora-footer">
+    {{-- <footer class="scizora-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
@@ -760,7 +762,8 @@
                 <p>&copy; 2025 SCIZORA. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </footer> --}}
+    @include('home.footer')
 
     <script>
         // Scroll Animation
