@@ -9,7 +9,8 @@ use App\Models\{
     SavedBusiness,
     Review,
     Customer,
-    Notifications
+    Notifications,
+    Customer_setting
 };
 use Illuminate\Support\Facades\Auth;
 
@@ -73,7 +74,10 @@ class CustomerLoadPageController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         }else{
-            return view('customer.settings.settings');
+             $user = Auth::user();
+             $notificationPreference = Customer_setting::where('user_id', $user?->id)->first();
+            //  dd($notificationPreference);
+            return view('customer.settings.settings',compact('user','notificationPreference'));
         }
     }
     protected function clearNotifications(Request $request)
