@@ -170,9 +170,14 @@ Route::prefix('customer')->group(function () {
 
 
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
+        
+        Route::get('/settings', [CustomerSettingController::class, 'index'])->name('customer.settings');
+        Route::post('/update-email', [CustomerSettingController::class, 'updateEmail'])->name('customer.updateEmail');
+        Route::post('/update-password', [CustomerSettingController::class, 'updatePassword'])->name('customer.updatePassword');
+        Route::post('/update-notifications', [CustomerSettingController::class, 'updateNotifications'])->name('customer.updateNotifications');
 
 
-
+        
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
 
 

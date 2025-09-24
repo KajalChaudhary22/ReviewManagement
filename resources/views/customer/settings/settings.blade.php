@@ -213,7 +213,7 @@
 <body class="bg-gray-100 font-sans">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar Navigation -->
-       @include('customer.layouts.sidebar')
+        @include('customer.layouts.sidebar')
 
         <!-- Main Content Area -->
         <div class="flex-1 overflow-auto">
@@ -232,29 +232,34 @@
                         <div class="p-6 border-b border-gray-200">
                             <h3 class="text-lg font-bold mb-4">Account Settings</h3>
                             <div class="space-y-4">
-                                <div>
+                                <form id="update-email-form">
                                     <label class="block text-gray-700 mb-1">Email Address</label>
                                     <div class="flex">
-                                        <input type="email" value="john.smith@example.com"
+                                        <input type="email" name="email" value="{{ $user->email }}"
                                             class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg">
+                                        <button type="submit"
+                                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg">
                                             Update
                                         </button>
                                     </div>
-                                </div>
+                                </form>
+
                                 <div>
-                                    <label class="block text-gray-700 mb-1">Change Password</label>
-                                    <div class="space-y-2">
-                                        <input type="password" placeholder="Current Password"
-                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <input type="password" placeholder="New Password"
-                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <input type="password" placeholder="Confirm New Password"
-                                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                                            Change Password
-                                        </button>
-                                    </div>
+                                    <form id="update-password-form" class="mt-6">
+                                        <label class="block text-gray-700 mb-1">Change Password</label>
+                                        <div class="space-y-2">
+                                            <input type="password" name="current_password" placeholder="Current Password"
+                                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <input type="password" name="new_password" placeholder="New Password"
+                                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <input type="password" name="new_password_confirmation" placeholder="Confirm New Password"
+                                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <button
+                                                type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                                Change Password
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -269,27 +274,18 @@
                                         <p class="text-sm text-gray-600">Receive updates via email</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" id="email-notifications"
-                                            class="notification-toggle sr-only peer" checked>
+                                        <input
+                                            type="checkbox"
+                                            id="email-notifications"
+                                            class="notification-toggle sr-only peer"
+                                            {{$notificationPreference && $notificationPreference->email_notifications ? 'checked' : '' }}>
+
                                         <div
                                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
                                         </div>
                                     </label>
                                 </div>
-                                
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium">Message Notifications</h4>
-                                        <p class="text-sm text-gray-600">Get alerts for new messages</p>
-                                    </div>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" id="message-notifications"
-                                            class="notification-toggle sr-only peer" checked>
-                                        <div
-                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
-                                        </div>
-                                    </label>
-                                </div>
+
                             </div>
                         </div>
 
@@ -407,8 +403,9 @@
         </div>
     </div>
 
+    @include('customer.settings.js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
 
             // Hamburger menu for mobile
@@ -416,12 +413,12 @@
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.querySelector('.overlay');
 
-            hamburger.addEventListener('click', function() {
+            hamburger.addEventListener('click', function () {
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('open');
             });
 
-            overlay.addEventListener('click', function() {
+            overlay.addEventListener('click', function () {
                 sidebar.classList.remove('open');
                 this.classList.remove('open');
             });
@@ -429,7 +426,7 @@
             // Notification toggle functionality
             const toggleSwitches = document.querySelectorAll('.notification-toggle');
             toggleSwitches.forEach(toggle => {
-                toggle.addEventListener('change', function() {
+                toggle.addEventListener('change', function () {
                     const isChecked = this.checked;
                     // You would typically save this preference to a database here
                     console.log(`Toggle ${this.id} is now ${isChecked ? 'on' : 'off'}`);
@@ -453,7 +450,7 @@
             const businessModal = document.getElementById('businessModal');
 
             quickViewButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     document.getElementById('modalBusinessTitle').textContent = this.getAttribute(
                         'data-title');
                     document.getElementById('modalBusinessType').textContent = this.getAttribute(
@@ -472,7 +469,7 @@
             const inquiryModal = document.getElementById('inquiryModal');
 
             viewDetailsButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     document.getElementById('modalInquiryTitle').textContent = this.getAttribute(
                         'data-title');
                     document.getElementById('modalInquiryDate').textContent = this.getAttribute(
@@ -502,7 +499,7 @@
             const closeModalButtons = document.querySelectorAll('.close-modal');
 
             closeModalButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     businessModal.style.display = 'none';
                     inquiryModal.style.display = 'none';
                     deleteAccountModal.style.display = 'none';
@@ -510,7 +507,7 @@
             });
 
             // Close modal when clicking outside
-            window.addEventListener('click', function(e) {
+            window.addEventListener('click', function (e) {
                 if (e.target === businessModal) {
                     businessModal.style.display = 'none';
                 }
@@ -523,21 +520,21 @@
             });
 
             // View All Buttons Functionality
-            document.getElementById('viewAllBusinesses').addEventListener('click', function() {
+            document.getElementById('viewAllBusinesses').addEventListener('click', function () {
                 const additionalContent = document.getElementById('additionalBusinesses');
                 additionalContent.classList.toggle('visible');
                 this.textContent = additionalContent.classList.contains('visible') ? 'View Less' :
                     'View All';
             });
 
-            document.getElementById('viewAllInquiries').addEventListener('click', function() {
+            document.getElementById('viewAllInquiries').addEventListener('click', function () {
                 const additionalContent = document.getElementById('additionalInquiries');
                 additionalContent.classList.toggle('visible');
                 this.textContent = additionalContent.classList.contains('visible') ? 'View Less' :
                     'View All';
             });
 
-            document.getElementById('viewAllReviews').addEventListener('click', function() {
+            document.getElementById('viewAllReviews').addEventListener('click', function () {
                 const additionalContent = document.getElementById('additionalReviews');
                 additionalContent.classList.toggle('visible');
                 this.textContent = additionalContent.classList.contains('visible') ? 'View Less' :
@@ -550,7 +547,7 @@
             const messageContainer = document.getElementById('messageContainer');
 
             sendMessageBtn.addEventListener('click', sendMessage);
-            messageInput.addEventListener('keypress', function(e) {
+            messageInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     sendMessage();
                 }
@@ -625,7 +622,7 @@
             // Conversation switching
             const conversationItems = document.querySelectorAll('.conversation-item');
             conversationItems.forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     // Remove active class from all conversations
                     conversationItems.forEach(conv => {
                         conv.classList.remove('bg-blue-50');
@@ -654,74 +651,74 @@
                 // For demo purposes, we'll just show some sample messages
                 const conversations = {
                     '1': [{
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-                            text: 'Hello Dr. Smith, thank you for your inquiry about our new oncology drugs. How can we assist you today?',
-                            time: '9:15 AM'
-                        },
-                        {
-                            sender: 'me',
-                            avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-                            text: "I'm interested in learning more about your XZ-450 drug for our clinical trials. Can you send me the trial data and pricing information?",
-                            time: '9:20 AM'
-                        },
-                        {
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-                            text: 'Certainly! I\'ve attached the Phase II trial data and our pricing sheet. Let me know if you need any additional information.',
-                            time: '9:25 AM'
-                        }
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+                        text: 'Hello Dr. Smith, thank you for your inquiry about our new oncology drugs. How can we assist you today?',
+                        time: '9:15 AM'
+                    },
+                    {
+                        sender: 'me',
+                        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+                        text: "I'm interested in learning more about your XZ-450 drug for our clinical trials. Can you send me the trial data and pricing information?",
+                        time: '9:20 AM'
+                    },
+                    {
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+                        text: 'Certainly! I\'ve attached the Phase II trial data and our pricing sheet. Let me know if you need any additional information.',
+                        time: '9:25 AM'
+                    }
                     ],
                     '2': [{
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-                            text: 'Hello Dr. Smith, your order #12345 has been shipped and will arrive on June 20th.',
-                            time: '10:30 AM'
-                        },
-                        {
-                            sender: 'me',
-                            avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-                            text: 'Thank you for the update. Could you provide the tracking number?',
-                            time: '10:35 AM'
-                        },
-                        {
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-                            text: 'Of course! The tracking number is GPS123456789. You can track it on our website.',
-                            time: '10:38 AM'
-                        }
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
+                        text: 'Hello Dr. Smith, your order #12345 has been shipped and will arrive on June 20th.',
+                        time: '10:30 AM'
+                    },
+                    {
+                        sender: 'me',
+                        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+                        text: 'Thank you for the update. Could you provide the tracking number?',
+                        time: '10:35 AM'
+                    },
+                    {
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
+                        text: 'Of course! The tracking number is GPS123456789. You can track it on our website.',
+                        time: '10:38 AM'
+                    }
                     ],
                     '3': [{
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/women/33.jpg',
-                            text: 'Thank you for your recent review of our clinical trial services and research facilities.',
-                            time: '2:15 PM'
-                        },
-                        {
-                            sender: 'me',
-                            avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-                            text: 'You\'re welcome. Your team did an excellent job on the recent study. I especially appreciated Dr. Johnson\'s attention to detail.',
-                            time: '2:30 PM'
-                        },
-                        {
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/women/33.jpg',
-                            text: 'We appreciate your feedback! Would you be interested in collaborating on our upcoming pancreatic cancer study?',
-                            time: '3:45 PM'
-                        }
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/women/33.jpg',
+                        text: 'Thank you for your recent review of our clinical trial services and research facilities.',
+                        time: '2:15 PM'
+                    },
+                    {
+                        sender: 'me',
+                        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+                        text: 'You\'re welcome. Your team did an excellent job on the recent study. I especially appreciated Dr. Johnson\'s attention to detail.',
+                        time: '2:30 PM'
+                    },
+                    {
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/women/33.jpg',
+                        text: 'We appreciate your feedback! Would you be interested in collaborating on our upcoming pancreatic cancer study?',
+                        time: '3:45 PM'
+                    }
                     ],
                     '4': [{
-                            sender: 'them',
-                            avatar: 'https://randomuser.me/api/portraits/men/55.jpg',
-                            text: 'Your recent order has been processed and is ready for pickup at our warehouse.',
-                            time: '11:05 AM'
-                        },
-                        {
-                            sender: 'me',
-                            avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-                            text: 'Great! What are your warehouse hours this week?',
-                            time: '11:15 AM'
-                        }
+                        sender: 'them',
+                        avatar: 'https://randomuser.me/api/portraits/men/55.jpg',
+                        text: 'Your recent order has been processed and is ready for pickup at our warehouse.',
+                        time: '11:05 AM'
+                    },
+                    {
+                        sender: 'me',
+                        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+                        text: 'Great! What are your warehouse hours this week?',
+                        time: '11:15 AM'
+                    }
                     ],
                     '5': [{
                         sender: 'them',
@@ -767,7 +764,7 @@
             }
 
             // Load more conversations
-            document.getElementById('loadMoreConversations').addEventListener('click', function() {
+            document.getElementById('loadMoreConversations').addEventListener('click', function () {
                 const additionalConversations = document.querySelectorAll('.additional-conversation');
                 additionalConversations.forEach(conv => {
                     conv.style.display = 'flex';
@@ -776,7 +773,7 @@
             });
 
             // Notification functionality
-            document.getElementById('clearAllNotifications').addEventListener('click', function() {
+            document.getElementById('clearAllNotifications').addEventListener('click', function () {
                 const notificationItems = document.querySelectorAll('.notification-item');
                 notificationItems.forEach(item => {
                     item.remove();
@@ -784,14 +781,14 @@
             });
 
             document.querySelectorAll('.remove-notification').forEach(button => {
-                button.addEventListener('click', function(e) {
+                button.addEventListener('click', function (e) {
                     e.stopPropagation();
                     this.closest('.notification-item').remove();
                 });
             });
 
             // Load more notifications
-            document.getElementById('loadMoreNotifications').addEventListener('click', function() {
+            document.getElementById('loadMoreNotifications').addEventListener('click', function () {
                 const additionalNotifications = document.querySelectorAll('.additional-notification');
                 additionalNotifications.forEach(notif => {
                     notif.style.display = 'flex';
@@ -805,15 +802,15 @@
             const confirmDelete = document.getElementById('confirmDelete');
             const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
-            deleteAccountBtn.addEventListener('click', function() {
+            deleteAccountBtn.addEventListener('click', function () {
                 deleteAccountModal.style.display = 'flex';
             });
 
-            confirmDelete.addEventListener('change', function() {
+            confirmDelete.addEventListener('change', function () {
                 confirmDeleteBtn.disabled = !this.checked;
             });
 
-            confirmDeleteBtn.addEventListener('click', function() {
+            confirmDeleteBtn.addEventListener('click', function () {
                 if (confirmDelete.checked) {
                     alert(
                         'Account deletion requested. In a real application, this would delete your account.');
