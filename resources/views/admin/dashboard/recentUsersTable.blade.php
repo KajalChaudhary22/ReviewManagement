@@ -1,7 +1,9 @@
 <div class="table-container">
     <div class="table-header">
         <h2 class="section-title">Recent User Signups</h2>
-        <a href="{{ route('user.management.index',['ty'=>custom_encrypt('UserManagement')]) }}" class="action-link">View All</a>
+        <a href="{{ route('user.management.index', ['ty' => custom_encrypt('UserManagement')]) }}"
+            class="action-link">View
+            All</a>
     </div>
     <table id="usersTable" class="table">
         <thead>
@@ -79,7 +81,7 @@
                                 // ✅ Update row instantly
                                 let row = $(
                                     `#usersTable .action-btn.status[data-id="${id}"]`
-                                    ).closest('tr');
+                                ).closest('tr');
 
                                 // Update status badge
                                 let statusBadge = '';
@@ -147,8 +149,9 @@
 
             $.get(`/api/admin/user-view/${id}`, function(user) {
                 console.log('Fetched User:', user);
+
                 // Fill Avatar
-                $('#userAvatar').text(user.name ? user.name.charAt(0) : 'U');
+                $('#userAvatar').text(user.name ? user.name.charAt(0).toUpperCase() : 'U');
 
                 // Fill Basic Info
                 $('#customerName').text(user.name || 'N/A');
@@ -156,41 +159,49 @@
 
                 // Status badge
                 let statusClass = 'status-suspended';
-                if (user.status && user.status.toLowerCase() === 'Active') statusClass =
-                    'status-active';
-                else if (user.status == 'Pending') statusClass =
-                    'status-pending';
+                if (user?.status?.toLowerCase() === 'active') {
+                    statusClass = 'status-active';
+                } else if (user?.status?.toLowerCase() === 'pending') {
+                    statusClass = 'status-pending';
+                }
+
                 $('#customerStatusBadge')
                     .removeClass('status-active status-pending status-suspended')
                     .addClass(statusClass)
-                    .text(user.user_details.status || 'Unknown');
+                    .text(user.status || 'Unknown');
 
                 // Fill Other Details
                 $('#customerPhone').text(user.contact_number || 'N/A');
-                $('#customerType').text('Customer' || 'N/A');
+                $('#customerType').text(user.customer_type || 'Customer');
+
+                // Registration Date
                 $('#customerRegistrationDate').text(
-                    user.created_at ? new Date(user.created_at).toLocaleDateString(
-                        'en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                        }) : 'N/A'
+                    user.created_at ?
+                    new Date(user.created_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                    }) :
+                    'N/A'
                 );
+
+                // Last Active
                 $('#customerLastActive').text(
-                    user.last_active ? new Date(user.user_details.last_active).toLocaleDateString(
-                        'en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                        }) : 'Unknown'
+                    user.last_active ?
+                    new Date(user.last_active).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                    }) :
+                    'NA'
                 );
 
                 // Show modal
                 openModal('detailsModal');
-                // $('#detailsModal').fadeIn();
             }).fail(function() {
                 showAlert('error', 'Failed to fetch user details.');
             });
         });
+
     });
 </script>

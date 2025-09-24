@@ -1884,28 +1884,28 @@
                                 <p>Configure master settings for your SCIZORA platform. All fields marked with * are
                                     required.</p>
                             </div>
-                            <button id="view-records-btn" class="btn btn-primary" style="padding: 12px 24px;">View
-                                All Records</button>
+                            <a href="{{ route('admin.master.setup',['ty'=>custom_encrypt('MasterSetup')]) }}"><button id="" class="btn btn-primary" style="padding: 12px 24px;">View
+                                All Records</button></a>
                         </div>
 
                         <div class="form-card">
-                            <form id="masterSetupForm">
+                            <form id="masterSetupForm" action="{{ route('master.setup.save') }}" method="POST" >
+                                @csrf
                                 <div class="form-row">
                                     <div class="form-group half-width">
                                         <label for="name" class="required">Name</label>
                                         <input type="text" id="name" class="input-control"
-                                            placeholder="Enter master name">
+                                            placeholder="Enter master name" required name="name">
                                         <div class="error-message" id="name-error">Please enter a valid name</div>
                                     </div>
 
                                     <div class="form-group half-width">
                                         <label for="masterType" class="required">Master Type</label>
-                                        <select id="masterType" class="input-control">
+                                        <select id="masterType" class="input-control" required name="masterType">
                                             <option value="" disabled selected>Select master type</option>
-                                            <option value="typeA">Type A</option>
-                                            <option value="typeB">Type B</option>
-                                            <option value="typeC">Type C</option>
-                                            <option value="typeD">Type D</option>
+                                            @foreach ($masterTypes as $masterType)
+                                                <option value="{{ $masterType->id }}">{{ $masterType->name }}</option>                                                
+                                            @endforeach
                                         </select>
                                         <div class="error-message" id="type-error">Please select a master type</div>
                                     </div>
@@ -1913,18 +1913,15 @@
 
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea id="description" class="input-control" placeholder="Enter detailed description..."></textarea>
+                                    <textarea id="description" name="description" class="input-control" placeholder="Enter detailed description..."></textarea>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group half-width">
                                         <label for="parentName">Parent Name</label>
-                                        <select id="parentName" class="input-control">
+                                        <select id="parentName" class="input-control" disabled name="parentName">
                                             <option value="" disabled selected>Select parent</option>
-                                            <option value="parent1">Parent 1</option>
-                                            <option value="parent2">Parent 2</option>
-                                            <option value="parent3">Parent 3</option>
-                                            <option value="parent4">Parent 4</option>
+                                            
                                         </select>
                                     </div>
 
@@ -1932,8 +1929,8 @@
                                         <label for="status" class="required">Status</label>
                                         <select id="status" class="input-control">
                                             <option value="" disabled selected>Select status</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
                                         </select>
                                         <div class="error-message" id="status-error">Please select a status</div>
                                     </div>

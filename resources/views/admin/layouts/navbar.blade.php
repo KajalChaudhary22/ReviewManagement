@@ -47,7 +47,7 @@
                     });
                     // remove token and redirect
                     localStorage.removeItem('token');
-                    window.location.href = '/';
+                    window.location.href = '/admin/login';
                 } else {
                     Swal.fire('Error', response.message, 'error');
                 }

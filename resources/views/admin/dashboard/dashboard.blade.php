@@ -284,6 +284,57 @@
         </div>
     </div>
 </div>
+<div class="modal" id="BusinessdetailsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" id="detailsModalTitle">Business Details</h2>
+            <button class="modal-close">×</button>
+        </div>
+        <div class="modal-body">
+            <!-- Avatar + Basic Info -->
+            <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
+                <div id="businessAvatar"
+                     style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-color);
+                            display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; flex-shrink: 0;">
+                    U
+                </div>
+                <div>
+                    <h3 id="businessViewName" style="margin-bottom: 5px; color: var(--black);">N/A</h3>
+                    <p id="businessEmail" style="color: var(--text-light); margin-bottom: 5px;">N/A</p>
+                    <span id="businessStatusBadge" class="status-badge status-suspended">Unknown</span>
+                </div>
+            </div>
+
+            <!-- Other Details Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Phone</p>
+                    <p id="businessPhone" style="font-weight: 500;">N/A</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Business Type</p>
+                    <p id="businessType" style="font-weight: 500;">N/A</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Location</p>
+                    <p id="businessLocation" style="font-weight: 500;">N/A</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Registration Date</p>
+                    <p id="businessRegistrationDate" style="font-weight: 500;">N/A</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Last Active</p>
+                    <p id="businessLastActive" style="font-weight: 500;">Unknown</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="closeDetails">Close</button>
+        </div>
+    </div>
+</div>
+
 
 
    @include('admin.dashboard.script')

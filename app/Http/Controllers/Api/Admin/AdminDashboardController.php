@@ -160,7 +160,7 @@ class AdminDashboardController extends Controller
             ]);
 
         } catch (\Throwable $e) {
-            dd($e);
+            // dd($e);
             DB::rollBack();
             Log::error('Business approval failed', [
                 'business_id' => $id,
@@ -178,13 +178,20 @@ class AdminDashboardController extends Controller
     public function viewBusiness($id)
     {
         try {
-            $business = Business::with(['locationDetails', 'masterType'])
+            $business = Business::with(['locationDetails', 'masterType','userDetails'])
                 ->findOrFail(custom_decrypt($id));
 
-            return response()->json([
-                'success' => true,
-                'data' => $business,
-            ]);
+                return response()->json([
+                    'id' => $business?->id,
+                    'name' => $business?->name,
+                    'email' => $business?->email,
+                    'contact_number' => $business?->contact_number,
+                    'status' => $business?->userDetails?->status,
+                    'last_active' => $business?->last_active,
+                    'business_type' => $business?->masterType?->name ?? null,
+                    'location' => $business?->locationDetails?->name ?? null,
+                    'created_at' => $business?->created_at,
+                ]);
         } catch (\Throwable $e) {
             Log::error('View business failed', ['business_id' => $id, 'error' => $e->getMessage()]);
 

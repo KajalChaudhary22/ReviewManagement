@@ -59,8 +59,17 @@ class UserManagementController extends Controller
     public function userView($id)
     {
         $id = custom_decrypt($id); // Decrypt before use
-        $user = Customer::with('userDetails')->findOrFail($id);
-        return response()->json($user);
+        $user = Customer::with('userDetails:customer_id,status,last_active','customerType:id,name')->findOrFail($id);
+        return response()->json([
+            'id' => $user?->id,
+            'name' => $user?->name,
+            'email' => $user?->email,
+            'contact_number' => $user?->contact_number,
+            'status' => $user?->userDetails?->status ?? null,
+            'last_active' => $user?->userDetails?->last_active ?? null,
+            // 'customer_type' => $user?->customerType?->name ?? null,
+            'created_at' => $user?->created_at,
+        ]);
     }
     public function userUpdate(Request $request, $encryptedId)
     {
