@@ -91,4 +91,15 @@ class LoadPageController extends Controller
         }
         return view('admin.businessManagement.index', compact('industries', 'locations'));
     }
+    protected function emailTemplate(Request $request)
+    {
+        $routeUrl = custom_decrypt($request->ty);
+        if (!$routeUrl || $routeUrl !== 'EmailTemplates') {
+            // If the URL is not valid, redirect to a 404 page or handle the error as needed
+            abort(404);
+        }else{
+            return view('admin.email_template.index');
+        }
+        
+    }
 }

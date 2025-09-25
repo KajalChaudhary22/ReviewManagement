@@ -28,6 +28,10 @@
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
         </a> --}}
+        <a href="{{ route('admin.email.templates',['ty'=>custom_encrypt('EmailTemplates')]) }}" class="menu-item {{ Route::is('admin.master.setup') ? 'active' : '' }}">
+            <i class="icon">📢</i>
+            <span class="menu-text">Email Templates</span>
+        </a> 
         <a href="{{ route('admin.master.setup',['ty'=>custom_encrypt('MasterSetup')]) }}" class="menu-item {{ Route::is('admin.master.setup') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Master Setup</span>
