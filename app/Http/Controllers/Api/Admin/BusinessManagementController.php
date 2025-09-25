@@ -86,7 +86,7 @@ class BusinessManagementController extends Controller
             DB::beginTransaction();
 
             $business = Business::with('userDetails')->findOrFail($id);
-
+            dd($business, $request->all(),$id);
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'category' => 'required|integer|exists:categories,id',
@@ -128,6 +128,7 @@ class BusinessManagementController extends Controller
                 'errors' => $e->errors()
             ], 422);
         } catch (\Throwable $e) {
+            dd($e->getMessage());
             DB::rollBack();
 
             Log::error('Business Update Error: ' . $e->getMessage(), [

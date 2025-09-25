@@ -81,7 +81,8 @@
     </main>
 
     <!-- Footer -->
-    @include('business.auth.footer')
+    {{-- @include('business.auth.footer') --}}
+    @include('home.footer')
     @include('layouts.commonjs')
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script>

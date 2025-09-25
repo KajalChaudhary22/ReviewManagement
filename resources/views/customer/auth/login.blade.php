@@ -68,8 +68,8 @@
                             <i class="fas fa-shield-alt"></i>
                             <span>ISO 27001 Certified Security</span>
                         </div>
-                        <p class="terms">By continuing, you agree to our <a href="#">Terms of Service</a> and <a
-                                href="#">Privacy Policy</a>.</p>
+                        <p class="terms">By continuing, you agree to our <a href="{{ route('show.termsCondition') }}">Terms of Service</a> and <a
+                                href="{{ route('show.privacyPolicy') }}">Privacy Policy</a>.</p>
                     </div>
                     <!-- Ad Banner -->
                     <div style="padding: 24px 0; text-align: center;">
@@ -84,7 +84,8 @@
         </section>
     </div>
 
-    @include('customer.auth.js')
+    {{-- @include('customer.auth.js') --}}
+    @include('home.footer')
     @include('layouts.commonjs')
     <script>
         document.addEventListener('DOMContentLoaded', function () {

@@ -173,7 +173,7 @@
                 <button class="modal-close">×</button>
             </div>
             <div class="modal-body">
-                <form id="businessEditForm">
+                <form id="editBusinessForm">
                     <div class="form-group">
                         <label class="form-label">Business Name</label>
                         <input type="text" class="form-control" id="businessEditName" name="name" required>
@@ -213,7 +213,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="cancelBusiness">Cancel</button>
-                <button class="btn btn-primary" id="saveBusiness">Save Business</button>
+                <button class="btn btn-primary" id="updateBusiness">Update Business</button>
             </div>
         </div>
     </div>

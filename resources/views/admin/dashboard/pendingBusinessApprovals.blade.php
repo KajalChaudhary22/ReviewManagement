@@ -41,7 +41,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/api/admin/a/${id}`,
+                        url: `/api/admin/business-approval/${id}`,
                         type: 'POST',
                         data: {
                             status: status

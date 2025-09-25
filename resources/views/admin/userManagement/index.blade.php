@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" id="userPhone" name="contact_number">
+                        <input type="number" class="form-control" id="userPhone" name="contact_number">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" name="phone">
+                        <input type="number" class="form-control" name="phone">
                     </div>
                 </form>
             </div>
@@ -174,14 +174,14 @@
 
                 <!-- USER INFO HEADER -->
                 <div id="userInfoHeader" style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px;">
-                    <div id="userAvatar"
+                    <div id="userViewAvatar"
                         style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; flex-shrink: 0;">
                         U
                     </div>
                     <div>
-                        <h3 id="userName" style="margin-bottom: 5px; color: var(--black);">User Name</h3>
-                        <p id="userEmail" style="color: var(--text-light); margin-bottom: 5px;">user@email.com</p>
-                        <span id="userStatusBadge" class="status-badge status-active">Active</span>
+                        <h3 id="userViewName" style="margin-bottom: 5px; color: var(--black);">User Name</h3>
+                        <p id="userViewEmail" style="color: var(--text-light); margin-bottom: 5px;">user@email.com</p>
+                        <span id="userViewStatusBadge" class="status-badge status-active">Active</span>
                     </div>
                 </div>
 
@@ -190,20 +190,20 @@
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Phone</p>
-                        <p id="userPhone" style="font-weight: 500;">N/A</p>
+                        <p id="userViewPhone" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">User Type</p>
-                        <p id="userType" style="font-weight: 500;">N/A</p>
+                        <p id="userViewType" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Registration Date
                         </p>
-                        <p id="userRegistrationDate" style="font-weight: 500;">N/A</p>
+                        <p id="userViewRegistrationDate" style="font-weight: 500;">N/A</p>
                     </div>
                     <div>
                         <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px;">Last Active</p>
-                        <p id="userLastActive" style="font-weight: 500;">N/A</p>
+                        <p id="userViewLastActive" style="font-weight: 500;">N/A</p>
                     </div>
                 </div>
 
