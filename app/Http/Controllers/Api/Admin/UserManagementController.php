@@ -82,7 +82,7 @@ class UserManagementController extends Controller
 
             $validated = $request->validate([
                 'name'  => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email,' . ($customer->userDetails->id ?? 'NULL'),
+                'email' => 'required|email',
                 'phone' => 'nullable|string|max:20',
             ]);
 

@@ -12,7 +12,7 @@
 
 <body>
     <!-- Header -->
-    <header>
+    {{-- <header>
         <div class="header-content">
             <div class="logo">
 
@@ -27,7 +27,7 @@
                 </ul>
             </nav>
         </div>
-    </header>
+    </header> --}}
 
     <!-- Main Content -->
     <main>
@@ -73,28 +73,14 @@
 
                     <button type="submit" class="login-btn">LOGIN</button>
 
-                    <div class="divider">
-                        <span>OR CONTINUE WITH</span>
-                    </div>
-
-                    <div class="social-login">
-                        <div class="social-btn google-btn" id="googleLogin">
-                            <i class="fab fa-google"></i>
-                        </div>
-                        <div class="social-btn microsoft-btn" id="microsoftLogin">
-                            <i class="fab fa-microsoft"></i>
-                        </div>
-                        <div class="social-btn apple-btn" id="appleLogin">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                    </div>
+                    
                 </form>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer>
+    {{-- <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About SCIZORA</h3>
@@ -107,7 +93,6 @@
                 <ul class="footer-links">
                     <li><a href="{{ url('/') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
                     <li><a href="{{ route('about.us') }}"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    {{-- <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li> --}}
                     <li><a href="{{ route('categories') }}"><i class="fas fa-chevron-right"></i> Categories</a></li>
                     <li><a href="{{ route('contact.us') }}"><i class="fas fa-chevron-right"></i> Contact</a></li>
                 </ul>
@@ -135,7 +120,8 @@
         <div class="copyright">
             &copy; 2025 SCIZORA. All rights reserved.
         </div>
-    </footer>
+    </footer> --}}
+    {{-- @include('home.footer') --}}
 
     
 

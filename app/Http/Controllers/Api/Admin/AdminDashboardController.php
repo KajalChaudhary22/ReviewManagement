@@ -138,18 +138,20 @@ class AdminDashboardController extends Controller
 
         try {
             DB::beginTransaction();
-
             $business = Business::findOrFail(custom_decrypt($id));
-            $business->status = $status;
-            if ($status == 'Reject') {
-                $user = $business->userDetails; // fetch the related user
-                if ($user) {
+            
+            $user = $business->userDetails;
+            if ($user) {
+                if ($status == 'Reject') {
                     $user->status = 'Rejected';
-                    $user->save();
+                    $business->status = 'Rejected';
+                } elseif ($status == 'Approved') {
+                    $user->status = 'Active';
+                    $business->status = 'Active';
                 }
+            
+                $user->save();
             }
-
-            // $business->approved_at = now();
             $business->save();
 
             DB::commit();

@@ -1,15 +1,7 @@
 <script>
-    function openModal(id) {
-        $(`#${id}`).fadeIn();
-    }
+    @include('admin.layouts.modalJS')
 
-    function closeModal(id) {
-        $(`#${id}`).fadeOut();
-    }
 
-    $(document).on('click', '[data-close]', function() {
-        closeModal($(this).data('close'));
-    });
     $(document).ready(function() {
         let defaultPageLength = {{ $adminPreferences->results_per_page ?? 10 }};
         $.ajaxSetup({
@@ -68,49 +60,55 @@
             let id = $(this).data('id');
 
             $.get(`/api/admin/user-view/${id}`, function(user) {
+                // Fallbacks in case nested fields exist
+                const status = user.user_details?.status ?? user.status ?? 'Unknown';
+                const lastActive = user.user_details?.last_active ?? user.last_active ?? null;
+
                 // Fill Avatar
-                $('#userAvatar').text(user.name ? user.name.charAt(0) : 'U');
+                $('#userViewAvatar').text(user.name ? user.name.charAt(0).toUpperCase() : 'U');
 
                 // Fill Basic Info
-                $('#userName').text(user.name || 'N/A');
-                $('#userEmail').text(user.email || 'N/A');
+                $('#userViewName').text(user.name || 'N/A');
+                $('#userViewEmail').text(user.email || 'N/A');
 
                 // Status badge
                 let statusClass = 'status-suspended';
-                if (user.status && user.status.toLowerCase() === 'active') statusClass =
-                    'status-active';
-                else if (user.status && user.status.toLowerCase() === 'pending') statusClass =
-                    'status-pending';
-                $('#userStatusBadge')
+                if (status.toLowerCase() === 'active') statusClass = 'status-active';
+                else if (status.toLowerCase() === 'pending') statusClass = 'status-pending';
+
+                $('#userViewStatusBadge')
                     .removeClass('status-active status-pending status-suspended')
                     .addClass(statusClass)
-                    .text(user.status || 'Unknown');
+                    .text(status);
 
                 // Fill Other Details
-                $('#userPhone').text(user.contact_number || 'N/A');
-                $('#userType').text(user.type || 'N/A');
-                $('#userRegistrationDate').text(
-                    user.created_at ? new Date(user.created_at).toLocaleDateString(
-                        'en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                        }) : 'N/A'
+                $('#userViewPhone').text(user.contact_number || 'N/A');
+                $('#userViewType').text(user.type || 'N/A');
+                $('#userViewRegistrationDate').text(
+                    user.created_at ?
+                    new Date(user.created_at).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    }) :
+                    'N/A'
                 );
-                $('#userLastActive').text(
-                    user.last_active ? new Date(user.last_active).toLocaleDateString(
-                        'en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                        }) : 'Unknown'
+                $('#userViewLastActive').text(
+                    lastActive ?
+                    new Date(lastActive).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    }) :
+                    'NA'
                 );
 
                 // Show modal
-                $('#detailsModal').fadeIn();
+                openModal('detailsModal');
             }).fail(function() {
                 showAlert('error', 'Failed to fetch user details.');
             });
+
         });
 
 
@@ -125,7 +123,7 @@
                 success: function(res) {
                     if (res.success) {
                         showAlert('success', res.message);
-                        $('#addUserModal').hide();
+                        closeModal('addUserModal');
                         $('#userForm')[0].reset();
                         table.ajax.reload();
                     } else {
@@ -256,8 +254,7 @@
 
         // Open "Add User" modal
         $('#addUserBtn').on('click', function() {
-            // $('#userForm')[0].reset();
-            $('#addUserModal').show();
+            openModal('addUserModal');
         });
     });
 </script>
