@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Subscriber;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
@@ -49,5 +50,21 @@ class HomeController extends Controller
                 'message' => 'Failed to save message: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    public function subscribeStore(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:subscribers,email',
+        ]);
+
+        Subscriber::create([
+            'email' => $request->email,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Thank you for subscribing!',
+        ]);
     }
 }

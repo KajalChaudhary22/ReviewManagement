@@ -187,6 +187,8 @@ Route::prefix('customer')->group(function () {
 
 
 Route::post('/contact/store', [ApiHomeController::class, 'store']);
+Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
+
 // Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);

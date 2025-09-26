@@ -1,5 +1,6 @@
 @include('layouts.commonjs')
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+{{--
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script>
     // Mobile menu toggle
     // document.getElementById('mobile-menu-button').addEventListener('click', function () {
@@ -168,6 +169,37 @@
                         text: "Server error occurred!"
                     });
                     console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#subscribeForm").on("submit", function (e) {
+            e.preventDefault();
+
+            let formData = $(this).serialize();
+
+            $.ajax({
+                url: "/api/contact/subscribe",
+                method: "POST",
+                data: formData,
+                success: function (data) {
+                    if (data.status === "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Subscribed",
+                            text: data.message
+                        });
+                        $("#subscribeForm")[0].reset();
+                    }
+                },
+                error: function (xhr) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: xhr.responseJSON?.message || "Something went wrong!"
+                    });
                 }
             });
         });
