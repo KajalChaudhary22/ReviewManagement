@@ -98,7 +98,8 @@ class LoadPageController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         }else{
-            return view('admin.email_template.index');
+            $adminPreferences = AdminPreference::find(1);
+            return view('admin.email_template.index',compact('adminPreferences'));
         }
         
     }
