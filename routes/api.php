@@ -39,11 +39,10 @@ use App\Http\Controllers\Api\Customer\{
     CustomerReviewsController,
     CustomerSettingController
 };
-
-
+use App\Http\Controllers\HomeController;
 use App\Models\Business;
 use App\Models\Product;
-
+use App\Http\Controllers\Api\HomeController as ApiHomeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -119,7 +118,7 @@ Route::prefix('business')->group(function () {
         Route::get('/dashboard', [BusinessDashboardController::class, 'dashboard'])->name('business.dashboard.show');
         Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
         Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
-        
+
 
 
         // Product Routes
@@ -170,14 +169,14 @@ Route::prefix('customer')->group(function () {
 
 
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
-        
+
         Route::get('/settings', [CustomerSettingController::class, 'index'])->name('customer.settings');
         Route::post('/update-email', [CustomerSettingController::class, 'updateEmail'])->name('customer.updateEmail');
         Route::post('/update-password', [CustomerSettingController::class, 'updatePassword'])->name('customer.updatePassword');
         Route::post('/update-notifications', [CustomerSettingController::class, 'updateNotifications'])->name('customer.updateNotifications');
 
 
-        
+
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
 
 
@@ -185,6 +184,13 @@ Route::prefix('customer')->group(function () {
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
     });
 });
+
+
+Route::post('/contact/store', [ApiHomeController::class, 'store']);
+Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
+
+// Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');
+
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password/{token}', [ResetPasswordController::class, 'reset']);
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
