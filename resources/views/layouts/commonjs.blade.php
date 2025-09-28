@@ -1,4 +1,3 @@
-
 <!-- Load your custom SweetAlert wrapper -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {{-- <script src="/build/js/alerts.js"></script> --}}
@@ -14,3 +13,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 
+<script>
+    function showAlert(type, message) {
+        Swal.fire({
+            icon: type,
+            title: type === 'success' ? 'Success' : 'Error',
+            text: message,
+            confirmButtonText: 'OK'
+        });
+    }
+</script>

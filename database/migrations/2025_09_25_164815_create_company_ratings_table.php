@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('business_id');
             $table->unsignedBigInteger('customer_id');
             $table->string('name');
-            $table->string(column: 'email')->nullable();
+            $table->string('email')->nullable();
             $table->integer('rating');
             $table->text('review_title');
             $table->text('review_content');
