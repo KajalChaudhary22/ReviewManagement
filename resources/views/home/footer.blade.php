@@ -4,15 +4,14 @@
             <!-- About SCIZORA -->
             <div>
                 <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4"><a href="#"
-                        class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200"
-                            height="300"></a></h3>
+                        class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo"
+                            width="200" height="300"></a></h3>
                 <p class="text-gray-400 mb-3 md:mb-4 text-sm sm:text-base">SCIZORA helps consumers find trustworthy
                     businesses through verified reviews and ratings from real customers.</p>
                 <div class="flex space-x-3 md:space-x-4">
                     <a href="#" class="text-gray-400 hover:text-white transition-all"><i
                             class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-all"><i
-                            class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="text-gray-400 hover:text-white transition-all"><i
                             class="fab fa-instagram"></i></a>
                     <a href="#" class="text-gray-400 hover:text-white transition-all"><i
@@ -24,8 +23,7 @@
             <div>
                 <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">Quick Links</h3>
                 <ul class="space-y-1 md:space-y-2">
-                    <li><a href="#"
-                            class="text-gray-400 hover:text-white transition-all text-sm sm:text-base">Home</a>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition-all text-sm sm:text-base">Home</a>
                     </li>
                     <li><a href="categories.html"
                             class="text-gray-400 hover:text-white transition-all text-sm sm:text-base">Categories</a>
@@ -85,8 +83,10 @@
         <div class="scizora-footer-grid">
             <!-- Column 1: About -->
             <div class="scizora-footer-column">
-                <h3 class="scizora-footer-logo-heading"><a href="{{ url('/') }}"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="100"></a></h3>
-                <p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through verified reviews and ratings from real customers.</p>
+                <h3 class="scizora-footer-logo-heading"><a href="{{ url('/') }}"><img
+                            src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="100"></a></h3>
+                <p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through
+                    verified reviews and ratings from real customers.</p>
                 <div class="scizora-social-links">
                     <a href="#" class="scizora-social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="scizora-social-icon"><i class="fab fa-twitter"></i></a>
@@ -94,7 +94,7 @@
                     <a href="#" class="scizora-social-icon"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            
+
             <!-- Column 2: Quick Links -->
             <div class="scizora-footer-column">
                 <h3 class="scizora-footer-heading">Quick Links</h3>
@@ -106,29 +106,33 @@
                     <li><a href="{{ route('contact.us') }}" class="scizora-footer-link">Contact Us</a></li>
                 </ul>
             </div>
-            
+
             <!-- Column 3: Legal -->
             <div class="scizora-footer-column">
                 <h3 class="scizora-footer-heading">Legal</h3>
                 <ul class="scizora-footer-list">
-                    <li><a href="{{ route('show.termsCondition') }}" class="scizora-footer-link">Terms of Service</a></li>
+                    <li><a href="{{ route('show.termsCondition') }}" class="scizora-footer-link">Terms of Service</a>
+                    </li>
                     <li><a href="{{ route('show.privacyPolicy') }}" class="scizora-footer-link">Privacy Policy</a></li>
                 </ul>
             </div>
-            
+
             <!-- Column 4: Newsletter -->
             <div class="scizora-footer-column">
-                <h3 class="scizora-footer-heading">Newsletter</h3>
-                <p class="scizora-footer-description">Subscribe to our newsletter for the latest updates and featured companies.</p>
-                <div class="scizora-newsletter-form">
-                    <input type="email" placeholder="Your email" class="scizora-newsletter-input">
-                    <button class="scizora-newsletter-button">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
+                <form id="subscribeForm">
+                    <h3 class="scizora-footer-heading">Newsletter</h3>
+                    <p class="scizora-footer-description">Subscribe to our newsletter for the latest updates and
+                        featured companies.</p>
+                    <div class="scizora-newsletter-form">
+                        <input type="email" name="email" placeholder="Your email" class="scizora-newsletter-input">
+                        <button class="scizora-newsletter-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-        
+
         <!-- Footer Bottom/Copyright -->
         <div class="scizora-footer-bottom">
             <p>&copy; 2025 SCIZORA. All rights reserved.</p>
