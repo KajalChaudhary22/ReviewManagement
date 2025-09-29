@@ -37,6 +37,7 @@
     Route::get('/product', [WelcomeController::class, 'showProduct'])->name('show.product');
     Route::get('/terms', [WelcomeController::class, 'terms'])->name('show.termsCondition');
     Route::get('/privacy', [WelcomeController::class, 'privacy'])->name('show.privacyPolicy');
+    Route::get('/view-business', [WelcomeController::class, 'showBusinessProfile'])->name('business.profile.home');
 
     Route::get('/admin/login', [AuthController::class, 'showAdminLogin'])->name('business.auth.show');
     Route::get('/business/login', [AuthController::class, 'showBusinessLogin'])->name('business.auth.show');
@@ -72,6 +73,3 @@
     // Route::middleware(['web'])->prefix('customer')->group(function () {
     //     Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
     // });
-
-
-
