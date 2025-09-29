@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class Business extends Authenticatable
 
     public function userDetails()
     {
-        return $this->hasOne(User::class,'business_id');
+        return $this->hasOne(User::class, 'business_id');
     }
     public function masterType()
     {
@@ -28,4 +29,8 @@ class Business extends Authenticatable
         return $this->belongsTo(Masters::class, 'location_id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'business_id');
+    }
 }

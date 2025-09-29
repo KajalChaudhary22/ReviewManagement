@@ -127,7 +127,7 @@
                     id="companiesContainer">
                     <!-- Company 1 -->
                     <a href="">
-                        @forelse ($AllBusinesses as $business)
+                        @foreach($companies as $company)
                             <div
                                 class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
                                 <div class="flex items-center mb-3 sm:mb-4">
@@ -136,169 +136,33 @@
                                         <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-base sm:text-lg">{{$business?->name}}</h3>
+                                        <h3 class="font-bold text-base sm:text-lg">{{ $company->name }}</h3>
+                                         @php
+                                            $avgRating = $company->reviews->avg('rating');
+                                            $totalReviews = $company->reviews->count();
+                                        @endphp
                                         <div class="flex text-yellow-400 text-sm sm:text-base">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="text-gray-600 ml-2">(128)</span>
+                                            @for($i = 1; $i <= 5; $i++)
+                                                <i class="fas fa-star {{ $i <= round($avgRating) ? '' : 'text-gray-300' }}"></i>
+                                            @endfor
+                                            <span class="text-gray-600 ml-2">({{ $totalReviews }})</span>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Leading provider of
-                                    innovative
-                                    software solutions for businesses of all sizes with excellent customer support.</p>
-                                <a href="business-profile.html"><button
+                                <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+                                    @foreach($company->reviews->take(2) as $review)
+                                        {{ $review->comment }} .
+                                    @endforeach
+                                </p>
+                                <a href="{{ route('business.profile.home', ['id' => custom_encrypt($company->id)]) }}">
+                                    <button
                                         class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
                                         View Profile
-                                    </button></a>
+                                    </button>
+                                </a>
                             </div>
-                        @empty
-                        <div>No record found</div>
-                        @endforelse
-
-
-                        <!-- Company 2 -->
-                        <div
-                            class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
-                            <div class="flex items-center mb-3 sm:mb-4">
-                                <div
-                                    class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-200 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                                    <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base sm:text-lg">HealthCare Plus</h3>
-                                    <div class="flex text-yellow-400 text-sm sm:text-base">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span class="text-gray-600 ml-2">(94)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Comprehensive healthcare
-                                services with state-of-the-art facilities and compassionate medical professionals.</p>
-                            <a href="business-profile.html"><button
-                                    class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
-                                    View Profile
-                                </button></a>
-                        </div>
-
-                        <!-- Company 3 -->
-                        <div
-                            class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
-                            <div class="flex items-center mb-3 sm:mb-4">
-                                <div
-                                    class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-200 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                                    <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base sm:text-lg">EduFuture Academy</h3>
-                                    <div class="flex text-yellow-400 text-sm sm:text-base">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="text-gray-600 ml-2">(76)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Innovative educational programs
-                                that prepare students for the future with hands-on learning experiences.</p>
-                            <a href="business-profile.html"><button
-                                    class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
-                                    View Profile
-                                </button></a>
-                        </div>
-
-                        <!-- Company 4 -->
-                        <div
-                            class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
-                            <div class="flex items-center mb-3 sm:mb-4">
-                                <div
-                                    class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-200 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                                    <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base sm:text-lg">GreenTech Solutions</h3>
-                                    <div class="flex text-yellow-400 text-sm sm:text-base">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <span class="text-gray-600 ml-2">(64)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Sustainable technology solutions
-                                that help businesses reduce their environmental impact while improving efficiency.</p>
-                            <a href="business-profile.html"><button
-                                    class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
-                                    View Profile
-                                </button></a>
-                        </div>
-
-                        <!-- Company 5 -->
-                        <div
-                            class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
-                            <div class="flex items-center mb-3 sm:mb-4">
-                                <div
-                                    class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-200 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                                    <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base sm:text-lg">Foodie Delights</h3>
-                                    <div class="flex text-yellow-400 text-sm sm:text-base">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span class="text-gray-600 ml-2">(52)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Premium food delivery service
-                                offering gourmet meals from top-rated restaurants with exceptional service.</p>
-                            <a href="business-profile.html"><button
-                                    class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
-                                    View Profile
-                                </button></a>
-                        </div>
-
-                        <!-- Company 6 -->
-                        <div
-                            class="inline-block w-80 mx-2 bg-white p-4 sm:p-6 rounded-lg shadow-sm hover:shadow-md transition-all whitespace-normal company-card">
-                            <div class="flex items-center mb-3 sm:mb-4">
-                                <div
-                                    class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-200 rounded-full flex items-center justify-center mr-3 sm:mr-4">
-                                    <i class="fas fa-building text-gray-500 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base sm:text-lg">TravelEase</h3>
-                                    <div class="flex text-yellow-400 text-sm sm:text-base">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="text-gray-600 ml-2">(48)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Your one-stop travel agency
-                                offering customized vacation packages with 24/7 customer support worldwide.</p>
-                            <a href="business-profile.html"><button
-                                    class="w-full bg-blue-600 text-white py-1.5 sm:py-2 rounded-lg hover:bg-blue-700 transition-all text-sm sm:text-base">
-                                    View Profile
-                                </button></a>
-                        </div>
+                        @endforeach
+                    </a>
                 </div>
 
                 <button id="scrollRight"
@@ -323,8 +187,7 @@
     </section>
 
     <!-- Popup Review Form -->
-    <div id="review-popup"
-        class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+    <div id="review-popup" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
         <div
             class="bg-white rounded-lg shadow-2xl p-6 md:p-8 w-11/12 md:w-2/3 lg:w-1/2 transform transition-all scale-95 opacity-0">
             <!-- Popup Header -->
