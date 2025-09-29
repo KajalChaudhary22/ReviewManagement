@@ -18,7 +18,8 @@ use App\Http\Controllers\Api\Admin\{
     CampaignsController,
     MasterSetupController,
     SettingController,
-    AnalyticsReportsController
+    AnalyticsReportsController,
+    EmailTemplateController
 };
 use App\Http\Controllers\Api\Business\{
     BusinessDashboardController,
@@ -94,12 +95,13 @@ Route::prefix('admin')->group(function () {
 
         // Analytics Reports Routes
         Route::get('/analytics-reports', [AnalyticsReportsController::class, 'index'])->name('analytics.reports.index');
-        // Route::get('/reviews/list', [ReviewModerationController::class, 'list'])->name('reviews.list');
+        Route::get('/email-templates', [EmailTemplateController::class, 'yajaraList'])->name('admin.email.templates');
+        Route::put('/update/email-templates/{id}', [EmailTemplateController::class, 'update'])->name('admin.emailTemplates.update');
         // Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
         // Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
 
 
-
+ 
 
         // Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
         Route::post('/save-master', [MasterSetupController::class, 'save'])->name('master.setup.save');
