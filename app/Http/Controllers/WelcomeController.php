@@ -8,7 +8,8 @@ use App\Models\{
     MasterType,
     Masters,
     Product,
-    Review
+    Review,
+    Business
 };
 
 class WelcomeController extends Controller
@@ -18,8 +19,9 @@ class WelcomeController extends Controller
         $masterTypeId = MasterType::where('name','Product Category')->first()?->id;
         $productCategoies = Masters::where('master_type_id',$masterTypeId)->where('status','Active')->with('images')->get();
         $latestReviews = Review::where('status','Active')->with(['productDetails','customerDetails'])->latest()->take(3)->get();
-        // dd($productCategoies);
-        return view('home.welcome',compact('productCategoies','latestReviews'));
+        $AllBusinesses = Business::where('status','Active')->get();
+        // dd($AllBusinesses);
+        return view('home.welcome',compact('productCategoies','latestReviews','AllBusinesses'));
     }
     protected function categories()
     {

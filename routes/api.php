@@ -105,6 +105,9 @@ Route::prefix('admin')->group(function () {
 
         // Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
         Route::post('/save-master', [MasterSetupController::class, 'save'])->name('master.setup.save');
+        Route::get('/get-master-data', [MasterSetupController::class, 'getMasterSetupData'])->name('get.masterSetup.data');
+        Route::delete('/master-delete/{id}', [MasterSetupController::class, 'delete']);
+       
 
         // Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
@@ -186,7 +189,7 @@ Route::prefix('customer')->group(function () {
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
     });
 });
-
+Route::get('/get-master-parent', [MasterSetupController::class, 'getMasterParent'])->name('get.master.parent');
 
 Route::post('/contact/store', [ApiHomeController::class, 'store']);
 Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);

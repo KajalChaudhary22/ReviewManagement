@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
     MasterType,
-    AdminPreference
+    AdminPreference,
+    Masters
 };
 
 class LoadPageController extends Controller
@@ -18,7 +19,8 @@ class LoadPageController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         }else{
-            return view('admin.master_setup.index');
+            $adminPreferences = AdminPreference::find(1);
+            return view('admin.master_setup.index',compact('adminPreferences'));
         }
     }
     public function masterSetupAdd(Request $request)
@@ -29,8 +31,18 @@ class LoadPageController extends Controller
             abort(404);
         }else{
             $masterTypes = MasterType::where('status','Active')->get();
-            // dd($masterTypes);
-            return view('admin.master_setup.add',compact('masterTypes'));
+            $id = null;
+            if($request->has('id')){
+                $id = custom_decrypt($request->id);
+            }
+            $masterData = Masters::find($id);
+            $parentMasters = collect();
+            if($masterData?->master_type_id){
+                $parentMasters = Masters::where('master_type_id',$masterData->master_type_id)->ActiveOnly()->whereNull('parent_id')->get();
+               
+            }
+            // dd($parentMasters);
+            return view('admin.master_setup.add',compact('masterTypes','masterData','parentMasters'));
         }
     }
     protected function indexSetting(Request $request)

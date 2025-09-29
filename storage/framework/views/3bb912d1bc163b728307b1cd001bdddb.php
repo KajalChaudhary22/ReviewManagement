@@ -1,1 +1,0 @@
- <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"><?php /**PATH D:\Projects\ReviewManagement\resources\views/layouts/token.blade.php ENDPATH**/ ?>

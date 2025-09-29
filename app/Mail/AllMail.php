@@ -11,17 +11,17 @@ class AllMail extends Mailable
     use Queueable, SerializesModels;
 
     public $subjectText;
-    public $user;
+    // public $user;
     public $content;
     public $attachments;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($subjectText, $user, $content, $attachments = [])
+    public function __construct($subjectText, $content, $attachments = [])
     {
         $this->subjectText = $subjectText;
-        $this->user = $user;
+        // $this->user = $user;
         $this->content = $content;
         $this->attachments = $attachments;
     }
@@ -35,7 +35,7 @@ class AllMail extends Mailable
                      ->view('email.email_template')
                      ->with([
                          'subject' => $this->subjectText,
-                         'user' => $this->user,
+                        //  'user' => $this->user,
                          'content' => $this->content,
                      ]);
 

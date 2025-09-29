@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Campaigns - SCIZORA-Admin</title>
     @include('admin.layouts.styles')
 </head>
+
 <body>
     <!-- Sidebar -->
     @include('admin.layouts.sidebar')
@@ -21,9 +24,10 @@
             <div id="campaigns-content" class="content-section">
                 <div class="content-header">
                     <h1 class="page-title">Master Setup</h1>
-                    <a href="{{ route('admin.masterSetup.Add',['ty'=>custom_encrypt('MasterSetupAdd')]) }}"><button class="btn btn-primary" id="createCampaignBtn">
-                        <i class="icon">➕</i> Create Master
-                    </button></a>
+                    <a href="{{ route('admin.masterSetup.Add', ['ty' => custom_encrypt('MasterSetupAdd')]) }}"><button
+                            class="btn btn-primary" id="createCampaignBtn">
+                            <i class="icon">➕</i> Create Master
+                        </button></a>
                 </div>
 
                 <!-- Campaign Filters -->
@@ -41,7 +45,7 @@
                                 <option value="Inactive">Inactive</option>
                             </select>
                         </div>
-                        
+
                     </div>
                     <div class="apply-filters">
                         <button class="btn btn-primary" id="applyMasterFilters">Apply Filters</button>
@@ -52,7 +56,7 @@
                 <div class="table-container">
                     <div class="table-header">
                         <h2 class="section-title">All Master</h2>
-                        
+
                     </div>
                     <table id="masterSetupTable">
                         <thead>
@@ -66,7 +70,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -78,7 +82,95 @@
     <div class="menu-toggle hidden">
         <i class="icon">≡</i>
     </div>
+    @include('layouts.commonjs')
+    <script>
+        $(document).ready(function() {
+            let defaultPageLength = {{ $adminPreferences->results_per_page ?? 10 }};
+            let table = $('#masterSetupTable').DataTable({
+                processing: true,
+                serverSide: true,
+                pageLength: defaultPageLength,
+                ajax: {
+                    url: '{{ route('get.masterSetup.data') }}',
+                    data: function(d) {
+                        d.name = $('#nameSearch').val(); // filter by Name input
+                        d.status = $('#StatusFilter').val(); // filter by Status dropdown
+                    }
+                },
+                columns: [{
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'master_type',
+                        name: 'master_type'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+                    {
+                        data: 'parent_name',
+                        name: 'parent_name'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+            $('#applyMasterFilters').on('click', function() {
+                table.ajax.reload();
+            });
 
-    
+            // Optional: live filtering when typing/selecting
+            // $('#nameSearch, #StatusFilter').on('keyup change', function() {
+            //     table.ajax.reload();
+            // });
+
+            // Delete master
+            $('#masterSetupTable').on('click', '.delete-master', function() {
+                let id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This will delete the master!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/api/admin/master-delete/${id}`,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response.status) {
+                                    Swal.fire('Deleted!', response.message, 'success');
+                                    table.ajax.reload();
+                                } else {
+                                    Swal.fire('Error!', response.message, 'error');
+                                }
+                            },
+                            error: function(err) {
+                                Swal.fire('Error!', 'Something went wrong.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
+
 </html>

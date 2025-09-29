@@ -5,7 +5,6 @@
     <title>{{ $subject }}</title>
 </head>
 <body>
-    {{-- <p>Dear {{ $user->name ?? 'User' }},</p> --}}
 
     <p>{!! $content !!}</p>
 

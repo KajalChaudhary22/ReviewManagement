@@ -70,20 +70,13 @@ class ResetPasswordController extends Controller
 
             // Delete the token after successful reset
             DB::table('password_reset_tokens')->where('email', $user->email)->delete();
-            // Send password reset success email
-            $content = 'Your password has been changed successfully.<br>';
-            $content .= 'If you did not perform this change, please contact support immediately.';
 
-            \Illuminate\Support\Facades\Mail::to($user->email)->send(
-                new \App\Mail\AllMail(
-                    'Password Changed Successfully',
-                    $user,
-                    $content
-                )
-            );
+            sendSuccessfullyPasswordChangedEmail($user->email, [
+                'NAME' => $user?->name
+            ]);
 
             Log::info('Password reset successful', [
-                'email' => $user->email,
+                'email' => $user?->email,
             ]);
 
             return response()->json([
