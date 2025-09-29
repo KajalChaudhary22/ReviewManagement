@@ -895,7 +895,7 @@
                         .then(data => {
                             if (data.status) {
                                 Swal.fire('Success', data.message, 'success');
-                                form.reset();
+                                window.location.href = '/';
                                 strengthMeter.setAttribute('data-strength', 0);
                             } else {
                                 Swal.fire('Error', data.message, 'error');

@@ -82,35 +82,35 @@
     // });
 
     // // Horizontal Navigation for Top Rated Companies
-    // const scrollLeftBtn = document.getElementById('scrollLeft');
-    // const scrollRightBtn = document.getElementById('scrollRight');
-    // const companiesContainer = document.getElementById('companiesContainer');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const companiesContainer = document.getElementById('companiesContainer');
 
-    // scrollLeftBtn.addEventListener('click', function () {
-    //     companiesContainer.scrollBy({
-    //         left: -300,
-    //         behavior: 'smooth'
-    //     });
-    // });
+    scrollLeftBtn.addEventListener('click', function () {
+        companiesContainer.scrollBy({
+            left: -300,
+            behavior: 'smooth'
+        });
+    });
 
-    // scrollRightBtn.addEventListener('click', function () {
-    //     companiesContainer.scrollBy({
-    //         left: 300,
-    //         behavior: 'smooth'
-    //     });
-    // });
+    scrollRightBtn.addEventListener('click', function () {
+        companiesContainer.scrollBy({
+            left: 300,
+            behavior: 'smooth'
+        });
+    });
 
-    // // Show/hide arrows based on scroll position
-    // companiesContainer.addEventListener('scroll', function () {
-    //     const scrollLeft = companiesContainer.scrollLeft;
-    //     const maxScroll = companiesContainer.scrollWidth - companiesContainer.clientWidth;
+    // Show/hide arrows based on scroll position
+    companiesContainer.addEventListener('scroll', function () {
+        const scrollLeft = companiesContainer.scrollLeft;
+        const maxScroll = companiesContainer.scrollWidth - companiesContainer.clientWidth;
 
-    //     scrollLeftBtn.style.display = scrollLeft > 0 ? 'block' : 'none';
-    //     scrollRightBtn.style.display = scrollLeft < maxScroll - 10 ? 'block' : 'none';
-    // });
+        scrollLeftBtn.style.display = scrollLeft > 0 ? 'block' : 'none';
+        scrollRightBtn.style.display = scrollLeft < maxScroll - 10 ? 'block' : 'none';
+    });
 
-    // // Initial check for arrows
-    // companiesContainer.dispatchEvent(new Event('scroll'));
+    // Initial check for arrows
+    companiesContainer.dispatchEvent(new Event('scroll'));
 
     // // Expandable Recent Reviews
     // const viewAllReviewsBtn = document.getElementById('viewAllReviews');

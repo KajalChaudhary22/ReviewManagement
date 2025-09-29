@@ -94,161 +94,12 @@
                                     {{-- <i class="fas fa-dna text-blue-600 text-xl sm:text-2xl"></i> --}}
                                     <img src="{{ asset($productCat?->images?->path) }}">
                                 </div>
-                                <h3 class="font-semibold text-sm sm:text-base">{{$productCat?->name}}</h3>
+                                <h3 class="font-semibold text-sm sm:text-base">{{ $productCat?->name }}</h3>
                             </div>
                         </a>
                     @empty
                         <p>No Categories Found</p>
                     @endforelse
-                    <!-- Life Sciences -->
-                    <a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-dna text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Life Sciences</h3>
-                        </div>
-                    </a>
-
-                    <!-- Drug Discovery & Development -->
-                    {{--<a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-pills text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Drug Discovery & Development</h3>
-                        </div>
-                    </a>
-
-                    <!-- Clinical Diagnostics -->
-                    <a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-microscope text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Clinical Diagnostics</h3>
-                        </div>
-                    </a>
-
-                    <!-- Environmental -->
-                    <a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-leaf text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Environmental</h3>
-                        </div>
-                    </a>
-
-                    <!-- Materials -->
-                    <a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-cubes text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Materials</h3>
-                        </div>
-                    </a>
-
-                    <!-- Food & Beverage -->
-                    <a href="category.html">
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-wine-glass-alt text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Food & Beverage</h3>
-                        </div>
-                    </a>
-
-                    <!-- Additional Categories (hidden by default) -->
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-flask text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">General Lab</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-robot text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Lab Automation</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-database text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Lab Informatics</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-filter text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Separations</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-chart-line text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Spectroscopy</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-fingerprint text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Forensics</h3>
-                        </div>
-                    </a>
-
-                    <a href="category.html">
-                        <div
-                            class="additional-category hidden bg-gray-50 p-4 sm:p-6 rounded-lg text-center hover:shadow-md transition-all cursor-pointer">
-                            <div
-                                class="bg-blue-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto rounded-full flex items-center justify-center mb-2 sm:mb-3">
-                                <i class="fas fa-cannabis text-blue-600 text-xl sm:text-2xl"></i>
-                            </div>
-                            <h3 class="font-semibold text-sm sm:text-base">Cannabis Testing</h3>
-                        </div>
-                    </a> --}}
                 </div>
             </div>
 
@@ -392,10 +243,12 @@
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Recent Reviews</h2>
 
-            @if($latestReviews->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 review-grid" id="reviewsContainer">
-                    @foreach($latestReviews as $index => $review)
-                        <div class="bg-gray-50 p-4 sm:p-6 rounded-lg {{ $index >= 3 ? 'additional-review hidden' : '' }}">
+            @if ($latestReviews->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 review-grid"
+                    id="reviewsContainer">
+                    @foreach ($latestReviews as $index => $review)
+                        <div
+                            class="bg-gray-50 p-4 sm:p-6 rounded-lg {{ $index >= 3 ? 'additional-review hidden' : '' }}">
                             <div class="flex items-center mb-3 sm:mb-4">
                                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-300 rounded-full mr-3 sm:mr-4"></div>
                                 <div>
@@ -404,7 +257,7 @@
                                     </h3>
                                     <div class="flex text-yellow-400 text-xs sm:text-sm">
                                         @for ($i = 1; $i <= 5; $i++)
-                                            @if($i <= floor($review->rating))
+                                            @if ($i <= floor($review->rating))
                                                 <i class="fas fa-star"></i>
                                             @elseif($i - $review->rating < 1)
                                                 <i class="fas fa-star-half-alt"></i>
@@ -425,7 +278,7 @@
                     @endforeach
                 </div>
 
-                @if($latestReviews->count() > 3)
+                @if ($latestReviews->count() > 3)
                     <div class="text-center">
                         <button id="viewAllReviews"
                             class="border border-blue-600 text-blue-600 px-5 py-1.5 sm:px-6 sm:py-2 rounded-full hover:bg-blue-600 hover:text-white transition-all text-sm sm:text-base">

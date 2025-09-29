@@ -1884,55 +1884,67 @@
                                 <p>Configure master settings for your SCIZORA platform. All fields marked with * are
                                     required.</p>
                             </div>
-                            <a href="{{ route('admin.master.setup',['ty'=>custom_encrypt('MasterSetup')]) }}"><button id="" class="btn btn-primary" style="padding: 12px 24px;">View
-                                All Records</button></a>
+                            <a href="{{ route('admin.master.setup', ['ty' => custom_encrypt('MasterSetup')]) }}"><button
+                                    id="" class="btn btn-primary" style="padding: 12px 24px;">View
+                                    All Records</button></a>
                         </div>
 
                         <div class="form-card">
-                            <form id="masterSetupForm" action="{{ route('master.setup.save') }}" method="POST" >
+                            <form id="masterSetupForm" action="{{ route('master.setup.save') }}" method="POST">
                                 @csrf
+                                @if($masterData)
+                                <input type="hidden" name="master_id" value="{{ custom_encrypt($masterData?->id) }}">
+                                @endif
                                 <div class="form-row">
                                     <div class="form-group half-width">
                                         <label for="name" class="required">Name</label>
                                         <input type="text" id="name" class="input-control"
-                                            placeholder="Enter master name" required name="name">
-                                        <div class="error-message" id="name-error">Please enter a valid name</div>
+                                            placeholder="Enter master name" required name="name" value="{{ $masterData?->name ?? '' }}">
+                                        <div class="error-message" id="name-error" style="display:none;color:red;">
+                                        </div>
                                     </div>
 
                                     <div class="form-group half-width">
                                         <label for="masterType" class="required">Master Type</label>
-                                        <select id="masterType" class="input-control" required name="masterType">
+                                        <select id="masterType" class="input-control" required name="masterType"
+                                            onchange="fetchMasters(this.value)">
                                             <option value="" disabled selected>Select master type</option>
                                             @foreach ($masterTypes as $masterType)
-                                                <option value="{{ $masterType->id }}">{{ $masterType->name }}</option>                                                
+                                                <option value="{{ $masterType->id }}" {{ $masterData?->master_type_id == $masterType->id ? 'selected' : ''  }}>{{ $masterType->name }}</option>
                                             @endforeach
                                         </select>
-                                        <div class="error-message" id="type-error">Please select a master type</div>
+                                        <div class="error-message" id="masterType-error"
+                                            style="display:none;color:red;"></div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea id="description" name="description" class="input-control" placeholder="Enter detailed description..."></textarea>
+                                    <textarea id="description" name="description" class="input-control" placeholder="Enter detailed description...">{{$masterData?->description}}</textarea>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group half-width">
                                         <label for="parentName">Parent Name</label>
-                                        <select id="parentName" class="input-control" disabled name="parentName">
+                                        <select id="parentName" class="input-control" @if(!$masterData) disabled @endif name="parentName">
                                             <option value="" disabled selected>Select parent</option>
-                                            
+                                            @if($masterData)
+                                                @foreach ($parentMasters as $parentMaster)
+                                                    <option value="{{ $parentMaster?->id }}" {{ $masterData?->parent_id == $parentMaster?->id ? 'selected' : ''  }}>{{ $parentMaster?->name }}</option>
+                                                @endforeach
+                                                @endif
                                         </select>
                                     </div>
 
                                     <div class="form-group half-width">
                                         <label for="status" class="required">Status</label>
-                                        <select id="status" class="input-control">
+                                        <select id="status" class="input-control" name="status">
                                             <option value="" disabled selected>Select status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
+                                            <option value="Active" {{$masterData?->status == "Active" ? 'selected' : ''}}>Active</option>
+                                            <option value="Inactive" {{$masterData?->status == "Inactive" ? 'selected' : ''}}>Inactive</option>
                                         </select>
-                                        <div class="error-message" id="status-error">Please select a status</div>
+                                        <div class="error-message" id="status-error" style="display:none;color:red;">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1944,1225 +1956,13 @@
                                         <span class="btn-icon">↺</span> Reset
                                     </button>
                                 </div>
-
-                                <div class="form-footer">
-                                    <p>By submitting this form, you agree to our <a href="#">Terms of Service</a>
-                                        and <a href="#">Privacy Policy</a></p>
-                                </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- Table View (Initially Hidden) -->
-                <div id="table-view-container" class="hidden">
-                    <div class="table-header">
-                        <h1 class="section-title">All Queries</h1>
-                        <button id="back-to-form-btn" class="btn btn-secondary" style="padding: 12px 24px;">Back to
-                            Form</button>
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>NAME</th>
-                                    <th>MASTER TYPE</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>PARENT NAME</th>
-                                    <th>STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Example Master 1</td>
-                                    <td>Type A</td>
-                                    <td>Detailed description for example master 1.</td>
-                                    <td>Parent X</td>
-                                    <td>Active</td>
-                                </tr>
-                                <tr>
-                                    <td>Another Master Entry</td>
-                                    <td>Type B</td>
-                                    <td>This is a second example entry to show more data.</td>
-                                    <td>Parent Y</td>
-                                    <td>Pending</td>
-                                </tr>
-                                <tr>
-                                    <td>Third Master</td>
-                                    <td>Type A</td>
-                                    <td>Description for the third master entry.</td>
-                                    <td>(None)</td>
-                                    <td>Inactive</td>
-                                </tr>
-                                <tr>
-                                    <td>Fourth Entry</td>
-                                    <td>Type C</td>
-                                    <td>A description for the fourth one.</td>
-                                    <td>Parent X</td>
-                                    <td>Active</td>
-                                </tr>
-                                <tr>
-                                    <td>Fifth Master Example</td>
-                                    <td>Type B</td>
-                                    <td>Another detailed description here to fill space.</td>
-                                    <td>Parent Z</td>
-                                    <td>Inactive</td>
-                                </tr>
-                                <tr>
-                                    <td>Sixth Sample</td>
-                                    <td>Type D</td>
-                                    <td>Sample data for the sixth row to demonstrate scrolling.</td>
-                                    <td>Parent Y</td>
-                                    <td>Pending</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Profile Management Content -->
-            <div id="profile-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Profile Management</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="table-container">
-                    <h2 class="section-title mb-20">Company Information</h2>
-
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Company Name</label>
-                                <input type="text" class="form-control" value="PharmaCorp Inc">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Business Type</label>
-                                <input type="text" class="form-control" value="Pharmaceutical Manufacturer">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Year Established</label>
-                                <input type="text" class="form-control" value="2005">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Company Logo</label>
-                                <div style="display: flex; align-items: center; gap: 20px;">
-                                    <div
-                                        style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
-                                        <img src="https://via.placeholder.com/80x80?text=PC" alt="Company Logo"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                    </div>
-                                    <button class="btn btn-primary">Upload New</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 class="section-title mb-20">Contact Information</h2>
-
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Primary Contact</label>
-                                <input type="text" class="form-control" value="John Doe">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" value="john.doe@pharmacorp.com">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Website</label>
-                                <input type="url" class="form-control" value="https://www.pharmacorp.com">
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 class="section-title mb-20">Business Address</h2>
-
-                    <div class="form-group">
-                        <label class="form-label">Street Address</label>
-                        <input type="text" class="form-control" value="123 Pharma Street">
-                    </div>
-
-                    <div class="flex" style="gap: 30px; margin-bottom: 30px;">
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">City</label>
-                                <input type="text" class="form-control" value="Boston">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">State/Province</label>
-                                <input type="text" class="form-control" value="Massachusetts">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">ZIP/Postal Code</label>
-                                <input type="text" class="form-control" value="02108">
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div class="form-group">
-                                <label class="form-label">Country</label>
-                                <input type="text" class="form-control" value="United States">
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 class="section-title mb-20">Business Description</h2>
-
-                    <div class="form-group">
-                        <textarea class="form-control" rows="5">PharmaCorp Inc is a leading manufacturer of high-quality pharmaceutical products with over 15 years of experience in the industry. We specialize in antibiotics, pain relievers, and vitamin supplements, serving clients across North America and Europe.</textarea>
-                    </div>
-
-                    <div class="flex justify-between" style="margin-top: 30px;">
-                        <button id="cancel-profile-changes" class="btn"
-                            style="background-color: #f0f0f0;">Cancel</button>
-                        <button class="btn btn-primary">Save Changes</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Products & Services Content -->
-            <div id="products-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Products & Services</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="section-title">Your Products (124)</h2>
-                        <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
-                    </div>
-
-                    <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-                        <div style="flex: 1; min-width: 200px;">
-                            <input type="text" class="form-control" placeholder="Search products..."
-                                id="product-search">
-                        </div>
-                        <select class="form-control" style="width: 200px; min-width: 150px;"
-                            id="product-category-filter">
-                            <option>All Categories</option>
-                            <option>Antibiotics</option>
-                            <option>Pain Relievers</option>
-                            <option>Vitamins</option>
-                            <option>Supplements</option>
-                        </select>
-                        <select class="form-control" style="width: 150px; min-width: 120px;" id="product-sort">
-                            <option>Sort by: Newest</option>
-                            <option>Sort by: Oldest</option>
-                            <option>Sort by: Name</option>
-                            <option>Sort by: Popularity</option>
-                        </select>
-                    </div>
-
-                    <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
-                        id="products-grid">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/400x300?text=Antibiotic+X" alt="Antibiotic X">
-                            </div>
-                            <h3 class="product-name">Antibiotic</h3>
-                            <div class="product-meta">
-                                <span>SKU: PC-ABX-500</span>
-                                <span>In Stock: 1,240</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                                <span style="color: var(--primary-color); font-weight: 600;">$24.99</span>
-                                <div>
-                                    <button class="edit-product-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-product-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/400x300?text=Pain+Reliever+Y"
-                                    alt="Pain Reliever Y">
-                            </div>
-                            <h3 class="product-name">Pain Reliever</h3>
-                            <div class="product-meta">
-                                <span>SKU: PC-PRY-200</span>
-                                <span>In Stock: 980</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                                <span style="color: var(--primary-color); font-weight: 600;">$19.99</span>
-                                <div>
-                                    <button class="edit-product-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-product-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/400x300?text=Vitamin+Complex"
-                                    alt="Vitamin Complex">
-                            </div>
-                            <h3 class="product-name">Vitamin Complex</h3>
-                            <div class="product-meta">
-                                <span>SKU: PC-VTC-100</span>
-                                <span>In Stock: 750</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                                <span style="color: var(--primary-color); font-weight: 600;">$29.99</span>
-                                <div>
-                                    <button class="edit-product-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-product-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://via.placeholder.com/400x300?text=Immune+Booster"
-                                    alt="Immune Booster">
-                            </div>
-                            <h3 class="product-name">Immune Booster</h3>
-                            <div class="product-meta">
-                                <span>SKU: PC-IMB-300</span>
-                                <span>In Stock: 420</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                                <span style="color: var(--primary-color); font-weight: 600;">$34.99</span>
-                                <div>
-                                    <button class="edit-product-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-product-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                        <div style="color: var(--text-light);">
-                            Showing 1-4 of 124 products
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0;"
-                                id="prev-products">Previous</button>
-                            <button class="btn btn-primary" id="next-products">Next</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-container" style="margin-top: 30px;">
-                    <div class="table-header">
-                        <h2 class="section-title">Services (3)</h2>
-                        <button class="btn btn-primary" id="add-service-btn">Add New Service</button>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Service Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Custom Formulation</td>
-                                <td>Tailored pharmaceutical solutions for specific needs</td>
-                                <td>$1,500+</td>
-                                <td>
-                                    <button class="edit-service-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-service-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Private Labeling</td>
-                                <td>Brand our products with your own label and packaging</td>
-                                <td>$500+</td>
-                                <td>
-                                    <button class="edit-service-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-service-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Bulk Discounts</td>
-                                <td>Special pricing for large quantity orders</td>
-                                <td>20-50% off</td>
-                                <td>
-                                    <button class="edit-service-btn"
-                                        style="background: none; border: none; cursor: pointer; margin-right: 10px;">✏️</button>
-                                    <button class="delete-service-btn"
-                                        style="background: none; border: none; cursor: pointer;">🗑️</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Inquiries Content -->
-            <div id="inquiries-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Inquiries</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-title">Total Inquiries</div>
-                        <div class="stat-value">87</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 15% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Active Inquiries</div>
-                        <div class="stat-value">35</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 5% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Completed</div>
-                        <div class="stat-value">42</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 22% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Avg. Response Time</div>
-                        <div class="stat-value">6.2h</div>
-                        <div class="stat-change">
-                            <i class="icon">↓</i> 1.3h faster
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="section-title">Recent Inquiries</h2>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <select class="form-control" style="width: 150px; min-width: 120px;"
-                                id="inquiry-status-filter">
-                                <option>All Statuses</option>
-                                <option>Pending</option>
-                                <option>In Progress</option>
-                                <option>Completed</option>
-                            </select>
-                            <button class="btn btn-primary" id="export-inquiries-btn">Export</button>
-                        </div>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Company</th>
-                                <th>Contact</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>20 Feb 2024</td>
-                                <td>MediLife Inc.</td>
-                                <td>sarah.miller@medilife.com</td>
-                                <td>Antibiotic X</td>
-                                <td>500 units</td>
-                                <td><span class="status in-progress">In Progress</span></td>
-                                <td>
-                                    <button class="reply-inquiry-btn" data-company="MediLife Inc."
-                                        data-email="sarah.miller@medilife.com"
-                                        style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn"
-                                        style="background: none; border: none; cursor: pointer;">👁️</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>19 Feb 2024</td>
-                                <td>HealthPlus</td>
-                                <td>john.davis@healthplus.com</td>
-                                <td>Pain Reliever Y</td>
-                                <td>1,000 units</td>
-                                <td><span class="status pending">Pending</span></td>
-                                <td>
-                                    <button class="reply-inquiry-btn" data-company="HealthPlus"
-                                        data-email="john.davis@healthplus.com"
-                                        style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn"
-                                        style="background: none; border: none; cursor: pointer;">👁️</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>18 Feb 2024</td>
-                                <td>PharmaGlobal</td>
-                                <td>amanda.patel@pharmaglobal.com</td>
-                                <td>Vitamin Complex</td>
-                                <td>2,000 units</td>
-                                <td><span class="status completed">Completed</span></td>
-                                <td>
-                                    <button class="reply-inquiry-btn" data-company="PharmaGlobal"
-                                        data-email="amanda.patel@pharmaglobal.com"
-                                        style="background: none; border: none; cursor: pointer;">✉️</button>
-                                    <button class="view-inquiry-btn"
-                                        style="background: none; border: none; cursor: pointer;">👁️</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                        <div style="color: var(--text-light);">
-                            Showing 1-3 of 35 active inquiries
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0;"
-                                id="prev-inquiries">Previous</button>
-                            <button class="btn btn-primary" id="next-inquiries">Next</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reviews Content -->
-            <div id="reviews-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Customer Reviews</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-title">Total Reviews</div>
-                        <div class="stat-value">156</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 18% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Average Rating</div>
-                        <div class="stat-value">4.7</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 0.2 from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">5-Star Reviews</div>
-                        <div class="stat-value">112</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 24 from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Response Rate</div>
-                        <div class="stat-value">92%</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 5% from last month
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <div class="table-container" style="flex: 2; min-width: 300px;">
-                        <div class="table-header">
-                            <h2 class="section-title">Recent Reviews</h2>
-                            <div style="display: flex; gap: 10px;">
-                                <select class="form-control" style="width: 150px; min-width: 120px;"
-                                    id="review-rating-filter">
-                                    <option>All Ratings</option>
-                                    <option>5 Stars</option>
-                                    <option>4 Stars</option>
-                                    <option>3 Stars</option>
-                                    <option>2 Stars</option>
-                                    <option>1 Star</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="review-item">
-                            <div class="reviewer-avatar">SM</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Sarah Miller <span
-                                        style="color: var(--text-light); font-weight: normal;">- MediLife Inc.</span>
-                                </div>
-                                <div class="stars">★★★★★ <span
-                                        style="color: var(--text-light); font-size: 0.9rem;">20 Feb 2024</span></div>
-                                <div class="review-text">We've been working with PharmaCorp for over 3 years now and
-                                    their products have consistently exceeded our expectations. The Antibiotic X is
-                                    particularly effective with minimal side effects reported by our patients.</div>
-                                <div style="margin-top: 10px;">
-                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Antibiotic
-                                        X</span>
-                                </div>
-                                <button class="btn reply-review-btn"
-                                    style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
-                            </div>
-                        </div>
-
-                        <div class="review-item">
-                            <div class="reviewer-avatar">JD</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">John Davis <span
-                                        style="color: var(--text-light); font-weight: normal;">- HealthPlus</span>
-                                </div>
-                                <div class="stars">★★★★☆ <span
-                                        style="color: var(--text-light); font-size: 0.9rem;">18 Feb 2024</span></div>
-                                <div class="review-text">The Pain Reliever Y works well for most of our patients,
-                                    though we've had a few reports of mild stomach discomfort. Packaging could be more
-                                    eco-friendly.</div>
-                                <div style="margin-top: 10px;">
-                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Pain Reliever
-                                        Y</span>
-                                </div>
-                                <div
-                                    style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                                    <div style="font-weight: 500; margin-bottom: 5px;">Your Response:</div>
-                                    <div>Thank you for your feedback, John. We're currently developing a new formulation
-                                        to reduce stomach discomfort and will be introducing eco-friendly packaging
-                                        options next quarter.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="review-item">
-                            <div class="reviewer-avatar">AP</div>
-                            <div class="review-content">
-                                <div class="reviewer-name">Amanda Patel <span
-                                        style="color: var(--text-light); font-weight: normal;">- PharmaGlobal</span>
-                                </div>
-                                <div class="stars">★★★★★ <span
-                                        style="color: var(--text-light); font-size: 0.9rem;">15 Feb 2024</span></div>
-                                <div class="review-text">The Vitamin Complex is our best-selling supplement! Customers
-                                    report increased energy levels and overall wellbeing. Delivery is always prompt.
-                                </div>
-                                <div style="margin-top: 10px;">
-                                    <span style="font-size: 0.9rem; color: var(--text-light);">Product: Vitamin
-                                        Complex</span>
-                                </div>
-                                <button class="btn reply-review-btn"
-                                    style="padding: 5px 10px; font-size: 0.8rem; margin-top: 10px;">Reply</button>
-                            </div>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                            <div style="color: var(--text-light);">
-                                Showing 1-3 of 28 new reviews
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn" style="background-color: #f0f0f0;"
-                                    id="prev-reviews">Previous</button>
-                                <button class="btn btn-primary" id="next-reviews">Next</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="table-container" style="flex: 1; min-width: 300px;">
-                        <h2 class="section-title">Rating Distribution</h2>
-
-                        <div style="margin-top: 20px;">
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 80px;">5 Stars</div>
-                                <div
-                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                                    <div style="width: 72%; height: 100%; background-color: var(--primary-color);">
-                                    </div>
-                                </div>
-                                <div>112</div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 80px;">4 Stars</div>
-                                <div
-                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                                    <div style="width: 18%; height: 100%; background-color: var(--primary-color);">
-                                    </div>
-                                </div>
-                                <div>28</div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 80px;">3 Stars</div>
-                                <div
-                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                                    <div style="width: 6%; height: 100%; background-color: var(--primary-color);">
-                                    </div>
-                                </div>
-                                <div>9</div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 80px;">2 Stars</div>
-                                <div
-                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                                    <div style="width: 3%; height: 100%; background-color: var(--primary-color);">
-                                    </div>
-                                </div>
-                                <div>4</div>
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                                <div style="width: 80px;">1 Star</div>
-                                <div
-                                    style="flex: 1; height: 20px; background-color: #f0f0f0; border-radius: 10px; margin: 0 10px; overflow: hidden;">
-                                    <div style="width: 1%; height: 100%; background-color: var(--primary-color);">
-                                    </div>
-                                </div>
-                                <div>3</div>
-                            </div>
-                        </div>
-
-                        <h2 style="margin-top: 30px; font-size: 1.2rem;">Review Highlights</h2>
-
-                        <div style="margin-top: 15px;">
-                            <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Positive</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px;">
-                                <span
-                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Quality
-                                    (87)</span>
-                                <span
-                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Delivery
-                                    (65)</span>
-                                <span
-                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Effectiveness
-                                    (58)</span>
-                                <span
-                                    style="background-color: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Customer
-                                    Service (42)</span>
-                            </div>
-
-                            <div style="font-weight: 500; margin-bottom: 5px;">Most Mentioned Negative</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 5px;">
-                                <span
-                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Packaging
-                                    (12)</span>
-                                <span
-                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Side
-                                    Effects (8)</span>
-                                <span
-                                    style="background-color: #FFEBEE; color: #5A009D; padding: 3px 8px; border-radius: 20px; font-size: 0.8rem;">Price
-                                    (5)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Content -->
-            <div id="analytics-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Business Analytics</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-title">Total Revenue</div>
-                        <div class="stat-value">$124,580</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 22% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Total Orders</div>
-                        <div class="stat-value">287</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 15% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">Avg. Order Value</div>
-                        <div class="stat-value">$434</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 6% from last month
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">New Customers</div>
-                        <div class="stat-value">42</div>
-                        <div class="stat-change">
-                            <i class="icon">↑</i> 18% from last month
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <div class="chart-container" style="flex: 2; min-width: 300px;">
-                        <div class="table-header">
-                            <h2 class="section-title">Revenue Overview</h2>
-                            <select class="form-control" style="width: 150px;" id="revenue-time-filter">
-                                <option>Last 30 Days</option>
-                                <option>Last 90 Days</option>
-                                <option>This Year</option>
-                                <option>Last Year</option>
-                            </select>
-                        </div>
-                        <div class="chart">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 70%;">
-                                    <div class="bar-value">$42K</div>
-                                    <div class="bar-label">Jan</div>
-                                </div>
-                                <div class="bar" style="height: 85%;">
-                                    <div class="bar-value">$51K</div>
-                                    <div class="bar-label">Feb</div>
-                                </div>
-                                <div class="bar" style="height: 65%;">
-                                    <div class="bar-value">$39K</div>
-                                    <div class="bar-label">Mar</div>
-                                </div>
-                                <div class="bar" style="height: 90%;">
-                                    <div class="bar-value">$54K</div>
-                                    <div class="bar-label">Apr</div>
-                                </div>
-                                <div class="bar" style="height: 75%;">
-                                    <div class="bar-value">$45K</div>
-                                    <div class="bar-label">May</div>
-                                </div>
-                                <div class="bar" style="height: 95%;">
-                                    <div class="bar-value">$57K</div>
-                                    <div class="bar-label">Jun</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chart-container" style="flex: 1; min-width: 300px;">
-                        <h2 class="section-title">Sales by Category</h2>
-                        <div class="chart">
-                            <div class="pie-chart">
-                                <div class="pie-center"></div>
-                            </div>
-                            <div class="pie-legend">
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #4e73df;"></div>
-                                    <span>Antibiotics (30%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #1cc88a;"></div>
-                                    <span>Pain Relievers (25%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #36b9cc;"></div>
-                                    <span>Vitamins (20%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #f6c23e;"></div>
-                                    <span>Supplements (15%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #e74a3b;"></div>
-                                    <span>Other (10%)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex" style="gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <div class="chart-container" style="flex: 1; min-width: 300px;">
-                        <h2 class="section-title">Top Products</h2>
-
-                        <div class="chart chart-bottom-aligned">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 95%;">
-                                    <div class="bar-value">$57K</div>
-                                    <div class="bar-label">Antibiotic</div>
-                                </div>
-                                <div class="bar" style="height: 85%;">
-                                    <div class="bar-value">$51K</div>
-                                    <div class="bar-label">Pain Reliever</div>
-                                </div>
-                                <div class="bar" style="height: 75%;">
-                                    <div class="bar-value">$45K</div>
-                                    <div class="bar-label">Vitamin</div>
-                                </div>
-                                <div class="bar" style="height: 65%;">
-                                    <div class="bar-value">$39K</div>
-                                    <div class="bar-label">Immune</div>
-                                </div>
-                                <div class="bar" style="height: 55%;">
-                                    <div class="bar-value">$33K</div>
-                                    <div class="bar-label">Sleep Aid</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chart-container" style="flex: 1; min-width: 300px;">
-                        <h2 class="section-title">Customer Geography</h2>
-                        <div class="chart">
-                            <div class="map-chart"></div>
-                            <div class="pie-legend">
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #0066ff;"></div>
-                                    <span>North America (45%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #00a8ff;"></div>
-                                    <span>Europe (35%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #0044cc;"></div>
-                                    <span>Asia (15%)</span>
-                                </div>
-                                <div class="pie-legend-item">
-                                    <div class="pie-color" style="background-color: #003399;"></div>
-                                    <span>Other (5%)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <div class="table-header">
-                        <h2 class="section-title">Recent Orders</h2>
-                        <button class="btn btn-primary" id="export-analytics-btn">Export Data</button>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Date</th>
-                                <th>Customer</th>
-                                <th>Products</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#PC-10245</td>
-                                <td>20 Feb 2024</td>
-                                <td>MediLife Inc.</td>
-                                <td>Antibiotic X (500)</td>
-                                <td>$12,495.00</td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>#PC-10244</td>
-                                <td>19 Feb 2024</td>
-                                <td>HealthPlus</td>
-                                <td>Pain Reliever Y (1000)</td>
-                                <td>$19,990.00</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>#PC-10243</td>
-                                <td>18 Feb 2024</td>
-                                <td>PharmaGlobal</td>
-                                <td>Vitamin Complex (2000)</td>
-                                <td>$59,980.00</td>
-                                <td><span class="status in-progress">Processing</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                        <div style="color: var(--text-light);">
-                            Showing 1-3 of 287 orders
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0;"
-                                id="prev-orders">Previous</button>
-                            <button class="btn btn-primary" id="next-orders">Next</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Content -->
-            <div id="settings-content" class="content-section hidden">
-                <div class="content-header">
-                    <h1 class="welcome-text">Account Settings</h1>
-                    <p class="date-text">Tuesday, 20 February 2024</p>
-                </div>
-
-                <div class="settings-tabs">
-                    <div class="tab active" data-tab="account">Account</div>
-                    <div class="tab" data-tab="security">Security</div>
-                    <div class="tab" data-tab="notifications">Notifications</div>
-                    <div class="tab" data-tab="billing">Billing</div>
-                </div>
-
-                <div id="account-tab" class="tab-content active">
-                    <div class="table-container">
-                        <h2 class="section-title mb-20">Profile Information</h2>
-
-                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" value="John">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" value="john.doe@pharmacorp.com">
-                                </div>
-                            </div>
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" value="Doe">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2 class="section-title mb-20">Profile Picture</h2>
-
-                        <div
-                            style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div class="user-avatar" style="width: 80px; height: 80px;">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn btn-primary">Upload New</button>
-                                <button class="btn" style="background-color: #f0f0f0;">Remove</button>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="security-tab" class="tab-content">
-                    <div class="table-container">
-                        <h2 class="section-title mb-20">Password</h2>
-
-                        <div class="form-group">
-                            <label class="form-label">Current Password</label>
-                            <input type="password" class="form-control" placeholder="Enter current password">
-                        </div>
-
-                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter new password">
-                                </div>
-                            </div>
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" placeholder="Confirm new password">
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2 class="section-title mb-20">Two-Factor Authentication</h2>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">SMS Authentication</div>
-                                <div style="color: var(--text-light);">Add your phone number to receive security codes
-                                    via SMS</div>
-                            </div>
-                            <button class="btn" style="background-color: #f0f0f0;">Enable</button>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Authenticator App</div>
-                                <div style="color: var(--text-light);">Use an authenticator app to generate security
-                                    codes</div>
-                            </div>
-                            <button class="btn" style="background-color: #f0f0f0;">Enable</button>
-                        </div>
-
-                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="notifications-tab" class="tab-content">
-                    <div class="table-container">
-                        <h2 class="section-title mb-20">Notification Preferences</h2>
-
-                        <h3 style="margin-bottom: 15px; font-weight: 500;">Email Notifications</h3>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">New Orders</div>
-                                <div style="color: var(--text-light);">Receive notifications when new orders are placed
-                                </div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Inquiries</div>
-                                <div style="color: var(--text-light);">Receive notifications for new inquiries</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Reviews</div>
-                                <div style="color: var(--text-light);">Receive notifications for new reviews</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Promotions</div>
-                                <div style="color: var(--text-light);">Receive promotional emails and offers</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <h3 style="margin-bottom: 15px; font-weight: 500;">Push Notifications</h3>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Order Updates</div>
-                                <div style="color: var(--text-light);">Receive push notifications for order status
-                                    changes</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <div style="font-weight: 500; margin-bottom: 5px;">Important Alerts</div>
-                                <div style="color: var(--text-light);">Receive important system alerts and
-                                    notifications</div>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="billing-tab" class="tab-content">
-                    <div class="table-container">
-                        <h2 class="section-title mb-20">Billing Information</h2>
-
-                        <div class="flex" style="gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">Card Number</label>
-                                    <input type="text" class="form-control" value="•••• •••• •••• 4242">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Name on Card</label>
-                                    <input type="text" class="form-control" value="John Doe">
-                                </div>
-                            </div>
-                            <div style="flex: 1; min-width: 250px;">
-                                <div class="form-group">
-                                    <label class="form-label">Expiration Date</label>
-                                    <input type="text" class="form-control" value="12/25">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Security Code</label>
-                                    <input type="text" class="form-control" placeholder="•••">
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2 class="section-title mb-20">Billing History</h2>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Invoice</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>15 Feb 2024</td>
-                                    <td>Premium Subscription</td>
-                                    <td>$99.00</td>
-                                    <td><span class="status completed">Paid</span></td>
-                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                                </tr>
-                                <tr>
-                                    <td>15 Jan 2024</td>
-                                    <td>Premium Subscription</td>
-                                    <td>$99.00</td>
-                                    <td><span class="status completed">Paid</span></td>
-                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                                </tr>
-                                <tr>
-                                    <td>15 Dec 2023</td>
-                                    <td>Premium Subscription</td>
-                                    <td>$99.00</td>
-                                    <td><span class="status completed">Paid</span></td>
-                                    <td><a href="#" style="color: var(--primary-color);">Download</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="flex justify-between" style="margin-top: 30px; flex-wrap: wrap; gap: 10px;">
-                            <button class="btn" style="background-color: #f0f0f0; flex: 1;">Cancel</button>
-                            <button class="btn btn-primary" style="flex: 1;">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -3192,222 +1992,122 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Template Edit Modal -->
-    <div class="modal" id="edit-template-modal">
-        <div class="template-modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Edit Template</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="form-group">
-                <label for="edit-eventName"><i class="fas fa-calendar-alt"></i> Event Name</label>
-                <input type="text" id="edit-eventName" class="form-control" placeholder="Enter event name">
-            </div>
-
-            <div class="form-group">
-                <label for="edit-emailSubject"><i class="fas fa-tag"></i> Email Subject</label>
-                <input type="text" id="edit-emailSubject" class="form-control" placeholder="Enter email subject">
-            </div>
-
-            <div class="form-group">
-                <label for="edit-emailBody"><i class="fas fa-align-left"></i> Email Body</label>
-                <textarea id="edit-emailBody" class="form-control" placeholder="Compose your email content..." rows="8"></textarea>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;"
-                    id="cancel-edit-template">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-edited-template">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reply Inquiry Modal -->
-    <div class="modal" id="reply-inquiry-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Reply to Inquiry</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form class="reply-form">
-                <div class="form-group">
-                    <label class="form-label">To</label>
-                    <input type="text" class="form-control" id="reply-to" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Company</label>
-                    <input type="text" class="form-control" id="reply-company" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="reply-subject" value="Re: Your Inquiry">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-control" id="reply-message" rows="6" placeholder="Type your response here..."></textarea>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;"
-                    id="cancel-reply">Cancel</button>
-                <button type="button" class="btn btn-primary" id="send-reply">Send Reply</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- View Inquiry Modal -->
-    <div class="modal" id="view-inquiry-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Inquiry Details</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Company</label>
-                <input type="text" class="form-control" id="inquiry-company" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Contact Email</label>
-                <input type="text" class="form-control" id="inquiry-email" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Product</label>
-                <input type="text" class="form-control" id="inquiry-product" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Quantity</label>
-                <input type="text" class="form-control" id="inquiry-quantity" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Message</label>
-                <textarea class="form-control" id="inquiry-message" rows="4" readonly></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Status</label>
-                <select class="form-control" id="inquiry-status">
-                    <option value="pending">Pending</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #f0f0f0;"
-                    id="cancel-view-inquiry">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-inquiry-btn">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Modal -->
-    <div class="modal" id="product-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Add New Product</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="product-form">
-                <div class="form-group">
-                    <label class="form-label">Product Name</label>
-                    <input type="text" id="product-name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">SKU</label>
-                    <input type="text" id="product-sku" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Price</label>
-                    <input type="number" id="product-price" class="form-control" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Quantity</label>
-                    <input type="number" id="product-quantity" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select id="product-category" class="form-control">
-                        <option>Antibiotics</option>
-                        <option>Pain Relievers</option>
-                        <option>Vitamins</option>
-                        <option>Supplements</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0;"
-                        onclick="closeModal('product-modal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Product</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Service Modal -->
-    <div class="modal" id="service-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Add New Service</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="service-form">
-                <div class="form-group">
-                    <label class="form-label">Service Name</label>
-                    <input type="text" id="service-name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea id="service-description" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Price</label>
-                    <input type="text" id="service-price" class="form-control"
-                        placeholder="e.g., $1,500+ or 20% off" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0;"
-                        onclick="closeModal('service-modal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Service</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Reply Review Modal -->
-    <div class="modal" id="reply-review-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Reply to Review</h2>
-                <button class="close-modal" onclick="closeModal('reply-review-modal')">&times;</button>
-            </div>
-            <form id="review-reply-form">
-                <div class="form-group">
-                    <label class="form-label">Reviewer</label>
-                    <input type="text" id="reviewer-name" class="form-control" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Rating</label>
-                    <div id="review-rating" class="stars" style="text-align: left;"></div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Original Review</label>
-                    <textarea id="review-text" class="form-control" rows="4" readonly></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Your Response</label>
-                    <textarea id="review-response" class="form-control" rows="5"
-                        placeholder="Write your public response here..." required></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0;"
-                        onclick="closeModal('reply-review-modal')">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="submit-review-response">Submit
-                        Response</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    @include('layouts.commonjs')
     <script>
+        function fetchMasters(masterTypeId) {
+            const parentSelect = $('#parentName');
+
+            if (!masterTypeId) {
+                parentSelect.html('<option value="" disabled selected>Select parent</option>').prop('disabled', true);
+                return;
+            }
+
+            $.ajax({
+                url: '/api/get-master-parent', // your route
+                method: 'GET',
+                data: {
+                    masterType_id: masterTypeId
+                },
+                success: function(response) {
+                    parentSelect.empty(); // clear previous options
+
+                    if (response.data.length > 0) {
+                        parentSelect.append('<option value="" disabled selected>Select parent</option>');
+                        response.data.forEach(item => {
+                            parentSelect.append(`<option value="${item.id}">${item.name}</option>`);
+                        });
+                        parentSelect.prop('disabled', false);
+                    } else {
+                        parentSelect.append('<option value="" disabled selected>No parents found</option>');
+                        parentSelect.prop('disabled', true);
+                    }
+                },
+                error: function(err) {
+                    console.error(err);
+                    parentSelect.html('<option value="" disabled selected>Error loading data</option>').prop(
+                        'disabled', true);
+                }
+            });
+        }
+        $(document).ready(function() {
+
+            $('#masterSetupForm').on('submit', function(e) {
+                e.preventDefault();
+
+                let form = $(this);
+                let url = form.attr('action');
+                let formData = form.serialize();
+
+                // hide previous errors
+                $('.error-message').hide();
+
+                try {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: response.message,
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                form.trigger('reset');
+                                $('#parentName').html(
+                                    '<option value="" disabled selected>Select parent</option>'
+                                    ).prop('disabled', true);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: response.message || 'Something went wrong'
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            if (xhr.status === 422) { // validation error
+                                let errors = xhr.responseJSON.errors;
+                                let errorMessages = '';
+                                for (let key in errors) {
+                                    if (errors.hasOwnProperty(key)) {
+                                        errorMessages += errors[key].join(' ') + '\n';
+                                        $('#' + key + '-error').text(errors[key][0]).show();
+                                    }
+                                }
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Validation Error',
+                                    text: errorMessages
+                                });
+                            } else {
+                                console.error(xhr.responseText);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An unexpected error occurred.'
+                                });
+                            }
+                        }
+                    });
+                } catch (err) {
+                    console.error('Try-Catch Error:', err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'An unexpected exception occurred.'
+                    });
+                }
+
+            });
+
+        });
+
+
+
         document.addEventListener('DOMContentLoaded', function() {
             // Reusable modal functions
             window.openModal = function(modalId) {
@@ -3456,103 +2156,14 @@
             });
 
             // Master Setup Form with Preview Functionality
-            const form = document.getElementById('masterSetupForm');
+            // const form = document.getElementById('masterSetupForm');
             const previewModal = document.getElementById('preview-modal');
             const previewContentArea = document.getElementById('preview-content-area');
             const confirmSubmitBtn = document.getElementById('confirm-submit-btn');
             const editDetailsBtn = document.getElementById('edit-details-btn');
             const closePreviewModalBtn = document.getElementById('close-preview-modal');
 
-            if (form) {
-                form.addEventListener('reset', function() {
-                    document.querySelectorAll('.input-control').forEach(input => input.classList.remove(
-                        'input-error'));
-                    document.querySelectorAll('.error-message').forEach(error => error.style.display =
-                        'none');
-                });
-
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    let isValid = true;
-
-                    // --- Validation Logic ---
-                    const nameInput = document.getElementById('name');
-                    if (!nameInput.value.trim()) {
-                        nameInput.classList.add('input-error');
-                        document.getElementById('name-error').style.display = 'block';
-                        isValid = false;
-                    } else {
-                        nameInput.classList.remove('input-error');
-                        document.getElementById('name-error').style.display = 'none';
-                    }
-
-                    const typeInput = document.getElementById('masterType');
-                    if (!typeInput.value) {
-                        typeInput.classList.add('input-error');
-                        document.getElementById('type-error').style.display = 'block';
-                        isValid = false;
-                    } else {
-                        typeInput.classList.remove('input-error');
-                        document.getElementById('type-error').style.display = 'none';
-                    }
-
-                    const statusInput = document.getElementById('status');
-                    if (!statusInput.value) {
-                        statusInput.classList.add('input-error');
-                        document.getElementById('status-error').style.display = 'block';
-                        isValid = false;
-                    } else {
-                        statusInput.classList.remove('input-error');
-                        document.getElementById('status-error').style.display = 'none';
-                    }
-
-                    if (isValid) {
-                        // --- Populate and Show Preview Modal ---
-                        const name = nameInput.value;
-                        const masterType = typeInput.value;
-                        const description = document.getElementById('description').value || 'N/A';
-                        const parentNameSelect = document.getElementById('parentName');
-                        const parentName = parentNameSelect.value ? parentNameSelect.options[
-                            parentNameSelect.selectedIndex].text : 'N/A';
-                        const status = statusInput.value;
-
-                        previewContentArea.innerHTML = `
-                            <div style="display: grid; grid-template-columns: 150px 1fr; gap: 15px; font-size: 1rem; align-items: center;">
-                                <strong style="color: #2d3748;">Name:</strong>
-                                <span>${name}</span>
-
-                                <strong style="color: #2d3748;">Master Type:</strong>
-                                <span>${masterType}</span>
-
-                                <strong style="color: #2d3748; align-self: start;">Description:</strong>
-                                <span style="white-space: pre-wrap; word-break: break-word;">${description}</span>
-
-                                <strong style="color: #2d3748;">Parent Name:</strong>
-                                <span>${parentName}</span>
-
-                                <strong style="color: #2d3748;">Status:</strong>
-                                <span style="text-transform: capitalize;">${status}</span>
-                            </div>
-                        `;
-
-                        openModal('preview-modal');
-                    }
-                });
-
-                // --- Listeners for Modal Buttons ---
-                const closeTheModal = () => {
-                    closeModal('preview-modal');
-                };
-
-                confirmSubmitBtn.addEventListener('click', () => {
-                    closeTheModal();
-                    alert('Master setup submitted successfully!');
-                    form.reset();
-                });
-
-                editDetailsBtn.addEventListener('click', closeTheModal);
-                closePreviewModalBtn.addEventListener('click', closeTheModal);
-            }
+            
 
             // --- View Toggling for Master Setup Form ---
             const formViewContainer = document.getElementById('form-view-container');

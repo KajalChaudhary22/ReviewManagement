@@ -11,6 +11,7 @@ class Masters extends Model
     protected $table = 'masters';
     protected $guarded  = [];
 
+
     public function children()
     {
         return $this->hasMany(Masters::class, 'parent_id');
@@ -20,8 +21,16 @@ class Masters extends Model
     {
         return $this->belongsTo(Masters::class, 'parent_id');
     }
+    public function masterTypeDetails()
+    {
+        return $this->belongsTo(MasterType::class, 'master_type_id');
+    }
     public function images()
     {
         return $this->morphOne(Images::class, 'imageable');
+    }
+    public function scopeActiveOnly($query)
+    {
+        return $query->where('status', 'Active');
     }
 }
