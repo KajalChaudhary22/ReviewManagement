@@ -39,7 +39,8 @@
             background-color: var(--secondary-color);
             color: var(--text-dark-color);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevents horizontal scrollbar */
+            overflow-x: hidden;
+            /* Prevents horizontal scrollbar */
         }
 
         .container {
@@ -55,9 +56,10 @@
 
         img {
             max-width: 100%;
-            height: auto; /* Ensures images scale proportionally */
+            height: auto;
+            /* Ensures images scale proportionally */
         }
-        
+
         /* ------------------------- */
         /* ---  2. HEADER & NAVIGATION --- */
         /* ------------------------- */
@@ -70,7 +72,7 @@
             z-index: 1000;
             box-shadow: 0 2px 10px var(--shadow-color);
         }
-        
+
         .site-header .container {
             display: flex;
             justify-content: space-between;
@@ -78,7 +80,8 @@
         }
 
         .logo img {
-            max-height: 35px; /* Control logo height */
+            max-height: 35px;
+            /* Control logo height */
             width: auto;
         }
 
@@ -94,11 +97,12 @@
             position: relative;
             transition: color 0.3s ease;
         }
-        
-        .main-nav a:hover, .main-nav a.active {
+
+        .main-nav a:hover,
+        .main-nav a.active {
             color: var(--primary-color);
         }
-        
+
         .main-nav a::after {
             content: '';
             position: absolute;
@@ -109,21 +113,23 @@
             background-color: var(--primary-color);
             transition: width 0.3s ease;
         }
-        
-        .main-nav a:hover::after, .main-nav a.active::after {
+
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
             width: 100%;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 15px; /* Add gap for spacing */
+            gap: 15px;
+            /* Add gap for spacing */
         }
-        
+
         .profile-dropdown {
             position: relative;
         }
-        
+
         .profile-btn {
             background: none;
             border: none;
@@ -131,7 +137,7 @@
             font-size: 1.5rem;
             color: var(--text-mid-color);
         }
-        
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -144,18 +150,18 @@
             overflow: hidden;
             z-index: 1;
         }
-        
+
         .dropdown-content a {
             color: var(--text-dark-color);
             padding: 12px 16px;
             display: block;
             transition: background-color 0.2s ease;
         }
-        
+
         .dropdown-content a:hover {
             background-color: var(--accent-bg-color);
         }
-        
+
         .profile-dropdown.active .dropdown-content {
             display: block;
         }
@@ -175,7 +181,8 @@
         .hero-section {
             background-color: var(--accent-bg-color);
             text-align: center;
-            padding: 60px 20px; /* Reduced padding for mobile */
+            padding: 60px 20px;
+            /* Reduced padding for mobile */
         }
 
         .hero-section h1 {
@@ -206,7 +213,7 @@
             outline: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .search-bar input:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(10, 71, 169, 0.1);
@@ -226,7 +233,7 @@
         .categories-section {
             padding: 60px 0;
         }
-        
+
         .filter-sort-controls {
             display: flex;
             justify-content: space-between;
@@ -262,7 +269,7 @@
             background-color: var(--primary-color);
             color: var(--secondary-color);
         }
-        
+
         .sort-options select {
             padding: 8px 12px;
             border: 1px solid #ccc;
@@ -270,9 +277,10 @@
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             background-color: var(--secondary-color);
-            width: 200px; /* Give a default width */
+            width: 200px;
+            /* Give a default width */
         }
-        
+
         .category-grid {
             display: grid;
             /* Switched to a more robust responsive grid layout */
@@ -342,7 +350,7 @@
             padding: 50px 0;
             margin: 40px 0;
         }
-        
+
         .cta-banner .container {
             display: flex;
             justify-content: space-between;
@@ -350,13 +358,14 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-       
+
         .cta-banner h2 {
             font-size: 1.8rem;
             font-weight: 600;
-            flex-grow: 1; /* Allow text to take available space */
+            flex-grow: 1;
+            /* Allow text to take available space */
         }
-        
+
         .cta-button {
             background-color: var(--secondary-color);
             color: var(--primary-color);
@@ -364,14 +373,15 @@
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
-            flex-shrink: 0; /* Prevent button from shrinking */
+            flex-shrink: 0;
+            /* Prevent button from shrinking */
         }
 
         .cta-button:hover {
             background-color: var(--accent-bg-color);
             transform: scale(1.05);
         }
-        
+
         /* ======================= FOOTER STYLES ======================= */
         .scizora-main-footer {
             background-color: #111827;
@@ -385,18 +395,20 @@
             gap: 2.5rem;
         }
 
-        .scizora-footer-column > *:not(:last-child) {
+        .scizora-footer-column>*:not(:last-child) {
             margin-bottom: 1rem;
         }
 
-        .scizora-footer-heading, .scizora-footer-logo-heading {
+        .scizora-footer-heading,
+        .scizora-footer-logo-heading {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .scizora-footer-logo-heading img {
-           max-width: 150px; /* Control logo size in footer */
+            max-width: 150px;
+            /* Control logo size in footer */
         }
 
         .scizora-footer-description {
@@ -423,57 +435,87 @@
             font-size: 0.8rem;
         }
 
-        .scizora-social-links { display: flex; gap: 1rem; }
-        .scizora-social-icon { color: #9CA3AF; font-size: 1.2rem; transition: color 0.2s ease; }
-        .scizora-social-icon:hover { color: #ffffff; }
-        .scizora-footer-link { color: #9CA3AF; text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; }
-        .scizora-footer-link:hover { color: #ffffff; }
-        
-        .scizora-newsletter-form { display: flex; max-width: 100%; }
-        .scizora-newsletter-input { 
-            background-color: #1F2937; 
-            color: #ffffff; 
-            padding: 8px 12px; 
-            border: 1px solid #374151; 
-            border-radius: 4px 0 0 4px; 
-            outline: none; 
-            width: 100%; 
-            font-size: 0.875rem; 
+        .scizora-social-links {
+            display: flex;
+            gap: 1rem;
         }
-        .scizora-newsletter-button { 
-            background-color: #2563EB; 
-            color: #ffffff; 
-            padding: 8px 12px; 
-            border: none; 
-            border-radius: 0 4px 4px 0; 
-            cursor: pointer; 
+
+        .scizora-social-icon {
+            color: #9CA3AF;
+            font-size: 1.2rem;
+            transition: color 0.2s ease;
+        }
+
+        .scizora-social-icon:hover {
+            color: #ffffff;
+        }
+
+        .scizora-footer-link {
+            color: #9CA3AF;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .scizora-footer-link:hover {
+            color: #ffffff;
+        }
+
+        .scizora-newsletter-form {
+            display: flex;
+            max-width: 100%;
+        }
+
+        .scizora-newsletter-input {
+            background-color: #1F2937;
+            color: #ffffff;
+            padding: 8px 12px;
+            border: 1px solid #374151;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 100%;
+            font-size: 0.875rem;
+        }
+
+        .scizora-newsletter-button {
+            background-color: #2563EB;
+            color: #ffffff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
             transition: background-color 0.2s ease;
         }
-        .scizora-newsletter-button:hover { background-color: #1D4ED8; }
+
+        .scizora-newsletter-button:hover {
+            background-color: #1D4ED8;
+        }
 
         /* ------------------------- */
         /* ---  7. RESPONSIVENESS --- */
         /* ------------------------- */
-        
+
         /* Tablets and Laptops (up to 1024px) */
         @media (min-width: 768px) {
             .scizora-footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
         @media (min-width: 1024px) {
             .scizora-footer-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-        
+
         /* Tablets and below (up to 992px) */
         @media (max-width: 992px) {
             .main-nav {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 100%; /* Position below header */
+                top: 100%;
+                /* Position below header */
                 left: 0;
                 width: 100%;
                 background: var(--secondary-color);
@@ -482,55 +524,68 @@
                 border-top: 1px solid #e0e0e0;
                 gap: 0;
             }
+
             .main-nav a {
                 padding: 12px 0;
                 border-bottom: 1px solid #f0f0f0;
             }
+
             .main-nav a:last-child {
                 border-bottom: none;
             }
+
             .main-nav.active {
                 display: flex;
             }
+
             .mobile-toggle {
                 display: block;
             }
+
             .hero-section h1 {
                 font-size: 2.5rem;
             }
+
             /* .category-grid is handled by auto-fit */
         }
-        
+
         /* Mobile phones (up to 767px) */
         @media (max-width: 767px) {
             .filter-sort-controls {
                 flex-direction: column;
                 align-items: stretch;
             }
+
             .sort-options {
                 width: 100%;
             }
+
             .sort-options select {
                 width: 100%;
             }
+
             .cta-banner .container {
                 flex-direction: column;
                 text-align: center;
             }
-             .scizora-footer-grid, .cta-banner .container {
+
+            .scizora-footer-grid,
+            .cta-banner .container {
                 text-align: center;
             }
-             .scizora-social-links {
+
+            .scizora-social-links {
                 justify-content: center;
             }
+
             .hero-section h1 {
                 font-size: 2rem;
             }
+
             .hero-section p {
                 font-size: 1rem;
             }
         }
-
     </style>
 </head>
 
@@ -539,12 +594,12 @@
     <!-- ======================= HEADER ======================= -->
     <header class="site-header">
         <div class="container">
-            <a href="{{ url('/') }}" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}"
-                    alt="logo" width="150" height="50"></a>
+            <a href="{{ url('/') }}" class="text-xl md:text-2xl font-bold"><img
+                    src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="150" height="50"></a>
             <nav class="main-nav" id="mainNav">
                 <a href="{{ url('/') }}">Home</a>
                 <a href="{{ route('categories') }}" class="active">Categories</a>
-                
+
                 <a href="{{ route('about.us') }}">About Us</a>
                 <a href="{{ route('contact.us') }}">Contact</a>
             </nav>
@@ -583,10 +638,15 @@
                 <div class="filter-sort-controls">
                     <div class="filter-tags" id="filterTags">
                         <button class="active" data-filter="all">All</button>
-                        <button data-filter="pharma">Pharma</button>
+                        {{-- <button data-filter="pharma">Pharma</button>
                         <button data-filter="diagnostics">Diagnostics</button>
                         <button data-filter="nutrition">Food & Nutrition</button>
-                        <button data-filter="lab">Lab Supplies</button>
+                        <button data-filter="lab">Lab Supplies</button> --}}
+                        @foreach($productCategoies as $category)
+                            <button data-filter="{{ strtolower(str_replace(' ', '-', $category?->name)) }}">
+                                {{ $category?->name }}
+                            </button>
+                        @endforeach
                     </div>
                     <div class="sort-options">
                         <select id="sortCategories">
@@ -618,84 +678,16 @@
 
 
     <script>
+        const categoryRouteTemplate = "{{ url('/category-products') }}"
+            + "?ty={{ custom_encrypt('CategoryProducts') }}"
+            + "&id=:categoryId"
+            + "&subCat=:subCategoryId";
         document.addEventListener('DOMContentLoaded', () => {
 
             // ===================================
             // --- 1. DATA FOR CATEGORIES ---
             // ===================================
-            const categoryData = [{
-                    id: 1,
-                    icon: 'fa-solid fa-pills',
-                    title: 'Pharmaceuticals',
-                    description: 'Active ingredients, excipients, and finished dosage forms for drug manufacturing.',
-                    tags: ['pharma'],
-                    popularity: 95,
-                    dateAdded: '2023-10-15'
-                },
-                {
-                    id: 2,
-                    icon: 'fa-solid fa-microscope',
-                    title: 'Diagnostics & Testing',
-                    description: 'Reagents, kits, and instruments for clinical diagnostics and research testing.',
-                    tags: ['diagnostics', 'lab'],
-                    popularity: 92,
-                    dateAdded: '2023-11-01'
-                },
-                {
-                    id: 3,
-                    icon: 'fa-solid fa-apple-whole',
-                    title: 'Food & Nutrition',
-                    description: 'Nutraceuticals, food additives, and specialty ingredients for the health industry.',
-                    tags: ['nutrition'],
-                    popularity: 80,
-                    dateAdded: '2023-09-20'
-                },
-                {
-                    id: 4,
-                    icon: 'fa-solid fa-flask-vial',
-                    title: 'Lab Chemicals',
-                    description: 'High-purity solvents, reagents, and standards for analytical and research labs.',
-                    tags: ['lab', 'pharma'],
-                    popularity: 88,
-                    dateAdded: '2024-01-10'
-                },
-                {
-                    id: 5,
-                    icon: 'fa-solid fa-dna',
-                    title: 'Biotechnology',
-                    description: 'Cell culture media, enzymes, and molecular biology tools for biotech innovation.',
-                    tags: ['diagnostics', 'pharma'],
-                    popularity: 90,
-                    dateAdded: '2023-12-05'
-                },
-                {
-                    id: 6,
-                    icon: 'fa-solid fa-vials',
-                    title: 'Lab Consumables',
-                    description: 'Pipettes, vials, gloves, and other essential supplies for daily lab operations.',
-                    tags: ['lab'],
-                    popularity: 85,
-                    dateAdded: '2023-08-11'
-                },
-                {
-                    id: 7,
-                    icon: 'fa-solid fa-truck-medical',
-                    title: 'Medical Devices',
-                    description: 'Surgical instruments, monitoring equipment, and therapeutic devices.',
-                    tags: ['diagnostics'],
-                    popularity: 75,
-                    dateAdded: '2024-02-01'
-                },
-                {
-                    id: 8,
-                    icon: 'fa-solid fa-seedling',
-                    title: 'Agrochemicals',
-                    description: 'Specialty chemicals for crop protection, fertilizers, and agricultural research.',
-                    tags: ['nutrition'],
-                    popularity: 70,
-                    dateAdded: '2023-11-25'
-                }
-            ];
+            const categoryData = @json($productSubCategories);
 
             let currentCategories = [...categoryData];
 
@@ -727,14 +719,19 @@
 
                 categories.forEach(category => {
                     const card = document.createElement('div');
+                    console.log(category.id, category.cat_id);
                     card.className = 'category-card';
+                    // build route dynamically
+                    const viewMoreUrl = categoryRouteTemplate
+                        .replace(':categoryId', category.cat_id)
+                        .replace(':subCategoryId', category.id);
                     card.innerHTML = `
                     <i class="card-icon ${category.icon}"></i>
                     <div>
                         <h3 class="card-title">${category.title}</h3>
                         <p class="card-description">${category.description}</p>
                     </div>
-                    <a href="#" class="card-button">View More</a>
+                    <a href="${viewMoreUrl}" class="card-button">View More</a>
                 `;
                     categoryGrid.appendChild(card);
                 });
