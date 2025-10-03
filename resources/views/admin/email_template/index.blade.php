@@ -1665,21 +1665,23 @@
     <!-- Template Edit Modal -->
     <div class="modal" id="edit-template-modal">
         <div class="template-modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Template</h2>
+                <button class="close-modal">&times;</button>
+            </div>
             <form id="editTemplateForm" class="reply-form">
                 @csrf
                 <input type="hidden" id="edit-emailId" name="id">
-                <div class="modal-header">
-                    <h2 class="modal-title">Edit Template</h2>
-                    <button class="close-modal">&times;</button>
-                </div>
                 <div class="form-group">
                     <label for="edit-eventName"><i class="fas fa-calendar-alt"></i> Event Name</label>
-                    <input type="text" id="edit-eventName"  class="form-control" placeholder="Enter event name">
+                    <input type="text" id="edit-eventName" class="form-control" placeholder="Enter event name"
+                        disabled>
                 </div>
                 <div class="form-group">
                     <label for="edit-emailSubject"><i class="fas fa-tag"></i> Email Variables</label>
                     <input type="text" id="edit-emailVariables" class="form-control"
-                        placeholder="Enter email variables" readonly>
+                        placeholder="Enter email variables" disabled>
                 </div>
                 <div class="form-group">
                     <label for="edit-emailSubject"><i class="fas fa-tag"></i> Email Subject</label>
@@ -1694,7 +1696,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #f0f0f0;"
+                    <button type="button" class="btn close-modal" style="background-color: #f0f0f0;"
                         id="cancel-edit-template">Cancel</button>
                     <button type="submit" class="btn btn-primary" id="save-edited-template">Save Changes</button>
                 </div>

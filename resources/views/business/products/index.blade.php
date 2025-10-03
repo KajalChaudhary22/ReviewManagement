@@ -32,7 +32,8 @@
                 <div class="table-container">
                     <div class="table-header">
                         <h2 class="section-title">Your Products </h2>
-                        <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
+                       <a href="{{ route('business.product.add',['ty' => custom_encrypt('BusinessProductAdd')]) }}"> <button class="btn btn-primary">Add New Product</button></a>
+                        {{-- <button class="btn btn-primary" id="add-product-btn">Add New Product</button> --}}
                     </div>
 
                     <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
@@ -143,6 +144,7 @@
 
    
 @include('business.products.js')
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Settings Tabs

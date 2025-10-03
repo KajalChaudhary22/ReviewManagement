@@ -1,49 +1,37 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\{
-    CustomerAuthController,
-    ForgotPasswordController,
-    BusinessAuthController,
-    AdminAuthController,
-    ResetPasswordController,
-    AuthController
-};
-use App\Http\Controllers\Api\Admin\{
-    UserManagementController,
-    BusinessManagementController,
-    AdminDashboardController,
-    ReviewModerationController,
-    CampaignsController,
-    MasterSetupController,
-    SettingController,
-    AnalyticsReportsController,
-    EmailTemplateController
-};
-use App\Http\Controllers\Api\Business\{
-    BusinessDashboardController,
-    BusinessProfileController,
-    ProductController,
-    ServiceController,
-    InquiryController,
-    ReviewController,
-    AnalyticsController,
-    BusinessSettingController
-};
-
-use App\Http\Controllers\Api\Customer\{
-    CustomerDashboardController,
-    CustomerProfileController,
-    CustomerInquiriesController,
-    CustomerNotificationController,
-    CustomerReviewsController,
-    CustomerSettingController
-};
+use App\Http\Controllers\Api\Admin\AdminDashboardController;
+use App\Http\Controllers\Api\Admin\AnalyticsReportsController;
+use App\Http\Controllers\Api\Admin\BusinessManagementController;
+use App\Http\Controllers\Api\Admin\CampaignsController;
+use App\Http\Controllers\Api\Admin\EmailTemplateController;
+use App\Http\Controllers\Api\Admin\MasterSetupController;
+use App\Http\Controllers\Api\Admin\ReviewModerationController;
+use App\Http\Controllers\Api\Admin\SettingController;
+use App\Http\Controllers\Api\Admin\UserManagementController;
+use App\Http\Controllers\Api\Auth\AdminAuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\BusinessAuthController;
+use App\Http\Controllers\Api\Auth\CustomerAuthController;
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
+use App\Http\Controllers\Api\Business\AnalyticsController;
+use App\Http\Controllers\Api\Business\BusinessDashboardController;
+use App\Http\Controllers\Api\Business\BusinessProfileController;
+use App\Http\Controllers\Api\Business\BusinessSettingController;
+use App\Http\Controllers\Api\Business\InquiryController;
+use App\Http\Controllers\Api\Business\ProductController;
+use App\Http\Controllers\Api\Business\ReviewController;
+use App\Http\Controllers\Api\Business\ServiceController;
+use App\Http\Controllers\Api\Customer\CustomerDashboardController;
+use App\Http\Controllers\Api\Customer\CustomerSettingController;
+use App\Http\Controllers\Api\HomeController as ApiHomeController;
 use App\Http\Controllers\HomeController;
 use App\Models\Business;
 use App\Models\Product;
-use App\Http\Controllers\Api\HomeController as ApiHomeController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -59,8 +47,6 @@ use App\Http\Controllers\Api\HomeController as ApiHomeController;
 //     return $request->user();
 // });
 
-
-
 Route::prefix('admin')->group(function () {
     Route::post('login', [AdminAuthController::class, 'login']);
 
@@ -69,7 +55,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/business-approval/{id}', [AdminDashboardController::class, 'updateApproval']);
         Route::get('/business/{id}', [AdminDashboardController::class, 'viewBusiness']);
 
-        //user Management Routes
+        // user Management Routes
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         Route::get('/users-list', [UserManagementController::class, 'usersList'])->name('users.list');
         Route::get('/user-view/{id}', [UserManagementController::class, 'userView'])->name('user.view');
@@ -79,7 +65,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/user-add', [UserManagementController::class, 'userAdd']);
 
         // Business Management Routes
-        //Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
+        // Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
         Route::get('/business-list', [BusinessManagementController::class, 'businessList']);
         Route::get('/business-view/{id}', [BusinessManagementController::class, 'businessView'])->name('business.view');
         Route::put('/business-update/{id}', [BusinessManagementController::class, 'businessUpdate'])->name('business.update');
@@ -95,19 +81,16 @@ Route::prefix('admin')->group(function () {
 
         // Analytics Reports Routes
         Route::get('/analytics-reports', [AnalyticsReportsController::class, 'index'])->name('analytics.reports.index');
+        Route::get('/analytics-data', [AnalyticsReportsController::class, 'getAnalyticsData'])->name('admin.analytics.data');
         Route::get('/email-templates', [EmailTemplateController::class, 'yajaraList'])->name('admin.email.templates');
         Route::put('/update/email-templates/{id}', [EmailTemplateController::class, 'update'])->name('admin.emailTemplates.update');
         // Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
         // Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
 
-
- 
-
         // Route::get('/campaigns', [CampaignsController::class, 'index'])->name('campaigns.index');
         Route::post('/save-master', [MasterSetupController::class, 'save'])->name('master.setup.save');
         Route::get('/get-master-data', [MasterSetupController::class, 'getMasterSetupData'])->name('get.masterSetup.data');
         Route::delete('/master-delete/{id}', [MasterSetupController::class, 'delete']);
-       
 
         // Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
@@ -124,11 +107,11 @@ Route::prefix('business')->group(function () {
         Route::get('/profile', [BusinessProfileController::class, 'editProfile'])->name('business.profile.edit');
         Route::post('/update-profile', [BusinessDashboardController::class, 'updateProfile']);
 
-
-
         // Product Routes
         Route::get('/product-list', [ProductController::class, 'index'])->name('business.product.list');
         Route::get('/get-product-data', [ProductController::class, 'getProductsData'])->name('business.product.data');
+        
+        Route::get('/add-product', [ProductController::class, 'addProductPage'])->name('business.product.add');
         Route::post('/products/store', [ProductController::class, 'saveProduct'])->name('business.products.store');
         Route::get('/products/{id}', [ProductController::class, 'show'])->name('business.products.show');
         Route::put('/business/products/{id}', [ProductController::class, 'update'])->name('business.products.update');
@@ -146,7 +129,6 @@ Route::prefix('business')->group(function () {
         Route::post('/inquiries/{id}', [InquiryController::class, 'update'])->name('business.inquiries.update');
         Route::get('/inquiries-export', [InquiryController::class, 'export'])->name('business.inquiries.export');
 
-
         // Review Routes
         Route::get('/reviews-list', [ReviewController::class, 'index'])->name('business.reviews.list');
         Route::get('/reviews/data', [ReviewController::class, 'getReviews'])->name('business.reviews.data');
@@ -155,7 +137,6 @@ Route::prefix('business')->group(function () {
 
         // Analytics Routes
         Route::get('/analytics', [AnalyticsController::class, 'index'])->name('business.analytics');
-
 
         Route::get('/settings', [BusinessSettingController::class, 'index'])->name('business.settings');
         Route::post('/save-settings', [BusinessSettingController::class, 'save'])->name('business.save.settings');
@@ -167,11 +148,8 @@ Route::prefix('customer')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         // Route::get('/dashboard', [CustomerDashboardController::class, 'dashboard'])->name('customer.dashboard.show');
 
-
-
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
         Route::post('/profile', [CustomerDashboardController::class, 'profileUpdate'])->name('customer.profile.update');
-
 
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
 
@@ -180,11 +158,7 @@ Route::prefix('customer')->group(function () {
         Route::post('/update-password', [CustomerSettingController::class, 'updatePassword'])->name('customer.updatePassword');
         Route::post('/update-notifications', [CustomerSettingController::class, 'updateNotifications'])->name('customer.updateNotifications');
 
-
-
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
-
-
 
         Route::get('/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile.edit');
     });
@@ -193,6 +167,7 @@ Route::get('/get-master-parent', [MasterSetupController::class, 'getMasterParent
 
 Route::post('/contact/store', [ApiHomeController::class, 'store']);
 Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
+Route::get('/subcategories/{id}', [ProductController::class, 'getSubcategories'])->name('get.subcategories.data');
 
 // Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');
 

@@ -26,7 +26,7 @@ class BusinessProfileController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         } else {
-            $businessId = Auth::user()->business_id;
+            $businessId = Auth::user()?->business_id;
             $profileData = Business::find($businessId);
 
             // return view('business.profile.edit',compact('profileData'));
@@ -43,6 +43,7 @@ class BusinessProfileController extends Controller
             } else {
                 $locations = collect();
             }
+            // dd($profileData);
             return view('business.profile.edit', compact('profileData', 'industries', 'locations'));
         }
     }
