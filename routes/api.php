@@ -115,7 +115,8 @@ Route::prefix('business')->group(function () {
         Route::post('/products/store', [ProductController::class, 'saveProduct'])->name('business.products.store');
         Route::get('/products/{id}', [ProductController::class, 'show'])->name('business.products.show');
         Route::put('/business/products/{id}', [ProductController::class, 'update'])->name('business.products.update');
-        Route::delete('/business/products/{id}', [ProductController::class, 'destroy'])->name('business.products.delete');
+        // Route::delete('/business/products/{id}', [ProductController::class, 'destroy'])->name('business.products.delete');
+        Route::delete('/resource/delete/{id}', [ProductController::class, 'deleteResource'])->name('resource.delete');
 
         // Service Routes
         Route::get('/get-service-data', [ServiceController::class, 'getServiceData'])->name('business.service.data');
@@ -168,6 +169,7 @@ Route::get('/get-master-parent', [MasterSetupController::class, 'getMasterParent
 Route::post('/contact/store', [ApiHomeController::class, 'store']);
 Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
 Route::get('/subcategories/{id}', [ProductController::class, 'getSubcategories'])->name('get.subcategories.data');
+
 
 // Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');
 

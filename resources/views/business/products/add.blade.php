@@ -548,7 +548,7 @@
         }
 
         .resource-item-actions .btn-remove {
-            background-color: var(--danger-red);
+            background-color: red;
             color: white;
             border: none;
             width: 38px;
@@ -661,16 +661,23 @@
         {{-- @include('business.layouts.navbar') --}}
 
         <!-- Content Area -->
-
+        @include('sweetalert::alert')
         <div class="content">
             <!-- Products & Services Content -->
             <div id="products-content" class="content-section">
                 <div class="content-header">
                     <div>
-                        <h1 class="welcome-text">Add New Product / Service</h1>
-                        <p class="date-text">Tuesday, 20 February 2024</p>
+                        <h1 class="welcome-text">
+                            @if ($productData)
+                                Edit
+                            @else
+                                Add New
+                            @endif Product / Service
+                        </h1>
+                        <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
                     </div>
-                    <a href="Products-&-Services.html"><button class="btn btn-secondary">
+                    <a href="{{ route('business.product.list', ['ty' => custom_encrypt('BusinessProductList')]) }}"><button
+                            class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Back to Products
                         </button></a>
                 </div>
@@ -679,22 +686,25 @@
                     <form id="product-service-form" action="{{ route('business.products.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        @if ($productData)
+                            <input type="hidden" name="product_id" value="{{ custom_encrypt($productData?->id) }}">
+                        @endif
                         <div class="form-group">
                             <label class="form-label">Product / Service Name</label>
                             <input type="text" class="form-control" id="product-name"
-                                value="{{ old('product_name') }}" placeholder="Enter product or service name" required
-                                name="product_name">
+                                value="{{ old('product_name', $productData?->name) }}"
+                                placeholder="Enter product or service name" required name="product_name">
                             @if (isset($errors) && $errors->has('product_name'))
                                 <small class="text-danger">{{ $errors->first('product_name') }}</small>
                             @endif
-                            
+
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">SKU</label>
                             <input type="text" class="form-control" id="product-sku" placeholder="Enter SKU" required
-                                name="sku" value="{{ old('sku') }}">
-                                @if (isset($errors) && $errors->has('sku'))
+                                name="sku" value="{{ old('sku', $productData?->sku) }}">
+                            @if (isset($errors) && $errors->has('sku'))
                                 <small class="text-danger">{{ $errors->first('sku') }}</small>
                             @endif
                             {{-- @error('sku')
@@ -706,7 +716,9 @@
                             <select class="form-control" id="product-category" required name="product_category">
                                 <option value="" disabled selected>Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category?->id }}">{{ $category?->name }}</option>
+                                    <option value="{{ $category?->id }}"
+                                        {{ $productData?->productCategory_id == $category?->id ? 'selected' : '' }}>
+                                        {{ $category?->name }}</option>
                                 @endforeach
                             </select>
                             @if (isset($errors) && $errors->has('product_category'))
@@ -719,6 +731,12 @@
                             <select class="form-control" id="product-subcategory" name="subcategory_id"
                                 data-selected="{{ old('subcategory_id', $product->subcategory_id ?? '') }}">
                                 <option value="">Select Subcategory</option>
+                                @foreach ($subcategories as $subcategory)
+                                    <option value="{{ $subcategory?->id }}"
+                                        {{ old('subcategory_id', $productData?->subcategory_id) == $subcategory?->id ? 'selected' : '' }}>
+                                        {{ $subcategory?->name }}
+                                    </option>
+                                @endforeach
                             </select>
                             @if (isset($errors) && $errors->has('subcategory_id'))
                                 <small class="text-danger">{{ $errors->first('subcategory_id') }}</small>
@@ -727,16 +745,18 @@
                         <div class="form-group">
                             <label class="form-label">Quantity</label>
                             <input type="number" class="form-control" id="product-quantity"
-                                placeholder="Enter Quantity" required name="quantity" min="0">
-                                @if (isset($errors) && $errors->has('quantity'))
+                                placeholder="Enter Quantity" required name="quantity" min="0"
+                                value="{{ old('quantity', $productData?->quantity) }}">
+                            @if (isset($errors) && $errors->has('quantity'))
                                 <small class="text-danger">{{ $errors->first('quantity') }}</small>
                             @endif
                         </div>
                         <div class="form-group">
                             <label class="form-label">Price</label>
                             <input type="number" class="form-control" id="product-price" placeholder="Enter Price"
-                                required name="price" step="0.01" min="0" >
-                                @if (isset($errors) && $errors->has('price'))
+                                required name="price" step="0.01" min="0"
+                                value="{{ old('price', $productData?->price) }}">
+                            @if (isset($errors) && $errors->has('price'))
                                 <small class="text-danger">{{ $errors->first('price') }}</small>
                             @endif
                         </div>
@@ -745,11 +765,13 @@
                             <label class="form-label">Item Type</label>
                             <div class="radio-group">
                                 <div class="radio-option">
-                                    <input type="radio" id="product-type" name="item_type" value="product" checked>
+                                    <input type="radio" id="product-type" name="item_type" value="Product" checked
+                                        {{ old('item_type', $productData?->item_type) == 'Product' ? 'checked' : '' }}>
                                     <label for="product-type">Product</label>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" id="service-type" name="item_type" value="service">
+                                    <input type="radio" id="service-type" name="item_type" value="Service"
+                                        {{ old('item_type', $productData?->item_type) == 'Service' ? 'checked' : '' }}>
                                     <label for="service-type">Service</label>
                                 </div>
                             </div>
@@ -761,32 +783,48 @@
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Click to upload or drag and drop</p>
                                 <p>PNG, JPG, GIF up to 10MB</p>
-                                <input type="file" class="file-input" id="product-images" multiple accept="image/*">
+                                <input type="file" class="file-input" id="product-images" multiple
+                                    accept="image/*" name="product_images[]">
                             </div>
-                            <div id="file-list" style="margin-top: 10px;"></div>
+                            <div id="file-list" style="margin-top: 10px;">
+                                @if ($productData?->images)
+                                    @foreach ($productData?->images as $image)
+                                        <div class="file-item">
+                                            <a href="{{ asset($image?->path) }}" target="_blank"><i
+                                                    class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <span>{{ basename($image?->path) }}</span>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Pharma Certificates</label>
                             <div class="checkbox-group">
                                 <div class="checkbox-option">
-                                    <input type="checkbox" id="gmp-cert" name="certificates[]" value="gmp">
+                                    <input type="checkbox" id="gmp-cert" name="certificates[]" value="gmp"
+                                        {{ in_array('gmp', old('certificates', $existingCerts)) ? 'checked' : '' }}>
                                     <label for="gmp-cert">GMP (Good Manufacturing Practice)</label>
                                 </div>
                                 <div class="checkbox-option">
-                                    <input type="checkbox" id="fda-cert" name="certificates[]" value="fda">
+                                    <input type="checkbox" id="fda-cert" name="certificates[]" value="fda"
+                                        {{ in_array('fda', old('certificates', $existingCerts)) ? 'checked' : '' }}>
                                     <label for="fda-cert">FDA Approved</label>
                                 </div>
                                 <div class="checkbox-option">
-                                    <input type="checkbox" id="iso-cert" name="certificates[]" value="iso">
+                                    <input type="checkbox" id="iso-cert" name="certificates[]" value="iso"
+                                        {{ in_array('iso', old('certificates', $existingCerts)) ? 'checked' : '' }}>
                                     <label for="iso-cert">ISO 9001</label>
                                 </div>
                                 <div class="checkbox-option">
-                                    <input type="checkbox" id="who-cert" name="certificates[]" value="who">
+                                    <input type="checkbox" id="who-cert" name="certificates[]" value="who"
+                                        {{ in_array('who', old('certificates', $existingCerts)) ? 'checked' : '' }}>
                                     <label for="who-cert">WHO Certified</label>
                                 </div>
                                 <div class="checkbox-option">
-                                    <input type="checkbox" id="other-cert" name="certificates[]" value="other">
+                                    <input type="checkbox" id="other-cert" name="certificates[]" value="other"
+                                        {{ in_array('other', old('certificates', $existingCerts)) ? 'checked' : '' }}>
                                     <label for="other-cert">Other</label>
                                 </div>
                             </div>
@@ -794,31 +832,61 @@
 
                         <div class="form-group">
                             <label class="form-label">Overview</label>
-                            <textarea id="overview-editor" class="form-control" name="overview"></textarea>
+                            <textarea id="overview-editor" class="form-control" name="overview">{!! $productData?->overview !!}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Specifications</label>
-                            <textarea id="specifications-editor" class="form-control" name="specification"></textarea>
+                            <textarea id="specifications-editor" class="form-control" name="specification">{!! $productData?->specification !!}</textarea>
                         </div>
                         <div class="tab-content" id="resources">
                             <h2 class="section-title">Downloads & Resources</h2>
                             <div id="resource-repeater-container">
+                                {{-- @dd($productData?->resources) --}}
+                                @if ($productData?->resources)
+                                    @foreach ($productData?->resources as $resource)
+                                        <div class="resource-item" data-id="{{ $resource->id }}">
+                                            <div class="form-group">
+                                                <label>Resource Title</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="e.g., Product Datasheet" name="resource_title[]"
+                                                    value="{{ $resource->resource_name }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Upload File</label>
+                                                @if ($resource->resource_url)
+                                                    <a href="{{ asset($resource->resource_url) }}" target="_blank"><i
+                                                            class="fa fa-eye" aria-hidden="true"></i></a>
+                                                @endif
+                                                <input type="file" class="form-control" name="resource_file[]"
+                                                    {{ $resource->resource_url ? '' : 'required' }}>
+                                            </div>
+                                            <div class="resource-item-actions">
+                                                <button type="button" class="btn-remove resource-deleteBtn"
+                                                    style=""><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
                                 <div class="resource-item">
                                     <div class="form-group">
                                         <label>Resource Title</label>
                                         <input type="text" class="form-control"
-                                            placeholder="e.g., Product Datasheet" name="resource_title[]">
+                                            placeholder="e.g., Product Datasheet" name="resource_title[]"
+                                            value="" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Upload File</label>
-                                        <input type="file" class="form-control" name="resource_file[]">
+                                       
+                                        <input type="file" class="form-control" name="resource_file[]"
+                                            >
                                     </div>
                                     <div class="resource-item-actions">
-                                        <button type="button" class="btn-remove" style="visibility: hidden;"><i
-                                                class="fas fa-trash"></i></button>
+                                        <button type="button" class="btn-remove"
+                                            style="visibility: hidden;"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             <button type="button" id="add-resource-btn" class="btn-add-more"><i
                                     class="fas fa-plus"></i> Add More Resources</button>
@@ -848,6 +916,7 @@
     <!-- Overlay for mobile menu -->
     <div class="sidebar-overlay"></div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- @include('layouts.commonjs') --}}
     <script>
         $(document).ready(function() {
             // Resource Repeater Logic
@@ -861,13 +930,66 @@
 
                 resourceContainer.append(newItem);
             });
-            $('#resource-repeater-container').on('click', '.btn-remove', function() {
-                if ($('#resource-repeater-container .resource-item').length > 1) {
-                    $(this).closest('.resource-item').remove();
+            $('#resource-repeater-container').on('click', '.resource-deleteBtn', function() {
+                let $row = $(this).closest('.resource-item');
+                let resourceId = $row.data(
+                'id'); // assume you store existing resource ID in data-id attribute
+
+                if ($('#resource-repeater-container .resource-item').length <= 1) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'At least one resource is required',
+                    });
+                    return;
+                }
+
+                if (resourceId) {
+                    // 🔹 Existing resource: confirm deletion
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/api/business/resource/delete/' +
+                                resourceId, // your backend route
+                                type: 'DELETE',
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        $row.remove();
+                                        Swal.fire('Deleted!', response.message,
+                                            'success');
+                                    } else {
+                                        Swal.fire('Error!', response.message, 'error');
+                                    }
+                                },
+                                error: function(xhr) {
+                                    Swal.fire('Error!', 'Something went wrong.',
+                                        'error');
+                                }
+                            });
+                        }
+                    });
                 } else {
-                    alert("At least one resource item is required.");
+                    // 🔹 New resource row: just remove
+                    $row.remove();
                 }
             });
+            // $('#resource-repeater-container').on('click', '.btn-remove', function() {
+            //     if ($('#resource-repeater-container .resource-item').length > 1) {
+            //         $(this).closest('.resource-item').remove();
+            //     } else {
+            //         alert("At least one resource item is required.");
+            //     }
+            // });
 
             function loadSubcategories(categoryId, selectedSubcategoryId = null) {
                 if (categoryId) {
@@ -903,7 +1025,7 @@
             });
             let categoryId = $('#product-category').val();
             let selectedSubcategoryId = $('#product-subcategory').data('selected');
-            loadSubcategories(categoryId, selectedSubcategoryId);
+            // loadSubcategories(categoryId, selectedSubcategoryId);
         });
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Summernote editors
@@ -1034,18 +1156,18 @@
             // });
 
             // Back button functionality
-            document.getElementById('back-btn').addEventListener('click', function() {
-                // In a real application, this would navigate back to the products list
-                alert('Navigating back to products list...');
-            });
+            // document.getElementById('back-btn').addEventListener('click', function() {
+            //     // In a real application, this would navigate back to the products list
+            //     alert('Navigating back to products list...');
+            // });
 
             // Cancel button functionality
-            document.getElementById('cancel-btn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
-                    // In a real application, this would navigate back to the products list
-                    alert('Cancelled. Navigating back to products list...');
-                }
-            });
+            // document.getElementById('cancel-btn').addEventListener('click', function() {
+            //     if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+            //         // In a real application, this would navigate back to the products list
+            //         alert('Cancelled. Navigating back to products list...');
+            //     }
+            // });
 
             // Mobile Menu Toggle
             const menuToggle = document.querySelector('.menu-toggle');

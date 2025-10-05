@@ -7,16 +7,14 @@ use App\Models\Masters;
 use App\Models\MasterType;
 use App\Models\{
     Product,
-    ProductCertificates,
-    ProductResources,
+    ProductResources
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\{
-    Log,
-    Validator
-};
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
@@ -83,47 +81,95 @@ class ProductController extends Controller
         }
     }
 
-    // 🔹 New function for DataTables
     public function getProductsData(Request $request)
     {
-        if ($request->ajax()) {
-            $query = Product::with('categoryDetails');
+        // dd($request->all());
+        $query = Product::with(['categoryDetails:id,name'])
+            ->select('id', 'name', 'productCategory_id', 'type', 'price', 'status');
 
-            // Search filter
-            if ($request->search) {
-                $search = $request->search;
-                $query->where(function ($q) use ($search) {
-                    $q->where('name', 'like', "%$search%")
-                        ->orWhere('sku', 'like', "%$search%");
-                });
-            }
-
-            // Category filter
-            if ($request->category_id && $request->category_id != 'All') {
-                $query->where('productCategory_id', $request->category_id);
-            }
-            // 🔄 Sorting
-            if ($request->sort == 'oldest') {
-                $query->orderBy('created_at', 'asc');
-            } elseif ($request->sort == 'name') {
-                $query->orderBy('name', 'asc');
-            } else {
-                $query->orderBy('created_at', 'desc'); // newest default
-            }
-            $products = $query->paginate(6); // 6 cards per page
-            // Encrypt IDs before returning
-            $products->getCollection()->transform(function ($item) {
-                $item->enc_id = custom_encrypt($item->id);
-
-                return $item;
-            });
-
-            return response()->json($products);
-
+        // 🔹 Apply filters if provided
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
-        return response()->json(['message' => 'Invalid request'], 400);
+        if ($request->filled('category_id')) {
+            $query->where('productCategory_id', $request->category_id);
+        }
+
+        if ($request->filled('sort')) {
+            if ($request->sort == 'Oldest') {
+                $query->orderBy('id', 'asc');
+            } elseif ($request->sort == 'Name') {
+                $query->orderBy('name', 'desc');
+            } else {
+                $query->latest('id');
+            }
+        } else {
+            $query->latest('id');
+        }
+
+        // dd($query->get());
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->editColumn('category', function ($row) {
+                return $row->categoryDetails?->name ?? '-';
+            })
+            ->editColumn('item_type', function ($row) {
+                return ucfirst($row->type);
+            })
+            ->editColumn('status', function ($row) {
+                $badgeClass = $row->status === 'Active' ? 'success' : 'danger';
+
+                return "<span class='badge bg-{$badgeClass}'>{$row->status}</span>";
+            })
+            ->addColumn('actions', function ($row) {
+                return view('business.products.actions', ['row' => $row])->render();
+            })
+            ->rawColumns(['status', 'actions'])
+            ->make(true);
     }
+
+    // 🔹 New function for DataTables
+    // public function getProductsData(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $query = Product::with('categoryDetails');
+
+    //         // Search filter
+    //         if ($request->search) {
+    //             $search = $request->search;
+    //             $query->where(function ($q) use ($search) {
+    //                 $q->where('name', 'like', "%$search%")
+    //                     ->orWhere('sku', 'like', "%$search%");
+    //             });
+    //         }
+
+    //         // Category filter
+    //         if ($request->category_id && $request->category_id != 'All') {
+    //             $query->where('productCategory_id', $request->category_id);
+    //         }
+    //         // 🔄 Sorting
+    //         if ($request->sort == 'oldest') {
+    //             $query->orderBy('created_at', 'asc');
+    //         } elseif ($request->sort == 'name') {
+    //             $query->orderBy('name', 'asc');
+    //         } else {
+    //             $query->orderBy('created_at', 'desc'); // newest default
+    //         }
+    //         $products = $query->paginate(6); // 6 cards per page
+    //         // Encrypt IDs before returning
+    //         $products->getCollection()->transform(function ($item) {
+    //             $item->enc_id = custom_encrypt($item->id);
+
+    //             return $item;
+    //         });
+
+    //         return response()->json($products);
+
+    //     }
+
+    //     return response()->json(['message' => 'Invalid request'], 400);
+    // }
 
     protected function show($encryptedId)
     {
@@ -138,12 +184,12 @@ class ProductController extends Controller
         // dd($request->all());
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|string|max:255',
-            'sku' => 'required|string|max:100|unique:products,sku',
+            'sku' => 'required|string|max:100',
             'product_category' => 'required|exists:masters,id',
             'subcategory_id' => 'required|exists:masters,id',
             'quantity' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
-            'item_type' => 'required|in:product,service',
+            'item_type' => 'required|in:Product,Service',
             'certificates' => 'array',
             'certificates.*' => 'string|in:gmp,fda,iso,who,other',
             'overview' => 'nullable|string',
@@ -155,6 +201,7 @@ class ProductController extends Controller
         ]);
         if ($validator->fails()) {
             dd($validator->errors());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -165,14 +212,19 @@ class ProductController extends Controller
 
             if ($request->product_id) {
                 // 🔹 Update product
-                $product = Product::findOrFail($request->product_id);
+                $product_id = custom_decrypt($request->product_id);
+                $product = Product::findOrFail($product_id);
                 $product->update([
                     'name' => $request->product_name,
                     'description' => $request->description,
                     'sku' => $request->sku,
-                    'productCategory_id' => $request->category_id,
+                    'productCategory_id' => $request->product_category,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
+                    'subcategory_id' => $request->subcategory_id,
+                    'type' => $request->item_type,
+                    'overview' => $request->overview,
+                    'specification' => $request->specification,
                 ]);
 
                 $message = '✅ Product updated successfully!';
@@ -203,62 +255,63 @@ class ProductController extends Controller
             if ($request->has('certificates')) {
                 $product->certificates()->delete();
                 foreach ($request->certificates as $cert) {
-                    $product->certificates()->create(['name' => $cert]);
+                    $product->certificates()->create(['certificate_name' => $cert]);
                 }
             }
 
             // 🔹 Resources (title + file)
-            if ($request->has('resource_title')) {
+            if ($request->hasFile('resource_file')) {
                 $product->resources()->delete();
 
                 foreach ($request->resource_title as $key => $title) {
                     $filePath = null;
 
-                    if ($request->hasFile("resource_file.$key")) {
-                        $file = $request->file("resource_file.$key");
-                        $filename = time().'_'.rand(1000, 9999).'.'.$file->extension();
-                        $folder = 'resources';
-                        $file->move(public_path($folder), $filename);
-                        $filePath = $folder.'/'.$filename;
+                    // Make sure file exists for this index
+                    if (isset($request->file('resource_file')[$key])) {
+                        $file = $request->file('resource_file')[$key];
+
+                        if ($file && $file->isValid()) {
+                            $filename = time().'_'.rand(1000, 9999).'.'.$file->getClientOriginalExtension();
+                            $folder = 'Resources';
+                            $file->move(public_path($folder), $filename);
+                            $filePath = $folder.'/'.$filename;
+                        }
                     }
 
-                    $product->resources()->create([
-                        'title' => $title,
-                        'file_path' => $filePath,
-                    ]);
+                    // Only create resource if title or file exists
+                    if (! empty($title) || $filePath) {
+                        $product->resources()->create([
+                            'resource_name' => $title,
+                            'resource_url' => $filePath,
+                        ]);
+                    }
                 }
             }
-
             // 🔹 Attachments (morphMany)
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $file) {
-                    $filename = time().'_'.rand(1000, 9999).'.'.$file->extension();
+            if ($request->hasFile('product_images')) {
+                $product->images()->delete();
+                foreach ($request->file('product_images') as $file) {
+                    $filename = time().'_'.rand(1000, 9999).'.'.$file->getClientOriginalExtension();
+                    // dd( $filename);
                     $folder = 'ProductsImages';
                     $file->move(public_path($folder), $filename);
 
                     $product->images()->create([
                         'path' => $folder.'/'.$filename,
-                        'file_type' => $file->extension(),
+                        'file_type' => $file->getClientOriginalExtension(),
                     ]);
                 }
             }
-
-            // 🔹 Product Image (main thumbnail)
-            if ($request->hasFile('image')) {
-                $filename = time().'_'.rand(1000, 9999).'.'.$request->image->extension();
-                $folder = 'Products';
-                $request->image->move(public_path($folder), $filename);
-
-                $product->update(['product_image' => $folder.'/'.$filename]);
-            }
-
+            // dd($product);
             DB::commit();
+            Alert::success('Success', $message);
 
-            return redirect()->back()->with('success', '✅ Product saved successfully!');
+            return redirect()->route('business.product.list', ['ty' => custom_encrypt('BusinessProductList')]);
         } catch (\Exception $e) {
             dd($e->getMessage());
             DB::rollBack();
             Log::error('Save Product Error: '.$e->getMessage());
+            Alert::error('Error', $e->getMessage());
 
             return redirect()->back()->with('error', '❌ Something went wrong while saving product!');
         }
@@ -279,8 +332,19 @@ class ProductController extends Controller
             } else {
                 $categories = collect();
             }
+            $id = null;
+            $subcategories = collect();
+            if ($request->id) {
+                $id = custom_decrypt($request->id);
 
-            return view('business.products.add', compact('categories'));
+            }
+            $productData = Product::with(['certificates', 'resources', 'images'])->find($id);
+            $existingCerts = $productData?->certificates?->pluck('certificate_name')->toArray() ?? [];
+            if ($productData) {
+                $subcategories = Masters::ActiveOnly()->where('parent_id', $productData?->productCategory_id)->get(['id', 'name']);
+            }
+
+            return view('business.products.add', compact('categories', 'productData', 'subcategories', 'existingCerts'));
         }
     }
 
@@ -289,5 +353,21 @@ class ProductController extends Controller
         $subcategories = Masters::ActiveOnly()->where('parent_id', $categoryId)->get(['id', 'name']);
 
         return response()->json(['data' => $subcategories]);
+    }
+
+    public function deleteResource($id)
+    {
+        $resource = ProductResources::find($id);
+        if ($resource) {
+            // optionally delete file from public folder
+            if ($resource->resource_url && file_exists(public_path($resource->resource_url))) {
+                unlink(public_path($resource->resource_url));
+            }
+            $resource->delete();
+
+            return response()->json(['success' => true, 'message' => 'Resource deleted successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Resource not found.']);
     }
 }
