@@ -26,7 +26,7 @@
             <div id="profile-content" class="content-section">
                 <div class="content-header">
                     <h1 class="welcome-text">Profile Management</h1>
-                    <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
+                    {{-- <p class="date-text">{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p> --}}
                 </div>
                 <form id="businessProfileForm" enctype="multipart/form-data">
                     <div class="table-container">
@@ -36,7 +36,13 @@
                             <div style="flex: 1;">
                                 <div class="form-group">
                                     <label class="form-label">Company Name</label>
-                                    <input type="text" name="name" class="form-control"
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="form-control"
+                                        pattern="[A-Za-z\s]+"
+                                        title="Only alphabets and spaces are allowed"
+                                        oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
                                         value="{{ $profileData->name ?? '' }}">
                                 </div>
                                 <div class="form-group">
@@ -53,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Year Established</label>
-                                    <input type="text" name="year" class="form-control"
+                                    <input type="number" name="year" class="form-control"
                                         value="{{ $profileData->year ?? '' }}">
                                 </div>
                             </div>
@@ -88,7 +94,11 @@
                             <div style="flex: 1;">
                                 <div class="form-group">
                                     <label class="form-label">Primary Contact</label>
-                                    <input type="text" name="primary_contact" class="form-control"
+                                    <input
+                                        type="number"
+                                        name="primary_contact"
+                                        oninput="if(this.value.length > 12) this.value = this.value.slice(0,12)"
+                                        class="form-control"
                                         value="{{ $profileData->primary_contact ?? '' }}">
                                 </div>
                                 <div class="form-group">
@@ -100,7 +110,7 @@
                             <div style="flex: 1;">
                                 <div class="form-group">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="tel" name="contact_number" class="form-control"
+                                    <input type="number" name="contact_number" oninput="if(this.value.length > 12) this.value = this.value.slice(0,12)" class="form-control"
                                         value="{{ $profileData->contact_number ?? '' }}">
                                 </div>
                                 <div class="form-group">
@@ -124,20 +134,26 @@
                                 <div class="form-group">
                                     <label class="form-label">City</label>
                                     <input type="text" name="city" class="form-control"
-                                        value="{{ $profileData->city ?? '' }}">
+                                    pattern="[A-Za-z\s]+"
+                                    title="Only alphabets and spaces are allowed"
+                                    oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
+                                    value="{{ $profileData->city ?? '' }}">
                                 </div>
                             </div>
                             <div style="flex: 1;">
                                 <div class="form-group">
                                     <label class="form-label">State/Province</label>
                                     <input type="text" name="state" class="form-control"
+                                    pattern="[A-Za-z\s]+"
+                                    title="Only alphabets and spaces are allowed"
+                                    oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
                                         value="{{ $profileData->state ?? '' }}">
                                 </div>
                             </div>
                             <div style="flex: 1;">
                                 <div class="form-group">
                                     <label class="form-label">ZIP/Postal Code</label>
-                                    <input type="text" name="zip_code" class="form-control"
+                                    <input type="number" name="zip_code" class="form-control"
                                         value="{{ $profileData->zip_code ?? '' }}">
                                 </div>
                             </div>
@@ -145,6 +161,9 @@
                                 <div class="form-group">
                                     <label class="form-label">Country</label>
                                     <input type="text" name="country" class="form-control"
+                                        pattern="[A-Za-z\s]+"
+                                        title="Only alphabets and spaces are allowed"
+                                        oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
                                         value="{{ $profileData->country ?? '' }}">
                                 </div>
                             </div>
@@ -153,7 +172,12 @@
                         <h2 class="section-title mb-20">Business Description</h2>
 
                         <div class="form-group">
-                            <textarea class="form-control" name="description"
+                            <textarea
+                                class="form-control"
+                                name="description"
+                                pattern="[A-Za-z\s]+"
+                                title="Only alphabets and spaces are allowed"
+                                oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')"
                                 rows="5">{{ $profileData->description ?? '' }}</textarea>
                         </div>
 

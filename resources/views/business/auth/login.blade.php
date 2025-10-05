@@ -27,7 +27,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Top Navigation Bar -->
-    @include('business.auth.navbar')
+    {{-- @include('business.auth.navbar') --}}
 
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-8 md:py-12">
@@ -82,7 +82,7 @@
 
     <!-- Footer -->
     {{-- @include('business.auth.footer') --}}
-    @include('home.footer')
+    {{-- @include('home.footer') --}}
     @include('layouts.commonjs')
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script>
