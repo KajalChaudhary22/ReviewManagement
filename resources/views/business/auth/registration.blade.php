@@ -7,7 +7,10 @@
     <form id="registrationForm" class="space-y-4">
         <div>
             <label for="businessName" class="block text-sm font-medium mb-1 text-gray-700">Business Name</label>
-            <input type="text" id="businessName" name="businessName" 
+            <input type="text" id="businessName" name="businessName"
+                pattern="[A-Za-z\s]+"
+                title="Only alphabets and spaces are allowed"
+                oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'')" 
                 class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent transition text-gray-700"
                 required>
             <p class="text-red-500 text-xs mt-1 hidden" id="businessNameError">Business name is required</p>
@@ -23,7 +26,8 @@
         
         <div>
             <label for="phone" class="block text-sm font-medium mb-1 text-gray-700">Phone Number</label>
-            <input type="tel" id="phone" name="phone" 
+            <input type="number" id="phone" name="phone" 
+                oninput="if(this.value.length > 12) this.value = this.value.slice(0,12)"    
                 class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent transition text-gray-700"
                 required>
             <p class="text-red-500 text-xs mt-1 hidden" id="phoneError">Please enter a valid phone number</p>
@@ -60,7 +64,11 @@
             <label for="password" class="block text-sm font-medium mb-1 text-gray-700">Password</label>
             <input type="password" id="password" name="password" 
                 class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent transition text-gray-700"
-                required minlength="8">
+                required
+                minlength="8"
+                maxlength="25"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,25}$"
+                title="Password must be 8-25 characters long, include uppercase, lowercase, a number, and a special character">
             <p class="text-red-500 text-xs mt-1 hidden" id="passwordError">Password must be at least 8 characters</p>
         </div>
         
@@ -68,7 +76,11 @@
             <label for="confirmPassword" class="block text-sm font-medium mb-1 text-gray-700">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" 
                 class="w-full bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent transition text-gray-700"
-                required>
+                required
+                minlength="8"
+                maxlength="25"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,25}$"
+                title="Password must be 8-25 characters long, include uppercase, lowercase, a number, and a special character">
             <p class="text-red-500 text-xs mt-1 hidden" id="confirmPasswordError">Passwords do not match</p>
         </div>
         

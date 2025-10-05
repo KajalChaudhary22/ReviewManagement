@@ -11,6 +11,7 @@ use App\Models\{
     Review,
     Business
 };
+use Illuminate\Support\Str;
 
 class WelcomeController extends Controller
 {
@@ -25,7 +26,26 @@ class WelcomeController extends Controller
     }
     protected function categories()
     {
-        return view('home.categories');
+        $masterTypeId = MasterType::where('name', 'Product Category')->first()?->id;
+        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
+        $masterSubcatId = MasterType::where('name', 'Product Sub Category')->first()?->id;
+        $productSubCategories = Masters::where('master_type_id', $masterSubcatId)->where('status', 'Active')->with('images')->latest()->get()->map(function ($item) {
+            return [
+                'id' => custom_encrypt($item?->id),
+                'cat_id' => custom_encrypt($item?->parent_id),
+                'icon' => 'fa-solid fa-box', // static fallback or map dynamically
+                'title' => $item?->name, // map from DB
+                'description' => $item?->description ?? 'No description available', // fallback
+                'tags' => [Str::lower($item?->parent?->name) ?? []], // empty array if not in DB
+                'popularity' => rand(60, 100), // fake popularity for now
+                'dateAdded' => $item?->created_at?->toDateString(), // from DB
+                'image' => $item?->images?->first()?->path 
+                    ? asset('storage/'.$item?->images?->first()?->path)
+                    : asset('images/default-category.jpg'),
+            ];
+        });
+        // dd($productSubCategories);
+        return view('home.categories', compact('productCategoies', 'productSubCategories'));
     }
     protected function blogs()
     {
@@ -41,15 +61,18 @@ class WelcomeController extends Controller
     }
     protected function categoryProducts(Request $request)
     {
+        // dd($request->all());
         $url = custom_decrypt($request->ty);
         if (!$url || $url !== 'CategoryProducts') {
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         } else {
             $categoryId = custom_decrypt($request->id);
+            $subCategoryId = $request->subCat ? custom_decrypt($request->subCat) : null;
             $allProducts = Product::where('productCategory_id', $categoryId)->where('status', 'Active')->get();
             $masterTypeId = MasterType::where('name', 'Location')->first()?->id;
             $locations = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
+            $subcategories = Masters::where('parent_id', $categoryId)->where('status', 'Active')->with('images')->get();
             // Build the business data array safely with null operators
             $businessData = $allProducts->map(function ($product) {
                 return [

@@ -2,8 +2,8 @@
 
     <div class="navbar-right">
         <div class="search-bar">
-            <i class="icon">🔍</i>
-            <input type="text" placeholder="Search...">
+            {{-- <i class="icon">🔍</i> --}}
+            {{-- <input type="text" placeholder="Search..."> --}}
         </div>
 
         <div class="user-profile">
