@@ -1,6 +1,5 @@
 @include('layouts.commonjs')
 <script>
-    
     function openModal(modalId) {
         document.getElementById(modalId).style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -11,76 +10,125 @@
         document.body.style.overflow = 'auto';
     }
     $(document).ready(function() {
-        let currentPage = 1;
-
-        function loadProducts() {
-            $.ajax({
+        // let currentPage = 1;
+        const table = $('#product-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
                 url: "{{ route('business.product.data') }}",
-                data: {
-                    page: currentPage,
-                    search: $('#product-search').val(),
-                    category_id: $('#product-category-filter').val(),
-                    sort: $('#product-sort').val(),
-                },
-                success: function(res) {
-                    let html = '';
-                    const assetBaseUrl = "{{ asset('/') }}"; 
-                    if (res.data.length === 0) {
-                        html = '<p>No products found</p>';
-                    } else {
-                        res.data.forEach(p => {
-                            html += `
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="${p.product_image ? assetBaseUrl + p.product_image : 'https://via.placeholder.com/400x300?text=' + p.name}" alt="${p.name}">
-                            </div>
-                            <h3 class="product-name">${p.name}</h3>
-                            <div class="product-meta">
-                                <span>SKU: ${p.sku}</span>
-                                <span>In Stock: ${p.quantity}</span>
-                            </div>
-                            <div style="display:flex; justify-content:space-between; margin-top:15px;">
-                                <span style="color:var(--primary-color); font-weight:600;">$${p.price}</span>
-                                <div>
-                                    <button class="edit-product-btn" data-id="${p.enc_id}">✏️</button>
-                                    <button class="delete-product-btn" data-id="${p.enc_id}">🗑️</button>
-                                </div>
-                            </div>
-                        </div>`;
-                        });
-                    }
-                    $('#products-grid').html(html);
-
-                    // Pagination info
-                    $('#pagination-info').text(`Page ${res.current_page} of ${res.last_page}`);
-
-                    // Enable/disable prev/next
-                    $('#prev-products').prop('disabled', res.prev_page_url === null);
-                    $('#next-products').prop('disabled', res.next_page_url === null);
+                data: function(d) {
+                    // Append your custom params to the request
+                    // d.page = currentPage;
+                    d.search = $('#product-search').val();
+                    d.category_id = $('#product-category-filter').val();
+                    d.sort = $('#product-sort').val();
                 }
-            });
-        }
-
-        // Load first time
-        loadProducts();
-
-        // Pagination
-        $('#prev-products').click(() => {
-            if (currentPage > 1) {
-                currentPage--;
-                loadProducts();
-            }
+            },
+            columns: [{
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'category',
+                    name: 'category',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'item_type',
+                    name: 'type'
+                },
+                {
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
         });
-        $('#next-products').click(() => {
-            currentPage++;
-            loadProducts();
-        });
 
-        // Filters
-        $('#product-search, #product-category-filter, #product-sort').on('keyup change', function() {
-            currentPage = 1;
-            loadProducts();
+        // 🔹 Refresh table on filter/search change
+        $('#product-search, #product-category-filter, #product-sort').on('change keyup', function() {
+            table.ajax.reload();
         });
+        // function loadProducts() {
+        //     $.ajax({
+        //         url: "{{ route('business.product.data') }}",
+        //         data: {
+        //             page: currentPage,
+        //             search: $('#product-search').val(),
+        //             category_id: $('#product-category-filter').val(),
+        //             sort: $('#product-sort').val(),
+        //         },
+        //         success: function(res) {
+        //             let html = '';
+        //             const assetBaseUrl = "{{ asset('/') }}"; 
+        //             if (res.data.length === 0) {
+        //                 html = '<p>No products found</p>';
+        //             } else {
+        //                 res.data.forEach(p => {
+        //                     html += `
+        //                 <div class="product-card">
+        //                     <div class="product-image">
+        //                         <img src="${p.product_image ? assetBaseUrl + p.product_image : 'https://via.placeholder.com/400x300?text=' + p.name}" alt="${p.name}">
+        //                     </div>
+        //                     <h3 class="product-name">${p.name}</h3>
+        //                     <div class="product-meta">
+        //                         <span>SKU: ${p.sku}</span>
+        //                         <span>In Stock: ${p.quantity}</span>
+        //                     </div>
+        //                     <div style="display:flex; justify-content:space-between; margin-top:15px;">
+        //                         <span style="color:var(--primary-color); font-weight:600;">$${p.price}</span>
+        //                         <div>
+        //                             <button class="edit-product-btn" data-id="${p.enc_id}">✏️</button>
+        //                             <button class="delete-product-btn" data-id="${p.enc_id}">🗑️</button>
+        //                         </div>
+        //                     </div>
+        //                 </div>`;
+        //                 });
+        //             }
+        //             $('#products-grid').html(html);
+
+        //             // Pagination info
+        //             $('#pagination-info').text(`Page ${res.current_page} of ${res.last_page}`);
+
+        //             // Enable/disable prev/next
+        //             $('#prev-products').prop('disabled', res.prev_page_url === null);
+        //             $('#next-products').prop('disabled', res.next_page_url === null);
+        //         }
+        //     });
+        // }
+
+        // // Load first time
+        // loadProducts();
+
+        // // Pagination
+        // $('#prev-products').click(() => {
+        //     if (currentPage > 1) {
+        //         currentPage--;
+        //         loadProducts();
+        //     }
+        // });
+        // $('#next-products').click(() => {
+        //     currentPage++;
+        //     loadProducts();
+        // });
+
+        // // Filters
+        // $('#product-search, #product-category-filter, #product-sort').on('keyup change', function() {
+        //     currentPage = 1;
+        //     loadProducts();
+        // });
         // Edit (fetch product and open modal)
         $(document).on('click', '.edit-product-btn', function() {
             let encryptedId = $(this).data('id');
@@ -214,45 +262,45 @@
             ]
         });
         $('#service-form').on('submit', function(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    let formData = new FormData(this);
+            let formData = new FormData(this);
 
-    $.ajax({
-        url: "/api/business/services/store", // always same URL
-        type: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(res) {
-            if (res.status) {
-                Swal.fire({
-                    icon: 'success',
-                    title: res.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+            $.ajax({
+                url: "/api/business/services/store", // always same URL
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
 
-                $('#service-form')[0].reset();
-                $('#serviceModal').hide();
-                $('#servicesTable').DataTable().ajax.reload();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: res.message
-                });
-            }
-        },
-        error: function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Something went wrong!'
+                        $('#service-form')[0].reset();
+                        $('#serviceModal').hide();
+                        $('#servicesTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: res.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Server Error',
+                        text: 'Something went wrong!'
+                    });
+                }
             });
-        }
-    });
-});
+        });
 
 
     });

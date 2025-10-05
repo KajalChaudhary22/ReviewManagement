@@ -50,7 +50,7 @@
                                     <select class="form-control" id="businessCategory" name="category">
                                         <option value="">Select Category</option>
                                         @foreach ($industries as $industry)
-                                            <option value="{{ $industry->id }}" {{ $profileData->master_id == $industry->id ? 'selected' : '' }}>
+                                            <option value="{{ $industry?->id }}" {{ $profileData?->master_id == $industry?->id ? 'selected' : '' }}>
                                                 {{ $industry->name }}
                                             </option>
 
@@ -70,7 +70,7 @@
                                         <!-- Preview Box -->
                                         <div id="logoPreviewBox"
                                             style="width: 80px; height: 80px; border-radius: 8px; background-color: #f0f0f0; overflow: hidden;">
-                                            <img id="logoPreview" src="{{ $profileData->logo ? asset($profileData?->logo) : 'https://via.placeholder.com/80x80?text=PC' }}"
+                                            <img id="logoPreview" src="{{ $profileData?->logo ? asset($profileData?->logo) : 'https://via.placeholder.com/80x80?text=PC' }}"
                                                 alt="Company Logo"
                                                 style="width: 100%; height: 100%; object-fit: cover;">
                                         </div>

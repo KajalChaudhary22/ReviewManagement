@@ -21,7 +21,7 @@
         <!-- Content Area -->
         <div class="content">
 
-
+            @include('sweetalert::alert')
             <!-- Products & Services Content -->
             <div id="products-content" class="content-section">
                 <div class="content-header">
@@ -32,34 +32,48 @@
                 <div class="table-container">
                     <div class="table-header">
                         <h2 class="section-title">Your Products </h2>
-                        <button class="btn btn-primary" id="add-product-btn">Add New Product</button>
+                       <a href="{{ route('business.product.add',['ty' => custom_encrypt('BusinessProductAdd')]) }}"> <button class="btn btn-primary">Add New Product</button></a>
+                        {{-- <button class="btn btn-primary" id="add-product-btn">Add New Product</button> --}}
                     </div>
 
                     <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 200px;">
-                            <input type="text" class="form-control" placeholder="Search products..."
-                                id="product-search">
+                            {{-- <input type="text" class="form-control" placeholder="Search products..."
+                                id="product-search"> --}}
                         </div>
                         <select class="form-control" style="width: 200px; min-width: 150px;"
                             id="product-category-filter">
-                            <option value="All">All Categories</option>
+                            <option value="">All Categories</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>                                
                             @endforeach
                             
                         </select>
                         <select class="form-control" style="width: 150px; min-width: 120px;" id="product-sort">
-                            <option>Sort by: Newest</option>
-                            <option>Sort by: Oldest</option>
-                            <option>Sort by: Name</option>
-                            <option>Sort by: Popularity</option>
+                            <option value="Newest">Sort by: Newest</option>
+                            <option value="Oldest">Sort by: Oldest</option>
+                            <option value="Name">Sort by: Name</option>
+                            {{-- <option>Sort by: Popularity</option> --}}
                         </select>
                     </div>
+                    <table id="product-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Item Type</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
 
-                    <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
+                    {{-- <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"
                         id="products-grid">
                         
-                    </div>
+                    </div> --}}
 
                     {{-- <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 10px;">
@@ -143,7 +157,9 @@
 
    
 @include('business.products.js')
+
     <script>
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Settings Tabs
             const settingsTabs = document.querySelectorAll('.settings-tabs .tab');

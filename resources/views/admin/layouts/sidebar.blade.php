@@ -28,7 +28,7 @@
             <i class="icon">📢</i>
             <span class="menu-text">Campaigns</span>
         </a> --}}
-        <a href="{{ route('admin.email.templates',['ty'=>custom_encrypt('EmailTemplates')]) }}" class="menu-item {{ Route::is('admin.master.setup') ? 'active' : '' }}">
+        <a href="{{ route('admin.email.templates',['ty'=>custom_encrypt('EmailTemplates')]) }}" class="menu-item {{ Route::is('admin.email.templates') ? 'active' : '' }}">
             <i class="icon">📢</i>
             <span class="menu-text">Email Templates</span>
         </a> 
