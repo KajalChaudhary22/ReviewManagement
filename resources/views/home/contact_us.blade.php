@@ -24,7 +24,7 @@
         }
 
         /* Header Styles */
-        header {
+        /* header {
             background-color: #FFFFFF;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 1rem 5%;
@@ -34,7 +34,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-        }
+        } */
 
         .logo {
             font-size: 1.8rem;

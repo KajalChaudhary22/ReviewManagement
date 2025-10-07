@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCIZORA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -34,7 +37,11 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             font-family: 'Poppins', sans-serif;
             color: var(--text-black);
             font-weight: 600;
@@ -47,9 +54,9 @@
         }
 
         /* Header Styles */
-        header {
+        /* header {
             background-color: #FFFFFF;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
@@ -57,7 +64,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-        }
+        } */
 
         .logo {
             font-size: 1.8rem;
@@ -74,10 +81,11 @@
             transition: color 0.3s ease;
         }
 
-        .nav-menu a:hover, .nav-menu a.active {
+        .nav-menu a:hover,
+        .nav-menu a.active {
             color: #0A47A9;
         }
-        
+
         .header-right {
             display: flex;
             align-items: center;
@@ -100,12 +108,13 @@
         }
 
         .dropdown-content {
-            display: none; /* Changed to be controlled by JS */
+            display: none;
+            /* Changed to be controlled by JS */
             position: absolute;
             right: 0;
             background-color: #FFFFFF;
             min-width: 180px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             z-index: 1;
             border-radius: 8px;
             overflow: hidden;
@@ -414,7 +423,8 @@
             object-fit: contain;
         }
 
-        .thumbnail.active, .thumbnail:hover {
+        .thumbnail.active,
+        .thumbnail:hover {
             border-color: var(--primary-blue);
         }
 
@@ -466,8 +476,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
@@ -585,9 +602,9 @@
         }
 
         .write-review-btn:hover {
-			background-color: #1137b0;
-			transform: translateY(-2px);
-		}
+            background-color: #1137b0;
+            transform: translateY(-2px);
+        }
 
         .reviews-controls {
             display: flex;
@@ -667,7 +684,8 @@
             margin-bottom: 15px;
         }
 
-        .pros, .cons {
+        .pros,
+        .cons {
             display: flex;
         }
 
@@ -845,9 +863,9 @@
         }
 
         .cta-primary:hover {
-			background-color: #1137b0;
-			transform: translateY(-2px);
-		}
+            background-color: #1137b0;
+            transform: translateY(-2px);
+        }
 
         .cta-secondary {
             background-color: var(--white);
@@ -922,6 +940,29 @@
         .modal-overlay.active .review-modal {
             transform: translateY(0);
         }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .quote-modal, .specialist-modal {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-overlay.active .quote-modal,
+        .modal-overlay.active .specialist-modal {
+            transform: translateY(0);
+        }
 
         .close-modal {
             position: absolute;
@@ -958,8 +999,8 @@
             color: var(--text-black);
         }
 
-        .form-group input, 
-        .form-group textarea, 
+        .form-group input,
+        .form-group textarea,
         .form-group select {
             width: 100%;
             padding: 12px 15px;
@@ -970,8 +1011,8 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, 
-        .form-group textarea:focus, 
+        .form-group input:focus,
+        .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: var(--primary-blue);
@@ -1020,92 +1061,138 @@
 
         /* Footer */
         .scizora-main-footer {
-			background-color: #111827;
-			color: #ffffff;
-			padding: 2rem 1rem 1.5rem 1rem;
-		}
+            background-color: #111827;
+            color: #ffffff;
+            padding: 2rem 1rem 1.5rem 1rem;
+        }
 
-		.scizora-footer-grid {
-			display: grid;
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-			margin-bottom: 1.5rem;
-		}
+        .scizora-footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-		.scizora-footer-column > * {
-			margin-bottom: 0.5rem;
-		}
-		.scizora-footer-column > *:last-child {
-			margin-bottom: 0;
-		}
+        .scizora-footer-column>* {
+            margin-bottom: 0.5rem;
+        }
 
-		.scizora-footer-heading, .scizora-footer-logo-heading {
-			font-size: 1.1rem;
-			font-weight: 700;
-			margin-bottom: 0.5rem;
-		}
+        .scizora-footer-column>*:last-child {
+            margin-bottom: 0;
+        }
 
-		.scizora-footer-description {
-			color: #9CA3AF;
-			font-size: 0.875rem;
-			line-height: 1.4;
-		}
+        .scizora-footer-heading,
+        .scizora-footer-logo-heading {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-		.scizora-footer-list {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			display: flex;
-			flex-direction: column;
-			gap: 0.2rem;
-		}
+        .scizora-footer-description {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
 
-		.scizora-footer-bottom {
-			border-top: 1px solid #374151;
-			padding-top: 1rem;
-			margin-top: 1.5rem;
-			text-align: center;
-			color: #9CA3AF;
-			font-size: 0.8rem;
-		}
+        .scizora-footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
 
-		.scizora-social-links { display: flex; gap: 1rem; }
-		.scizora-social-icon { color: #9CA3AF; transition: color 0.2s ease; }
-		.scizora-social-icon:hover { color: #ffffff; }
-		.scizora-footer-link { color: #9CA3AF; text-decoration: none; font-size: 0.875rem; }
-		.scizora-footer-link:hover { color: #ffffff; }
-		.scizora-newsletter-form { display: flex; }
-		.scizora-newsletter-input { background-color: #1F2937; color: #ffffff; padding: 6px 12px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%; font-size: 0.875rem; }
-		.scizora-newsletter-button { background-color: #2563EB; color: #ffffff; padding: 6px 12px; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
-		.scizora-newsletter-button:hover { background-color: #1D4ED8; }
+        .scizora-footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 0.8rem;
+        }
+
+        .scizora-social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .scizora-social-icon {
+            color: #9CA3AF;
+            transition: color 0.2s ease;
+        }
+
+        .scizora-social-icon:hover {
+            color: #ffffff;
+        }
+
+        .scizora-footer-link {
+            color: #9CA3AF;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .scizora-footer-link:hover {
+            color: #ffffff;
+        }
+
+        .scizora-newsletter-form {
+            display: flex;
+        }
+
+        .scizora-newsletter-input {
+            background-color: #1F2937;
+            color: #ffffff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 100%;
+            font-size: 0.875rem;
+        }
+
+        .scizora-newsletter-button {
+            background-color: #2563EB;
+            color: #ffffff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .scizora-newsletter-button:hover {
+            background-color: #1D4ED8;
+        }
 
         /* Responsive Design */
         @media (min-width: 768px) {
-			.scizora-footer-grid {
-				grid-template-columns: repeat(2, 1fr);
-				gap: 2rem;
-			}
-		}
-		@media (min-width: 1024px) {
-			.scizora-footer-grid {
-				grid-template-columns: repeat(4, 1fr);
-			}
-		}
+            .scizora-footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .scizora-footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
 
         @media (max-width: 1100px) {
             .main-content {
                 flex-direction: column;
             }
-            
-            .left-column, .right-column {
+
+            .left-column,
+            .right-column {
                 flex: 1;
                 width: 100%;
             }
-            
+
             .sidebar {
                 position: static;
             }
-            
+
             .pros-cons {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -1116,55 +1203,55 @@
             .specs-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .nav-menu {
                 display: none;
             }
-            
+
             .hamburger {
                 display: block;
             }
-            
+
             .summary-bar {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
-            
+
             .rating {
                 margin-right: 0;
             }
-            
+
             .sku {
                 margin-left: 0;
             }
-            
+
             .main-image {
                 height: 300px;
             }
-            
+
             .summary-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
+
             .overall-rating {
                 margin-bottom: 20px;
             }
-            
+
             .product-title {
                 font-size: 28px;
             }
-            
+
             .big-rating {
                 font-size: 36px;
             }
-            
+
             .review-footer {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
+
             .helpful-section {
                 margin-top: 10px;
             }
@@ -1189,14 +1276,14 @@
                 align-items: flex-start;
             }
             
-            .review-modal {
+            .review-modal, .quote-modal, .specialist-modal {
                 padding: 20px;
             }
         }
-
     </style>
-    {{-- @include('home.styles') --}}
+    @include('home.styles')
 </head>
+
 <body>
     <!-- Header -->
     {{-- <header>
@@ -1227,7 +1314,8 @@
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
-            <a href="index.html" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150" height="50"></a>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150"
+                    height="50"></a>
             <button class="close-mobile-nav" id="close-mobile-nav">
                 <i class="fas fa-times"></i>
             </button>
@@ -1258,7 +1346,7 @@
                 @php
                     $averageRating = $productDetails?->ratingData?->avg('rating') ?? 0;
                     $fullStars = floor($averageRating);
-                    $halfStar = ($averageRating - $fullStars) >= 0.5 ? 1 : 0;
+                    $halfStar = $averageRating - $fullStars >= 0.5 ? 1 : 0;
                     $emptyStars = 5 - $fullStars - $halfStar;
                 @endphp
                 <div class="rating">
@@ -1267,12 +1355,12 @@
                         @for ($i = 0; $i < $fullStars; $i++)
                             <i class="fas fa-star"></i>
                         @endfor
-                
+
                         {{-- Half Star --}}
                         @if ($halfStar)
                             <i class="fas fa-star-half-alt"></i>
                         @endif
-                
+
                         {{-- Empty Stars --}}
                         @for ($i = 0; $i < $emptyStars; $i++)
                             <i class="far fa-star"></i>
@@ -1292,7 +1380,8 @@
                 <!-- Image Carousel -->
                 <div class="carousel">
                     <div class="main-image">
-                        <img src="{{ asset($productDetails->images->first()?->path) }}" alt="{{ $productDetails?->name }}" id="main-img">
+                        <img src="{{ asset($productDetails->images->first()?->path) }}"
+                            alt="{{ $productDetails?->name }}" id="main-img">
                         <div class="carousel-nav">
                             <button class="carousel-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
                             <button class="carousel-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
@@ -1300,7 +1389,8 @@
                     </div>
                     <div class="thumbnails">
                         @foreach ($productDetails->images as $index => $image)
-                            <div class="thumbnail {{ $index == 0 ? 'active' : '' }}" data-img="{{ asset($image?->path) }}">
+                            <div class="thumbnail {{ $index == 0 ? 'active' : '' }}"
+                                data-img="{{ asset($image?->path) }}">
                                 <img src="{{ asset($image?->path) }}" alt="Thumbnail {{ $index + 1 }}">
                             </div>
                         @endforeach
@@ -1330,7 +1420,8 @@
 
                     <div class="tab-content active" id="overview">
                         <h2 class="section-title">Product Overview</h2>
-                        <p class="overview-text">The Aerospray® Hematology Pro is a state-of-the-art slide stainer and cytocentrifuge designed for modern clinical laboratories. This innovative instrument combines rapid staining with precise cytocentrifugation, streamlining your hematology workflow.</p>
+                        {!! $productDetails?->overview !!}
+                        {{-- <p class="overview-text">The Aerospray® Hematology Pro is a state-of-the-art slide stainer and cytocentrifuge designed for modern clinical laboratories. This innovative instrument combines rapid staining with precise cytocentrifugation, streamlining your hematology workflow.</p>
                         <p class="overview-text">Featuring advanced automation and intuitive controls, the Aerospray Pro delivers consistent, high-quality slides with minimal operator intervention. Its dual functionality reduces the need for multiple instruments, saving valuable bench space and improving laboratory efficiency.</p>
                         <p class="overview-text">With programmable protocols and remote monitoring capabilities, the Aerospray Pro ensures standardization across all procedures while providing the flexibility needed for specialized testing requirements.</p>
                         
@@ -1343,12 +1434,13 @@
                                 <li><strong>Remote Monitoring:</strong> Track progress from anywhere in the lab</li>
                                 <li><strong>Reduced Reagent Consumption:</strong> Optimized systems minimize waste</li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="tab-content" id="specifications">
-                        <h2 class="section-title">Technical Specifications</h2>
-                        <div class="specs-grid">
+                        <h2 class="section-title">Product Specifications</h2>
+                        {!! $productDetails?->specification !!}
+                        {{-- <div class="specs-grid">
                             <div class="spec-item">
                                 <div class="spec-label">Dimensions</div>
                                 <div>45cm (W) × 60cm (D) × 40cm (H)</div>
@@ -1389,13 +1481,13 @@
                                 <div class="spec-label">Humidity Range</div>
                                 <div>20% - 80% RH (non-condensing)</div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="tab-content" id="reviews">
                         <div id="reviews">
                             <h2 class="section-title">Ratings & Reviews</h2>
-                            
+
                             <div class="reviews-summary">
                                 <div class="summary-header">
                                     <div class="overall-rating">
@@ -1411,9 +1503,10 @@
                                             <div>Based on 158 reviews</div>
                                         </div>
                                     </div>
-                                    <button class="write-review-btn" id="write-review-btn"><i class="fas fa-pen"></i> Write a Review</button>
+                                    <button class="write-review-btn" id="write-review-btn"><i class="fas fa-pen"></i>
+                                        Write a Review</button>
                                 </div>
-                                
+
                                 <div class="rating-breakdown">
                                     <div class="rating-bar">
                                         <div class="stars-label">5 star</div>
@@ -1452,7 +1545,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="reviews-controls">
                                 <div>158 reviews</div>
                                 <div>
@@ -1464,7 +1557,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <!-- Review Cards -->
                             <div class="review-card">
                                 <div class="review-header">
@@ -1491,7 +1584,11 @@
                                         <div>Initial setup took longer than expected</div>
                                     </div>
                                 </div>
-                                <p class="review-text">The Aerospray Pro has transformed our hematology department. The dual functionality has reduced processing time by nearly 40%, and the staining quality is consistently excellent. The remote monitoring feature allows our technicians to multitask efficiently. After 6 months of daily use, we've had zero downtime.</p>
+                                <p class="review-text">The Aerospray Pro has transformed our hematology department. The
+                                    dual functionality has reduced processing time by nearly 40%, and the staining
+                                    quality is consistently excellent. The remote monitoring feature allows our
+                                    technicians to multitask efficiently. After 6 months of daily use, we've had zero
+                                    downtime.</p>
                                 <div class="review-footer">
                                     <div class="date">Reviewed on: Oct 26, 2023</div>
                                     <div class="helpful-section">
@@ -1501,7 +1598,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="review-card">
                                 <div class="review-header">
                                     <div>
@@ -1527,7 +1624,11 @@
                                         <div>Requires proprietary reagents</div>
                                     </div>
                                 </div>
-                                <p class="review-text">We operate a central lab processing 500+ samples daily. The Aerospray Pro has handled our volume without issue for 9 months. The programmable protocols ensure standardization across shifts, and the maintenance alerts prevent unexpected downtime. Reagent consumption is significantly lower than our previous system.</p>
+                                <p class="review-text">We operate a central lab processing 500+ samples daily. The
+                                    Aerospray Pro has handled our volume without issue for 9 months. The programmable
+                                    protocols ensure standardization across shifts, and the maintenance alerts prevent
+                                    unexpected downtime. Reagent consumption is significantly lower than our previous
+                                    system.</p>
                                 <div class="review-footer">
                                     <div class="date">Reviewed on: Sep 15, 2023</div>
                                     <div class="helpful-section">
@@ -1537,7 +1638,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="review-card">
                                 <div class="review-header">
                                     <div>
@@ -1563,7 +1664,11 @@
                                         <div>Interface could be more intuitive</div>
                                     </div>
                                 </div>
-                                <p class="review-text">The slide quality from the Aerospray Pro is exceptional - well-defined cellular morphology with consistent staining. The compact design freed up bench space in our crowded lab. It operates much quieter than comparable systems. The touchscreen interface is functional but could be more user-friendly during protocol setup.</p>
+                                <p class="review-text">The slide quality from the Aerospray Pro is exceptional -
+                                    well-defined cellular morphology with consistent staining. The compact design freed
+                                    up bench space in our crowded lab. It operates much quieter than comparable systems.
+                                    The touchscreen interface is functional but could be more user-friendly during
+                                    protocol setup.</p>
                                 <div class="review-footer">
                                     <div class="date">Reviewed on: Aug 7, 2023</div>
                                     <div class="helpful-section">
@@ -1579,6 +1684,55 @@
                     <div class="tab-content" id="resources">
                         <h2 class="section-title">Downloads & Resources</h2>
                         <ul class="resource-list">
+                            @foreach ($productDetails?->resources as $resource)
+                                @php
+                                    $fileType = strtolower(pathinfo($resource->resource_url, PATHINFO_EXTENSION));
+                                    $iconClass = 'fas fa-file'; // default
+
+                                    switch ($fileType) {
+                                        case 'pdf':
+                                            $iconClass = 'fas fa-file-pdf text-danger';
+                                            break;
+                                        case 'doc':
+                                        case 'docx':
+                                            $iconClass = 'fas fa-file-word text-primary';
+                                            break;
+                                        case 'xls':
+                                        case 'xlsx':
+                                            $iconClass = 'fas fa-file-excel text-success';
+                                            break;
+                                        case 'ppt':
+                                        case 'pptx':
+                                            $iconClass = 'fas fa-file-powerpoint text-warning';
+                                            break;
+                                        case 'jpg':
+                                        case 'jpeg':
+                                        case 'png':
+                                        case 'gif':
+                                        case 'webp':
+                                            $iconClass = 'fas fa-image text-info';
+                                            break;
+                                        case 'mp4':
+                                        case 'mov':
+                                        case 'avi':
+                                            $iconClass = 'fas fa-play-circle text-purple';
+                                            break;
+                                        default:
+                                            $iconClass = 'fas fa-file-alt text-secondary';
+                                    }
+                                @endphp
+
+                                <li class="resource-item d-flex align-items-center mb-2">
+                                    <div class="resource-icon me-2"><i class="{{ $iconClass }}"></i></div>
+                                    <a href="{{ asset($resource?->resource_url) }}" target="_blank"
+                                        class="resource-link">
+                                        {{ $resource?->resource_name }} ({{ strtoupper($fileType) }})
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        {{-- <ul class="resource-list">
                             <li class="resource-item">
                                 <div class="resource-icon"><i class="fas fa-file-pdf"></i></div>
                                 <a href="#" class="resource-link">Product Datasheet (PDF, 1.2MB)</a>
@@ -1607,7 +1761,7 @@
                                 <div class="resource-icon"><i class="fas fa-chart-line"></i></div>
                                 <a href="#" class="resource-link">Performance Validation Report (PDF, 1.1MB)</a>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div>
@@ -1617,16 +1771,19 @@
                 <div class="sidebar">
                     <!-- Testimonial Card -->
                     <div class="sidebar-card testimonial-card">
-                        <p class="testimonial-text">"The Aerospray Pro has significantly improved our lab's efficiency and slide quality. A game-changer for high-volume hematology departments."</p>
-                        <div class="testimonial-author">Dr. Jane Doe, Head of Hematology, University of Southampton</div>
+                        <p class="testimonial-text">"The Aerospray Pro has significantly improved our lab's efficiency
+                            and slide quality. A game-changer for high-volume hematology departments."</p>
+                        <div class="testimonial-author">Dr. Jane Doe, Head of Hematology, University of Southampton
+                        </div>
                     </div>
 
                     <!-- CTA Card -->
                     <div class="sidebar-card">
                         <h2 class="cta-title">Get More Information</h2>
                         <div class="cta-buttons">
-                            <a href="#" class="cta-btn cta-primary">Request a Quote</a>
-                            <a href="#" class="cta-btn cta-secondary">Contact a Specialist</a>
+                            <a href="#" class="cta-btn cta-primary" id="request-quote-btn">Request a Quote</a>
+                            <a href="#" class="cta-btn cta-secondary" id="contact-specialist-btn">Contact a
+                                Specialist</a>
                         </div>
                     </div>
 
@@ -1670,53 +1827,164 @@
     </div>
 
     <!-- Footer -->
-    <footer class="scizora-main-footer">
-		<div class="container scizora-footer-container">
-			<div class="scizora-footer-grid">
-				<div class="scizora-footer-column">
-					<h3 class="scizora-footer-logo-heading"><a href="#"><img src="logo.jpg" alt="logo" width="200" height="100"></a></h3>
-					<p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through verified reviews and ratings from real customers.</p>
-					<div class="scizora-social-links">
-						<a href="#" class="scizora-social-icon"><i class="fab fa-facebook-f"></i></a>
-						<a href="#" class="scizora-social-icon"><i class="fab fa-twitter"></i></a>
-						<a href="#" class="scizora-social-icon"><i class="fab fa-instagram"></i></a>
-						<a href="#" class="scizora-social-icon"><i class="fab fa-linkedin-in"></i></a>
-					</div>
-				</div>
-				<div class="scizora-footer-column">
-					<h3 class="scizora-footer-heading">Quick Links</h3>
-					<ul class="scizora-footer-list">
-						<li><a href="#" class="scizora-footer-link">Home</a></li>
-						<li><a href="categories.html" class="scizora-footer-link">Categories</a></li>
-						<li><a href="blog.html" class="scizora-footer-link">Blogs</a></li>
-						<li><a href="aboutus.html" class="scizora-footer-link">About Us</a></li>
-						<li><a href="contactus.html" class="scizora-footer-link">Contact Us</a></li>
-					</ul>
-				</div>
-				<div class="scizora-footer-column">
-					<h3 class="scizora-footer-heading">Legal</h3>
-					<ul class="scizora-footer-list">
-						<li><a href="terms.html" class="scizora-footer-link">Terms of Service</a></li>
-						<li><a href="privacy.html" class="scizora-footer-link">Privacy Policy</a></li>
-					</ul>
-				</div>
-				<div class="scizora-footer-column">
-					<h3 class="scizora-footer-heading">Newsletter</h3>
-					<p class="scizora-footer-description">Subscribe to our newsletter for the latest updates and featured companies.</p>
-					<div class="scizora-newsletter-form">
-						<input type="email" placeholder="Your email" class="scizora-newsletter-input">
-						<button class="scizora-newsletter-button">
-							<i class="fas fa-paper-plane"></i>
-						</button>
-					</div>
-				</div>
-			</div>
-			<div class="scizora-footer-bottom">
-				<p>&copy; 2025 SCIZORA. All rights reserved.</p>
-			</div>
-		</div>
-	</footer>
+    {{-- <footer class="scizora-main-footer">
+        <div class="container scizora-footer-container">
+            <div class="scizora-footer-grid">
+                <div class="scizora-footer-column">
+                    <h3 class="scizora-footer-logo-heading"><a href="#"><img src="logo.jpg" alt="logo"
+                                width="200" height="100"></a></h3>
+                    <p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through
+                        verified reviews and ratings from real customers.</p>
+                    <div class="scizora-social-links">
+                        <a href="#" class="scizora-social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="scizora-social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="scizora-social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="scizora-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="scizora-footer-column">
+                    <h3 class="scizora-footer-heading">Quick Links</h3>
+                    <ul class="scizora-footer-list">
+                        <li><a href="#" class="scizora-footer-link">Home</a></li>
+                        <li><a href="categories.html" class="scizora-footer-link">Categories</a></li>
+                        <li><a href="blog.html" class="scizora-footer-link">Blogs</a></li>
+                        <li><a href="aboutus.html" class="scizora-footer-link">About Us</a></li>
+                        <li><a href="contactus.html" class="scizora-footer-link">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="scizora-footer-column">
+                    <h3 class="scizora-footer-heading">Legal</h3>
+                    <ul class="scizora-footer-list">
+                        <li><a href="terms.html" class="scizora-footer-link">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="scizora-footer-link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="scizora-footer-column">
+                    <h3 class="scizora-footer-heading">Newsletter</h3>
+                    <p class="scizora-footer-description">Subscribe to our newsletter for the latest updates and
+                        featured companies.</p>
+                    <div class="scizora-newsletter-form">
+                        <input type="email" placeholder="Your email" class="scizora-newsletter-input">
+                        <button class="scizora-newsletter-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="scizora-footer-bottom">
+                <p>&copy; 2025 SCIZORA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer> --}}
+    @include('home.footer')
+    <!-- Quote Request Modal -->
+    <div class="modal-overlay" id="quote-modal-overlay">
+        <div class="quote-modal">
+            <button class="close-modal" id="close-quote-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">Request a Quote</h2>
 
+            <form id="quote-form">
+                <div class="form-group">
+                    <label for="quote-name" class="required-field">Name</label>
+                    <input type="text" id="quote-name" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-email" class="required-field">Email Address</label>
+                    <input type="email" id="quote-email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-phone" class="required-field">Contact Number</label>
+                    <input type="tel" id="quote-phone" placeholder="Your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-quantity" class="required-field">Quantity</label>
+                    <input type="number" id="quote-quantity" placeholder="Number of units" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-organization">Organization/Institution</label>
+                    <input type="text" id="quote-organization" placeholder="Your organization name">
+                </div>
+
+                <div class="form-group">
+                    <label for="quote-message">Additional Information</label>
+                    <textarea id="quote-message" placeholder="Any specific requirements or questions"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Request Quote</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Specialist Modal -->
+    <div class="modal-overlay" id="specialist-modal-overlay">
+        <div class="specialist-modal">
+            <button class="close-modal" id="close-specialist-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title">Contact a Specialist</h2>
+
+            <form id="specialist-form">
+                <div class="form-group">
+                    <label for="specialist-name" class="required-field">Name</label>
+                    <input type="text" id="specialist-name" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-email" class="required-field">Email Address</label>
+                    <input type="email" id="specialist-email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-phone" class="required-field">Contact Number</label>
+                    <input type="tel" id="specialist-phone" placeholder="Your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-organization" class="required-field">Organization/Institution</label>
+                    <input type="text" id="specialist-organization" placeholder="Your organization name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-department">Department</label>
+                    <input type="text" id="specialist-department" placeholder="Your department">
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-subject" class="required-field">Subject</label>
+                    <select id="specialist-subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="product-inquiry">Product Inquiry</option>
+                        <option value="technical-support">Technical Support</option>
+                        <option value="training-request">Training Request</option>
+                        <option value="service-request">Service Request</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-message" class="required-field">Message</label>
+                    <textarea id="specialist-message" placeholder="How can our specialist help you?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialist-urgency">Urgency</label>
+                    <select id="specialist-urgency">
+                        <option value="low">Low - General inquiry</option>
+                        <option value="medium" selected>Medium - Need information within a week</option>
+                        <option value="high">High - Need immediate assistance</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Contact Specialist</button>
+            </form>
+        </div>
+    </div>
     <!-- Review Modal -->
     <div class="modal-overlay" id="review-modal">
         <div class="review-modal">
@@ -1724,18 +1992,18 @@
                 <i class="fas fa-times"></i>
             </button>
             <h2 class="modal-title">Write a Review</h2>
-            
+
             <form id="review-form">
                 <div class="form-group">
                     <label for="reviewer-name">Your Name</label>
                     <input type="text" id="reviewer-name" placeholder="Dr. John Smith" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="reviewer-email">Email Address</label>
                     <input type="email" id="reviewer-email" placeholder="john.smith@example.com" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Your Rating</label>
                     <div class="star-rating" id="star-rating">
@@ -1747,27 +2015,27 @@
                     </div>
                     <input type="hidden" id="rating-value" value="0" name="rating">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="review-title">Review Title</label>
                     <input type="text" id="review-title" placeholder="Great product for our lab" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="pros">Pros</label>
                     <textarea id="pros" placeholder="What did you like about this product?"></textarea>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="cons">Cons</label>
                     <textarea id="cons" placeholder="What could be improved?"></textarea>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="review-text">Your Review</label>
                     <textarea id="review-text" required placeholder="Share your experience with this product"></textarea>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="verified">Are you a verified purchaser?</label>
                     <select id="verified">
@@ -1775,7 +2043,7 @@
                         <option value="no">No, I haven't purchased it</option>
                     </select>
                 </div>
-                
+
                 <button type="submit" class="submit-review-btn">Submit Review</button>
             </form>
         </div>
@@ -1805,6 +2073,14 @@
             const reviewForm = document.getElementById('review-form');
             const profileIcon = document.getElementById('profileIcon');
             const dropdownContent = document.getElementById('dropdownContent');
+            const requestQuoteBtn = document.getElementById('request-quote-btn');
+            const contactSpecialistBtn = document.getElementById('contact-specialist-btn');
+            const quoteModalOverlay = document.getElementById('quote-modal-overlay');
+            const specialistModalOverlay = document.getElementById('specialist-modal-overlay');
+            const closeQuoteModal = document.getElementById('close-quote-modal');
+            const closeSpecialistModal = document.getElementById('close-specialist-modal');
+            const quoteForm = document.getElementById('quote-form');
+            const specialistForm = document.getElementById('specialist-form');
 
             // Profile Dropdown Logic
             if (profileIcon) {
@@ -1815,7 +2091,8 @@
             }
 
             window.addEventListener('click', function(event) {
-                if (dropdownContent && !profileIcon.contains(event.target) && !dropdownContent.contains(event.target)) {
+                if (dropdownContent && !profileIcon.contains(event.target) && !dropdownContent.contains(
+                        event.target)) {
                     dropdownContent.classList.remove('show');
                 }
             });
@@ -1859,14 +2136,17 @@
                     btn.addEventListener('click', () => {
                         tabBtns.forEach(b => b.classList.remove('active'));
                         tabContents.forEach(c => c.classList.remove('active'));
-                        
+
                         btn.classList.add('active');
                         const tabId = btn.getAttribute('data-tab');
                         document.getElementById(tabId).classList.add('active');
-                        
+
                         if (tabId === 'reviews') {
                             setTimeout(() => {
-                                reviewsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                reviewsSection.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
                             }, 300);
                         }
                     });
@@ -1896,7 +2176,9 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1 });
+                }, {
+                    threshold: 0.1
+                });
 
                 reviewCards.forEach(card => observer.observe(card));
             }
@@ -1920,7 +2202,7 @@
                     mobileNav.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 };
-                
+
                 const closeMenu = () => {
                     mobileNav.classList.remove('active');
                     document.body.style.overflow = '';
@@ -1930,6 +2212,75 @@
                 closeMobileNav.addEventListener('click', closeMenu);
                 document.querySelectorAll('.mobile-nav-links a').forEach(link => {
                     link.addEventListener('click', closeMenu);
+                });
+            }
+            // Quote Request Modal Functionality
+            if (requestQuoteBtn && quoteModalOverlay) {
+                const openQuoteModal = () => {
+                    quoteModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                };
+
+                const closeQuoteModalHandler = () => {
+                    quoteModalOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                };
+
+                requestQuoteBtn.addEventListener('click', openQuoteModal);
+                closeQuoteModal.addEventListener('click', closeQuoteModalHandler);
+                quoteModalOverlay.addEventListener('click', (e) => {
+                    if (e.target === quoteModalOverlay) {
+                        closeQuoteModalHandler();
+                    }
+                });
+
+                // Quote Form Submission
+                quoteForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const formData = new FormData(quoteForm);
+                    const quoteData = Object.fromEntries(formData.entries());
+                    console.log('Quote Request Submitted:', quoteData);
+
+                    alert('Thank you for your quote request! Our team will contact you shortly.');
+
+                    quoteForm.reset();
+                    closeQuoteModalHandler();
+                });
+            }
+
+            // Contact Specialist Modal Functionality
+            if (contactSpecialistBtn && specialistModalOverlay) {
+                const openSpecialistModal = () => {
+                    specialistModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                };
+
+                const closeSpecialistModalHandler = () => {
+                    specialistModalOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                };
+
+                contactSpecialistBtn.addEventListener('click', openSpecialistModal);
+                closeSpecialistModal.addEventListener('click', closeSpecialistModalHandler);
+                specialistModalOverlay.addEventListener('click', (e) => {
+                    if (e.target === specialistModalOverlay) {
+                        closeSpecialistModalHandler();
+                    }
+                });
+
+                // Specialist Form Submission
+                specialistForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const formData = new FormData(specialistForm);
+                    const specialistData = Object.fromEntries(formData.entries());
+                    console.log('Specialist Contact Submitted:', specialistData);
+
+                    alert('Thank you for contacting us! A specialist will reach out to you soon.');
+
+                    specialistForm.reset();
+                    closeSpecialistModalHandler();
                 });
             }
 
@@ -1969,24 +2320,25 @@
                 // Review Form Submission
                 reviewForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    
+
                     const formData = new FormData(reviewForm);
                     const reviewData = Object.fromEntries(formData.entries());
                     console.log('Review Submitted:', reviewData);
-                    
+
                     alert('Thank you for your review! It has been submitted successfully.');
-                    
+
                     reviewForm.reset();
                     starRating.forEach(star => {
                         star.classList.remove('fas', 'active');
                         star.classList.add('far');
                     });
                     ratingValue.value = 0;
-                    
+
                     closeModalHandler();
                 });
             }
         });
     </script>
 </body>
+
 </html>

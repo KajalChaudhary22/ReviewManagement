@@ -587,12 +587,13 @@
             }
         }
     </style>
+    @include('home.styles')
 </head>
 
 <body>
 
     <!-- ======================= HEADER ======================= -->
-    <header class="site-header">
+    {{-- <header class="site-header">
         <div class="container">
             <a href="{{ url('/') }}" class="text-xl md:text-2xl font-bold"><img
                     src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="150" height="50"></a>
@@ -617,8 +618,8 @@
                 </button>
             </div>
         </div>
-    </header>
-    {{-- @include('home.header') --}}
+    </header> --}}
+    @include('home.header')
 
     <main>
         <!-- ======================= HERO SECTION ======================= -->

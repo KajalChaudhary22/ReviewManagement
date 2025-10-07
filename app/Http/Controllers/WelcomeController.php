@@ -78,12 +78,13 @@ class WelcomeController extends Controller
                 return [
                     'id' => $product?->id,
                     'name' => $product?->name,
-                    'logo' => $product?->images?->first()?->url ?? 'https://via.placeholder.com/80',
+                    'logo' => $product?->images?->first()?->path ?? 'https://via.placeholder.com/80',
                     'rating' => round((float) ($product?->rating ?? 0), 1),
                     'reviews' => $product?->reviews_count ?? 0,
                     'description' => $product?->description ?? '',
                     'categories' => [$product?->categoryDetails?->name ?? ''],
-                    'certifications' => $product?->certifications ?? [],
+                    'sub_categories' => [$product?->subCategoryDetails?->name ?? ''],
+                    'certifications' => $product?->certifications?->pluck('certificate_name')->toArray() ?? [],
                     'location' => [
                         'id' => $product?->location?->id ?? '',
                         'country' => $product?->location?->name ?? 'Unknown'

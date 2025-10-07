@@ -13,7 +13,7 @@
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
                 </div>
             </a>
-            <span>John Doe</span>
+            <span>{{Auth::user()?->name}}</span>
             <a href="#" class="logout-btn" title="Logout" id="logoutBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" align="right"
                     fill="currentColor" viewBox="0 0 16 16">
