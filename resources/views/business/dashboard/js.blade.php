@@ -27,51 +27,51 @@
             }
         });
     });
-    $(document).ready(function() {
-        // Add product button
-        $('#add-product-btn').click(function() {
-            $('#product_id').val('');
-            $('#product-form')[0].reset();
-            openModal('productModal');
-        });
-        $('#product-form').on('submit', function(e) {
-            e.preventDefault();
+    // $(document).ready(function() {
+    //     // Add product button
+    //     $('#add-product-btn').click(function() {
+    //         $('#product_id').val('');
+    //         $('#product-form')[0].reset();
+    //         openModal('productModal');
+    //     });
+    //     $('#product-form').on('submit', function(e) {
+    //         e.preventDefault();
 
-            let formData = new FormData(this);
+    //         let formData = new FormData(this);
 
-            $.ajax({
-                url: "/api/business/products/store",
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(res) {
-                    if (res.status) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: res.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+    //         $.ajax({
+    //             url: "/api/business/products/store",
+    //             type: "POST",
+    //             data: formData,
+    //             processData: false,
+    //             contentType: false,
+    //             success: function(res) {
+    //                 if (res.status) {
+    //                     Swal.fire({
+    //                         icon: 'success',
+    //                         title: res.message,
+    //                         showConfirmButton: false,
+    //                         timer: 1500
+    //                     });
 
-                        $('#product-form')[0].reset();
-                        $('#productModal').hide(); // hide custom modal
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: res.message
-                        });
-                    }
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Server Error',
-                        text: 'Something went wrong!'
-                    });
-                }
-            });
-        });
-    });
+    //                     $('#product-form')[0].reset();
+    //                     $('#productModal').hide(); // hide custom modal
+    //                 } else {
+    //                     Swal.fire({
+    //                         icon: 'error',
+    //                         title: 'Oops...',
+    //                         text: res.message
+    //                     });
+    //                 }
+    //             },
+    //             error: function() {
+    //                 Swal.fire({
+    //                     icon: 'error',
+    //                     title: 'Server Error',
+    //                     text: 'Something went wrong!'
+    //                 });
+    //             }
+    //         });
+    //     });
+    // });
 </script>

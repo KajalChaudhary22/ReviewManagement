@@ -10,7 +10,11 @@
 
             <a href="Profile-Management.html">
                 <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                    @if(Auth::user()?->businessDetails?->logo)
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="{{Auth::user()?->name}}">
+                    @else
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="{{Auth::user()?->name}}">
+                    @endif
                 </div>
             </a>
             <span>{{Auth::user()?->name}}</span>

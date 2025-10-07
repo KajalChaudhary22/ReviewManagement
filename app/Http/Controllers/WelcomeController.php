@@ -19,7 +19,7 @@ class WelcomeController extends Controller
     {
         $masterTypeId = MasterType::where('name', 'Product Category')->first()?->id;
         $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
-        $latestReviews = Review::where('status', 'Active')->with(['productDetails', 'customerDetails'])->latest()->take(3)->get();
+        $latestReviews = Review::where('status', 'Apprpved')->with(['productDetails', 'customerDetails'])->latest()->take(9)->get();
         $companies = Business::all(); // fetch all companies
         // dd($productCategoies);
         return view('home.welcome', compact('productCategoies', 'latestReviews', 'companies'));
@@ -27,7 +27,7 @@ class WelcomeController extends Controller
     protected function categories()
     {
         $masterTypeId = MasterType::where('name', 'Product Category')->first()?->id;
-        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
+        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->latest()->get();
         $masterSubcatId = MasterType::where('name', 'Product Sub Category')->first()?->id;
         $productSubCategories = Masters::where('master_type_id', $masterSubcatId)->where('status', 'Active')->with('images')->latest()->get()->map(function ($item) {
             return [
@@ -69,10 +69,11 @@ class WelcomeController extends Controller
         } else {
             $categoryId = custom_decrypt($request->id);
             $subCategoryId = $request->subCat ? custom_decrypt($request->subCat) : null;
-            $allProducts = Product::where('productCategory_id', $categoryId)->where('status', 'Active')->get();
+            $allProducts = Product::with(['images'])->where('productCategory_id', $categoryId)->where('status', 'Active')->latest()->get();
             $masterTypeId = MasterType::where('name', 'Location')->first()?->id;
             $locations = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
             $subcategories = Masters::where('parent_id', $categoryId)->where('status', 'Active')->with('images')->get();
+            // dd($allProducts[0]);
             // Build the business data array safely with null operators
             $businessData = $allProducts->map(function ($product) {
                 return [
@@ -105,7 +106,7 @@ class WelcomeController extends Controller
             abort(404);
         } else {
             $productId = custom_decrypt($request->id);
-            $productDetails = Product::where('id', $productId)->where('status', 'Active')->with(['categoryDetails', 'images'])->first();
+            $productDetails = Product::where('id', $productId)->where('status', 'Active')->with(['categoryDetails:id,name', 'images','reviewsData'])->first();
             if (!$productDetails) {
                 abort(404);
             }

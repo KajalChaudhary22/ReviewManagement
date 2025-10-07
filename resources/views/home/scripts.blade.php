@@ -27,37 +27,37 @@
 
 
     // // JavaScript for Popup Review Form
-    // const reviewPopup = document.getElementById('review-popup');
-    // const writeReviewBtn = document.getElementById('write-review-btn');
-    // const closePopupBtn = document.getElementById('close-popup');
-    // const stars = document.querySelectorAll('.star');
+    const reviewPopup = document.getElementById('review-popup');
+    const writeReviewBtn = document.getElementById('write-review-btn');
+    const closePopupBtn = document.getElementById('close-popup');
+    const stars = document.querySelectorAll('.star');
 
-    // // Show the popup when the "Write a Review" button is clicked
-    // writeReviewBtn.addEventListener('click', () => {
-    //     reviewPopup.classList.add('active');
-    // });
+    // Show the popup when the "Write a Review" button is clicked
+    writeReviewBtn.addEventListener('click', () => {
+        reviewPopup.classList.add('active');
+    });
 
-    // // Hide the popup when the close button is clicked
-    // closePopupBtn.addEventListener('click', () => {
-    //     reviewPopup.classList.remove('active');
-    // });
+    // Hide the popup when the close button is clicked
+    closePopupBtn.addEventListener('click', () => {
+        reviewPopup.classList.remove('active');
+    });
 
-    // // Hide the popup when clicking outside of it
-    // reviewPopup.addEventListener('click', (e) => {
-    //     if (e.target === reviewPopup) {
-    //         reviewPopup.classList.remove('active');
-    //     }
-    // });
+    // Hide the popup when clicking outside of it
+    reviewPopup.addEventListener('click', (e) => {
+        if (e.target === reviewPopup) {
+            reviewPopup.classList.remove('active');
+        }
+    });
 
-    // // Star Rating Functionality
-    // stars.forEach(star => {
-    //     star.addEventListener('click', () => {
-    //         const value = parseInt(star.dataset.value);
-    //         stars.forEach(s => {
-    //             s.classList.toggle('selected', parseInt(s.dataset.value) <= value);
-    //         });
-    //     });
-    // });
+    // Star Rating Functionality
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = parseInt(star.dataset.value);
+            stars.forEach(s => {
+                s.classList.toggle('selected', parseInt(s.dataset.value) <= value);
+            });
+        });
+    });
 
     // // Expandable Categories Section
     // const toggleCategoriesBtn = document.getElementById('toggleCategories');
