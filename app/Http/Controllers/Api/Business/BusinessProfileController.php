@@ -78,7 +78,7 @@ class BusinessProfileController extends Controller
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = 'logos/' . $filename;
+                $path = 'BusinessLogos/' . $filename;
             
                 // move file directly to public/logos folder
                 $file->move(public_path('logos'), $filename);
@@ -100,12 +100,12 @@ class BusinessProfileController extends Controller
                 'country' => $validated['country'] ?? null,
                 'description' => $validated['description'] ?? null,
                 'primary_contact' => $validated['primary_contact'] ?? null,
-                'logo' => $validated['logo'] ?? $business->logo_url, // keep old if not updated
+                'logo' => $validated['logo'] ?? $business?->logo, // keep old if not updated
             ]);
 
             // Update related User record
-            if ($business->userDetails) {
-                $business->userDetails->update([
+            if ($business?->userDetails) {
+                $business?->userDetails->update([
                     'name'  => $validated['name'],
                     'email' => $validated['email'] ?? null,
                 ]);

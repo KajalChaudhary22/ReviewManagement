@@ -69,10 +69,11 @@
 
                 <!-- Quick Actions -->
                 <div class="quick-actions">
-                    <div class="action-btn" id="add-product-btn">
+                    <a href="{{ route('business.product.add',['ty' => custom_encrypt('BusinessProductAdd')]) }}"><div class="action-btn" >
                         <i class="icon" >➕</i>
                         <span>Add Product</span>
                     </div>
+                    </a>
                     <a href="{{ route('business.inquiries.list', ['ty' => custom_encrypt('InquiriesProductList')]) }}">
                         <div class="action-btn" id="quick-view-inquiries">
                             <i class="icon">📩</i>

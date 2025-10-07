@@ -188,8 +188,7 @@
 
     <!-- Popup Review Form -->
     <div id="review-popup" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div
-            class="bg-white rounded-lg shadow-2xl p-6 md:p-8 w-11/12 md:w-2/3 lg:w-1/2 transform transition-all scale-95 opacity-0">
+        <div class="bg-white rounded-lg shadow-2xl p-6 md:p-8 w-11/12 md:w-2/3 lg:w-1/2 transform transition-all scale-95 opacity-0">
             <!-- Popup Header -->
             <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
                 <h2 class="text-xl md:text-2xl font-bold">Write a Review</h2>
@@ -197,16 +196,15 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-
+    
             <!-- Popup Body -->
             <div class="space-y-4">
                 <!-- Company Name -->
                 <div>
                     <label for="company-name" class="block text-sm font-medium text-gray-700">Company Name</label>
-                    <input type="text" id="company-name"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" id="company-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 </div>
-
+    
                 <!-- Star Rating -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Your Rating</label>
@@ -218,17 +216,15 @@
                         <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="5"></i>
                     </div>
                 </div>
-
+    
                 <!-- Review Text -->
                 <div>
                     <label for="review-text" class="block text-sm font-medium text-gray-700">Your Review</label>
-                    <textarea id="review-text" rows="5"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    <textarea id="review-text" rows="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                 </div>
-
+    
                 <!-- Submit Button -->
-                <button
-                    class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all">
+                <button class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all">
                     Submit Review
                 </button>
             </div>
@@ -243,7 +239,7 @@
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Recent Reviews</h2>
 
-            @if ($latestReviews->count() > 0)
+            @if ($latestReviews?->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 review-grid"
                     id="reviewsContainer">
                     @foreach ($latestReviews as $index => $review)
@@ -253,7 +249,7 @@
                                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-300 rounded-full mr-3 sm:mr-4"></div>
                                 <div>
                                     <h3 class="font-semibold text-sm sm:text-base">
-                                        {{ $review->business->name ?? 'Unknown Business' }}
+                                        {{ $review?->customerDetails?->name ?? 'Unknown User' }}
                                     </h3>
                                     <div class="flex text-yellow-400 text-xs sm:text-sm">
                                         @for ($i = 1; $i <= 5; $i++)
@@ -269,16 +265,16 @@
                                 </div>
                             </div>
                             <p class="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base">
-                                "{{ $review->comment }}"
+                                "{{ $review?->comment }}"
                             </p>
                             <p class="text-gray-400 text-xs sm:text-sm">
-                                Posted on {{ \Carbon\Carbon::parse($review->created_at)->format('M d, Y') }}
+                                Posted on {{ \Carbon\Carbon::parse($review?->created_at)->format('M d, Y') }}
                             </p>
                         </div>
                     @endforeach
                 </div>
 
-                @if ($latestReviews->count() > 3)
+                @if ($latestReviews?->count() > 3)
                     <div class="text-center">
                         <button id="viewAllReviews"
                             class="border border-blue-600 text-blue-600 px-5 py-1.5 sm:px-6 sm:py-2 rounded-full hover:bg-blue-600 hover:text-white transition-all text-sm sm:text-base">

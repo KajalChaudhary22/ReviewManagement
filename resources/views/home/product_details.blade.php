@@ -900,6 +900,29 @@
             margin-right: 12px;
             margin-top: 4px;
         }
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #1137b0;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
 
         /* Review Modal */
         .modal-overlay {
@@ -1559,6 +1582,60 @@
                             </div>
 
                             <!-- Review Cards -->
+                            @if($productDetails?->reviewsData)
+                                @foreach ($productDetails?->reviewsData as $review)
+                                    @php
+                                        $fullStars = floor($review?->rating);
+                                        $halfStar = $review?->rating - $fullStars >= 0.5 ? 1 : 0;
+                                        $emptyStars = 5 - $fullStars - $halfStar;
+                                    @endphp
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <div>
+                                                <span class="reviewer">{{ $review?->customerDetails?->name }}</span>
+                                                <span class="verified-badge">Verified Purchaser</span>
+                                            </div>
+                                        </div>
+                                        <div class="review-stars">
+                                            {{-- Full Stars --}}
+                                            @for ($i = 0; $i < $fullStars; $i++)
+                                                <i class="fas fa-star"></i>
+                                            @endfor
+
+                                            {{-- Half Star --}}
+                                            @if ($halfStar)
+                                                <i class="fas fa-star-half-alt"></i>
+                                            @endif
+
+                                            {{-- Empty Stars --}}
+                                            @for ($i = 0; $i < $emptyStars; $i++)
+                                                <i class="far fa-star"></i>
+                                            @endfor
+                                        </div>
+                                        <h3 class="review-title">{{ $review?->title }}</h3>
+                                        <div class="pros-cons">
+                                            <div class="pros">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                <div>{{ $review->pros }}</div>
+                                            </div>
+                                            <div class="cons">
+                                                <i class="fas fa-thumbs-down"></i>
+                                                <div>{{ $review->cons }}</div>
+                                            </div>
+                                        </div>
+                                        <p class="review-text">{{ $review?->comment }}</p>
+                                        <div class="review-footer">
+                                            <div class="date">Reviewed on: {{ \Carbon\Carbon::parse($review->created_at)->format('M d, Y') }}</div>
+                                            <div class="helpful-section">
+                                                <span class="helpful-text">Helpful?</span>
+                                                <button class="helpful-btn">Yes ({{ $review->helpful_count }})</button>
+                                                <button class="helpful-btn">No ({{ $review->not_helpful_count }})</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <!-- Sample Review Cards -->
                             <div class="review-card">
                                 <div class="review-header">
                                     <div>
