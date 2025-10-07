@@ -204,5 +204,13 @@
             });
         });
     });
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById("scizoraMenuToggle");
+    const mobileNav = document.getElementById("scizoraMobileNav");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.toggle("active");
+      menuToggle.classList.toggle("active");
+    });
 
 </script>

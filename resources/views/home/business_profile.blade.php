@@ -360,11 +360,12 @@
             background-color: rgba(21, 68, 218, 0.1);
         }
     </style>
+    @include('home.styles')
 </head>
 
 <body class="bg-gray-50">
     <!-- Header with mobile menu toggle -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    {{-- <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
                 <a href="#" class="text-xl md:text-2xl font-bold"><img src="logo.jpg" alt="logo" width="200"
@@ -414,7 +415,8 @@
                     a Quote</button>
             </div>
         </div>
-    </header>
+    </header> --}}
+    @include('home.header')
 
     <!-- Hero Banner Section -->
     <div class="hero-banner">
@@ -906,7 +908,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 md:py-8">
+    {{-- <footer class="bg-gray-800 text-white py-6 md:py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
                 <div>
@@ -971,7 +973,8 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
+    @include('home.footer')
 
     <!-- Product Modal -->
     <div id="productModal" class="modal">

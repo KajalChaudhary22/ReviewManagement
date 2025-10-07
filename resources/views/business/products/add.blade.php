@@ -746,7 +746,7 @@
                             <label class="form-label">Quantity</label>
                             <input type="number" class="form-control" id="product-quantity"
                                 placeholder="Enter Quantity" required name="quantity" min="0"
-                                value="{{ old('quantity', $productData?->quantity) }}">
+                                value="{{ old('quantity', $productData?->quantity) }}" minlength="1" maxlength="6">
                             @if (isset($errors) && $errors->has('quantity'))
                                 <small class="text-danger">{{ $errors->first('quantity') }}</small>
                             @endif
@@ -755,7 +755,7 @@
                             <label class="form-label">Price</label>
                             <input type="number" class="form-control" id="product-price" placeholder="Enter Price"
                                 required name="price" step="0.01" min="0"
-                                value="{{ old('price', $productData?->price) }}">
+                                value="{{ old('price', $productData?->price) }}" minlength="1" maxlength="6">
                             @if (isset($errors) && $errors->has('price'))
                                 <small class="text-danger">{{ $errors->first('price') }}</small>
                             @endif

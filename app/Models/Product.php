@@ -15,7 +15,11 @@ class Product extends Model
 
     public function categoryDetails()
     {
-        return $this->belongsTo(MasterType::class, 'productCategory_id');
+        return $this->belongsTo(Masters::class, 'productCategory_id');
+    }
+    public function subCategoryDetails()
+    {
+        return $this->belongsTo(Masters::class, 'subcategory_id');
     }
 
     public function businessDetails()

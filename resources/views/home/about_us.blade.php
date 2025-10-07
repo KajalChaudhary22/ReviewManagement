@@ -79,7 +79,7 @@
         /* --- Header --- */
         header {
             background-color: var(--secondary-color);
-            padding: 15px 0;
+            /* padding: 15px 0; */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
