@@ -110,7 +110,7 @@ Route::prefix('business')->group(function () {
         // Product Routes
         Route::get('/product-list', [ProductController::class, 'index'])->name('business.product.list');
         Route::get('/get-product-data', [ProductController::class, 'getProductsData'])->name('business.product.data');
-        
+
         Route::get('/add-product', [ProductController::class, 'addProductPage'])->name('business.product.add');
         Route::post('/products/store', [ProductController::class, 'saveProduct'])->name('business.products.store');
         Route::get('/products/{id}', [ProductController::class, 'show'])->name('business.products.show');
@@ -169,6 +169,9 @@ Route::get('/get-master-parent', [MasterSetupController::class, 'getMasterParent
 Route::post('/contact/store', [ApiHomeController::class, 'store']);
 Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
 Route::get('/subcategories/{id}', [ProductController::class, 'getSubcategories'])->name('get.subcategories.data');
+Route::post('/product/quote', [ApiHomeController::class, 'quoteStore']);
+Route::post('/product/specialist', [ApiHomeController::class, 'specialistStore']);
+
 
 
 // Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');

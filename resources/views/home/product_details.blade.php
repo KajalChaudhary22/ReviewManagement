@@ -900,6 +900,7 @@
             margin-right: 12px;
             margin-top: 4px;
         }
+
         .submit-btn {
             background-color: var(--primary-blue);
             color: var(--white);
@@ -963,12 +964,14 @@
         .modal-overlay.active .review-modal {
             transform: translateY(0);
         }
+
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .quote-modal, .specialist-modal {
+        .quote-modal,
+        .specialist-modal {
             background-color: var(--white);
             border-radius: 8px;
             width: 90%;
@@ -1284,22 +1287,24 @@
             .breadcrumbs {
                 font-size: 12px;
             }
-            
+
             .tab-header {
                 gap: 5px;
             }
-            
+
             .tab-btn {
                 padding: 8px 12px;
                 font-size: 14px;
             }
-            
+
             .reviews-controls {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            
-            .review-modal, .quote-modal, .specialist-modal {
+
+            .review-modal,
+            .quote-modal,
+            .specialist-modal {
                 padding: 20px;
             }
         }
@@ -1322,7 +1327,8 @@
             <div class="profile-dropdown">
                 <i class="fas fa-user-circle profile-icon" id="profileIcon"></i>
                 <div class="dropdown-content" id="dropdownContent">
-                    <a href="User Pages\Dashboard seperate pages\My-Profile.html"><i class="fas fa-user"></i> My Profile</a>
+                    <a href="User Pages\Dashboard seperate pages\My-Profile.html"><i class="fas fa-user"></i> My
+                        Profile</a>
                     <a href="Business Pages\notification.html"><i class="fas fa-bell"></i> Notifications</a>
                     <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
@@ -1337,8 +1343,7 @@
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
-            <a href="index.html" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150"
-                    height="50"></a>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150" height="50"></a>
             <button class="close-mobile-nav" id="close-mobile-nav">
                 <i class="fas fa-times"></i>
             </button>
@@ -1412,21 +1417,24 @@
                     </div>
                     <div class="thumbnails">
                         @foreach ($productDetails->images as $index => $image)
-                            <div class="thumbnail {{ $index == 0 ? 'active' : '' }}"
-                                data-img="{{ asset($image?->path) }}">
+                            <div class="thumbnail {{ $index == 0 ? 'active' : '' }}" data-img="{{ asset($image?->path) }}">
                                 <img src="{{ asset($image?->path) }}" alt="Thumbnail {{ $index + 1 }}">
                             </div>
                         @endforeach
-                        {{-- <div class="thumbnail active" data-img="https://via.placeholder.com/800x600/005A9C/FFFFFF?text=SCIZORA+Hematology+Pro">
+                        {{-- <div class="thumbnail active"
+                            data-img="https://via.placeholder.com/800x600/005A9C/FFFFFF?text=SCIZORA+Hematology+Pro">
                             <img src="https://via.placeholder.com/100x75/005A9C/FFFFFF?text=Thumb+1" alt="Thumbnail 1">
                         </div>
-                        <div class="thumbnail" data-img="https://via.placeholder.com/800x600/1a6db1/FFFFFF?text=Product+Front+View">
+                        <div class="thumbnail"
+                            data-img="https://via.placeholder.com/800x600/1a6db1/FFFFFF?text=Product+Front+View">
                             <img src="https://via.placeholder.com/100x75/1a6db1/FFFFFF?text=Thumb+2" alt="Thumbnail 2">
                         </div>
-                        <div class="thumbnail" data-img="https://via.placeholder.com/800x600/0d4a7e/FFFFFF?text=Product+Side+View">
+                        <div class="thumbnail"
+                            data-img="https://via.placeholder.com/800x600/0d4a7e/FFFFFF?text=Product+Side+View">
                             <img src="https://via.placeholder.com/100x75/0d4a7e/FFFFFF?text=Thumb+3" alt="Thumbnail 3">
                         </div>
-                        <div class="thumbnail" data-img="https://via.placeholder.com/800x600/2c7cba/FFFFFF?text=Product+In+Use">
+                        <div class="thumbnail"
+                            data-img="https://via.placeholder.com/800x600/2c7cba/FFFFFF?text=Product+In+Use">
                             <img src="https://via.placeholder.com/100x75/2c7cba/FFFFFF?text=Thumb+4" alt="Thumbnail 4">
                         </div> --}}
                     </div>
@@ -1444,16 +1452,25 @@
                     <div class="tab-content active" id="overview">
                         <h2 class="section-title">Product Overview</h2>
                         {!! $productDetails?->overview !!}
-                        {{-- <p class="overview-text">The Aerospray® Hematology Pro is a state-of-the-art slide stainer and cytocentrifuge designed for modern clinical laboratories. This innovative instrument combines rapid staining with precise cytocentrifugation, streamlining your hematology workflow.</p>
-                        <p class="overview-text">Featuring advanced automation and intuitive controls, the Aerospray Pro delivers consistent, high-quality slides with minimal operator intervention. Its dual functionality reduces the need for multiple instruments, saving valuable bench space and improving laboratory efficiency.</p>
-                        <p class="overview-text">With programmable protocols and remote monitoring capabilities, the Aerospray Pro ensures standardization across all procedures while providing the flexibility needed for specialized testing requirements.</p>
-                        
+                        {{-- <p class="overview-text">The Aerospray® Hematology Pro is a state-of-the-art slide stainer
+                            and cytocentrifuge designed for modern clinical laboratories. This innovative instrument
+                            combines rapid staining with precise cytocentrifugation, streamlining your hematology
+                            workflow.</p>
+                        <p class="overview-text">Featuring advanced automation and intuitive controls, the Aerospray Pro
+                            delivers consistent, high-quality slides with minimal operator intervention. Its dual
+                            functionality reduces the need for multiple instruments, saving valuable bench space and
+                            improving laboratory efficiency.</p>
+                        <p class="overview-text">With programmable protocols and remote monitoring capabilities, the
+                            Aerospray Pro ensures standardization across all procedures while providing the flexibility
+                            needed for specialized testing requirements.</p>
+
                         <div class="overview-text">
                             <h3>Key Benefits:</h3>
                             <ul>
                                 <li><strong>Increased Efficiency:</strong> Process up to 48 slides simultaneously</li>
                                 <li><strong>Consistent Results:</strong> Automated protocols ensure standardization</li>
-                                <li><strong>Space Saving Design:</strong> Combines two essential lab functions in one instrument</li>
+                                <li><strong>Space Saving Design:</strong> Combines two essential lab functions in one
+                                    instrument</li>
                                 <li><strong>Remote Monitoring:</strong> Track progress from anywhere in the lab</li>
                                 <li><strong>Reduced Reagent Consumption:</strong> Optimized systems minimize waste</li>
                             </ul>
@@ -1625,7 +1642,9 @@
                                         </div>
                                         <p class="review-text">{{ $review?->comment }}</p>
                                         <div class="review-footer">
-                                            <div class="date">Reviewed on: {{ \Carbon\Carbon::parse($review->created_at)->format('M d, Y') }}</div>
+                                            <div class="date">Reviewed on:
+                                                {{ \Carbon\Carbon::parse($review->created_at)->format('M d, Y') }}
+                                            </div>
                                             <div class="helpful-section">
                                                 <span class="helpful-text">Helpful?</span>
                                                 <button class="helpful-btn">Yes ({{ $review->helpful_count }})</button>
@@ -1801,8 +1820,7 @@
 
                                 <li class="resource-item d-flex align-items-center mb-2">
                                     <div class="resource-icon me-2"><i class="{{ $iconClass }}"></i></div>
-                                    <a href="{{ asset($resource?->resource_url) }}" target="_blank"
-                                        class="resource-link">
+                                    <a href="{{ asset($resource?->resource_url) }}" target="_blank" class="resource-link">
                                         {{ $resource?->resource_name }} ({{ strtoupper($fileType) }})
                                     </a>
                                 </li>
@@ -1820,7 +1838,8 @@
                             </li>
                             <li class="resource-item">
                                 <div class="resource-icon"><i class="fas fa-file-alt"></i></div>
-                                <a href="#" class="resource-link">Application Notes: Hematology Workflow (PDF, 0.8MB)</a>
+                                <a href="#" class="resource-link">Application Notes: Hematology Workflow (PDF,
+                                    0.8MB)</a>
                             </li>
                             <li class="resource-item">
                                 <div class="resource-icon"><i class="fas fa-vial"></i></div>
@@ -1908,8 +1927,8 @@
         <div class="container scizora-footer-container">
             <div class="scizora-footer-grid">
                 <div class="scizora-footer-column">
-                    <h3 class="scizora-footer-logo-heading"><a href="#"><img src="logo.jpg" alt="logo"
-                                width="200" height="100"></a></h3>
+                    <h3 class="scizora-footer-logo-heading"><a href="#"><img src="logo.jpg" alt="logo" width="200"
+                                height="100"></a></h3>
                     <p class="scizora-footer-description">SCIZORA helps consumers find trustworthy businesses through
                         verified reviews and ratings from real customers.</p>
                     <div class="scizora-social-links">
@@ -1963,34 +1982,47 @@
             <h2 class="modal-title">Request a Quote</h2>
 
             <form id="quote-form">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $productDetails?->id }}">
+                <input type="hidden" name="customer_id" value="{{ auth()->check() ? auth()->user()->id : '' }}">
                 <div class="form-group">
                     <label for="quote-name" class="required-field">Name</label>
-                    <input type="text" id="quote-name" placeholder="Your full name" required>
+                    <input type="text" id="quote-name" pattern="^[A-Za-z\s]+$"
+                        title="Name can contain only letters and spaces" name="name" placeholder="Your full name"
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label for="quote-email" class="required-field">Email Address</label>
-                    <input type="email" id="quote-email" placeholder="your.email@example.com" required>
+                    <input type="email" id="quote-email" name="email" title="Please enter a valid email address"
+                        placeholder="your.email@example.com" required>
                 </div>
 
                 <div class="form-group">
                     <label for="quote-phone" class="required-field">Contact Number</label>
-                    <input type="tel" id="quote-phone" placeholder="Your phone number" required>
+                    <input type="phone" id="quote-phone" name="phone" placeholder="Your phone number" required
+                        pattern="^[0-9]{10,12}$" maxlength="12" minlength="10"
+                        title="Phone number must be between 10 to 12 digits"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'')">
                 </div>
 
                 <div class="form-group">
                     <label for="quote-quantity" class="required-field">Quantity</label>
-                    <input type="number" id="quote-quantity" placeholder="Number of units" min="1" required>
+                    <input type="number" id="quote-quantity" name="quantity" placeholder="Number of units" required
+                        min="1" max="6" required title="Quantity must be at least 1">
                 </div>
 
                 <div class="form-group">
                     <label for="quote-organization">Organization/Institution</label>
-                    <input type="text" id="quote-organization" placeholder="Your organization name">
+                    <input type="text" id="quote-organization" name="organization" placeholder="Your organization name"
+                        pattern="^[A-Za-z0-9\s,&.-]*$"
+                        title="Organization name can contain letters, numbers, spaces, commas, and periods">
                 </div>
 
                 <div class="form-group">
                     <label for="quote-message">Additional Information</label>
-                    <textarea id="quote-message" placeholder="Any specific requirements or questions"></textarea>
+                    <textarea id="quote-message" name="message" placeholder="Any specific requirements or questions"
+                        maxlength="1000" title="Message can be up to 1000 characters"></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">Request Quote</button>
@@ -2007,34 +2039,39 @@
             <h2 class="modal-title">Contact a Specialist</h2>
 
             <form id="specialist-form">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $productDetails?->id }}">
+                <input type="hidden" name="customer_id" value="{{ auth()->check() ? auth()->user()->id : '' }}">
                 <div class="form-group">
                     <label for="specialist-name" class="required-field">Name</label>
-                    <input type="text" id="specialist-name" placeholder="Your full name" required>
+                    <input type="text" id="specialist-name" name="name" placeholder="Your full name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-email" class="required-field">Email Address</label>
-                    <input type="email" id="specialist-email" placeholder="your.email@example.com" required>
+                    <input type="email" id="specialist-email" name="email" placeholder="your.email@example.com"
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-phone" class="required-field">Contact Number</label>
-                    <input type="tel" id="specialist-phone" placeholder="Your phone number" required>
+                    <input type="tel" id="specialist-phone" name="phone" placeholder="Your phone number" required>
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-organization" class="required-field">Organization/Institution</label>
-                    <input type="text" id="specialist-organization" placeholder="Your organization name" required>
+                    <input type="text" id="specialist-organization" name="organization"
+                        placeholder="Your organization name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-department">Department</label>
-                    <input type="text" id="specialist-department" placeholder="Your department">
+                    <input type="text" id="specialist-department" name="department" placeholder="Your department">
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-subject" class="required-field">Subject</label>
-                    <select id="specialist-subject" required>
+                    <select id="specialist-subject" name="subject" required>
                         <option value="">Select a subject</option>
                         <option value="product-inquiry">Product Inquiry</option>
                         <option value="technical-support">Technical Support</option>
@@ -2046,12 +2083,13 @@
 
                 <div class="form-group">
                     <label for="specialist-message" class="required-field">Message</label>
-                    <textarea id="specialist-message" placeholder="How can our specialist help you?" required></textarea>
+                    <textarea id="specialist-message" name="message" placeholder="How can our specialist help you?"
+                        required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="specialist-urgency">Urgency</label>
-                    <select id="specialist-urgency">
+                    <select id="specialist-urgency" name="urgency">
                         <option value="low">Low - General inquiry</option>
                         <option value="medium" selected>Medium - Need information within a week</option>
                         <option value="high">High - Need immediate assistance</option>
@@ -2110,7 +2148,8 @@
 
                 <div class="form-group">
                     <label for="review-text">Your Review</label>
-                    <textarea id="review-text" required placeholder="Share your experience with this product"></textarea>
+                    <textarea id="review-text" required
+                        placeholder="Share your experience with this product"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -2150,26 +2189,21 @@
             const reviewForm = document.getElementById('review-form');
             const profileIcon = document.getElementById('profileIcon');
             const dropdownContent = document.getElementById('dropdownContent');
-            const requestQuoteBtn = document.getElementById('request-quote-btn');
-            const contactSpecialistBtn = document.getElementById('contact-specialist-btn');
-            const quoteModalOverlay = document.getElementById('quote-modal-overlay');
-            const specialistModalOverlay = document.getElementById('specialist-modal-overlay');
-            const closeQuoteModal = document.getElementById('close-quote-modal');
-            const closeSpecialistModal = document.getElementById('close-specialist-modal');
+
             const quoteForm = document.getElementById('quote-form');
             const specialistForm = document.getElementById('specialist-form');
 
             // Profile Dropdown Logic
             if (profileIcon) {
-                profileIcon.addEventListener('click', function(event) {
+                profileIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     dropdownContent.classList.toggle('show');
                 });
             }
 
-            window.addEventListener('click', function(event) {
+            window.addEventListener('click', function (event) {
                 if (dropdownContent && !profileIcon.contains(event.target) && !dropdownContent.contains(
-                        event.target)) {
+                    event.target)) {
                     dropdownContent.classList.remove('show');
                 }
             });
@@ -2262,7 +2296,7 @@
 
             // Helpful buttons
             document.querySelectorAll('.helpful-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const textNode = this.childNodes[0];
                     const currentText = textNode.textContent;
                     const match = currentText.match(/\((\d+)\)/);
@@ -2291,40 +2325,7 @@
                     link.addEventListener('click', closeMenu);
                 });
             }
-            // Quote Request Modal Functionality
-            if (requestQuoteBtn && quoteModalOverlay) {
-                const openQuoteModal = () => {
-                    quoteModalOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                };
 
-                const closeQuoteModalHandler = () => {
-                    quoteModalOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                };
-
-                requestQuoteBtn.addEventListener('click', openQuoteModal);
-                closeQuoteModal.addEventListener('click', closeQuoteModalHandler);
-                quoteModalOverlay.addEventListener('click', (e) => {
-                    if (e.target === quoteModalOverlay) {
-                        closeQuoteModalHandler();
-                    }
-                });
-
-                // Quote Form Submission
-                quoteForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-
-                    const formData = new FormData(quoteForm);
-                    const quoteData = Object.fromEntries(formData.entries());
-                    console.log('Quote Request Submitted:', quoteData);
-
-                    alert('Thank you for your quote request! Our team will contact you shortly.');
-
-                    quoteForm.reset();
-                    closeQuoteModalHandler();
-                });
-            }
 
             // Contact Specialist Modal Functionality
             if (contactSpecialistBtn && specialistModalOverlay) {
@@ -2415,7 +2416,9 @@
                 });
             }
         });
+
     </script>
+    @include('home.productDetails_js')
 </body>
 
 </html>
