@@ -171,6 +171,7 @@ Route::post('/contact/subscribe', [ApiHomeController::class, 'subscribeStore']);
 Route::get('/subcategories/{id}', [ProductController::class, 'getSubcategories'])->name('get.subcategories.data');
 Route::post('/product/quote', [ApiHomeController::class, 'quoteStore']);
 Route::post('/product/specialist', [ApiHomeController::class, 'specialistStore']);
+Route::post('/home/writeReviews', [ApiHomeController::class, 'writeReview']);
 
 
 

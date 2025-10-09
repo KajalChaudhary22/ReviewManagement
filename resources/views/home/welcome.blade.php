@@ -137,7 +137,7 @@
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-base sm:text-lg">{{ $company->name }}</h3>
-                                         @php
+                                        @php
                                             $avgRating = $company->reviews->avg('rating');
                                             $totalReviews = $company->reviews->count();
                                         @endphp
@@ -188,7 +188,8 @@
 
     <!-- Popup Review Form -->
     <div id="review-popup" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-2xl p-6 md:p-8 w-11/12 md:w-2/3 lg:w-1/2 transform transition-all scale-95 opacity-0">
+        <div
+            class="bg-white rounded-lg shadow-2xl p-6 md:p-8 w-11/12 md:w-2/3 lg:w-1/2 transform transition-all scale-95 opacity-0">
             <!-- Popup Header -->
             <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
                 <h2 class="text-xl md:text-2xl font-bold">Write a Review</h2>
@@ -196,38 +197,45 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-    
+
             <!-- Popup Body -->
-            <div class="space-y-4">
-                <!-- Company Name -->
-                <div>
-                    <label for="company-name" class="block text-sm font-medium text-gray-700">Company Name</label>
-                    <input type="text" id="company-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                </div>
-    
-                <!-- Star Rating -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Your Rating</label>
-                    <div class="flex items-center mt-1">
-                        <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="1"></i>
-                        <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="2"></i>
-                        <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="3"></i>
-                        <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="4"></i>
-                        <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="5"></i>
+            <form id="review-form">
+                @csrf
+                <div class="space-y-4">
+                    <!-- Company Name -->
+                    <div>
+                        <label for="company-name" class="block text-sm font-medium text-gray-700">Company Name</label>
+                        <input name="company_name" type="text" id="company-name"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
+
+                    <!-- Star Rating -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Your Rating</label>
+                        <div class="flex items-center mt-1">
+                            <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="1"></i>
+                            <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="2"></i>
+                            <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="3"></i>
+                            <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="4"></i>
+                            <i class="fas fa-star text-gray-300 text-2xl cursor-pointer star" data-value="5"></i>
+                        </div>
+                        <input type="hidden" name="rating" id="rating">
+                    </div>
+
+                    <!-- Review Text -->
+                    <div>
+                        <label for="review-text" class="block text-sm font-medium text-gray-700">Your Review</label>
+                        <textarea name="message" id="review-text" rows="5"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button
+                        class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all">
+                        Submit Review
+                    </button>
                 </div>
-    
-                <!-- Review Text -->
-                <div>
-                    <label for="review-text" class="block text-sm font-medium text-gray-700">Your Review</label>
-                    <textarea id="review-text" rows="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                </div>
-    
-                <!-- Submit Button -->
-                <button class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all">
-                    Submit Review
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -240,11 +248,9 @@
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">Recent Reviews</h2>
 
             @if ($latestReviews?->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 review-grid"
-                    id="reviewsContainer">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 review-grid" id="reviewsContainer">
                     @foreach ($latestReviews as $index => $review)
-                        <div
-                            class="bg-gray-50 p-4 sm:p-6 rounded-lg {{ $index >= 3 ? 'additional-review hidden' : '' }}">
+                        <div class="bg-gray-50 p-4 sm:p-6 rounded-lg {{ $index >= 3 ? 'additional-review hidden' : '' }}">
                             <div class="flex items-center mb-3 sm:mb-4">
                                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-300 rounded-full mr-3 sm:mr-4"></div>
                                 <div>
