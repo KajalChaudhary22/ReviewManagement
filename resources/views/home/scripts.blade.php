@@ -205,8 +205,8 @@
         });
     });
 
-    
-    
+
+
     // Mobile Menu Toggle
     const menuToggle = document.getElementById("scizoraMenuToggle");
     const mobileNav = document.getElementById("scizoraMobileNav");
@@ -214,6 +214,59 @@
     menuToggle.addEventListener("click", () => {
         mobileNav.classList.toggle("active");
         menuToggle.classList.toggle("active");
+    });
+
+
+    // ⭐ Star rating logic
+    $(document).ready(function () {
+        $('.star').on('click', function () {
+            let value = $(this).data('value');
+            $('#rating').val(value);
+
+            // Reset all stars, then highlight selected
+            $('.star').removeClass('text-yellow-400').addClass('text-gray-300');
+            $(this).prevAll().addBack().removeClass('text-gray-300').addClass('text-yellow-400');
+        });
+
+        // Submit form via AJAX
+        $('#review-form').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "/api/home/writeReviews",
+                method: "POST",
+                data: $(this).serialize(),
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                    // Reset form & stars
+                    $('#review-form')[0].reset();
+                    $('#rating').val('');
+                    $('.star').removeClass('text-yellow-400').addClass('text-gray-300');
+                },
+                error: function (xhr) {
+                    let errorMessage = 'Something went wrong! Please check your inputs.';
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                    }
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: errorMessage,
+                    });
+                }
+            });
+        });
     });
 
 </script>

@@ -9,6 +9,7 @@ use App\Models\Subscriber;
 use Illuminate\Support\Facades\Log;
 use App\Models\Quote;
 use App\Models\SpecialistRequest;
+use App\Models\WebsiteReview;
 
 
 class HomeController extends Controller
@@ -151,6 +152,39 @@ class HomeController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Something went wrong! Please try again later.',
+            ], 500);
+        }
+    }
+
+    public function writeReview(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $validated = $request->validate([
+                'company_name' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
+                'rating' => 'nullable|integer|min:1|max:5',
+                'message' => 'required|string|max:2000',
+            ]);
+
+            $review = WebsiteReview::create($validated);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Thank you! Your review has been submitted successfully.',
+                'data' => $review
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            dd($e);
+            Log::error('Review submission failed: ' . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong! Please try again later.'
             ], 500);
         }
     }
