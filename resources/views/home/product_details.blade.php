@@ -1599,7 +1599,7 @@
                             </div>
 
                             <!-- Review Cards -->
-                            @if($productDetails?->reviewsData)
+                            @if ($productDetails?->reviewsData)
                                 @foreach ($productDetails?->reviewsData as $review)
                                     @php
                                         $fullStars = floor($review?->rating);
@@ -1643,12 +1643,14 @@
                                         <p class="review-text">{{ $review?->comment }}</p>
                                         <div class="review-footer">
                                             <div class="date">Reviewed on:
-                                                {{ \Carbon\Carbon::parse($review->created_at)->format('M d, Y') }}
+                                                {{ \Carbon\Carbon::parse($review?->created_at)->format('M d, Y') }}
                                             </div>
                                             <div class="helpful-section">
                                                 <span class="helpful-text">Helpful?</span>
-                                                <button class="helpful-btn">Yes ({{ $review->helpful_count }})</button>
-                                                <button class="helpful-btn">No ({{ $review->not_helpful_count }})</button>
+                                                <button class="helpful-btn">Yes
+                                                    ({{ $review?->helpful_count }})</button>
+                                                <button class="helpful-btn">No
+                                                    ({{ $review?->not_helpful_count }})</button>
                                             </div>
                                         </div>
                                     </div>
@@ -2164,7 +2166,82 @@
             </form>
         </div>
     </div>
+    @include('layouts.commonjs')
+    <script>
+        // ⭐ Check Login and Open Modal
+        $('#write-review-btn').on('click', function() {
+            $.get('/check-login', function(response) {
+                if (response.loggedIn) {
+                    $('#review-modal').css('display', 'flex');
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Login Required',
+                        text: 'You need to login to write a review',
+                        showCancelButton: true,
+                        confirmButtonText: 'Login',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/customer/login';
+                        }
+                    });
+                }
+            });
+        });
 
+        // ❌ Close Modal
+        $('#close-modal').on('click', function() {
+            $('#review-modal').hide();
+        });
+
+        // 🌟 Star Rating
+        $('#star-rating i').on('click', function() {
+            let rating = $(this).data('rating');
+            $('#rating-value').val(rating);
+            $('#star-rating i').removeClass('fas active').addClass('far');
+            $(this).addClass('fas active');
+            $(this).prevAll('i').addClass('fas active');
+        });
+
+        // 💾 Submit Review
+        $('#review-form').on('submit', function(e) {
+            e.preventDefault();
+            let data = {
+                name: $('#reviewer-name').val(),
+                email: $('#reviewer-email').val(),
+                rating: $('#rating-value').val(),
+                title: $('#review-title').val(),
+                pros: $('#pros').val(),
+                cons: $('#cons').val(),
+                review: $('#review-text').val(),
+                verified: $('#verified').val(),
+                _token: '{{ csrf_token() }}' // If you're using Laravel
+            };
+
+            $.ajax({
+                url: '/submit-review',
+                method: 'POST',
+                data: data,
+                success: function(res) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thank you!',
+                        text: 'Your review has been submitted successfully.',
+                    });
+                    $('#review-form')[0].reset();
+                    $('#review-modal').hide();
+                    $('#star-rating i').removeClass('fas active').addClass('far');
+                },
+                error: function(err) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong. Please try again.'
+                    });
+                }
+            });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // DOM Elements
@@ -2181,7 +2258,7 @@
             const hamburger = document.getElementById('hamburger');
             const mobileNav = document.getElementById('mobile-nav');
             const closeMobileNav = document.getElementById('close-mobile-nav');
-            const writeReviewBtn = document.getElementById('write-review-btn');
+            //const writeReviewBtn = document.getElementById('write-review-btn');
             const reviewModal = document.getElementById('review-modal');
             const closeModal = document.getElementById('close-modal');
             const starRating = document.querySelectorAll('#star-rating i');

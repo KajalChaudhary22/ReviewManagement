@@ -426,4 +426,74 @@
         display: flex;
       }
     }
+    .scizora-mobile-controls {
+        display: none;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .profile-icon-btn-mobile {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        font-size: 30px; /* Increase mobile icon size */
+        color: #1a0dab;
+    }
+    /* ===== Profile Dropdown Styles ===== */
+    .profile-dropdown, .profile-dropdown-mobile {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 38px; /* Increase icon size */
+      color: #1a0dab;
+    }
+
+    .dropdown-content {
+      display: none; 
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      background-color: #ffffff;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      z-index: 1001; /* Ensure it's on top */
+      border: 1px solid #f0f0f0;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+    }
+
+    .dropdown-content a i {
+      width: 20px;
+      text-align: center;
+      color: #555;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .dropdown-content.show {
+      display: block; 
+    }
+    .scizora-right-content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 </style>

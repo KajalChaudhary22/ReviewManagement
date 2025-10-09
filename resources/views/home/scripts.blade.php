@@ -1,7 +1,46 @@
 @include('layouts.commonjs')
-{{--
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script>
+     // --- Get all the elements ---
+     const menuToggle = document.getElementById("scizoraMenuToggle");
+    const mobileNav = document.getElementById("scizoraMobileNav");
+    
+    const profileBtn = document.getElementById("profileBtn");
+    const profileDropdown = document.getElementById("profileDropdown");
+    
+    const profileBtnMobile = document.getElementById("profileBtnMobile");
+    const profileDropdownMobile = document.getElementById("profileDropdownMobile");
+
+    // --- Mobile Nav (Hamburger) Toggle ---
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.toggle("active");
+      menuToggle.classList.toggle("active");
+    });
+    
+    // --- Desktop Profile Dropdown Toggle ---
+    profileBtn.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent click from bubbling up to window
+        profileDropdown.classList.toggle("show");
+        // Ensure mobile dropdown is closed
+        profileDropdownMobile.classList.remove("show");
+    });
+    
+    // --- Mobile Profile Dropdown Toggle ---
+    profileBtnMobile.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent click from bubbling up to window
+        profileDropdownMobile.classList.toggle("show");
+        // Ensure desktop dropdown is closed
+        profileDropdown.classList.remove("show");
+    });
+
+    // --- Close dropdowns if user clicks outside of them ---
+    window.addEventListener("click", (event) => {
+        if (profileDropdown.classList.contains("show")) {
+            profileDropdown.classList.remove("show");
+        }
+        if (profileDropdownMobile.classList.contains("show")) {
+            profileDropdownMobile.classList.remove("show");
+        }
+    });
     // Mobile menu toggle
     // document.getElementById('mobile-menu-button').addEventListener('click', function () {
     //     const menu = document.getElementById('mobile-menu');
@@ -208,8 +247,7 @@
     
     
     // Mobile Menu Toggle
-    const menuToggle = document.getElementById("scizoraMenuToggle");
-    const mobileNav = document.getElementById("scizoraMobileNav");
+    // const mobileNav = document.getElementById("scizoraMobileNav");
 
     menuToggle.addEventListener("click", () => {
         mobileNav.classList.toggle("active");

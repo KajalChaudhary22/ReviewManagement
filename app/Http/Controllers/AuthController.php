@@ -39,4 +39,17 @@ class AuthController extends Controller
     {
         return view('customer.auth.login');
     }
+    public function checkLogin()
+    {
+        // Check if user is authenticated
+        if (auth()->check()) {
+            return response()->json([
+                'loggedIn' => true,
+                'user' => Auth::user() // optional, if you want to return user info
+            ]);
+        }
+
+        return response()->json(['loggedIn' => false]);
+    }
+    
 }
