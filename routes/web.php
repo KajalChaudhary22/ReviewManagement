@@ -43,6 +43,7 @@
     Route::get('/business/login', [AuthController::class, 'showBusinessLogin'])->name('business.auth.show');
     Route::get('/customer/login', [AuthController::class, 'showCustomerLogin'])->name('customer.auth.show');
     Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::get('/check-login', [AuthController::class, 'checkLogin'])->name('check.login');
 
     Route::middleware(['web'])->prefix('admin')->group(function () {
         Route::get('/master-setup', [LoadPageController::class, 'masterSetup'])->name('admin.master.setup');
