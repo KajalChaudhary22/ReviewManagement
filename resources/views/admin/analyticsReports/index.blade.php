@@ -861,7 +861,7 @@
             align-items: flex-end;
             justify-content: space-around;
             gap: 10px;
-            padding: 15px 0;
+            padding: 25px 0 0;
             border-bottom: 1px solid var(--border-color);
             width: 100%;
         }
@@ -1430,6 +1430,18 @@
         #scheduleDateGroup {
             display: none;
         }
+        .rating-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-item {
+    font-weight: 600;
+    font-size: 14px;
+}
     </style>
     @include('admin.layouts.styles')
 </head>
@@ -1535,7 +1547,7 @@
 
                 <!-- User Growth Chart - IMPROVED ALIGNMENT -->
                 <div class="chart-container">
-                    {{-- <div class="chart-header">
+                    <div class="chart-header">
                         <h2 class="chart-title">User Growth</h2>
                         <div class="chart-actions">
                             <button class="btn btn-secondary btn-sm"
@@ -1545,7 +1557,7 @@
                             <button class="btn btn-primary btn-sm"
                                 data-chart="user-monthly">Monthly</button>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="chart-placeholder">
                         <div class="chart" id="userChart">
                             <div class="chart-bars">
@@ -1611,48 +1623,17 @@
                     <div class="chart-header">
                         <h2 class="chart-title">Review Activity</h2>
                         <div class="chart-actions">
-                            <button class="btn btn-secondary btn-sm"
-                                data-chart="review-rating">By
-                                Rating</button>
-                            <button class="btn btn-secondary btn-sm"
-                                data-chart="review-category">By
-                                Category</button>
-                            <button class="btn btn-primary btn-sm"
-                                data-chart="review-time">Over Time</button>
+                            {{-- <button class="btn btn-secondary btn-sm reviewFilter" data-chart="reviewCategory">By Category</button> --}}
+                            <button class="btn btn-primary btn-sm reviewFilter" data-chart="overTime">By Rating</button>
                         </div>
                     </div>
+                
                     <div class="chart-placeholder">
                         <div class="pie-chart-container">
                             <div class="pie-chart">
-                                <div class="pie-chart-center">1,245</div>
+                                <div class="pie-chart-center"></div>
                             </div>
-                            <div class="chart-legend">
-                                <div class="chart-legend-item">
-                                    <div class="chart-legend-color"
-                                        style="background-color: #4A89DC;"></div>
-                                    <span>5 Stars (45%)</span>
-                                </div>
-                                <div class="chart-legend-item">
-                                    <div class="chart-legend-color"
-                                        style="background-color: #5D9CEC;"></div>
-                                    <span>4 Stars (20%)</span>
-                                </div>
-                                <div class="chart-legend-item">
-                                    <div class="chart-legend-color"
-                                        style="background-color: #48CFAD;"></div>
-                                    <span>3 Stars (15%)</span>
-                                </div>
-                                <div class="chart-legend-item">
-                                    <div class="chart-legend-color"
-                                        style="background-color: #A0D468;"></div>
-                                    <span>2 Stars (12%)</span>
-                                </div>
-                                <div class="chart-legend-item">
-                                    <div class="chart-legend-color"
-                                        style="background-color: #FFCE54;"></div>
-                                    <span>1 Star (8%)</span>
-                                </div>
-                            </div>
+                            <div class="review-list mt-3"></div> <!-- ⭐ dynamic labels like "5 Stars (45%)" -->
                         </div>
                     </div>
                 </div>
@@ -1662,70 +1643,15 @@
                     <div class="chart-header">
                         <h2 class="chart-title">Business Metrics</h2>
                         <div class="chart-actions">
-                            <button class="btn btn-secondary btn-sm"
-                                data-chart="business-type">By Type</button>
-                            <button class="btn btn-secondary btn-sm"
-                                data-chart="business-location">By
-                                Location</button>
-                            <button class="btn btn-primary btn-sm"
-                                data-chart="business-growth">Growth</button>
+                            <button class="btn btn-secondary btn-sm businessFilter" data-chart="businessType">By Type</button>
+                            <button class="btn btn-primary btn-sm businessFilter" data-chart="businessLocation">By Location</button>
                         </div>
                     </div>
                     <div class="chart-placeholder">
                         <div class="chart" id="businessChart">
-                            <div class="chart-bars">
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 20%; background-color: #4A89DC;">
-                                        <span
-                                            class="chart-bar-value">25</span>
-                                    </div>
-                                    <div class="chart-bar-label">US</div>
-                                </div>
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 35%; background-color: #5D9CEC;">
-                                        <span
-                                            class="chart-bar-value">42</span>
-                                    </div>
-                                    <div class="chart-bar-label">UK</div>
-                                </div>
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 25%; background-color: #48CFAD;">
-                                        <span
-                                            class="chart-bar-value">30</span>
-                                    </div>
-                                    <div class="chart-bar-label">CA</div>
-                                </div>
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 15%; background-color: #A0D468;">
-                                        <span
-                                            class="chart-bar-value">18</span>
-                                    </div>
-                                    <div class="chart-bar-label">AU</div>
-                                </div>
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 10%; background-color: #FFCE54;">
-                                        <span
-                                            class="chart-bar-value">12</span>
-                                    </div>
-                                    <div class="chart-bar-label">IN</div>
-                                </div>
-                                <div class="chart-bar-container">
-                                    <div class="chart-bar"
-                                        style="height: 5%; background-color: #ED5565;">
-                                        <span
-                                            class="chart-bar-value">5</span>
-                                    </div>
-                                    <div class="chart-bar-label">Other</div>
-                                </div>
-                            </div>
+                            <div class="chart-bars"></div>
                             <div class="chart-x-axis">
-                                <span>New Businesses by Location (Last 30
-                                    Days)</span>
+                                <span id="businessChartLabel">Businesses by Location</span>
                             </div>
                         </div>
                     </div>

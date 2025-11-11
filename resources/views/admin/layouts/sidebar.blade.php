@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <div class="brand-name"><a href="dashboard-overview.html" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="60"></a></div>
-        <div class="brand-subtitle">Management Portal</div>
+        {{-- <div class="brand-subtitle">Management Portal</div> --}}
     </div>
     <div class="menu">
         <a href="{{ route('admin.dashboard.show',['ty'=>custom_encrypt('AdminDashboard')]) }}" class="menu-item {{ Route::is('admin.dashboard.show') ? 'active' : '' }}">
@@ -42,7 +42,7 @@
         </a>
         
     </div>
-    <div class="user-profile">
+    {{-- <div class="user-profile">
         <div class="user-avatar">
             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith">
         </div>
@@ -50,5 +50,5 @@
             <div class="user-name">{{Auth::user()?->name}}</div>
             <div class="user-role">{{Auth::user()?->type}}</div>
         </div>
-    </div>
+    </div> --}}
 </div>

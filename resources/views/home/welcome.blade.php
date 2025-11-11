@@ -231,7 +231,7 @@
 
                     <!-- Submit Button -->
                     <button
-                        class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all">
+                        class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all" id="submit-review-btn">
                         Submit Review
                     </button>
                 </div>
@@ -363,7 +363,7 @@
 
 
     <!-- Mobile App Download - Made responsive for mobile -->
-    <section class="py-12 md:py-16 bg-white">
+    {{-- <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-8 md:mb-0">
@@ -400,7 +400,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Footer Ad Banner -->
     <div class="container mx-auto px-4 py-6">

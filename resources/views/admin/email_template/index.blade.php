@@ -46,7 +46,7 @@
         }
 
         /* Sidebar Styles */
-        .sidebar {
+        /* .sidebar {
             width: var(--sidebar-width);
             background-color: var(--dark-color);
             color: var(--white);
@@ -104,7 +104,7 @@
 
         .menu-text {
             transition: var(--transition);
-        }
+        } */
 
         /* Main Content Styles */
         .main-content {
@@ -115,7 +115,7 @@
         }
 
         /* Navbar Styles */
-        .navbar {
+        /* .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -214,7 +214,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
+        } */
 
         /* Content Area Styles */
         .content {

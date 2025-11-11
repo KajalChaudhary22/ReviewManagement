@@ -18,7 +18,7 @@ class WelcomeController extends Controller
     protected function home()
     {
         $masterTypeId = MasterType::where('name', 'Product Category')->first()?->id;
-        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->get();
+        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->whereNULL('parent_id')->get();
         $latestReviews = Review::where('status', 'Apprpved')->with(['productDetails', 'customerDetails'])->latest()->take(9)->get();
         $companies = Business::all(); // fetch all companies
         // dd($productCategoies);
@@ -27,9 +27,11 @@ class WelcomeController extends Controller
     protected function categories()
     {
         $masterTypeId = MasterType::where('name', 'Product Category')->first()?->id;
-        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->latest()->get();
-        $masterSubcatId = MasterType::where('name', 'Product Sub Category')->first()?->id;
-        $productSubCategories = Masters::where('master_type_id', $masterSubcatId)->where('status', 'Active')->with('images')->latest()->get()->map(function ($item) {
+        $productCategoies = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->whereNULL('parent_id')->latest()->get();
+        $productCategoiesId = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->with('images')->whereNULL('parent_id')->pluck('id')->toArray();
+        // dd($productCategoiesId);
+        // $masterSubcatId = MasterType::where('name', 'Product Sub Category')->first()?->id;
+        $productSubCategories = Masters::where('master_type_id', $masterTypeId)->where('status', 'Active')->whereIn('parent_id',$productCategoiesId)->with('images')->latest()->get()->map(function ($item) {
             return [
                 'id' => custom_encrypt($item?->id),
                 'cat_id' => custom_encrypt($item?->parent_id),

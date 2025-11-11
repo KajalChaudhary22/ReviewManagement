@@ -184,15 +184,15 @@ class AnalyticsReportsController extends Controller
         $totalCustomers = Customer::whereBetween('created_at', [$from, $to])->count();
         $totalBusinesses = Business::whereBetween('created_at', [$from, $to])->count();
         $totalReviews = Review::whereBetween('created_at', [$from, $to])->count();
-        $totalRevenue = 0; //Order::whereBetween('created_at', [$from, $to])->sum('amount');
+        $totalRevenue = 0; // Order::whereBetween('created_at', [$from, $to])->sum('amount');
 
         // ✅ Business Metrics by Type
-        $businessByType = Business::select('type_id', DB::raw('COUNT(*) as total'))
+        $businessByType = Business::select('master_id', DB::raw('COUNT(*) as total'))
             ->whereBetween('created_at', [$from, $to])
-            ->groupBy('type_id')
-            ->with('type:id,name') // assumes relation business->type
+            ->groupBy('master_id')
+            ->with('masterType:id,name') // assumes relation business->type
             ->get()
-            ->mapWithKeys(fn ($b) => [$b->type->name => $b->total]);
+            ->mapWithKeys(fn ($b) => [$b->masterType?->name => $b->total]);
 
         // ✅ Business Metrics by Location
         $businessByLocation = Business::select('location_id', DB::raw('COUNT(*) as total'))
@@ -215,5 +215,195 @@ class AnalyticsReportsController extends Controller
                 'location' => $businessByLocation,
             ],
         ]);
+    }
+
+    public function getUserGrowth(Request $request)
+    {
+        return response()->json([
+            ['month' => 'Jan', 'total' => 75],
+            ['month' => 'Feb', 'total' => 112],
+            ['month' => 'Mar', 'total' => 150],
+            ['month' => 'Apr', 'total' => 187],
+        ]);
+    }
+
+    public function getReviewMetrics(Request $request)
+    {
+        // dd($request->all());
+        $type = $request->get('type', 'overTime'); // default
+        $dateRange = $request->get('dateRange', 30);
+        $from = $request->get('from');
+        $to = $request->get('to');
+
+        $query = Review::query();
+
+        // 🗓️ Apply date filters
+        if ($dateRange === 'custom' && $from && $to) {
+            $query->whereBetween(DB::raw('DATE(reviews.created_at)'), [$from, $to]);
+        } else {
+            $days = is_numeric($dateRange) ? (int) $dateRange : 30;
+            $query->where('reviews.created_at', '>=', Carbon::now()->subDays($days));
+        }
+
+        // 📊 Group by type
+        if ($type === 'reviewCategory') {
+            // Group by reviewType_id (category)
+            $data = $query->join('masters as m', 'reviews.reviewType_id', '=', 'm.id')
+                ->select('m.name as category_name', DB::raw('COUNT(*) as total'))
+                ->groupBy('m.name')
+                ->orderByDesc('total')
+                ->get();
+
+            $total = $data->sum('total');
+
+            $data = $data->map(function ($item) use ($total) {
+                $percentage = $total > 0 ? round(($item->total / $total) * 100, 1) : 0;
+
+                return [
+                    'category_name' => $item->category_name,
+                    'total' => (int) $item->total,
+                    'percentage' => $percentage,
+                    'label' => "{$item->rating} Star ".($item->rating > 1 ? 's' : '')." ({$percentage}%)",
+                ];
+            });
+
+        } else {
+            // ⭐ Default: Rating-based Over Time view
+            $data = $query->select('rating', DB::raw('COUNT(*) as total'))
+                ->groupBy('rating')
+                ->orderByDesc('rating')
+                ->get();
+
+            $total = $data->sum('total');
+
+            $data = $data->map(function ($item) use ($total) {
+                $percentage = $total > 0 ? round(($item->total / $total) * 100, 1) : 0;
+
+                return [
+                    'rating' => (int) $item->rating,
+                    'total' => (int) $item->total,
+                    'percentage' => $percentage,
+                    'label' => "{$item->rating} Star ".($item->rating > 1 ? 's' : '')." ({$percentage}%)",
+                ];
+            });
+        }
+        // 🧩 Include total count for chart center
+        return response()->json([
+            'total_reviews' => $data->sum('total'),
+            'data' => $data->values(),
+        ]);
+    }
+
+    // public function getReviewMetrics(Request $request)
+    // {
+    //     return response()->json([
+    //         ['rating' => 5, 'total' => 45],
+    //         ['rating' => 4, 'total' => 20],
+    //         ['rating' => 3, 'total' => 15],
+    //         ['rating' => 2, 'total' => 12],
+    //         ['rating' => 1, 'total' => 8],
+    //     ]);
+    // }
+    //     public function getReviewMetrics(Request $request)
+    // {
+    //     $dateRange = $request->get('dateRange', 30);
+    //     $from = $request->get('from');
+    //     $to = $request->get('to');
+
+    //     // 🗓️ Build query with date filters
+    //     $query = Review::query();
+
+    //     if ($dateRange === 'custom' && $from && $to) {
+    //         $query->whereBetween(DB::raw('DATE(reviews.created_at)'), [$from, $to]);
+    //     } else {
+    //         $days = is_numeric($dateRange) ? (int) $dateRange : 30;
+    //         $query->where('reviews.created_at', '>=', Carbon::now()->subDays($days));
+    //     }
+
+    //     // ⭐ Group reviews by rating (1–5)
+    //     $data = $query->select('rating', DB::raw('COUNT(*) as total'))
+    //         ->groupBy('rating')
+    //         ->orderByDesc('rating')
+    //         ->get()
+    //         ->map(function ($item) {
+    //             return [
+    //                 'rating' => (int) $item->rating,
+    //                 'total' => (int) $item->total,
+    //             ];
+    //         });
+
+    //     // 🧩 If no data, return sample default
+    //     // if ($data->isEmpty()) {
+    //     //     $data = collect([
+    //     //         ['rating' => 5, 'total' => 45],
+    //     //         ['rating' => 4, 'total' => 20],
+    //     //         ['rating' => 3, 'total' => 15],
+    //     //         ['rating' => 2, 'total' => 12],
+    //     //         ['rating' => 1, 'total' => 8],
+    //     //     ]);
+    //     // }
+
+    //     return response()->json($data->values());
+    // }
+
+    public function getBusinessMetrics(Request $request)
+    {
+        // dd($request->all());
+        $type = $request->get('type', 'businessLocation'); // default to location
+        $dateRange = $request->get('dateRange', 30);
+        $from = $request->get('from');
+        $to = $request->get('to');
+        $query = Business::query();
+
+        if ($dateRange === 'custom' && $from && $to) {
+            $query->whereBetween(DB::raw('DATE(businesses.created_at)'), [$from, $to]);
+        } else {
+            $days = is_numeric($dateRange) ? (int) $dateRange : 30;
+            $query->where('businesses.created_at', '>=', Carbon::now()->subDays($days));
+        }
+
+        // 🏢 Group by Business Type
+        if ($type === 'businessType') {
+            $data = $query->select('m.name as business_type', DB::raw('COUNT(businesses.id) as total'))
+                ->join('masters as m', 'm.id', '=', 'businesses.master_id')
+                ->groupBy('m.name')
+                ->orderByDesc('total')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'business_type' => $item->business_type,
+                        'total' => (int) $item->total,
+                    ];
+                });
+
+            return response()->json($data);
+        }
+
+        // 📍 Group by Location
+        $data = $query->select('loc.name as location_name', DB::raw('COUNT(businesses.id) as total'))
+            ->join('masters as loc', 'loc.id', '=', 'businesses.location_id')
+            ->groupBy('loc.name')
+            ->orderByDesc('total')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'location_name' => $item->location_name,
+                    'total' => (int) $item->total,
+                ];
+            });
+
+        return response()->json($data);
+        // if ($request->type === 'businessType') {
+        //     return response()->json([
+        //         ['business_type' => 'Retail', 'total' => 50],
+        //         ['business_type' => 'Services', 'total' => 30],
+        //         ['business_type' => 'Manufacturing', 'total' => 20],
+        //     ]);
+        // }
+        // return response()->json([
+        //     ['location_name' => 'Mumbai', 'total' => 40],
+        //     ['location_name' => 'Delhi', 'total' => 35],
+        //     ['location_name' => 'Pune', 'total' => 25],
+        // ]);
     }
 }

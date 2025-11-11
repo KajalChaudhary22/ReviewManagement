@@ -48,7 +48,15 @@
     Route::middleware(['web'])->prefix('admin')->group(function () {
         Route::get('/master-setup', [LoadPageController::class, 'masterSetup'])->name('admin.master.setup');
         Route::get('/master-setup-add', [LoadPageController::class, 'masterSetupAdd'])->name('admin.masterSetup.Add');
+        Route::get('/email-template-edit', [LoadPageController::class, 'emailTemplateEdit'])->name('admin.emailTemplate.edit');
         Route::get('/email-template', [LoadPageController::class, 'emailTemplate'])->name('admin.email.templates');
+        Route::get('/notifications', [LoadPageController::class, 'notificationList'])->name('admin.notifications');
+        // Route::any('/read-notifications', [LoadPageController::class, 'notificationRead'])->name('admin.notifications.read');
+        Route::post('/notifications/mark-all-read', [LoadPageController::class, 'markAllRead'])
+    ->name('admin.notifications.markAllRead');
+
+Route::post('/notifications/mark-read/{id}', [LoadPageController::class, 'markRead'])
+    ->name('admin.notifications.markRead');
         // Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management.index');
         // Route::get('/business-management', [BusinessManagementController::class, 'index'])->name('business.management.index');
         // Route::get('/review-moderation', [UserManagementController::class, 'index'])->name('review.moderation.index');

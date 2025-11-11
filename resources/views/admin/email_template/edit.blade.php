@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LabZora Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    
     <style>
         /* Global Styles */
         :root {
@@ -1635,7 +1638,7 @@
         }
 
         /* Analytics Charts */
-        
+
 
         /* Modal Styles for Template Editing */
         .template-modal-content {
@@ -1665,6 +1668,11 @@
             background-color: #007BFF;
             color: var(--white);
             font-weight: 600;
+        }
+        /* Summernote Customization */
+        .note-editor.note-frame {
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
     </style>
     @include('admin.layouts.styles')
@@ -1713,36 +1721,8 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Navbar -->
-        {{-- <div class="navbar">
-
-            <div class="navbar-right">
-                <div class="search-bar">
-                    <i class="icon">🔍</i>
-                    <input type="text" placeholder="Search...">
-                </div>
-
-                <div class="user-profile">
-                    <a href="">
-                        <div class="user-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
-                        </div>
-                    </a>
-                    <span>John Doe</span>
-                    <!-- The Logout Button -->
-                    <a href="#" class="logout-btn" title="Logout">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" align="right"
-                            fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                            <path
-                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2.5a.5.5 0 0 0 1 0v-2.5a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 0 4.5v9A1.5 1.5 0 0 0 1.5 15h8a1.5 1.5 0 0 0 1.5-1.5v-2.5a.5.5 0 0 0-1 0v2.5z" />
-                            <path
-                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div> --}}
         @include('admin.layouts.navbar')
+        @include('sweetalert::alert')
 
         <!-- Content Area -->
         <div class="content">
@@ -1754,83 +1734,53 @@
                         <div class="header"
                             style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                             <div>
-                                <h1>Master Setup Form</h1>
-                                <p>Configure master settings for your SCIZORA platform. All fields marked with * are
+                                <h1>Email Template Form</h1>
+                                <p>All fields marked with * are
                                     required.</p>
                             </div>
-                            <a href="{{ route('admin.master.setup', ['ty' => custom_encrypt('MasterSetup')]) }}"><button
+                            <a href="{{ route('admin.email.templates',['ty'=>custom_encrypt('EmailTemplates')]) }}"><button
                                     id="" class="btn btn-primary" style="padding: 12px 24px;">View
                                     All Records</button></a>
                         </div>
 
                         <div class="form-card">
-                            <form id="masterSetupForm" action="{{ route('master.setup.save') }}" method="POST">
+                            <form id="editTemplateForm" method="POST">
                                 @csrf
-                                @if ($masterData)
-                                    <input type="hidden" name="master_id"
-                                        value="{{ custom_encrypt($masterData?->id) }}">
+                                @if ($emailTemplate)
+                                    <input type="hidden" name="id" id="edit-emailId"
+                                        value="{{ custom_encrypt($emailTemplate?->id) }}">
                                 @endif
                                 <div class="form-row">
                                     <div class="form-group half-width">
-                                        <label for="name" class="required">Name</label>
-                                        <input type="text" id="name" class="input-control"
-                                            placeholder="Enter master name" required name="name"
-                                            value="{{ $masterData?->name ?? '' }}">
+                                        <label for="name" class="required">Event Name</label>
+                                        <input type="text" id="name" class="input-control" placeholder=""
+                                            required value="{{ $emailTemplate?->event_name ?? '' }}" disabled>
                                         <div class="error-message" id="name-error" style="display:none;color:red;">
                                         </div>
                                     </div>
-
                                     <div class="form-group half-width">
-                                        <label for="masterType" class="required">Master Type</label>
-                                        <select id="masterType" class="input-control" required name="masterType"
-                                            onchange="fetchMasters(this.value)">
-                                            <option value="" disabled selected>Select master type</option>
-                                            @foreach ($masterTypes as $masterType)
-                                                <option value="{{ $masterType->id }}"
-                                                    {{ $masterData?->master_type_id == $masterType->id ? 'selected' : '' }}>
-                                                    {{ $masterType->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="masterType" class="required">Email Subject</label>
+                                        <input type="text" id="edit-emailSubject" class="form-control"
+                                            placeholder="Enter email variables" name="subject" required
+                                            value="{{ $emailTemplate?->subject ?? '' }}">
                                         <div class="error-message" id="masterType-error"
                                             style="display:none;color:red;"></div>
                                     </div>
+
+                                    <div class="form-group half-width">
+                                        <label for="masterType" class="required">Email Variables</label>
+                                        <input type="text" id="edit-emailVariables" class="form-control"
+                                            placeholder="Enter email variables" disabled
+                                            value="{{ $emailTemplate?->variables ?? '' }}">
+                                        <div class="error-message" id="masterType-error"
+                                            style="display:none;color:red;"></div>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea id="description" name="description" class="input-control" placeholder="Enter detailed description...">{{ $masterData?->description }}</textarea>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group half-width">
-                                        <label for="parentName">Parent Name</label>
-                                        <select id="parentName" class="input-control"
-                                            @if (!$masterData) disabled @endif name="parentName">
-                                            <option value="" disabled selected>Select parent</option>
-                                            @if ($masterData)
-                                                @foreach ($parentMasters as $parentMaster)
-                                                    <option value="{{ $parentMaster?->id }}"
-                                                        {{ $masterData?->parent_id == $parentMaster?->id ? 'selected' : '' }}>
-                                                        {{ $parentMaster?->name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group half-width">
-                                        <label for="status" class="required">Status</label>
-                                        <select id="status" class="input-control" name="status">
-                                            <option value="" disabled selected>Select status</option>
-                                            <option value="Active"
-                                                {{ $masterData?->status == 'Active' ? 'selected' : '' }}>Active
-                                            </option>
-                                            <option value="Inactive"
-                                                {{ $masterData?->status == 'Inactive' ? 'selected' : '' }}>Inactive
-                                            </option>
-                                        </select>
-                                        <div class="error-message" id="status-error" style="display:none;color:red;">
-                                        </div>
-                                    </div>
+                                    <textarea id="email_body" name="body" class="input-control" placeholder="Enter detailed description...">{{ $emailTemplate?->body }}</textarea>
                                 </div>
 
                                 <div class="button-group">
@@ -1857,27 +1807,8 @@
         <i class="icon">≡</i>
     </div>
 
-    <!-- Master Setup Form Preview Modal -->
-    <div class="modal" id="preview-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Confirm Your Details</h2>
-                <button class="close-modal" id="close-preview-modal">&times;</button>
-            </div>
-            <div id="preview-content-area" style="padding: 10px 0;">
-                <!-- Data will be injected here by JavaScript -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="edit-details-btn">
-                    Edit
-                </button>
-                <button type="button" class="btn btn-primary" id="confirm-submit-btn">
-                    Confirm & Submit
-                </button>
-            </div>
-        </div>
-    </div>
     @include('layouts.commonjs')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
         function fetchMasters(masterTypeId) {
             const parentSelect = $('#parentName');
@@ -1916,77 +1847,26 @@
         }
         $(document).ready(function() {
 
-            $('#masterSetupForm').on('submit', function(e) {
+           // Save (AJAX form submit)
+           $('#editTemplateForm').on('submit', function(e) {
                 e.preventDefault();
 
-                let form = $(this);
-                let url = form.attr('action');
-                let formData = form.serialize();
+                let id = $('#edit-emailId').val();
+                let formData = $(this).serialize(); // serialize all fields with name=""
 
-                // hide previous errors
-                $('.error-message').hide();
-
-                try {
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: formData,
-                        success: function(response) {
-                            if (response.status) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
-                                    text: response.message,
-                                    timer: 2000,
-                                    showConfirmButton: false
-                                });
-
-                                form.trigger('reset');
-                                $('#parentName').html(
-                                    '<option value="" disabled selected>Select parent</option>'
-                                ).prop('disabled', true);
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error!',
-                                    text: response.message || 'Something went wrong'
-                                });
-                            }
-                        },
-                        error: function(xhr) {
-                            if (xhr.status === 422) { // validation error
-                                let errors = xhr.responseJSON.errors;
-                                let errorMessages = '';
-                                for (let key in errors) {
-                                    if (errors.hasOwnProperty(key)) {
-                                        errorMessages += errors[key].join(' ') + '\n';
-                                        $('#' + key + '-error').text(errors[key][0]).show();
-                                    }
-                                }
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Validation Error',
-                                    text: errorMessages
-                                });
-                            } else {
-                                console.error(xhr.responseText);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error!',
-                                    text: 'An unexpected error occurred.'
-                                });
-                            }
-                        }
-                    });
-                } catch (err) {
-                    console.error('Try-Catch Error:', err);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'An unexpected exception occurred.'
-                    });
-                }
-
+                $.ajax({
+                    url: '/api/admin/update/email-templates/' + id, // adjust route if needed
+                    method: 'POST',
+                    data: formData,
+                    success: function(res) {
+                        // closeModal('edit-template-modal');
+                        // $('#emailTemplatesTable').DataTable().ajax.reload();
+                        showAlert('success', res.message);
+                    },
+                    error: function(xhr) {
+                        showAlert('error', xhr.responseJSON.message || 'Something went wrong');
+                    }
+                });
             });
 
         });
@@ -1994,6 +1874,21 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Summernote editors
+            $('#email_body').summernote({
+                height: 300,
+                placeholder: 'Enter Template...',
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
             // Reusable modal functions
             window.openModal = function(modalId) {
                 const modal = document.getElementById(modalId);

@@ -129,48 +129,6 @@ class ProductController extends Controller
             ->make(true);
     }
 
-    // 🔹 New function for DataTables
-    // public function getProductsData(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $query = Product::with('categoryDetails');
-
-    //         // Search filter
-    //         if ($request->search) {
-    //             $search = $request->search;
-    //             $query->where(function ($q) use ($search) {
-    //                 $q->where('name', 'like', "%$search%")
-    //                     ->orWhere('sku', 'like', "%$search%");
-    //             });
-    //         }
-
-    //         // Category filter
-    //         if ($request->category_id && $request->category_id != 'All') {
-    //             $query->where('productCategory_id', $request->category_id);
-    //         }
-    //         // 🔄 Sorting
-    //         if ($request->sort == 'oldest') {
-    //             $query->orderBy('created_at', 'asc');
-    //         } elseif ($request->sort == 'name') {
-    //             $query->orderBy('name', 'asc');
-    //         } else {
-    //             $query->orderBy('created_at', 'desc'); // newest default
-    //         }
-    //         $products = $query->paginate(6); // 6 cards per page
-    //         // Encrypt IDs before returning
-    //         $products->getCollection()->transform(function ($item) {
-    //             $item->enc_id = custom_encrypt($item->id);
-
-    //             return $item;
-    //         });
-
-    //         return response()->json($products);
-
-    //     }
-
-    //     return response()->json(['message' => 'Invalid request'], 400);
-    // }
-
     protected function show($encryptedId)
     {
         $id = custom_decrypt($encryptedId); // decrypt back
@@ -326,7 +284,7 @@ class ProductController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         } else {
-            $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Product Category')->first();
+            $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Product Category')->whereNULL('parent_id')->first();
             if ($mastertypId) {
                 $categories = $mastertypId?->getActiveMasterData;
             } else {

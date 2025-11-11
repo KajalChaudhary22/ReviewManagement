@@ -83,7 +83,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/analytics-reports', [AnalyticsReportsController::class, 'index'])->name('analytics.reports.index');
         Route::get('/analytics-data', [AnalyticsReportsController::class, 'getAnalyticsData'])->name('admin.analytics.data');
         Route::get('/email-templates', [EmailTemplateController::class, 'yajaraList'])->name('admin.email.templates');
-        Route::put('/update/email-templates/{id}', [EmailTemplateController::class, 'update'])->name('admin.emailTemplates.update');
+        Route::post('/update/email-templates/{id}', [EmailTemplateController::class, 'update'])->name('admin.emailTemplates.update');
         // Route::post('reviews/update-status/{id}', [ReviewModerationController::class, 'updateStatus']);
         // Route::get('reviews/reviews-show/{id}', [ReviewModerationController::class, 'show']); // for view details
 
@@ -94,6 +94,10 @@ Route::prefix('admin')->group(function () {
 
         // Route::get('/setting', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/save-setting', [SettingController::class, 'save'])->name('save.settings');
+
+        Route::get('/analytics/users', [AnalyticsReportsController::class, 'getUserGrowth']);
+        Route::get('/analytics/reviews', [AnalyticsReportsController::class, 'getReviewMetrics']);
+        Route::get('/analytics/business-metrics', [AnalyticsReportsController::class, 'getBusinessMetrics']);
     });
 
     Route::post('addUser', [AdminDashboardController::class, 'addUser']);
@@ -172,8 +176,6 @@ Route::get('/subcategories/{id}', [ProductController::class, 'getSubcategories']
 Route::post('/product/quote', [ApiHomeController::class, 'quoteStore']);
 Route::post('/product/specialist', [ApiHomeController::class, 'specialistStore']);
 Route::post('/home/writeReviews', [ApiHomeController::class, 'writeReview']);
-
-
 
 // Route::put('/update/{id}', [HomeController::class, 'update'])->name('contact.update');
 

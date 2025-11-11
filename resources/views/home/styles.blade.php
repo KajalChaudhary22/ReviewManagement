@@ -256,7 +256,16 @@
         .scizora-footer-link { color: #0000FF; text-decoration: none; font-size: 0.875rem; }
         .scizora-footer-link:hover { color: #111827; }
         .scizora-newsletter-form { display: flex; }
-        .scizora-newsletter-input { background-color: #1F2937; color: #ffffff; padding: 6px 12px; border: none; border-radius: 4px 0 0 4px; outline: none; width: 100%; font-size: 0.875rem; }
+        .scizora-newsletter-input {
+            background-color: #F8F9FA;
+            color: #333;
+            padding: 6px 12px;
+            border: 1px solid #DEE2E6;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 100%;
+            font-size: 0.875rem;
+        }
         .scizora-newsletter-button { background-color: #2563EB; color: #ffffff; padding: 6px 12px; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
         .scizora-newsletter-button:hover { background-color: #1D4ED8; }
 

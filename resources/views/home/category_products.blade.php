@@ -175,6 +175,7 @@
             margin-bottom: 1.5rem;
         }
     </style>
+    @include('home.styles')
 </head>
 
 <body class="bg-gray-50">
@@ -321,19 +322,6 @@
             </div>
 
             <!-- Prominent Search Section -->
-            <div class="prominent-search-container">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1 relative">
-                        <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
-                        <input type="text" id="prominent-search-input"
-                            placeholder="Search pharmaceutical companies, products, or keywords..."
-                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent">
-                    </div>
-                    <button id="prominent-search-button" class="search-button flex items-center justify-center">
-                        <i class="fas fa-search mr-2"></i> Search
-                    </button>
-                </div>
-            </div>
 
             <!-- Existing Search Bar -->
             <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
@@ -404,52 +392,10 @@
             </div>
         </div>
     </main>
+    @include('home.footer')
 
     <script>
         const businessData = @json($businessData);
-
-
-        // ===================================
-        // CHANGE #1: Add a 'url' property to each object
-        // ===================================
-        
-        // const businessData = [{
-        //         id: 1,
-        //         name: "PharmaTech Solutions",
-        //         logo: "https://via.placeholder.com/80",
-        //         rating: 4.5,
-        //         reviews: 156,
-        //         description: "Leading provider of Third Party manufacturing and custom synthesis services for the pharmaceutical industry.",
-        //         categories: ["Third Party Manufacturing", "Custom Synthesis"],
-        //         certifications: ["GMP", "ISO 9001", "FDA Approved"],
-        //         location: {
-        //             continent: "North America",
-        //             country: "USA"
-        //         },
-        //         verified: true,
-        //         dateAdded: "2023-05-15",
-        //         url: "product.html" // Added URL
-        //     },
-        //     {
-        //         id: 2,
-        //         name: "BioPharm Contractors",
-        //         logo: "https://via.placeholder.com/80",
-        //         rating: 4.2,
-        //         reviews: 89,
-        //         description: "Specialized in contract manufacturing of biologics and sterile injectables with WHO-GMP facilities.",
-        //         categories: ["Contract Manufacturing"],
-        //         certifications: ["GMP", "WHO-GMP"],
-        //         location: {
-        //             continent: "Europe",
-        //             country: "Germany"
-        //         },
-        //         verified: true,
-        //         dateAdded: "2023-03-22",
-        //         url: "product.html" // Added URL
-        //     },
-
-        // ];
-
         // DOM elements
         const businessResults = document.getElementById('business-results');
         const searchInput = document.getElementById('search-input');
@@ -465,10 +411,6 @@
         const nextPageBtn = document.getElementById('next-page');
         const pageNumbers = document.querySelectorAll('.page-number');
         const resultsCount = document.getElementById('results-count');
-
-        // New prominent search elements
-        const prominentSearchInput = document.getElementById('prominent-search-input');
-        const prominentSearchButton = document.getElementById('prominent-search-button');
 
         // View toggle elements
         const gridViewBtn = document.getElementById('grid-view-btn');
@@ -508,28 +450,11 @@
                 renderBusinessCards();
                 updatePagination();
             });
-
-            // Prominent search input
-            prominentSearchInput.addEventListener('input', function() {
-                filters.searchTerm = this.value.toLowerCase();
-                currentPage = 1;
-                renderBusinessCards();
-                updatePagination();
-            });
-
-            // Prominent search button
-            prominentSearchButton.addEventListener('click', function() {
-                filters.searchTerm = prominentSearchInput.value.toLowerCase();
-                currentPage = 1;
-                renderBusinessCards();
-                updatePagination();
-            });
-
             // Reset filters
             resetFiltersBtn.addEventListener('click', function() {
                 // Reset all filter inputs
                 searchInput.value = '';
-                prominentSearchInput.value = '';
+                // prominentSearchInput.value = '';
                 // continentSelect.value = '';
                 countrySelect.value = '';
                 countrySelect.disabled = true;
@@ -555,19 +480,6 @@
                 renderBusinessCards();
                 updatePagination();
             });
-
-            // Continent filter
-            // continentSelect.addEventListener('change', function() {
-            //     filters.continent = this.value;
-            //     countrySelect.disabled = !this.value;
-
-            //     // Update country options based on continent
-            //     updateCountryOptions();
-
-            //     currentPage = 1;
-            //     renderBusinessCards();
-            //     updatePagination();
-            // });
 
             // Country filter
             countrySelect.addEventListener('change', function() {

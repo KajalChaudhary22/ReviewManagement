@@ -4,16 +4,15 @@
         <input type="text" placeholder="Search users, businesses, reviews...">
     </div> --}}
     <div class="navbar-right">
-        <div class="nav-icon">
+        @php 
+        $allnotifications = \App\Models\Notifications::where('user_id',Auth::user()?->id)->count() ;
+        @endphp
+        <a href="{{ route('admin.notifications',['ty' => custom_encrypt("AdminNotifications")]) }}"><div class="nav-icon">
             🔔
-            <span class="notification-badge">5</span>
-        </div>
+            <span class="notification-badge">{{$allnotifications ?? 0}}</span>
+        </div></a>
         <a href="{{ route('admin.settings',['ty'=>custom_encrypt('Settings')]) }}"><div class="nav-icon">⚙️</div></a>
-        <div class="nav-avatar">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith">
-            <!-- The Logout Button -->
-            
-        </div>
+        
         <a href="#" class="logout-btn" title="Logout" id="logoutBtn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" align="right"
                 fill="currentColor" viewBox="0 0 16 16">

@@ -1,46 +1,49 @@
 @include('layouts.commonjs')
 <script>
-     // --- Get all the elements ---
-     const menuToggle = document.getElementById("scizoraMenuToggle");
+    // --- Get all the elements ---
+    const menuToggle = document.getElementById("scizoraMenuToggle");
     const mobileNav = document.getElementById("scizoraMobileNav");
-    
+
     const profileBtn = document.getElementById("profileBtn");
     const profileDropdown = document.getElementById("profileDropdown");
-    
+
     const profileBtnMobile = document.getElementById("profileBtnMobile");
     const profileDropdownMobile = document.getElementById("profileDropdownMobile");
 
     // --- Mobile Nav (Hamburger) Toggle ---
     menuToggle.addEventListener("click", () => {
-      mobileNav.classList.toggle("active");
-      menuToggle.classList.toggle("active");
-    });
-    
-    // --- Desktop Profile Dropdown Toggle ---
-    profileBtn.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent click from bubbling up to window
-        profileDropdown.classList.toggle("show");
-        // Ensure mobile dropdown is closed
-        profileDropdownMobile.classList.remove("show");
-    });
-    
-    // --- Mobile Profile Dropdown Toggle ---
-    profileBtnMobile.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent click from bubbling up to window
-        profileDropdownMobile.classList.toggle("show");
-        // Ensure desktop dropdown is closed
-        profileDropdown.classList.remove("show");
+        mobileNav.classList.toggle("active");
+        menuToggle.classList.toggle("active");
     });
 
-    // --- Close dropdowns if user clicks outside of them ---
-    window.addEventListener("click", (event) => {
-        if (profileDropdown.classList.contains("show")) {
-            profileDropdown.classList.remove("show");
+    document.addEventListener("DOMContentLoaded", () => {
+        const profileBtn = document.getElementById("profileBtn");
+        const profileBtnMobile = document.getElementById("profileBtnMobile");
+        const profileDropdown = document.getElementById("profileDropdown");
+        const profileDropdownMobile = document.getElementById("profileDropdownMobile");
+
+        if (profileBtn) {
+            profileBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
+                profileDropdown.classList.toggle("show");
+                profileDropdownMobile?.classList.remove("show");
+            });
         }
-        if (profileDropdownMobile.classList.contains("show")) {
-            profileDropdownMobile.classList.remove("show");
+
+        if (profileBtnMobile) {
+            profileBtnMobile.addEventListener("click", (event) => {
+                event.stopPropagation();
+                profileDropdownMobile.classList.toggle("show");
+                profileDropdown?.classList.remove("show");
+            });
         }
+
+        window.addEventListener("click", () => {
+            profileDropdown?.classList.remove("show");
+            profileDropdownMobile?.classList.remove("show");
+        });
     });
+
     // Mobile menu toggle
     // document.getElementById('mobile-menu-button').addEventListener('click', function () {
     //     const menu = document.getElementById('mobile-menu');
@@ -69,6 +72,7 @@
     const reviewPopup = document.getElementById('review-popup');
     const writeReviewBtn = document.getElementById('write-review-btn');
     const closePopupBtn = document.getElementById('close-popup');
+
     const stars = document.querySelectorAll('.star');
 
     // Show the popup when the "Write a Review" button is clicked
@@ -125,14 +129,14 @@
     const scrollRightBtn = document.getElementById('scrollRight');
     const companiesContainer = document.getElementById('companiesContainer');
 
-    scrollLeftBtn.addEventListener('click', function () {
+    scrollLeftBtn.addEventListener('click', function() {
         companiesContainer.scrollBy({
             left: -300,
             behavior: 'smooth'
         });
     });
 
-    scrollRightBtn.addEventListener('click', function () {
+    scrollRightBtn.addEventListener('click', function() {
         companiesContainer.scrollBy({
             left: 300,
             behavior: 'smooth'
@@ -140,7 +144,7 @@
     });
 
     // Show/hide arrows based on scroll position
-    companiesContainer.addEventListener('scroll', function () {
+    companiesContainer.addEventListener('scroll', function() {
         const scrollLeft = companiesContainer.scrollLeft;
         const maxScroll = companiesContainer.scrollWidth - companiesContainer.clientWidth;
 
@@ -173,8 +177,8 @@
     //     }
 
     // });
-    $(document).ready(function () {
-        $("#contact_usForm").on("submit", function (e) {
+    $(document).ready(function() {
+        $("#contact_usForm").on("submit", function(e) {
             e.preventDefault(); // stop default submit
 
             let formData = new FormData(this);
@@ -185,7 +189,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (data) {
+                success: function(data) {
                     if (data.status === "success") {
                         Swal.fire({
                             icon: "success",
@@ -201,7 +205,7 @@
                         });
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
@@ -213,36 +217,7 @@
         });
     });
 
-    $(document).ready(function () {
-        $("#subscribeForm").on("submit", function (e) {
-            e.preventDefault();
-
-            let formData = $(this).serialize();
-
-            $.ajax({
-                url: "/api/contact/subscribe",
-                method: "POST",
-                data: formData,
-                success: function (data) {
-                    if (data.status === "success") {
-                        Swal.fire({
-                            icon: "success",
-                            title: "Subscribed",
-                            text: data.message
-                        });
-                        $("#subscribeForm")[0].reset();
-                    }
-                },
-                error: function (xhr) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: xhr.responseJSON?.message || "Something went wrong!"
-                    });
-                }
-            });
-        });
-    });
+   
 
 
 
@@ -256,8 +231,8 @@
 
 
     // ⭐ Star rating logic
-    $(document).ready(function () {
-        $('.star').on('click', function () {
+    $(document).ready(function() {
+        $('.star').on('click', function() {
             let value = $(this).data('value');
             $('#rating').val(value);
 
@@ -267,7 +242,7 @@
         });
 
         // Submit form via AJAX
-        $('#review-form').on('submit', function (e) {
+        $('#review-form').on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
@@ -277,24 +252,30 @@
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (response) {
+                success: function(response) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
                         text: response.message,
                         showConfirmButton: false,
                         timer: 2000
-                    });
+                    }).then(() => {
+                        // Close modal after alert
+                        const reviewPopup = document.getElementById('review-popup');
+                        reviewPopup.classList.remove('active');
 
-                    // Reset form & stars
-                    $('#review-form')[0].reset();
-                    $('#rating').val('');
-                    $('.star').removeClass('text-yellow-400').addClass('text-gray-300');
+                        // Reset form & stars
+                        $('#review-form')[0].reset();
+                        $('#rating').val('');
+                        $('.star').removeClass('text-yellow-400').addClass(
+                            'text-gray-300');
+                    });
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     let errorMessage = 'Something went wrong! Please check your inputs.';
                     if (xhr.responseJSON && xhr.responseJSON.errors) {
-                        errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                        errorMessage = Object.values(xhr.responseJSON.errors).flat().join(
+                            '\n');
                     }
 
                     Swal.fire({
@@ -306,5 +287,4 @@
             });
         });
     });
-
 </script>

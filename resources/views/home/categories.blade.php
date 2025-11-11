@@ -699,9 +699,9 @@
             const searchInput = document.getElementById('categorySearch');
             const sortSelect = document.getElementById('sortCategories');
             const filterTagsContainer = document.getElementById('filterTags');
-            const mobileToggle = document.getElementById('mobileToggle');
+            //const mobileToggle = document.getElementById('mobileToggle');
             const mainNav = document.getElementById('mainNav');
-            const profileDropdown = document.getElementById('profileDropdown');
+            // const profileDropdown = document.getElementById('profileDropdown');
 
             // ===================================
             // --- 3. CORE FUNCTIONS ---
@@ -799,22 +799,22 @@
             });
 
             // Mobile navigation toggle
-            mobileToggle.addEventListener('click', () => {
-                mainNav.classList.toggle('active');
-            });
+            // mobileToggle.addEventListener('click', () => {
+            //     mainNav.classList.toggle('active');
+            // });
 
             // Profile dropdown toggle
-            profileDropdown.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevents the window click listener from firing immediately
-                profileDropdown.classList.toggle('active');
-            });
+            // profileDropdown.addEventListener('click', (e) => {
+            //     e.stopPropagation(); // Prevents the window click listener from firing immediately
+            //     profileDropdown.classList.toggle('active');
+            // });
 
             // Close dropdown when clicking outside
-            window.addEventListener('click', () => {
-                if (profileDropdown.classList.contains('active')) {
-                    profileDropdown.classList.remove('active');
-                }
-            });
+            // window.addEventListener('click', () => {
+            //     if (profileDropdown.classList.contains('active')) {
+            //         profileDropdown.classList.remove('active');
+            //     }
+            // });
 
             // ===================================
             // --- 5. INITIAL RENDER ---

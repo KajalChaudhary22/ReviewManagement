@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('organization')->nullable();
             $table->text('message')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('set null');
             $table->timestamps();
         });
     }
