@@ -362,14 +362,14 @@
 
     <header class="scizora-header">
         <div class="container header-content">
-            <a href="index.html" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="150" height="50"></a>
+            <a href="{{url('/')}}" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="150" height="50"></a>
             <nav class="nav-menu">
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ route('categories') }}">Categories</a></li>
                 <li><a href="{{ route('blogs') }}" class="active">Blog</a></li>
                 <li><a href="{{ route('about.us') }}">About Us</a></li>
-                <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li><a href="{{ route('contact.us') }}">Contact</a></li>
                   
                 </ul>
             </nav>

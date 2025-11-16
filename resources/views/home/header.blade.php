@@ -4,7 +4,7 @@
 
             <!-- Logo -->
             <div class="scizora-logo">
-                <a href="index.html"><img src="{{ asset('build/images/logo.jpg') }}" alt="SCIZORA Logo"></a>
+                <a href="{{url('/')}}"><img src="{{ asset('build/images/logo.jpg') }}" alt="SCIZORA Logo"></a>
             </div>
 
             <!-- Desktop Navigation -->
@@ -68,7 +68,7 @@
 
             <!-- Logo -->
             <div class="scizora-logo">
-                <a href="index.html"><img src="{{ asset('build/images/logo.jpg') }}" alt="SCIZORA Logo"></a>
+                <a href="{{url('/')}}"><img src="{{ asset('build/images/logo.jpg') }}" alt="SCIZORA Logo"></a>
             </div>
 
             <!-- Desktop Navigation -->

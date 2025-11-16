@@ -666,32 +666,7 @@
 <body>
 
     <!-- Header -->
-    {{-- <header>
-        <a href="index.html" class="logo"><img src="logo.jpg" alt="logo" width="150" height="50"></a>
-        <nav class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="categories.html">Categories</a>
-            <a href="blog.html">Blog</a>
-            <a href="aboutus.html">About Us</a>
-            <a href="contactus.html" class="active">Contact</a>
-        </nav>
-        <div class="header-right">
-            <div class="profile-dropdown">
-                <i class="fas fa-user-circle profile-icon" id="profileIcon"></i>
-                <div class="dropdown-content" id="dropdownContent">
-                    <a href="User Pages\Dashboard seperate pages\My-Profile.html"><i class="fas fa-user"></i> My
-                        Profile</a>
-                    <a href="Business Pages\notification.html"><i class="fas fa-bell"></i> Notifications</a>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-            </div>
-        </div>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-    </header> --}}
+    
     @include('home.header')
 
     <!-- Hero Section -->

@@ -284,9 +284,9 @@ class ProductController extends Controller
             // If the URL is not valid, redirect to a 404 page or handle the error as needed
             abort(404);
         } else {
-            $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Product Category')->whereNULL('parent_id')->first();
+            $mastertypId = MasterType::with('getActiveMasterData')->where('name', 'Product Category')->first();
             if ($mastertypId) {
-                $categories = $mastertypId?->getActiveMasterData;
+                $categories = Masters::ActiveOnly()->where('master_type_id', $mastertypId)->whereNULL('parent_id')->get();
             } else {
                 $categories = collect();
             }

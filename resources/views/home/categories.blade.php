@@ -644,7 +644,7 @@
                         <button data-filter="nutrition">Food & Nutrition</button>
                         <button data-filter="lab">Lab Supplies</button> --}}
                         @foreach($productCategoies as $category)
-                            <button data-filter="{{ strtolower(str_replace(' ', '-', $category?->name)) }}">
+                            <button data-filter="{{ $category?->name }}">
                                 {{ $category?->name }}
                             </button>
                         @endforeach
@@ -720,7 +720,6 @@
 
                 categories.forEach(category => {
                     const card = document.createElement('div');
-                    console.log(category.id, category.cat_id);
                     card.className = 'category-card';
                     // build route dynamically
                     const viewMoreUrl = categoryRouteTemplate

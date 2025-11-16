@@ -1,7 +1,7 @@
 <nav class="bg-white py-4 px-6 border-b border-gray-200">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <a href="../index.html">
+                <a href="{{ url('/') }}">
                     <h1 class="text-2xl font-bold">
                         <a href="#" class="text-xl md:text-2xl font-bold"><img src="{{ asset('build/images/logo.jpg') }}" alt="logo" width="200" height="60"></a>
                     </h1>

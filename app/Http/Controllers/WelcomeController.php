@@ -38,7 +38,7 @@ class WelcomeController extends Controller
                 'icon' => 'fa-solid fa-box', // static fallback or map dynamically
                 'title' => $item?->name, // map from DB
                 'description' => $item?->description ?? 'No description available', // fallback
-                'tags' => [Str::lower($item?->parent?->name) ?? []], // empty array if not in DB
+                'tags' => [$item?->parent?->name ?? []], // empty array if not in DB
                 'popularity' => rand(60, 100), // fake popularity for now
                 'dateAdded' => $item?->created_at?->toDateString(), // from DB
                 'image' => $item?->images?->first()?->path 

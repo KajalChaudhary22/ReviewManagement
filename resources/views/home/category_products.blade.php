@@ -180,29 +180,7 @@
 
 <body class="bg-gray-50">
     <!-- Header/Navigation -->
-    {{-- <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-			<a href="../index.html">
-               
-                <a href="#" class="text-xl md:text-2xl font-bold"><img src="logo.jpg" alt="logo" width="200" height="60"></a></span>
-            </a>
-            </div>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#" class="text-gray-600 hover:text-primary">Home</a>
-                <a href="#" class="text-primary font-medium">Directory</a>
-				<a href="#" class="text-gray-600 hover:text-primary">Blog</a>
-                <a href="#" class="text-gray-600 hover:text-primary">About</a>
-                <a href="#" class="text-gray-600 hover:text-primary">Contact</a>
-                <button class="ml-4 px-4 py-2 border border-primary text-primary rounded-md hover:bg-purple-100 transition">
-                    List Your Business
-                </button>
-            </nav>
-            <button class="md:hidden text-gray-600">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
-    </header> --}}
+   
     @include('home.header')
 
     <!-- Horizontal Ad Banner -->

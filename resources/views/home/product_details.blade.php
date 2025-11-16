@@ -1314,42 +1314,19 @@
 
 <body>
     <!-- Header -->
-    {{-- <header>
-        <a href="index.html" class="logo"><img src="logo.jpg" alt="logo" width="150" height="50"></a>
-        <nav class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="categories.html">Categories</a>
-            <a href="blog.html">Blog</a>
-            <a href="aboutus.html">About Us</a>
-            <a href="contactus.html" class="active">Contact</a>
-        </nav>
-        <div class="header-right">
-            <div class="profile-dropdown">
-                <i class="fas fa-user-circle profile-icon" id="profileIcon"></i>
-                <div class="dropdown-content" id="dropdownContent">
-                    <a href="User Pages\Dashboard seperate pages\My-Profile.html"><i class="fas fa-user"></i> My
-                        Profile</a>
-                    <a href="Business Pages\notification.html"><i class="fas fa-bell"></i> Notifications</a>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-            </div>
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header> --}}
+    
     @include('home.header')
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-header">
-            <a href="index.html" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150" height="50"></a>
+            <a href="{{url('/')}}" class="logo"><img src="logo.jpg" alt="SCIZORA Logo" width="150" height="50"></a>
             <button class="close-mobile-nav" id="close-mobile-nav">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <ul class="mobile-nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{url('/')}}"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="categories.html"><i class="fas fa-th-large"></i> Categories</a></li>
             <li><a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a></li>
             <li><a href="aboutus.html"><i class="fas fa-info-circle"></i> About Us</a></li>

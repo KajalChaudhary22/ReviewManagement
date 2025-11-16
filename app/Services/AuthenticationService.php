@@ -6,7 +6,8 @@ use App\Helpers\CodeGenerator;
 use App\Models\{
     Business,
     Industry,
-    Location
+    Location,
+    User
     };
 use Illuminate\Support\Facades\{
     Auth,
